@@ -455,24 +455,6 @@ end
 	self.Antenna_off = false	
 	self.Antenna_on = false	
 	self.KVWrenchMode = self.WrenchMode
-	
-    ALSFreqPlomb = true
-
-    if beb then
-        ALSFreqPlomb = false
-	else
-		--Автодешифратор (взято с 81-717.6)
-		local ALS													
-		for k,v in pairs(ents.FindByClass("gmod_track_signal")) do
-		if not ALS or self:GetPos():DistToSqr(v:GetPos()) < self:GetPos():DistToSqr(ALS:GetPos()) then ALS = v end
-		end
-		if ALS and ALS.TwoToSix then 
-			self.ALSFreqBlock:TriggerInput("Set",0)
-		end
-	end
-
-	--альтернативный способ выставления автодешифратора
-	--карты 2/6 в списке за 14.02.2021 (https://wiki.metrostroi.net/wiki/List_of_maps)
 
 --наложение пломб
 	self.Plombs = {
@@ -483,7 +465,6 @@ end
         BARSBlock = true,
         UAVA = true,
         Init = true,
-		ALSFreqBlock = ALSFreqPlomb,
     }
 	
 	self.HeadLightBroken = {}
