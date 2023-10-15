@@ -259,12 +259,6 @@ end	]]
 			ID = "CabinDoorLeft", 
 			Pos = Vector(476, 64, -30),Radius = 48,
         },    	
-		
-		{
-			ID = "CabinDoorLeft", 
-			Pos = Vector(476, -60, 30), Radius = 48,
-        },	
-		
         {
 			ID = "CabinDoorRight", 
 			Pos = Vector(466, -60, -30),Radius = 48,
@@ -288,7 +282,6 @@ end	]]
 			Pos = Vector(222-15,-17,-82), Radius = 20,
         },
     }
-    self.RearDoor = false
 	
     self.PassengerDoor = false
     self.CabinDoorLeft = false
@@ -734,7 +727,7 @@ end
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
 	ent.KeyMap = {}		
-	ent.SyncTable = {}	
+	ent.InteractionZones = {}	
 end			
 ---------------------------------------------------------------------------
 function ENT:Think()
