@@ -337,11 +337,11 @@ function ENT:InitializeSounds()
     self.SoundPositions["rolling_medium2"] = {480,1e12,Vector(520-25,0,0),0.90*0.4}
     self.SoundPositions["rolling_high2"] = {480,1e12,Vector(520-25,0,0),1.00*0.4}
 	
-	self.SoundPositions["rolling_5_middle"] = {485,1e9,Vector(-15-16.5,0),1}	 --0.6
-    self.SoundPositions["rolling_10_middle"] = {485,1e9,Vector(-15-16.5,0),1}  --0.7
-    self.SoundPositions["rolling_30_middle"] = {485,1e9,Vector(-15-16.5,0),1}  --0.8
-    self.SoundPositions["rolling_55_middle"] = {485,1e9,Vector(-15-16.5,0),1}  --0.9
-    self.SoundPositions["rolling_75_middle"] = {485,1e9,Vector(-15-16.5,0),1} --0.95
+	self.SoundPositions["rolling_5_middle"] = {485,1e9,Vector(-15-16.5,0),0.6}	 --0.6
+    self.SoundPositions["rolling_10_middle"] = {485,1e9,Vector(-15-16.5,0),0.7}  --0.7
+    self.SoundPositions["rolling_30_middle"] = {485,1e9,Vector(-15-16.5,0),0.8}  --0.8
+    self.SoundPositions["rolling_55_middle"] = {485,1e9,Vector(-15-16.5,0),0.9}  --0.9
+    self.SoundPositions["rolling_75_middle"] = {485,1e9,Vector(-15-16.5,0),0.95} --0.95
     self.SoundNames["rolling_low_middle"] = {loop=true,"subway_trains/rusich/rolling/rolling_outside_low.wav"}
     self.SoundNames["rolling_medium2_middle"] = {loop=true,"subway_trains/rusich/rolling/rolling_outside_medium"..rol..".wav"}
     self.SoundNames["rolling_high2_middle"] = {loop=true,"subway_trains/rusich/rolling/rolling_outside_high"..rol..".wav"}

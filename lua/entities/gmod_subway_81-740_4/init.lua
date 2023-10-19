@@ -49,7 +49,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
     self:SetPos(self:GetPos() + Vector(0,0,140))
 	
-    self.NormalMass = 24000
+    self.NormalMass = 20000
 	--self.m_tblToolsAllowed = { "none" }		
 
     -- Create seat entities
@@ -271,11 +271,11 @@ end	]]
 		
 		{
 			ID = "FrontBrakeLineIsolationToggle",
-			Pos = Vector(835-159,-25.0,-44), Radius = 16,
+			Pos = Vector(835-159,-25.0,-44), Radius = 8,
         },
 		{
 			ID = "FrontTrainLineIsolationToggle",
-			Pos = Vector(835-159,25.0,-44), Radius = 16,
+			Pos = Vector(835-159,25.0,-44), Radius = 8,
         },
 		{
 			ID = "GVToggle",
@@ -653,65 +653,65 @@ function ENT:CreatePricep(pos,ang)
 		0, --bone
 		0, --bone
 		Vector(305,0,50),
-		Vector(-305,0,60),		
+		Vector(-305,0,10),		
 		0, --forcelimit
 		0, --torquelimit
-		-15, --xmin
-		-20, --ymin
+		-10, --xmin
+		-10, --ymin
 		-180, --zmin
-		15, --xmax
-		20, --ymax
+		10, --xmax
+		10, --ymax
 		180, --zmax
 		0, --xfric
-		1, --yfric
-		0, --zfric
-		0, --rotonly
-		0,--nocollide
-		true
-	)		
-	constraint.AdvBallsocket(
-		ent,
-		self.MiddleBogey,
-		0, --bone
-		0, --bone,		
-		Vector(305,0,30),
-		Vector(-305,0,10),	
-		0, --forcelimit
-		0, --torquelimit
-		-15, --xmin
-		-20, --ymin
-		-180, --zmin
-		15, --xmax
-		20, --ymax
-		180, --zmax
-		1, --xfric
 		0, --yfric
 		0, --zfric
 		0, --rotonly
-		0,--nocollide
-		true
-	)		
+		1,
+		false	--nocollide
+	)	
 	constraint.AdvBallsocket(
 		ent,
 		self.MiddleBogey,
 		0, --bone
 		0, --bone,		
-		Vector(305,0,60),
+		Vector(305,0,0),
 		Vector(-305,0,10),	
 		0, --forcelimit
 		0, --torquelimit
 		-10, --xmin
-		-20, --ymin
+		-10, --ymin
 		-180, --zmin
 		10, --xmax
-		20, --ymax
+		10, --ymax
 		180, --zmax
 		0, --xfric
 		0, --yfric
-		1, --zfric
+		0, --zfric
 		0, --rotonly
-		0,--nocollide
-		true
+		1,
+		false	--nocollide
+	)	
+	constraint.AdvBallsocket(
+		ent,
+		self.MiddleBogey,
+		0, --bone
+		0, --bone,		
+		Vector(305,0,10),
+		Vector(-305,0,40),	
+		0, --forcelimit
+		0, --torquelimit
+		-5, --xmin
+		-5, --ymin
+		-180, --zmin
+		5, --xmax
+		5, --ymax
+		180, --zmax
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,
+		false	--nocollide
 	)		
 end	
 end 
@@ -726,7 +726,7 @@ end
 
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
-	ent.KeyMap = {}		
+	ent.KeyMap = {}
 	ent.InteractionZones = {}	
 end			
 ---------------------------------------------------------------------------

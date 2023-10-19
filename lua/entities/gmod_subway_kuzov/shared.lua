@@ -10,10 +10,10 @@ or Map:find("gm_metropbl")) then
 	return
 end
 
+ENT.NoTrain = true
+
 ENT.Type            = "anim"
 ENT.Base            = "gmod_subway_base"
-
-ENT.NoTrain = true
 
 ENT.Category		= ""
 ENT.Spawnable		= false
@@ -89,7 +89,7 @@ function ENT:InitializeSounds()
         self.SoundPositions["vent1"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
     end		
 	
-    self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"	
+    self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
 	
     self.SoundNames["bbe_v1"]   = {"subway_trains/rusich/bbes/bbe.wav",loop = true}
     self.SoundPositions["bbe_v1"] = {800,1e9,Vector(50,0,-40),0.4}	

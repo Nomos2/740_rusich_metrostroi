@@ -64,7 +64,7 @@ ENT.ButtonMap["PUU"] = {
             model = "models/metrostroi_train/81-722/button_green.mdl", z=1.85,
             lamp = {model = "models/metrostroi_train/81-722/lamp_green.mdl",var="ALSLamp",z=0.1, anim=true},
             var="ALS",speed=8, vmin=0, vmax=0.7, disable="ALSToggle",
-            --sndvol = 0.3, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "ALSkToggle",x=127+37.83*4, y=27.5+10, w=40,h=20, tooltip="", model = {
             model = "models/metrostroi_train/81/krishka.mdl", ang = 0, z = 1,
@@ -2919,7 +2919,7 @@ function ENT:OnPlay(soundid,location,range,pitch)
         return
     end
 	if soundid:sub(1,4) == "IGLA" then
-    return range > 0 and "	" or "igla_off",location,1,pitch
+    return range > 0 and "igla_on" or "igla_off",location,1,pitch
     end
     if soundid == "QF1" then
         local id = range > 0 and "qf1_on" or "qf1_off"

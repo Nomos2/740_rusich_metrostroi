@@ -43,17 +43,17 @@ function ENT:Initialize()
     }	
 	
 	self.InteractionZones = {	
-        {
-            ID = "RearBrakeLineIsolationToggle",
-            Pos = Vector(-206-131,-25,-46), Radius = 31
+		{
+			ID = "RearBrakeLineIsolationToggle",
+			Pos = Vector(-206-131,-22.0,-44), Radius = 8,
         },
-        {
-            ID = "RearTrainLineIsolationToggle",
-            Pos = Vector(-206-131,25,-46), Radius = 31
+		{
+			ID = "RearTrainLineIsolationToggle",
+			Pos = Vector(-206-131,22.0,-44), Radius = 8, 
         },
         {
             ID = "RearDoor",
-            Pos = Vector(-310, -6, 7), Radius = 31
+            Pos = Vector(-310, 5, 0), Radius = 31
         },
 	}   	
 	
@@ -183,19 +183,6 @@ function ENT:Think()
 	
     return retVal		 
 end	
-
-function ENT:OnCouple(train,isfront)   	
-    if isfront and self.FrontAutoCouple then
-        self.FrontBrakeLineIsolation:TriggerInput("Open",1.0)
-        self.FrontTrainLineIsolation:TriggerInput("Open",1.0)
-        self.FrontAutoCouple = false
-    elseif not isfront and self.RearAutoCouple then
-        self.RearBrakeLineIsolation:TriggerInput("Open",1.0)
-        self.RearTrainLineIsolation:TriggerInput("Open",1.0)
-        self.RearAutoCouple = false
-    end
-    self.BaseClass.OnCouple(self,train,isfront)
-end
 
 function ENT:OnButtonPress(button,ply)
     self:SetNW2Entity("gmod_subway_81-740_4", self.HeadTrain)	

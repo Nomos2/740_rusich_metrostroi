@@ -62,7 +62,6 @@ ENT.ClientProps["test_prop5"] = {
 	nohide = true,
 }]]
 
-
 ENT.ClientProps["salonR"] = {
 	model = "models/metrostroi_train/81-740/salon/salon_rear.mdl",
     pos = Vector(-211.2, 0, 5.5),
@@ -102,7 +101,7 @@ ENT.ClientProps["lamps_salon_off_r"] = {
 }
 ENT.ClientProps["door_cab_t"] = {
 	model = "models/metrostroi_train/81-740/salon/door_br.mdl",
-	pos = Vector(-334.5, 15, 8.8),
+	pos = Vector(-334.5, 15, 8.8), 
 	ang = Angle(0,180,0),
 	hide = 2, 	
 }
@@ -147,7 +146,7 @@ ENT.ButtonMap["RearPneumatic"] = {
 	
     buttons = {
 		{ID = "RearTrainLineIsolationToggle",x=500, y=0, w=400, h=100, tooltip=""},
-		{ID = "RearBrakeLineIsolationToggle",x=0, y=0, w=400, h=100,   tooltip=""},
+		{ID = "RearBrakeLineIsolationToggle",x=0, y=0, w=400, h=100,tooltip=""},
     }
 }	
 ENT.ClientProps["RearTrain"] = {
@@ -162,10 +161,8 @@ ENT.ClientProps["RearBrake"] = {
 	ang = Angle(0,90,0),
 	hide = 2,	
 }
-ENT.ClientSounds["RearTrainLineIsolation"] = {
-				{"RearTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
-ENT.ClientSounds["RearBrakeLineIsolation"] = {
-				{"RearBrake",function() return "disconnect_valve" end,11,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,11,1,50,1e3,Angle(-90,0,0)}}
 
 ENT.ButtonMap["Tickers_rear"] = {
 	pos = Vector(286.2,27,65.85), --446 -- 14 -- -0,5
@@ -303,11 +300,7 @@ self.ClientProps["TrainNumberL"..k] = {
             train.WagonNumber = false 
 		end,
     } 
-end	
-
-    if not IsValid(train) then return end		
-    self:Animate("RearBrake", train:GetNW2Bool("RbI") and 0 or 1,0,1, 3, false)
-    self:Animate("RearTrain", train:GetNW2Bool("RtI") and 1 or 0,0,1, 3, false)
+end
 
 --[[train.ClientProps["test_prop"] = {
 	model = "models/props_junk/metalbucket01a.mdl",
@@ -346,7 +339,7 @@ end
 for i = 1,11 do	
     local colV = self:GetNW2Vector("Lamp7404"..i)
     local col = Color(colV.x,colV.y,colV.z)		
-    if not IsValid(train) or not IsValid(self) then return end		
+    if not IsValid(train) then return end		
 	self:ShowHideSmooth("lamps_salon_on_rear"..i-1,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
     self:ShowHideSmooth("lamps_salon_on_rear1"..i,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
 end
@@ -354,7 +347,7 @@ end
 	local ZavodTable = train:GetNW2Int("ZavodTable",1)	
     if not IsValid(train) then return end		
     self:ShowHide("Zavod_table_sochl",ZavodTable==2)
-    self:ShowHide("Zavod_table_sochl_torec",ZavodTable==3)		
+    self:ShowHide("Zavod_table_sochl_torec",ZavodTable==3)
 	
 	--Анимация дверей.
 	if not self.DoorStates then self.DoorStates = {} end
@@ -392,10 +385,14 @@ end
         end
 	end	
 	
-	local dT = self.DeltaTime	
-    if not IsValid(train) then return end		
+    if not IsValid(train) then return end	
+	local dT = train.DeltaTime		
     train.RearLeak = math.Clamp(train.RearLeak + 10*(-train:GetPackedRatio("RearLeak")-train.RearLeak)*dT,0,1)	
-    self:SetSoundState("rear_isolation",train.RearLeak,0.9+0.2*train.RearLeak)		
+    self:SetSoundState("rear_isolation",train.RearLeak,0.9+0.2*train.RearLeak)	
+
+    if not IsValid(train) then return end		
+    self:Animate("RearBrake", train:GetNW2Bool("RbI") and 0 or 1,0,1, 3, false)
+    self:Animate("RearTrain", train:GetNW2Bool("RtI") and 1 or 0,0,1, 3, false)	
 	
     local dPdT = train:GetPackedRatio("BrakeCylinderPressure_dPdT")
     if not IsValid(train) then return end		
@@ -455,7 +452,7 @@ end
     local train = self.HeadTrain 
     if not IsValid(train) then return end		
 	
-    local work = self:GetPackedBool("AnnPlay")	
+    local work = train:GetPackedBool("AnnPlay")	
     for k,v in ipairs(self.AnnouncerPositions) do
         if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
             self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
@@ -478,8 +475,14 @@ function ENT:OnPlay(soundid,location,range,pitch)
         end
         return
     end
+    if soundid == "QF1" then
+        local id = range > 0 and "qf1_on" or "qf1_off"
+        local speed = self:GetPackedRatio("Speed")
+        self.SoundPositions["qf1_on"][1] = 440-Lerp(speed/0.1,0,330)
+        return id,location,1-Lerp(speed/10,0.2,0.8),pitch
+    end
     return soundid,location,range,pitch
-end 
+end  
 
 function ENT:DrawPost(special)
     self.HeadTrain = self:GetNW2Entity("gmod_subway_81-740_4")	

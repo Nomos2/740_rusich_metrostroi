@@ -287,7 +287,7 @@ function ENT:CreatePricep(pos,ang)
 	constraint.RemoveConstraints(self.MiddleBogey, "AdvBallsocket")	
 	constraint.RemoveConstraints(ent, "AdvBallsocket")	
 	
-	constraint.Axis(
+		constraint.Axis(
 		self.RearBogey,		
 		ent,
 		0,
@@ -314,7 +314,7 @@ function ENT:CreatePricep(pos,ang)
         -2, --xmin
         -2, --ymin
         -15, --zmin
-        2, --xmax 
+        2, --xmax
         2, --ymax
         15, --zmax
         0.1, --xfric
@@ -322,7 +322,7 @@ function ENT:CreatePricep(pos,ang)
         1, --zfric
         0, --rotonly
         1 --nocollide
-    ) 		
+    ) 	
 	
 	local Map = game.GetMap():lower() or ""        
 	if 
@@ -346,12 +346,12 @@ function ENT:CreatePricep(pos,ang)
 		Vector(0,0,-1),	
 		false
 		)
-	else		
-	     
+	else	
+    
 	if 
 	Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
-	Map:find("gm_metro_nekrasovskaya_line") then		
+	Map:find("gm_metro_nekrasovskaya_line") then	
 	constraint.AdvBallsocket(
 		self.MiddleBogey,	
 		ent,
@@ -395,75 +395,95 @@ function ENT:CreatePricep(pos,ang)
 		1--nocollide
 	)
 	else
-
+	
+	--[[local constraint = constraint.AdvBallsocket(
+		ent, 
+		self.MiddleBogey, 
+		0,
+		0, 
+		Vector(0, 0, 0), 
+		Vector(0, 0, 0), 
+		0, 
+		0,
+		
+		0, 
+		0, 
+		0, 
+		0, 
+		0, 
+		0, 
+		0,
+		0
+	 )]]	
+	
 	constraint.AdvBallsocket(
 		ent,
 		self.MiddleBogey,
 		0, --bone
 		0, --bone
 		Vector(305,0,50),
-		Vector(-305,0,60),		
+		Vector(-305,0,10),		
 		0, --forcelimit
 		0, --torquelimit
-		-15, --xmin
-		-20, --ymin
+		-10, --xmin
+		-10, --ymin
 		-180, --zmin
-		15, --xmax
-		20, --ymax
+		10, --xmax
+		10, --ymax
 		180, --zmax
 		0, --xfric
-		1, --yfric
-		0, --zfric
-		0, --rotonly
-		0,--nocollide
-		true
-	)		
-	constraint.AdvBallsocket(
-		ent,
-		self.MiddleBogey,
-		0, --bone
-		0, --bone,		
-		Vector(305,0,30),
-		Vector(-305,0,10),	
-		0, --forcelimit
-		0, --torquelimit
-		-15, --xmin
-		-20, --ymin
-		-180, --zmin
-		15, --xmax
-		20, --ymax
-		180, --zmax
-		1, --xfric
 		0, --yfric
 		0, --zfric
 		0, --rotonly
-		0,--nocollide
-		true
-	)		
+		1,
+		false	--nocollide
+	)	
 	constraint.AdvBallsocket(
 		ent,
 		self.MiddleBogey,
 		0, --bone
 		0, --bone,		
-		Vector(305,0,60),
+		Vector(305,0,0),
 		Vector(-305,0,10),	
 		0, --forcelimit
 		0, --torquelimit
 		-10, --xmin
-		-20, --ymin
+		-10, --ymin
 		-180, --zmin
 		10, --xmax
-		20, --ymax
+		10, --ymax
 		180, --zmax
 		0, --xfric
 		0, --yfric
-		1, --zfric
+		0, --zfric
 		0, --rotonly
-		0,--nocollide
-		true
+		1,
+		false	--nocollide
+	)	
+	constraint.AdvBallsocket(
+		ent,
+		self.MiddleBogey,
+		0, --bone
+		0, --bone,		
+		Vector(305,0,10),
+		Vector(-305,0,40),	
+		0, --forcelimit
+		0, --torquelimit
+		-5, --xmin
+		-5, --ymin
+		-180, --zmin
+		5, --xmax
+		5, --ymax
+		180, --zmax
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,
+		false	--nocollide
 	)		
 end	
-end
+end 
 
     self:RerailChange(self.FrontBogey, true)
     self:RerailChange(self.MiddleBogey, true)
