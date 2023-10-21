@@ -2539,12 +2539,10 @@ end
 	or Map:find("gm_smr_1987") 
 	or Map:find("gm_jar_pll")
 	or Map:find("gm_metro_pink_line") 
-	or Map:find("gm_metro_chapaevskaya_line")
 	or Map:find("gm_metro_surfacemetro")
 	or Map:find("gm_metro_sunnytown")	
 	or Map:find("gm_metro_ruralline")
 	or Map:find("gm_metro_nsk_line")		
-	or Map:find("gm_metrostroi")
 	or Map:find("gm_line_2")	
 	
 	
