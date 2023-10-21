@@ -131,5 +131,12 @@ ENT.AnnouncerPositions = {
     --{Vector(3,34,55),250,0.1},
     --{Vector(235,34,55),250,0.1},
 }
+-- Setup door positions
+ENT.LeftDoorPositions = {}
+ENT.RightDoorPositions = {}
+for i=0,3 do
+    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,1))
+    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
+end
 
 ENT.SubwayTrain = nil

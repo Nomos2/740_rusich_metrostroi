@@ -445,6 +445,13 @@ ENT.Cameras = {
     {Vector(767-159,36,-18),Angle(0,180,0),"Train.740.CameraPVZ"},
     {Vector(840-159,0,-20),Angle(60,0,0),"Train.Common.CouplerCamera"},
 }
+-- Setup door positions
+ENT.LeftDoorPositions = {}
+ENT.RightDoorPositions = {}
+for i=0,2 do
+    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,1))
+    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
+end
 ---------------------------------------------------
 -- Defined train information
 -- Types of wagon(for wagon limit system):

@@ -201,6 +201,13 @@ ENT.AnnouncerPositions = {
 	{Vector(-360,0,55),50,0.4},	--Костыль под информатор.
 	{Vector(-570,0,55),50,0.4},	--Костыль под информатор.	
 }
+-- Setup door positions
+ENT.LeftDoorPositions = {}
+ENT.RightDoorPositions = {}
+for i=0,2 do
+    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,1))
+    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
+end
 ---------------------------------------------------
 -- Defined train information
 -- Types of wagon(for wagon limit system):
