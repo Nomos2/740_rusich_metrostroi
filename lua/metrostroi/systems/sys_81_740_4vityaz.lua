@@ -724,7 +724,7 @@ if SERVER then
 							end
 						end
 						--print(Train.Speed,Train.BARS.Speed)
-						if Train.Prost_Kos.ProstActive > 0 and Train.Speed > 5 then
+						if Train.Prost_Kos.ProstActive and (Train.Prost_Kos.ProstActive > 0 and Train.BARS.Speed > 5) then
                             Train:SetNW2Int("ProstStength",Train.Prost_Kos.Command < 0 and -Train.Prost_Kos.Command or 0)
                             --if not self.ProstTimer then self.ProstTimer = 1052 end
 							self.ProstExchTimer = self.ProstExchTimer + math.random(1,3)
