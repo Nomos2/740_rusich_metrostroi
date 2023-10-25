@@ -725,8 +725,8 @@ end
     ent:SetNW2Entity("HeadTrain", self)
 
 	ent.ButtonBuffer = {}
-	ent.KeyBuffer = {}
-	ent.KeyMap = {}
+	--ent.KeyBuffer = {}
+	--ent.KeyMap = {}
 	ent.InteractionZones = {}	
 end			
 ---------------------------------------------------------------------------

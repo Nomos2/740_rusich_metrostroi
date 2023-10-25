@@ -323,7 +323,7 @@ train.ClientProps["test_prop_2"] = {
 	scale = 0.5,	
 	nohide = true,
 }]]
-
+if train then	
 for avar = 1,2 do
 	local animation = math.random (5,12)	
 	local animation1 = math.random (0.5,1)	
@@ -459,6 +459,7 @@ end
 		end 
 	end		
 end
+end
 
 function ENT:Draw()
     self.BaseClass.Draw(self)
@@ -487,15 +488,13 @@ end
 function ENT:DrawPost(special)
     self.HeadTrain = self:GetNW2Entity("gmod_subway_81-740_4")	
     local train = self.HeadTrain	
-    if not IsValid(train) then return end	
-	if train then	 	
+    if not IsValid(train) then return end		
 	self.RTMaterial:SetTexture("$basetexture", train.Tickers)		
     self:DrawOnPanel("Tickers_rear",function(...)
         surface.SetMaterial(self.RTMaterial)
         surface.SetDrawColor(255,255,255)
         surface.DrawTexturedRectRotated(512,32+8,1024+16,64+16,0)
     end)
-	end
 end
 
 Metrostroi.GenerateClientProps()

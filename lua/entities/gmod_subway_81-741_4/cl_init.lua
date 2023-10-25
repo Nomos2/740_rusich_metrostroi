@@ -1097,9 +1097,6 @@ end
     self:Animate("FrontBrake", self:GetNW2Bool("FbI") and 0 or 1,0,1, 3, false)
     self:Animate("FrontTrain",  self:GetNW2Bool("FtI") and 1 or 0,0,1, 3, false)
 	
-	train1:Animate("RearBrake", self:GetNW2Bool("RbI") and 0 or 1,0,1, 3, false)
-    train1:Animate("RearTrain", self:GetNW2Bool("RtI") and 1 or 0,0,1, 3, false)
-	
     local PVZ_otsek = self:GetNW2Bool("PVZ_otsek")
     self:HidePanel("PVZ_otsek_close",not PVZ_otsek)
     self:HidePanel("PVZ_otsek_open", PVZ_otsek)	
@@ -1275,10 +1272,6 @@ function ENT:Draw()
     self.BaseClass.Draw(self)
 end
 
-function ENT:OnButtonPressed(button)
-
-end
-
 function ENT:DrawPost(special)
 	self.RTMaterial:SetTexture("$basetexture", self.Tickers)
     self:DrawOnPanel("Tickers",function(...)
@@ -1307,3 +1300,27 @@ function ENT:OnPlay(soundid,location,range,pitch)
     return soundid,location,range,pitch
 end
 Metrostroi.GenerateClientProps()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

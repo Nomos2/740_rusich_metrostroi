@@ -158,10 +158,10 @@ ENT.ClientProps["RearBrake"] = {
 	ang = Angle(0,90,0),
 	hide = 2,	
 }
-ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,11,1,50,1e3,Angle(-90,0,0)}}
 ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
 
-ENT.ButtonMap["Tickers_rear"] = {
+ENT.ButtonMap["Tickers"] = {
 	pos = Vector(286.2,27,65.85), --446 -- 14 -- -0,5
 	ang = Angle(0,-90,90),
 	width = 1024,
@@ -244,12 +244,8 @@ end
 
 local yventpos = {
     414.5+0*117-159,
-	---414.5+1*117+6.2-144,
 	414.5+2*117+5-159,
-	--414.5+3*117+2-144,
 	214.5+4*117+0.5-15,
-	---414.5+5*117-2.3-144,
-	---414.5+6*117-144,
 }
 
 function ENT:Initialize()
@@ -294,7 +290,7 @@ function ENT:Think()
     end 		
     self.HeadTrain = self:GetNW2Entity("gmod_subway_81-741_4")	
     local train = self.HeadTrain 
-    if not IsValid(train) or not IsValid(self) then return end		
+    if not IsValid(train) then return end		
 	
 for k=0,3 do
 self.ClientProps["TrainNumberL"..k] = {
@@ -345,20 +341,24 @@ end
 for i = 1,11 do	
     local colV = self:GetNW2Vector("Lamp7404"..i)
     local col = Color(colV.x,colV.y,colV.z)		
-    if not IsValid(train) or not IsValid(self) then return end		
+    if not IsValid(train) then return end		
 	self:ShowHideSmooth("lamps_salon_on_rear"..i-1,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
     self:ShowHideSmooth("lamps_salon_on_rear1"..i,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
 end
 	
 	local ZavodTable = train:GetNW2Int("ZavodTable",1)	
-    if not IsValid(train) or not IsValid(self) then return end		
+    if not IsValid(train) then return end		
     self:ShowHide("Zavod_table_sochl",ZavodTable==2)
-    self:ShowHide("Zavod_table_sochl_torec",ZavodTable==3)		
+    self:ShowHide("Zavod_table_sochl_torec",ZavodTable==3)	
+	
+    if not IsValid(train) then return end		
+	self:Animate("RearBrake", train:GetNW2Bool("RbI") and 0 or 1,0,1, 3, false)
+    self:Animate("RearTrain", train:GetNW2Bool("RtI") and 1 or 0,0,1, 3, false)	
 	
 	--Анимация дверей.
 	if not self.DoorStates then self.DoorStates = {} end
     if not self.DoorLoopStates then self.DoorLoopStates = {} end
-    if not IsValid(train) or not IsValid(self) then return end	
+    if not IsValid(train) then return end	
     for b=0,2 do
         for k=0,1 do
             local st = k==1 and "DoorL" or "DoorR"
@@ -392,7 +392,7 @@ end
 	end	
 	
 	local dT = train.DeltaTime	
-    if not IsValid(train) or not IsValid(self) then return end		
+    if not IsValid(train) then return end		
     self.RearLeak = math.Clamp(self.RearLeak + 10*(-train:GetPackedRatio("RearLeak")-self.RearLeak)*dT,0,1)	
     self:SetSoundState("rear_isolation",self.RearLeak,0.9+0.2*self.RearLeak)	
 	
@@ -429,7 +429,7 @@ end
         self:SetSoundState("vent1"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
 		end 	
     end		
-    if not IsValid(train) or not IsValid(self) then return end				
+    if not IsValid(train) then return end				
 	local BBEs = train:GetNW2Int("BBESound",1)	
 	if BBEs==1 then		
     self:SetSoundState("bbe_v1", self:GetPackedBool("BBEWork") and 1 or 0, 1)
@@ -452,7 +452,23 @@ end
 function ENT:Draw()
     self.BaseClass.Draw(self)
 end
-function ENT:OnPlay(soundid,location,range,pitch) 
+
+function ENT:DrawPost(special)
+    self.HeadTrain = self:GetNW2Entity("gmod_subway_81-741_4")	
+    local train = self.HeadTrain	
+    if not IsValid(train) then return end		
+	self.RTMaterial:SetTexture("$basetexture", train.Tickers)		
+    self:DrawOnPanel("Tickers",function(...)
+        surface.SetMaterial(self.RTMaterial)
+        surface.SetDrawColor(255,255,255)
+        surface.DrawTexturedRectRotated(512,32+8,1024+16,64+16,0)
+    end)
+end
+
+function ENT:OnButtonPressed(button)
+end
+
+function ENT:OnPlay(soundid,location,range,pitch)
     if location == "stop" then
         if IsValid(self.Sounds[soundid]) then
             self.Sounds[soundid]:Pause()
@@ -460,23 +476,7 @@ function ENT:OnPlay(soundid,location,range,pitch)
         end
         return
     end
-    return soundid,location,range,pitch
-end 
-
-function ENT:DrawPost(special)
-    self.HeadTrain = self:GetNW2Entity("gmod_subway_81-741_4")	
-    local train = self.HeadTrain	
-    if not IsValid(train) or not IsValid(self) then return end	
-	if train then	 	
-	self.RTMaterial:SetTexture("$basetexture", train.Tickers)		
-    self:DrawOnPanel("Tickers_rear",function(...)
-        surface.SetMaterial(self.RTMaterial)
-        surface.SetDrawColor(255,255,255)
-        surface.DrawTexturedRectRotated(512,32+8,1024+16,64+16,0)
-    end)
-	end
+	--print("работает")		
+    return soundid,location,range,pitch	
 end
-function ENT:OnButtonPressed(button)
-end
-
 Metrostroi.GenerateClientProps()

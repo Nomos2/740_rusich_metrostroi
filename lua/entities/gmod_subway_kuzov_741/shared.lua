@@ -26,12 +26,8 @@ ENT.Model 			= "models/metrostroi_train/81-741/body/81-741_4_rear_reference.mdl"
 
 local yventpos = {
     -14.5+0*117-144,
-	---414.5+1*117+6.2-144,
 	-14.5+2*117+5-144,
-	--414.5+3*117+2-144,
 	-44.5+4*117+0.5-144,
-	---414.5+5*117-2.3-144,
-	---414.5+6*117-144,
 }
 function ENT:PassengerCapacity()
     return 191
@@ -84,15 +80,15 @@ function ENT:InitializeSounds()
     self.SoundNames["rear_isolation"] = {loop=true,"subway_trains/common/pneumatic/isolation_leak.wav"}
     self.SoundPositions["rear_isolation"] = {300,1e9,Vector(-456+144, 0,-63),1}
     self.SoundNames["compressor"] = {loop=2,"subway_trains/rusich/compressor/compressor740_start.wav","subway_trains/rusich/compressor/compressor740_loop.wav","subway_trains/rusich/compressor/compressor740_stop.wav"}
-    self.SoundPositions["compressor"] = {800,1e9,Vector(-18,-40,-66),0.4}		
+    self.SoundPositions["compressor"] = {800,1e9,Vector(-18,-40,-66),0.4}   
+	self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"			
 	
     for i=1,4 do
         self.SoundNames["vent"..i] = {loop=true,"subway_trains/rusich/vent/vent_loop.wav"}
         self.SoundPositions["vent"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
         self.SoundNames["vent1"..i] = {loop=true,"subway_trains/rusich/vent/vent_loop_1.wav"}
         self.SoundPositions["vent1"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
-    end	
-    self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"	
+    end
 	
     self.SoundNames["bbe_v1"]   = {"subway_trains/rusich/bbes/bbe.wav",loop = true}
     self.SoundPositions["bbe_v1"] = {800,1e9,Vector(50,0,-40),0.4}	
