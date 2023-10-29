@@ -1658,7 +1658,7 @@ ENT.ButtonMap["ASNP"] = {
         {ID = "R_ASNPOnToggle",x=10, y=10, radius=8, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler2.mdl", ang=0, scale=0.7,z=1.5,
             var="R_ASNPOn",speed=12, vmin=1, vmax=0,
-            --plomb = {model = "models/metrostroi_train/81/plomb.mdl",ang=90,x=-0.5,z=2,y=-12,scale=0.7,var="R_ASNPOnPl",ID="R_ASNPOnPl",},	
+            plomb = {model = "models/metrostroi_train/81/plomb.mdl",ang=90,x=0.7,z=1,y=-17,scale=0.7,var="R_ASNPOnPl",ID="R_ASNPOnPl",},	
 			--Прикол для всех дюбителей срывать пломбы с АСНП:D	
 			--Учитесь перенастраивать АСНП без перезапуска системы.	
             sndvol = 0.5,snd = function(val) return val and "pnm_on" or "pnm_off" end,
