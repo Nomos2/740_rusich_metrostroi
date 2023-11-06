@@ -288,20 +288,10 @@ end	]]
     self.CabinDoorRight = false
     self.OtsekDoor = true
     self.WrenchMode = 1
-	self.Antenna = false	
-	self.Password = false
-	self.KVWrenchMode = self.WrenchMode
-
---спасибо Valjas SaretoScripto за скрипт.
-local nearlyS    
-    for k,v in pairs(ents.FindByClass("gmod_track_signal")) do
-        if not nearlyS or self:GetPos():DistToSqr(v:GetPos()) < self:GetPos():DistToSqr(nearlyS:GetPos()) then nearlyS = v end
-    end
-    if nearlyS and nearlyS.TwoToSix then self.ALSFreqBlock:TriggerInput("Set",1) 
-    elseif nearlyS and not nearlyS.TwoToSix then self.ALSFreqBlock:TriggerInput("Set",0) 
-    elseif nearlyS == nil then self.ALSFreqBlock:TriggerInput("Set",0) 
-end
-
+    self.Antenna = false	
+    self.Password = false
+    self.KVWrenchMode = self.WrenchMode
+	
 --наложение пломб
 	self.Plombs = {
         ALS = {true,"ALSk"},
