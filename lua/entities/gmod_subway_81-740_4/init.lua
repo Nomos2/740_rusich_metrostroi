@@ -288,10 +288,10 @@ end	]]
     self.CabinDoorRight = false
     self.OtsekDoor = true
     self.WrenchMode = 1
-    self.Antenna = false	
-    self.Password = false
-    self.KVWrenchMode = self.WrenchMode
-	
+	self.Antenna = false	
+	self.Password = false
+	self.KVWrenchMode = self.WrenchMode
+
 --наложение пломб
 	self.Plombs = {
         ALS = {true,"ALSk"},

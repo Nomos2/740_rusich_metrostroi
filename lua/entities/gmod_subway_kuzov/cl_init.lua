@@ -66,7 +66,7 @@ ENT.ClientProps["salonR"] = {
 	model = "models/metrostroi_train/81-740/salon/salon_rear.mdl",
     pos = Vector(-211.2, 0, 5.5),
     ang = Angle(0,180,0),
-	hide = 1.2, 	
+	hide = 1.5, 	
 }
 --Новые модели 2023
 ENT.ClientProps["Naddver_off_740"] = { 
@@ -91,7 +91,7 @@ ENT.ClientProps["handrails"] = {
 	model = "models/metrostroi_train/81-740/salon/handrails/handrails_r.mdl",
     pos = Vector(-115.5, -1, -75),
     ang = Angle(0,180,0),
-	hide = 1.1, 	
+	hide = 1.5, 	
 }
 ENT.ClientProps["lamps_salon_off_r"] = {
     model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_rear.mdl",
