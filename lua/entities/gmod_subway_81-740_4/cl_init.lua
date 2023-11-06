@@ -478,10 +478,11 @@ ENT.ClientProps["lamps_salon_on_fr9"] = {
     hide = 1,
     color = Color(245,238,223),		
 }
+local rnd = math.random (0,-10)
 ENT.ClientProps["wiper"] = { --дворник от 760
     model = "models/metrostroi_train/81-740/body/81-740_wiper.mdl",
     pos = Vector(176.8-15,-10,0),
-    ang = Angle(0,0,0),
+    ang = Angle(0,0,rnd),
     hide = 2,		
 }
 
@@ -1658,9 +1659,7 @@ ENT.ButtonMap["ASNP"] = {
         {ID = "R_ASNPOnToggle",x=10, y=10, radius=8, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler2.mdl", ang=0, scale=0.7,z=1.5,
             var="R_ASNPOn",speed=12, vmin=1, vmax=0,
-            plomb = {model = "models/metrostroi_train/81/plomb.mdl",ang=90,x=0.7,z=1,y=-17,scale=0.7,var="R_ASNPOnPl",ID="R_ASNPOnPl",},	
-			--Прикол для всех дюбителей срывать пломбы с АСНП:D	
-			--Учитесь перенастраивать АСНП без перезапуска системы.	
+            plomb = {model = "models/metrostroi_train/81/plomb.mdl",ang=90,x=-0.5,z=2,y=-12,scale=0.7,var="R_ASNPOnPl",ID="R_ASNPOnPl",},	
             sndvol = 0.5,snd = function(val) return val and "pnm_on" or "pnm_off" end,
             sndmin = 50,sndmax = 1e3,sndang = Angle(-90,0,0),
         }},
@@ -2659,7 +2658,7 @@ end
 			self.WiperDir = false
 		end
 	end
-	self:Animate("wiper",self.WiperDir and 1 or 0,0,1,0.32,false)
+	self:Animate("wiper",self.WiperDir and 1 or 0,0,1,0.42,false)
 	
 	--Анимация дверей.
 	if not self.DoorStates then self.DoorStates = {} end

@@ -26,7 +26,7 @@ ENT.AdminSpawnable  = true
 ENT.DontAccelerateSimulation = false
 
 function ENT:PassengerCapacity()
-    return 176
+    return 172
 end
 
 function ENT:GetStandingArea()

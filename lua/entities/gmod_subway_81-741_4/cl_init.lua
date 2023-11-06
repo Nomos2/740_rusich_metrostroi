@@ -1019,9 +1019,9 @@ for k=0,3 do
     }
 end
 
-function self:UpdateWagonNumber()
-    self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov_741")	
-    local train1 = self.HeadTrain1 
+	function self:UpdateWagonNumber()
+		self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
+		local train1 = self.HeadTrain1 
     if not IsValid(train1) or not IsValid(self) then return end	
 for k=0,3 do
         --if i< count then			
@@ -1049,7 +1049,7 @@ local function GetDoorPositionRear(b,k,j)
 	end
 end
 ----------------------------------------------------------------------------------------------------Задняя часть
-    self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov_741")	
+    self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
     local train1 = self.HeadTrain1 
     if not IsValid(train1) or not IsValid(self) then return end	
 	
@@ -1300,27 +1300,3 @@ function ENT:OnPlay(soundid,location,range,pitch)
     return soundid,location,range,pitch
 end
 Metrostroi.GenerateClientProps()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

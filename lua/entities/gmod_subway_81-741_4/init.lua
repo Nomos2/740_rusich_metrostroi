@@ -235,7 +235,7 @@ function ENT:RerailChange(ent, bool)
 end
 
 function ENT:CreatePricep(pos,ang)
-	local ent = ents.Create("gmod_subway_kuzov_741")
+	local ent = ents.Create("gmod_subway_kuzov")
     if not IsValid(ent) then return end	
 	ent:SetPos(self:LocalToWorld(pos))
 	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
@@ -245,7 +245,7 @@ function ENT:CreatePricep(pos,ang)
 	--ent.m_tblToolsAllowed = { "none" }			
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end	
     --PrintTable(ent:GetTable())
-	self:SetNW2Entity("gmod_subway_kuzov_741",ent)
+	self:SetNW2Entity("gmod_subway_kuzov",ent)
     if not self.NoPhysics then
         --self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)
         ent:SetMoveType(MOVETYPE_VPHYSICS)
@@ -421,8 +421,8 @@ constraint.AdvBallsocket(
 		self.MiddleBogey,
 		0, --bone
 		0, --bone
-		Vector(300,0,50),
-		Vector(-305,0,0),		
+		Vector(295,0,50),
+		Vector(-295,0,0),		
 		0, --forcelimit
 		0, --torquelimit
 		-15, --xmin
@@ -443,8 +443,8 @@ constraint.AdvBallsocket(
 		self.MiddleBogey,
 		0, --bone
 		0, --bone,		
-		Vector(300,0,60),
-		Vector(-305,0,0),	
+		Vector(295,0,60),
+		Vector(-295,0,0),	
 		0, --forcelimit
 		0, --torquelimit
 		-15, --xmin
@@ -465,15 +465,15 @@ constraint.AdvBallsocket(
 		self.MiddleBogey,
 		0, --bone
 		0, --bone,		
-		Vector(300,0,10),
-		Vector(-305,0,0),	
+		Vector(295,0,10),
+		Vector(-295,0,0),	
 		0, --forcelimit
 		0, --torquelimit
 		-10, --xmin
-		-25, --ymin
+		-15, --ymin
 		-180, --zmin
 		10, --xmax
-		25, --ymax
+		15, --ymax
 		180, --zmax
 		0, --xfric
 		0, --yfric
@@ -481,7 +481,7 @@ constraint.AdvBallsocket(
 		0, --rotonly
 		1,--nocollide
 		false	
-	)		
+	)
 end	
 end 
 

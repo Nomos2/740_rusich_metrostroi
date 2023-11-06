@@ -512,13 +512,6 @@ Entities.gmod_subway_kuzov.Buttons.RearPneumatic.RearBrakeLineIsolationToggle   
 Entities.gmod_subway_kuzov.Buttons.RearDoor.RearDoor   							 = @[Common.741.RearDoor]
 Entities.gmod_subway_kuzov_741.Buttons.RearDoor_front.RearDoor   				 = @[Common.741.RearDoor]
 
-#gmod_subway_kuzov_741
-#Buttons:
-Entities.gmod_subway_kuzov_741.Buttons.RearPneumatic.RearTrainLineIsolationToggle    = @[Common.741.RearTrainLineIsolationToggle]
-Entities.gmod_subway_kuzov_741.Buttons.RearPneumatic.RearBrakeLineIsolationToggle    = @[Common.741.RearBrakeLineIsolationToggle]
-Entities.gmod_subway_kuzov_741.Buttons.RearDoor.RearDoor   							 = @[Common.741.RearDoor]
-Entities.gmod_subway_kuzov_741.Buttons.RearDoor_front.RearDoor   					 = @[Common.741.RearDoor]
-
 #gmod_subway_81-741_4
 Entities.gmod_subway_81-741_4.Buttons.Battery.BatteryToggle   = @[Common.740.VB]
 Entities.gmod_subway_81-741_4.Buttons.GV.GVToggle             = @[Common.740.BRU]

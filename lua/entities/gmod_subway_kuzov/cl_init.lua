@@ -161,7 +161,7 @@ ENT.ClientProps["RearBrake"] = {
 	ang = Angle(0,90,0),
 	hide = 2,	
 }
-ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,11,1,50,1e3,Angle(-90,0,0)}}
 ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,11,1,50,1e3,Angle(-90,0,0)}}
 
 ENT.ButtonMap["Tickers_rear"] = {

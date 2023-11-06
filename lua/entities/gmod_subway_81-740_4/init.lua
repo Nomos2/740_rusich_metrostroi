@@ -414,6 +414,13 @@ function ENT:TrainSpawnerUpdate()
 	
 end
 
+function ENT:NonSupportTrigger()
+    self.ALS:TriggerInput("Set",1)
+    self.ALSk:TriggerInput("Set",0)
+    self.Plombs.ALS = nil
+    self.Plombs.ALSk = nil
+end
+
 function ENT:UpdateLampsColors()
     local lCol,lCount = Vector(),0
 	local mr = math.random
@@ -652,8 +659,8 @@ function ENT:CreatePricep(pos,ang)
 		self.MiddleBogey,
 		0, --bone
 		0, --bone
-		Vector(300,0,50),
-		Vector(-305,0,0),		
+		Vector(295,0,50),
+		Vector(-295,0,0),		
 		0, --forcelimit
 		0, --torquelimit
 		-15, --xmin
@@ -674,8 +681,8 @@ function ENT:CreatePricep(pos,ang)
 		self.MiddleBogey,
 		0, --bone
 		0, --bone,		
-		Vector(300,0,60),
-		Vector(-305,0,0),	
+		Vector(295,0,60),
+		Vector(-295,0,0),	
 		0, --forcelimit
 		0, --torquelimit
 		-15, --xmin
@@ -696,15 +703,15 @@ function ENT:CreatePricep(pos,ang)
 		self.MiddleBogey,
 		0, --bone
 		0, --bone,		
-		Vector(300,0,10),
-		Vector(-305,0,0),	
+		Vector(295,0,10),
+		Vector(-295,0,0),	
 		0, --forcelimit
 		0, --torquelimit
 		-10, --xmin
-		-25, --ymin
+		-15, --ymin
 		-180, --zmin
 		10, --xmax
-		25, --ymax
+		15, --ymax
 		180, --zmax
 		0, --xfric
 		0, --yfric
@@ -721,12 +728,12 @@ end
     self:RerailChange(self.RearBogey, true)		
 
 	--Метод mirror 				
-	ent.HeadTrain = self 
+    ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)
 
 	ent.ButtonBuffer = {}
-	--ent.KeyBuffer = {}
-	--ent.KeyMap = {}
+	ent.KeyBuffer = {}
+	ent.KeyMap = {}
 	ent.InteractionZones = {}	
 end			
 ---------------------------------------------------------------------------

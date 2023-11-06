@@ -31,7 +31,7 @@ local yventpos = {
 }
 
 function ENT:PassengerCapacity()
-    return 177
+    return 172
 end
 local function GetDoorPosition(n,G)			--	x						--	y        --	z
 	return Vector(-195.5 - -35.0*G - 232.1*n, -66*(1-2*G), 4.3)
@@ -43,7 +43,7 @@ function ENT:BoardPassengers(delta)
     self:SetNW2Entity("gmod_subway_81-740_4", self.HeadTrain)	
     local train = self.HeadTrain
 	if not IsValid(train) then return end		
-	self:SetNW2Float("PassengerCount", math.max(0,math.min(train:PassengerCapacity(),self:GetNW2Float("PassengerCount") + delta)))
+	self:SetNW2Float("PassengerCount", math.max(0,math.min(self:PassengerCapacity(),self:GetNW2Float("PassengerCount") + delta)))
 end
 
 function ENT:InitializeSounds()

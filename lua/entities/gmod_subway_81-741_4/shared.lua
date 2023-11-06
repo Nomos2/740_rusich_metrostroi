@@ -25,7 +25,7 @@ ENT.Spawnable       = true
 ENT.AdminSpawnable  = true
  
 function ENT:PassengerCapacity()
-    return 191
+    return 198
 end	
 
 function ENT:GetStandingArea()
