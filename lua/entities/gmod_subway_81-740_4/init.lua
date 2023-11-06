@@ -472,7 +472,7 @@ function ENT:RerailChange(ent, bool)
     end
 end
 	
-function ENT:CreatePricep(pos,ang)
+function ENT:CreatePricep(pos)
 	local ent = ents.Create("gmod_subway_kuzov")		
     if not IsValid(ent) or not IsValid(self) then return end
 	ent:SetPos(self:LocalToWorld(pos))
@@ -652,15 +652,15 @@ function ENT:CreatePricep(pos,ang)
 		0, 
 		0,
 		0
-	 )]]	
-	
+	 )]]
+
 	constraint.AdvBallsocket(
 		ent,
 		self.MiddleBogey,
 		0, --bone
 		0, --bone
-		Vector(295,0,50),
-		Vector(-295,0,0),		
+		Vector(285,0,50),
+		Vector(-285,0,0),		
 		0, --forcelimit
 		0, --torquelimit
 		-15, --xmin
@@ -681,15 +681,15 @@ function ENT:CreatePricep(pos,ang)
 		self.MiddleBogey,
 		0, --bone
 		0, --bone,		
-		Vector(295,0,60),
-		Vector(-295,0,0),	
+		Vector(285,0,60),
+		Vector(-285,0,0),	
 		0, --forcelimit
 		0, --torquelimit
 		-15, --xmin
-		-20, --ymin
+		-15, --ymin
 		-180, --zmin
 		15, --xmax
-		10, --ymax
+		15, --ymax
 		180, --zmax
 		0, --xfric
 		0, --yfric
@@ -703,14 +703,14 @@ function ENT:CreatePricep(pos,ang)
 		self.MiddleBogey,
 		0, --bone
 		0, --bone,		
-		Vector(295,0,10),
-		Vector(-295,0,0),	
+		Vector(285,0,10),
+		Vector(-285,0,0),	
 		0, --forcelimit
 		0, --torquelimit
-		-10, --xmin
+		-15, --xmin
 		-15, --ymin
 		-180, --zmin
-		10, --xmax
+		15, --xmax
 		15, --ymax
 		180, --zmax
 		0, --xfric

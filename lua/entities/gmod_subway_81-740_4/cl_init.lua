@@ -1334,7 +1334,7 @@ ENT.ClientProps["PasswordProp"] = {
     pos = Vector(672.3-15,-6,3.4),
     ang = Angle(90,180,33),
 	scale = 1,	
-    hide = 2,
+    hide = 1,
 }
 
 ---Segments
@@ -1597,14 +1597,14 @@ ENT.ClientProps["door_cab_r"] = {
 	pos = Vector(766-159.7, -66.5,0),
 	ang = Angle(0,90,0.55),
 	scale = 1.001,		
-	hide = 2,
+	hide = 1,
 }
 ENT.ClientProps["door_cab_l"] = {
 	model = "models/metrostroi_train/81-740/cabine/cabin_left.mdl",
 	pos = Vector(765-159.45, 62.29, 0),
 	ang = Angle(0,-90,0.25),
 	scale = 1.01,
-	hide = 2,
+	hide = 1,
 }
 
 --Модели 2023.
@@ -1619,7 +1619,7 @@ ENT.ClientProps["ASNP_test"] = {
 	model = "models/740_vrb/vrb_asnp.mdl",
 	pos = Vector(682.5-15,-52.8,-11), --684.5-15,-56,-11
 	ang = Angle(0,-90,0), --0,-105,0 
-	hide = 1,
+	hideseat=0.8,
 }
 ENT.ButtonMap["ASNPScreen"] = {
     pos = Vector(658.63,-52.1,-6.1), --446 -- 14 -- -0,5 

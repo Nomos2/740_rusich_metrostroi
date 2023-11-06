@@ -166,7 +166,7 @@ ENT.ButtonMap["PVZ_otsek_open"] = {
     height = 500,
     scale = 0.0625,
     buttons = {
-        {ID = "PVZ_otsek",x=0,y=0,w=642,h=500, tooltip=""} ,
+        {ID = "PVZ_otsek",x=0,y=0,w=642,h=500, tooltip=""},
     }
 }
 ENT.ButtonMap["PVZ_otsek_close"] = {
@@ -176,7 +176,7 @@ ENT.ButtonMap["PVZ_otsek_close"] = {
     height = 400,
     scale = 0.0625,
     buttons = {
-        {ID = "PVZ_otsek",x=0,y=0,w=442,h=400, tooltip=""} ,
+        {ID = "PVZ_otsek",x=0,y=0,w=442,h=400, tooltip=""},
     }
 }
 
@@ -184,32 +184,32 @@ ENT.ClientProps["salon"] = {
 	model = "models/metrostroi_train/81-741/salon/salon.mdl",
 	pos = Vector(322.6,0,0),
 	ang = Angle(0,180,0),
-	hide = 2,
+	hide = 1,
 }
 ENT.ClientProps["otsek"] = {
 	model = "models/metrostroi_train/81-741/salon/otsek.mdl",
 	pos = Vector(322.6,0,0),
 	ang = Angle(0,180,0),
-	hide = 2,
+	hide = 1,
 }
 ENT.ClientProps["otsek_open"] = {
 	model = "models/metrostroi_train/81-741/salon/otsek.mdl",
 	pos = Vector(587.6,-275,0),
 	ang = Angle(0,270,0),
-	hide = 2,
+	hide = 1,
 }
 ENT.ClientProps["handrails"] = {
 	model = "models/metrostroi_train/81-741/salon/handrails/handrails.mdl",
 	pos = Vector(322.8,0,-2),
 	ang = Angle(0,-180,0),
-	hide = 2,
+	hide = 1.2,
 }
 ENT.ClientProps["door_cab_f"] = {
 	model = "models/metrostroi_train/81-740/salon/door_br.mdl",
 	pos = Vector(657,-15.2,8.8),
 	ang = Angle(0,0,0.1),
 	scale = 1.001,
-	hide = 2,
+	hide = 1.5,
 }
 ENT.ClientProps["krepezh"] = {
     model = "models/metrostroi_train/81-740/body/krepezh.mdl",
@@ -1019,10 +1019,10 @@ for k=0,3 do
     }
 end
 
-	function self:UpdateWagonNumber()
+function self:UpdateWagonNumber()
 		self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
 		local train1 = self.HeadTrain1 
-    if not IsValid(train1) or not IsValid(self) then return end	
+    if not IsValid(train1) then return end	
 for k=0,3 do
         --if i< count then			
 			if self.WagonNumber then				
@@ -1051,7 +1051,7 @@ end
 ----------------------------------------------------------------------------------------------------Задняя часть
     self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
     local train1 = self.HeadTrain1 
-    if not IsValid(train1) or not IsValid(self) then return end	
+    if not IsValid(train1) then return end	
 	
     if self.LastGVValue ~= self:GetPackedBool("GV") then
         self.ResetTime = CurTime()+1.5
@@ -1290,12 +1290,6 @@ function ENT:OnPlay(soundid,location,range,pitch)
             self.Sounds[soundid]:SetTime(0)
         end
         return
-    end
-    if soundid == "QF1" then
-        local id = range > 0 and "qf1_on" or "qf1_off"
-        local speed = self:GetPackedRatio("Speed")
-        self.SoundPositions["qf1_on"][1] = 440-Lerp(speed/0.1,0,330)
-        return id,location,1-Lerp(speed/10,0.2,0.8),pitch
     end
     return soundid,location,range,pitch
 end

@@ -421,8 +421,8 @@ constraint.AdvBallsocket(
 		self.MiddleBogey,
 		0, --bone
 		0, --bone
-		Vector(295,0,50),
-		Vector(-295,0,0),		
+		Vector(285,0,50),
+		Vector(-285,0,0),		
 		0, --forcelimit
 		0, --torquelimit
 		-15, --xmin
@@ -443,15 +443,15 @@ constraint.AdvBallsocket(
 		self.MiddleBogey,
 		0, --bone
 		0, --bone,		
-		Vector(295,0,60),
-		Vector(-295,0,0),	
+		Vector(285,0,60),
+		Vector(-285,0,0),	
 		0, --forcelimit
 		0, --torquelimit
 		-15, --xmin
-		-20, --ymin
+		-15, --ymin
 		-180, --zmin
 		15, --xmax
-		10, --ymax
+		15, --ymax
 		180, --zmax
 		0, --xfric
 		0, --yfric
@@ -465,14 +465,14 @@ constraint.AdvBallsocket(
 		self.MiddleBogey,
 		0, --bone
 		0, --bone,		
-		Vector(295,0,10),
-		Vector(-295,0,0),	
+		Vector(285,0,10),
+		Vector(-285,0,0),	
 		0, --forcelimit
 		0, --torquelimit
-		-10, --xmin
+		-15, --xmin
 		-15, --ymin
 		-180, --zmin
-		10, --xmax
+		15, --xmax
 		15, --ymax
 		180, --zmax
 		0, --xfric

@@ -66,7 +66,7 @@ ENT.ClientProps["salonR"] = {
 	model = "models/metrostroi_train/81-740/salon/salon_rear.mdl",
     pos = Vector(-211.2, 0, 5.5),
     ang = Angle(0,180,0),
-	hide = 2, 	
+	hide = 1.2, 	
 }
 --Новые модели 2023
 ENT.ClientProps["Naddver_off_740"] = { 
@@ -91,7 +91,7 @@ ENT.ClientProps["handrails"] = {
 	model = "models/metrostroi_train/81-740/salon/handrails/handrails_r.mdl",
     pos = Vector(-115.5, -1, -75),
     ang = Angle(0,180,0),
-	hide = 2, 	
+	hide = 1.1, 	
 }
 ENT.ClientProps["lamps_salon_off_r"] = {
     model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_rear.mdl",
@@ -103,7 +103,7 @@ ENT.ClientProps["door_cab_t"] = {
 	model = "models/metrostroi_train/81-740/salon/door_br.mdl",
 	pos = Vector(-334.5, 15, 8.8), 
 	ang = Angle(0,180,0),
-	hide = 2, 	
+	hide = 1.5, 	
 }
 ENT.ButtonMap["RearDoor"] = {
     pos = Vector(-332,-15,55), ---334.8,14.5,9
@@ -200,6 +200,7 @@ ENT.ClientProps["lamps_salon_on_rear_avar2"] = {
     pos = Vector(286.15, -57.8, -74.88),
     ang = Angle(0,180,0),
     color = Color(245,238,223),
+	hide = 1,	
 }
 for i = 1,11 do
 ENT.ClientProps["lamps_salon_on_rear"..i-1] = {
@@ -475,12 +476,6 @@ function ENT:OnPlay(soundid,location,range,pitch)
             self.Sounds[soundid]:SetTime(0)
         end
         return
-    end
-    if soundid == "QF1" then
-        local id = range > 0 and "qf1_on" or "qf1_off"
-        local speed = self:GetPackedRatio("Speed")
-        self.SoundPositions["qf1_on"][1] = 440-Lerp(speed/0.1,0,330)
-        return id,location,1-Lerp(speed/10,0.2,0.8),pitch
     end
     return soundid,location,range,pitch
 end  

@@ -38,7 +38,7 @@ local function GetDoorPosition(n,G)			--	x						--	y        --	z
 end
 function ENT:GetStandingArea()    --смещение пассажиров
 	return Vector(270-15,-25,-47),Vector(-285,25,-46) 	
-end 
+end	
 function ENT:BoardPassengers(delta)
     self:SetNW2Entity("gmod_subway_81-740_4", self.HeadTrain)	
     local train = self.HeadTrain
