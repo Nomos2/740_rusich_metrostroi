@@ -189,4 +189,7 @@ function ENT:OnButtonPress(button,ply)
 	local train = self.HeadTrain
     if not IsValid(train) then return end		
     if button == "RearDoor" and (self.RearDoor or not train.BUV.BlockTorec) then self.RearDoor = not self.RearDoor end
+
+	if button == "RearBrakeLineIsolationToggle" then train.RearBrakeLineIsolation:TriggerInput("Toggle",1) end
+	if button == "RearTrainLineIsolationToggle" then train.RearTrainLineIsolation:TriggerInput("Toggle",1) end
 end	
