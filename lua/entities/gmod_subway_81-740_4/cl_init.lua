@@ -2354,7 +2354,7 @@ function ENT:Think()
     self.BaseClass.Think(self)
 	local MiddleBogey = self:GetNW2Entity("MiddleBogey")	
 	local refresh = false--true		
-	
+		
 	if self:GetNW2Int("MotorType")==1 then		
 		if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines/engine_8.wav"  
 	or self.FrontBogey.EngineSNDConfig and self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
@@ -2478,6 +2478,9 @@ end
     self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
     local train1 = self.HeadTrain1 
     if not IsValid(train1) then return end	
+	
+	train1.HeadTrain = self 
+    train1:SetNW2Entity("HeadTrain", self)
 	
 	 self:SetLightPower(3,self.Door5 and self:GetPackedBool("AppLights"),self:GetPackedBool("AppLights") and 1 or 0)
     --ANIMS
