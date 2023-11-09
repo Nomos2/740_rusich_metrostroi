@@ -325,12 +325,12 @@ train.ClientProps["test_prop_2"] = {
 	nohide = true,
 }]]
 if train then	
+if not IsValid(train) then return end
 for avar = 1,2 do
 	local animation = math.random (5,12)	
 	local animation1 = math.random (0.5,1)	
     local colV = self:GetNW2Vector("Lamp7404"..avar)
-    local col = Color(colV.x,colV.y,colV.z)	
-    if not IsValid(train) then return end		
+    local col = Color(colV.x,colV.y,colV.z)			
 	self:ShowHideSmooth("lamps_salon_on_rear_avar"..avar,train:Animate("LampsEmer",train:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,animation1,animation,false),col)  
 end	
 
