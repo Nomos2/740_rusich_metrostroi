@@ -287,7 +287,7 @@ function ENT:Think()
     if not self.RenderClientEnts or self.CreatingCSEnts then
         return
     end 	
-    self.HeadTrain = self:GetNW2Entity("gmod_subway_81-740_4")	
+    self.HeadTrain = self:GetNW2Entity("HeadTrain")	
     local train = self.HeadTrain 
     if not IsValid(train) then return end		
 	
@@ -449,7 +449,7 @@ end
         self:PlayOnce("RearDoor","bass",door4s and 1 or 0)
     end
 
-    self.HeadTrain = self:GetNW2Entity("gmod_subway_81-740_4")	
+    self.HeadTrain = self:GetNW2Entity("HeadTrain")	
     local train = self.HeadTrain 
     if not IsValid(train) then return end		
 	
@@ -481,7 +481,7 @@ function ENT:OnPlay(soundid,location,range,pitch)
 end  
 
 function ENT:DrawPost(special)
-    self.HeadTrain = self:GetNW2Entity("gmod_subway_81-740_4")	
+    self.HeadTrain = self:GetNW2Entity("HeadTrain")	
     local train = self.HeadTrain	
     if not IsValid(train) then return end		
 	self.RTMaterial:SetTexture("$basetexture", train.Tickers)		
