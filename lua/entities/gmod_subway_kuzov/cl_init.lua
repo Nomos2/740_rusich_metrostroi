@@ -270,7 +270,7 @@ function ENT:Initialize()
         "models/metrostroi/passengers/m4.mdl",
         "models/metrostroi/passengers/m5.mdl",
     }
-    self:GetNW2Entity("gmod_subway_81-740_4").PreviousCompressorState = false			
+    self:GetNW2Entity("HeadTrain").PreviousCompressorState = false			
 	
     self.VentRand = {}
     self.VentState = {}
@@ -324,13 +324,12 @@ train.ClientProps["test_prop_2"] = {
 	scale = 0.5,	
 	nohide = true,
 }]]
-if train then	
-if not IsValid(train) then return end
 for avar = 1,2 do
 	local animation = math.random (5,12)	
 	local animation1 = math.random (0.5,1)	
     local colV = self:GetNW2Vector("Lamp7404"..avar)
-    local col = Color(colV.x,colV.y,colV.z)			
+    local col = Color(colV.x,colV.y,colV.z)	
+	if not IsValid(train) then return end		
 	self:ShowHideSmooth("lamps_salon_on_rear_avar"..avar,train:Animate("LampsEmer",train:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,animation1,animation,false),col)  
 end	
 
@@ -339,8 +338,8 @@ end
 
 for i = 1,11 do	
     local colV = self:GetNW2Vector("Lamp7404"..i)
-    local col = Color(colV.x,colV.y,colV.z)		
-    if not IsValid(train) then return end		
+    local col = Color(colV.x,colV.y,colV.z)	   
+	if not IsValid(train) then return end	
 	self:ShowHideSmooth("lamps_salon_on_rear"..i-1,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
     self:ShowHideSmooth("lamps_salon_on_rear1"..i,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
 end
@@ -459,7 +458,6 @@ end
             self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
 		end 
 	end		
-end
 end
 
 function ENT:Draw()
