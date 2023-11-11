@@ -264,6 +264,7 @@ function ENT:Initialize()
         "models/metrostroi/passengers/f2.mdl",
         "models/metrostroi/passengers/f3.mdl",
         "models/metrostroi/passengers/f4.mdl",
+	    "models/metrostroi/passengers/f5.mdl",	
         "models/metrostroi/passengers/m1.mdl",
         "models/metrostroi/passengers/m2.mdl",
 	    "models/metrostroi/passengers/m3.mdl",	

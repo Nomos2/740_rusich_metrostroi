@@ -40,7 +40,7 @@ function ENT:GetStandingArea()    --смещение пассажиров
 	return Vector(270-15,-25,-47),Vector(-285,25,-46) 	
 end	
 function ENT:BoardPassengers(delta)
-    self:SetNW2Entity("gmod_subway_81-740_4", self.HeadTrain)	
+    self.HeadTrain = self:GetNW2Entity("HeadTrain")	
     local train = self.HeadTrain
 	if not IsValid(train) then return end		
 	self:SetNW2Float("PassengerCount", math.max(0,math.min(self:PassengerCapacity(),self:GetNW2Float("PassengerCount") + delta)))
