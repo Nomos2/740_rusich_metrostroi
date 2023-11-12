@@ -119,8 +119,8 @@ function ENT:UpdateLampsColors()
 end	
 	
 function ENT:Think()	
+
 	self:SetPackedBool("RearDoor",self.RearDoor)		
-    --self:SetNW2Entity("gmod_subway_81-740_4", self.HeadTrain)  
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain		
 	self.TrainWires = {}	
@@ -186,7 +186,7 @@ function ENT:Think()
 end	
 
 function ENT:OnButtonPress(button,ply)
-    --self:SetNW2Entity("gmod_subway_81-740_4", self.HeadTrain)	
+
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")
 	local train = self.HeadTrain
     if not IsValid(train) then return end		
