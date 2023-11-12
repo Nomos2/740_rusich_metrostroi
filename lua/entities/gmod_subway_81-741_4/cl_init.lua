@@ -1052,6 +1052,9 @@ end
     self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
     local train1 = self.HeadTrain1 
     if not IsValid(train1) then return end	
+
+	train1.HeadTrain = self 
+    train1:SetNW2Entity("HeadTrain", self)
 	
     if self.LastGVValue ~= self:GetPackedBool("GV") then
         self.ResetTime = CurTime()+1.5
