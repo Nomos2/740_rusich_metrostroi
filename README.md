@@ -11,5 +11,5 @@
 Известные баги: 
 
 1) Отсутствие звука закрытия и открытия торцевых пневмокранов
-2) ~~Нельзя открыть торцевые пневмокраны вручную, только передние~~ (Исправлено  [7765db6...](https://github.com/AntonBorisovich/740_rusich_metrostroi/commit/7765db673b765f079c6c3c78973dedcdd74cb004)).
-3) ~~Периодически могут быть слеты тележек на пустом месте~~ (Частично исправлено [ad12369...](https://github.com/AntonBorisovich/740_rusich_metrostroi/commit/ad1236912476e03316fea029d82170d9ed11db67)).
+~~2) Нельзя открыть торцевые пневмокраны вручную, только передние~~ (Исправлено  [7765db6...](https://github.com/AntonBorisovich/740_rusich_metrostroi/commit/7765db673b765f079c6c3c78973dedcdd74cb004)).
+~~3) Периодически могут быть слеты тележек на пустом месте~~ (Частично исправлено [ad12369...](https://github.com/AntonBorisovich/740_rusich_metrostroi/commit/ad1236912476e03316fea029d82170d9ed11db67)).
