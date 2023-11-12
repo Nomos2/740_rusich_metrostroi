@@ -119,7 +119,8 @@ function ENT:UpdateLampsColors()
 end	
 	
 function ENT:Think()	
-	self:SetPackedBool("RearDoor",self.RearDoor)
+
+	self:SetPackedBool("RearDoor",self.RearDoor)		
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain		
 	self.TrainWires = {}	
@@ -185,6 +186,7 @@ function ENT:Think()
 end	
 
 function ENT:OnButtonPress(button,ply)
+
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")
 	local train = self.HeadTrain
     if not IsValid(train) then return end		
