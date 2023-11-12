@@ -1,12 +1,12 @@
 ﻿local Map = game.GetMap():lower() or ""
-if(Map:find("gm_metro_minsk") 
+if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
-or Map:find("gm_metropbl")) then
+or Map:find("gm_metropbl")) then 
 	return
 end
 
@@ -2443,9 +2443,13 @@ for k=0,3 do
 end
 
 function self:UpdateWagonNumber()
-    self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-    local train1 = self.HeadTrain1 
-    if not IsValid(train1) then return end	
+		self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
+		local train1 = self.HeadTrain1 
+		if not IsValid(train1) then return end	
+		
+		train1.HeadTrain = self 
+		train1:SetNW2Entity("HeadTrain", self)
+		
 for k=0,3 do
         --if i< count then			
 			if self.WagonNumber then				
@@ -2473,15 +2477,6 @@ for k=0,3 do
 			end
 		end
 end
-	
---Задняя часть
-    self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-    local train1 = self.HeadTrain1 
-    if not IsValid(train1) then return end	
-	
-	train1.HeadTrain = self 
-    train1:SetNW2Entity("HeadTrain", self)
-	
 	 self:SetLightPower(3,self.Door5 and self:GetPackedBool("AppLights"),self:GetPackedBool("AppLights") and 1 or 0)
     --ANIMS
     self:Animate("brake_line", self:GetPackedRatio("BL"), 0, 0.753,  256,2)
@@ -2653,15 +2648,17 @@ end
         end
 	end
 	
-	if self:GetPackedBool("wiper") then
+	if (self:GetPackedBool("wiper")) and self.Anims["wiper"] and self:GetPackedBool("Battery") then
 		local anim = self.Anims["wiper"].value		
 		if anim == 0 then
 			self.WiperDir = true
 		elseif anim == 1 then
 			self.WiperDir = false
 		end
+		self:Animate("wiper",self.WiperDir and 1 or 0,0,1,0.42,false)
+	elseif self:GetPackedBool("Battery") then
+		self:Animate("wiper",0,0,1,0.42,false)		
 	end
-	self:Animate("wiper",self.WiperDir and 1 or 0,0,1,0.42,false)
 	
 	--Анимация дверей.
 	if not self.DoorStates then self.DoorStates = {} end
@@ -2920,12 +2917,6 @@ function ENT:OnPlay(soundid,location,range,pitch)
     end
 	if soundid:sub(1,4) == "IGLA" then
     return range > 0 and "igla_on" or "igla_off",location,1,pitch
-    end
-    if soundid == "QF1" then
-        local id = range > 0 and "qf1_on" or "qf1_off"
-        local speed = self:GetPackedRatio("Speed")
-        self.SoundPositions["qf1_on"][1] = 440-Lerp(speed/0.1,0,330)
-        return id,location,1-Lerp(speed/10,0.2,0.8),pitch
     end
     return soundid,location,range,pitch
 end 

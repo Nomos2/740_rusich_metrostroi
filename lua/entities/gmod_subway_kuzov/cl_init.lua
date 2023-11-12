@@ -75,6 +75,21 @@ ENT.ClientProps["Naddver_off_740"] = {
     ang = Angle(0,0,0),
 	scale = 1,	
 }
+ENT.ClientProps["Zavod_table_sochl"] = { 
+    model = "models/metrostroi_train/81-740/salon/zavod.mdl",
+	pos = Vector(287.2,44,48),
+    ang = Angle(90,-180,0),
+	scale = 3,
+	hide = 1,		
+}
+ENT.ClientProps["Zavod_table_sochl_torec"] = { 
+    model = "models/metrostroi_train/81-740/salon/zavod.mdl",
+	pos = Vector(-332.4,-20,59),
+    ang = Angle(90,0,0),
+	scale = 3,
+	hide = 1, 	
+}
+
 ENT.ClientProps["krepezh1"] = {
     model = "models/metrostroi_train/81-740/body/krepezh.mdl",
     pos = Vector(64.5, 0, -75.2),
@@ -161,8 +176,8 @@ ENT.ClientProps["RearBrake"] = {
 	ang = Angle(0,90,0),
 	hide = 2,	
 }
-ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,11,1,50,1e3,Angle(-90,0,0)}}
-ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,11,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,5,1,50,1e3,Angle(-90,0,0)}}
 
 ENT.ButtonMap["Tickers_rear"] = {
 	pos = Vector(286.2,27,65.85), --446 -- 14 -- -0,5
@@ -173,20 +188,6 @@ ENT.ButtonMap["Tickers_rear"] = {
 	hide=true,
 	hideseat=1,		
 }	
-ENT.ClientProps["Zavod_table_sochl"] = { 
-    model = "models/metrostroi_train/81-740/salon/zavod.mdl",
-	pos = Vector(287.2,44,48),
-    ang = Angle(90,-180,0),
-	scale = 3,
-	hide = 1,		
-}
-ENT.ClientProps["Zavod_table_sochl_torec"] = { 
-    model = "models/metrostroi_train/81-740/salon/zavod.mdl",
-	pos = Vector(-332.4,-20,59),
-    ang = Angle(90,0,0),
-	scale = 3,
-	hide = 1, 	
-}
 	
 ENT.ClientProps["lamps_salon_on_rear_avar1"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
@@ -210,7 +211,7 @@ ENT.ClientProps["lamps_salon_on_rear"..i-1] = {
     color = Color(245,238,223),	
 	hide = 1,  	
 }
---правый ряд НЕ ТРОГАТЬ!!!!
+
 ENT.ClientProps["lamps_salon_on_rear1"..i] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
     pos = Vector(341.5-54*i+1,-57.78,-74.88),
@@ -477,7 +478,7 @@ function ENT:OnPlay(soundid,location,range,pitch)
         return
     end
     return soundid,location,range,pitch
-end  
+end 
 
 function ENT:DrawPost(special)
     self.HeadTrain = self:GetNW2Entity("HeadTrain")	

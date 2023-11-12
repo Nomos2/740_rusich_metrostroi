@@ -1,12 +1,12 @@
 local Map = game.GetMap():lower() or ""
-if(Map:find("gm_metro_minsk") 
+if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
-or Map:find("gm_metropbl")) then
+or Map:find("gm_metropbl")) then 
 	return
 end
 
@@ -19,7 +19,7 @@ ENT.Purpose         = ""
 ENT.Instructions    = ""
 ENT.Category        = "Metrostroi (trains)"
 ENT.SkinsType = "81-740"
-ENT.Model = "models/metrostroi_train/81-740/body/81-740_4_defualt_mos_front.mdl"
+ENT.Model = "models/metrostroi_train/81-740/body/81-740_4_front.mdl"
 
 ENT.Spawnable       = true
 ENT.AdminSpawnable  = true
@@ -75,7 +75,7 @@ function ENT:InitializeSounds()
 		
 		self.SoundNames[id2.."a"] = "subway_trains/rusich/bogey/wheels/street_"..i.."a.mp3"
 		self.SoundNames[id2.."b"] = "subway_trains/rusich/bogey/wheels/street_"..i.."b.mp3"
-		self.SoundPositions[id2.."a"] = {700,1e9,Vector(-15-16.5,0,-74),1.5}
+		self.SoundPositions[id2.."a"] = {700,1e9,Vector(-15-15.5,0,-74),1.5}
 		self.SoundPositions[id2.."b"] = self.SoundPositions[id2.."a"]
 		
 		self.SoundNames[id3.."a"] = "subway_trains/rusich/bogey/wheels/street_"..i.."a.mp3"

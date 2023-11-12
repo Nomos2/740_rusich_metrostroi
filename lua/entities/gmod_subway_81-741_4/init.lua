@@ -64,7 +64,7 @@ function ENT:Initialize()
 	self:SetNW2Entity("FrontBogey",self.FrontBogey)
 	self:SetNW2Entity("RearBogey",self.RearBogey)	
 	
-timer.Simple(0, function()	
+timer.Simple(0.1, function()	
         if not IsValid(self) then return end
 		self.Pricep = self:CreatePricep(Vector(-326.1,0,0))		--вагон			
 end)
@@ -363,10 +363,10 @@ function ENT:CreatePricep(pos,ang)
 		1, --torquelimit
 		-1, --xmin
 		-1, --ymin
-		-180, --zmin
+		-90, --zmin
 		1, --xmax
 		1, --ymax
-		180, --zmax
+		90, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -384,10 +384,10 @@ function ENT:CreatePricep(pos,ang)
 		1, --torquelimit
 		-2, --xmin
 		-1, --ymin
-		-180, --zmin
+		-90, --zmin
 		1, --xmax
 		2, --ymax
-		180, --zmax
+		90, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -427,10 +427,10 @@ constraint.AdvBallsocket(
 		0, --torquelimit
 		-15, --xmin
 		-15, --ymin
-		-180, --zmin
+		-90, --zmin
 		15, --xmax
 		15, --ymax
-		180, --zmax
+		90, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -449,10 +449,10 @@ constraint.AdvBallsocket(
 		0, --torquelimit
 		-15, --xmin
 		-15, --ymin
-		-180, --zmin
+		-90, --zmin
 		15, --xmax
 		15, --ymax
-		180, --zmax
+		90, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -471,10 +471,10 @@ constraint.AdvBallsocket(
 		0, --torquelimit
 		-15, --xmin
 		-15, --ymin
-		-180, --zmin
+		-90, --zmin
 		15, --xmax
 		15, --ymax
-		180, --zmax
+		90, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric

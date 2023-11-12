@@ -1,12 +1,12 @@
 local Map = game.GetMap():lower() or ""
-if(Map:find("gm_metro_minsk") 
+if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
-or Map:find("gm_metropbl")) then
+or Map:find("gm_metropbl")) then 
 	return
 end
 
@@ -101,10 +101,10 @@ function ENT:Initialize()
 		self.FrontBogey.m_tblToolsAllowed = { "none" }	
 		self.RearBogey.m_tblToolsAllowed = { "none" }
 		
-timer.Simple(0, function()			
+timer.Simple(0.1, function()			
         if not IsValid(self) then return end
 		self.Pricep = self:CreatePricep(Vector(-356,0,0))--вагон				
-end)  	    	
+end)      	
 
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)
@@ -483,7 +483,7 @@ function ENT:CreatePricep(pos)
 	table.insert(self.TrainEntities,ent)      
     table.insert(ent.TrainEntities,self)	
 	
-	self.MiddleBogey = self:CreateBogey(Vector(-15-16.5,0,-74),Angle(0,0,0),true,"740G")--тележка  ---160,0,-75 -410,0,-75	
+	self.MiddleBogey = self:CreateBogey(Vector(-15-15.5,0,-74),Angle(0,0,0),true,"740G")--тележка  ---160,0,-75 -410,0,-75	
 	self:SetNW2Entity("MiddleBogey",self.MiddleBogey)	
     local rand = math.random()*0.05
     self.MiddleBogey:SetNWFloat("SqualPitch",1.45+rand)
@@ -591,10 +591,10 @@ function ENT:CreatePricep(pos)
 		1, --torquelimit
 		-1, --xmin
 		-1, --ymin
-		-180, --zmin
+		-90, --zmin
 		1, --xmax
 		1, --ymax
-		180, --zmax
+		90, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -612,10 +612,10 @@ function ENT:CreatePricep(pos)
 		1, --torquelimit
 		-2, --xmin
 		-1, --ymin
-		-180, --zmin
+		-90, --zmin
 		1, --xmax
 		2, --ymax
-		180, --zmax
+		90, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -655,10 +655,10 @@ function ENT:CreatePricep(pos)
 		0, --torquelimit
 		-15, --xmin
 		-15, --ymin
-		-180, --zmin
+		-90, --zmin
 		15, --xmax
 		15, --ymax
-		180, --zmax
+		90, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -677,10 +677,10 @@ function ENT:CreatePricep(pos)
 		0, --torquelimit
 		-15, --xmin
 		-15, --ymin
-		-180, --zmin
+		-90, --zmin
 		15, --xmax
 		15, --ymax
-		180, --zmax
+		90, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -699,10 +699,10 @@ function ENT:CreatePricep(pos)
 		0, --torquelimit
 		-15, --xmin
 		-15, --ymin
-		-180, --zmin
+		-90, --zmin
 		15, --xmax
 		15, --ymax
-		180, --zmax
+		90, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric

@@ -501,12 +501,8 @@ end
 
 local yventpos = {
     414.5+0*117-144,
-	---414.5+1*117+6.2-144,
 	414.5+2*117+5-144,
-	--414.5+3*117+2-144,
 	414.5+4*117+0.5-144,
-	---414.5+5*117-2.3-144,
-	---414.5+6*117-144,
 }
 
 function ENT:Initialize()
@@ -1022,7 +1018,11 @@ end
 function self:UpdateWagonNumber()
 		self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
 		local train1 = self.HeadTrain1 
-    if not IsValid(train1) then return end	
+		if not IsValid(train1) then return end	
+		
+		train1.HeadTrain = self 
+		train1:SetNW2Entity("HeadTrain", self)		
+		
 for k=0,3 do
         --if i< count then			
 			if self.WagonNumber then				
@@ -1048,14 +1048,7 @@ local function GetDoorPositionRear(b,k,j)
 	else return Vector(265.6 - 35.0*(1+k) - 232.1*b,-67.5*(1-2*k),4.3)
 	end
 end
-----------------------------------------------------------------------------------------------------Задняя часть
-    self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-    local train1 = self.HeadTrain1 
-    if not IsValid(train1) then return end	
 
-	train1.HeadTrain = self 
-    train1:SetNW2Entity("HeadTrain", self)
-	
     if self.LastGVValue ~= self:GetPackedBool("GV") then
         self.ResetTime = CurTime()+1.5
         self.LastGVValue = self:GetPackedBool("GV")
