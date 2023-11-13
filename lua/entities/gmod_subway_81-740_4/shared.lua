@@ -550,7 +550,7 @@ ENT.Spawner = {
 		        ent.Headlights1:TriggerInput("Set",val==1 and 1 or 0)
 				ent.Headlights2:TriggerInput("Set",val==1 and 1 or 0)
 				ent.CabLight:TriggerInput("Set",val==1 and 1 or 0)
-				ent.Vent2:TriggerInput("Set",val==1 and 1 or 0)
+				ent.Vent2:TriggerInput("Set",(first and val==1) and 1 or 0)
                 _LastSpawner=CurTime()
                 ent.CabinDoorLeft = val==2 and first
                 ent.CabinDoorRight = val==2 and first
