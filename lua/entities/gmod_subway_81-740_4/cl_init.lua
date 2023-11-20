@@ -483,7 +483,7 @@ ENT.ClientProps["wiper"] = { --дворник от 760
     model = "models/metrostroi_train/81-740/body/81-740_wiper.mdl",
     pos = Vector(176.8-15,-10,0),
     ang = Angle(0,0,rnd),
-    hide = 2,		
+	nohide = true,		
 }
 
 ENT.ButtonMap["ALSPANELLAMPS"] = { -- дополнительные лампы АЛС 
@@ -1327,7 +1327,7 @@ ENT.ClientProps["AntennaProp"] = {
     model = "models/metrostroi_train/81-740/body/antenna/antenna.mdl",
     pos = Vector(234.25-15,21.3,-124.5),
     ang = Angle(-6,0,0),
-    hide = 2,
+    nohide = true,
 }
 ENT.ClientProps["PasswordProp"] = {
     model = "models/metrostroi_train/81-740/cabine/password.mdl",

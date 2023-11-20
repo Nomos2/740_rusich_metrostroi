@@ -90,7 +90,7 @@ ENT.ClientProps["Zavod_table_sochl_torec"] = {
 	hide = 1, 	
 }
 
-ENT.ClientProps["krepezh1"] = {
+ENT.ClientProps["krepezh"] = {
     model = "models/metrostroi_train/81-740/body/krepezh.mdl",
     pos = Vector(64.5, 0, -75.2),
     ang = Angle(0,180,0), 
