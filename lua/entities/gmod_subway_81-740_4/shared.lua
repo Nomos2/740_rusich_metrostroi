@@ -473,7 +473,6 @@ ENT.SubwayTrain = {
     EKKType = 740
 }
 ENT.NumberRanges = {{0154,0209},{0212,0335}}
---ENT.NumberRanges = {{0154,0155,0337,0190,0191,0192,0193,0194,0195,0196,0197,0198,0199,0200,0201,0202,0203,0204,0205,0206,0207,0208,0209,0212,0213,0214,0215,0216,0217,0218,0219,0220,0221,0222,0223,0224,0225,0227,0228,0229,0230,0231,0232,0233,0234,0235,0236,0238,0239,0248,0249,0250,0251,0252,0253,0254,0255,0256,0257,0260,0261,0262,0263,0264,0265,0266,0267,0268,0269,0270,0271,0272,0273,0276,0277,0278,0279,0280,0281,0282,0283,0286,0287,0288,0289,0290,0291,0292,0293,0296,0297,0304,0305,0305,0306,0307,0308,0311,0318,0319,0320,0321,0322,0323,0324,0325,0326,0327,0328,0329,0330,0331,0332,0333,0334,0335}}
 local Texture = {}
 local Announcer = {}
 for k,v in pairs(Metrostroi.AnnouncementsASNP or {}) do Announcer[k] = v.name or k end	
@@ -484,30 +483,13 @@ ENT.Spawner = {
 	{"models/metrostroi_train/81-740/salon/salon.mdl",pos = Vector(-15,0,0), ang=Angle(0,0,0)},
 	{"models/metrostroi_train/81-740/salon/handrails/handrails.mdl",pos = Vector(370-165,-5,0), ang=Angle(0,0,0)},
 	{"models/metrostroi_train/81-740/cabine/Pult/pult.mdl",pos = Vector(465.4-159, 6, 0), ang=Angle(0,0,0)},	
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(852-159,0.1,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(799-159,0.1,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(746-159,0.1,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(691-159,0.1,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(636-159,0.1,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(581-159,0.1,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(527-159,0.1,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(474-159,0.1,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(419-159,0.1,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(852-159,-58.5,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(799-159,-58.5,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(746-159,-58.5,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(691-159,-58.5,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(636-159,-58.5,0),ang = Angle(0,-180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(581-159,-58.5,0),ang = Angle(0,-180,0)},	
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(527-159,-58.5,0),ang = Angle(0,-180,0)},	
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(474-159,-58.5,0),ang = Angle(0,-180,0)},	
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl", pos = Vector(419-159,-58.5,0),ang = Angle(0,-180,0)},			
+	{"models/metrostroi_train/81-740/salon/lamps/lamps_off.mdl", pos = Vector(-15,-0.2,0),ang = Angle(0,0,0)},		
 	{"models/metrostroi_train/81-741/body/81-741_4_front.mdl",pos = Vector(-26.5,0,0), ang=Angle(0,-180,0)},
 	{"models/metrostroi_train/81-740/cabine/Pult/bucik.mdl",pos = Vector(465.4-159, 6, 0), ang=Angle(0,0,0)},
 	{"models/metrostroi_train/81-740/body/Garm.mdl",pos = Vector(330-15,0,-1.5), ang=Angle(0,0,0)},
 	{"models/metrostroi_train/81-740/salon/salon_rear.mdl",pos = Vector(-544-15, 0, 5.5), ang=Angle(0,180,0)},
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off_rear.mdl",pos = Vector(-450.1-15, 0.1, -75.15), ang=Angle(0,-180,0)},		
-	{"models/metrostroi_train/81-741/salon/handrails/handrails.mdl",pos = Vector(-330-15,0,0), ang=Angle(0,0,0)},
+	{"models/metrostroi_train/81-741/salon/lamps/lamps_off.mdl",pos = Vector(-334.1-15, 0.1, -0.4), ang=Angle(0,0,0)},		
+	{"models/metrostroi_train/81-740/salon/handrails/handrails_r.mdl",pos = Vector(-463.5, -1, -75), ang = Angle(0,180,0)},
 	{"models/metrostroi_train/81-740/body/krepezh.mdl",pos = Vector(283-15,2,-74.6),ang = Angle(0,0,0)},
 	{"models/metrostroi_train/81-740/body/krepezh.mdl",pos = Vector(-230-15,1,-74.6),ang = Angle(0,-180,0)},		
     {"models/metrostroi_train/81-740/cabine/electric/paneltex.mdl",pos = Vector(735.5-159,50,50),ang = Angle(180,270,0)},	

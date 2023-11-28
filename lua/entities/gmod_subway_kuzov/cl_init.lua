@@ -104,14 +104,14 @@ ENT.ClientProps["handrails_offside"] = {
 }
 ENT.ClientProps["handrails"] = {
 	model = "models/metrostroi_train/81-740/salon/handrails/handrails_r.mdl",
-    pos = Vector(-115.5, -1, -75),
+    pos = Vector(-116.7, -1, -75),
     ang = Angle(0,180,0),
 	hide = 1.5, 	
 }
 ENT.ClientProps["lamps_salon_off_r"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_rear.mdl",
-    pos = Vector(-120.1, 0.1, -75.15),
-    ang = Angle(0,180,0), 
+    model = "models/metrostroi_train/81-741/salon/lamps/lamps_off.mdl",
+    pos = Vector(1.1, 0.05, -0.4),
+    ang = Angle(0,0,0), 
 	hide = 2,		
 }
 ENT.ClientProps["door_cab_t"] = {
@@ -206,7 +206,7 @@ ENT.ClientProps["lamps_salon_on_rear_avar2"] = {
 for i = 1,11 do
 ENT.ClientProps["lamps_salon_on_rear"..i-1] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(341.5-54*i+1,0.29,-74.88),
+    pos = Vector(341.5-54*i+1,0.3,-74.92),
     ang = Angle(0,180,0),
     color = Color(245,238,223),	
 	hide = 1,  	

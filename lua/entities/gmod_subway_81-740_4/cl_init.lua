@@ -223,127 +223,25 @@ ENT.ClientProps["krepezh"] = {
     ang = Angle(0,0,0),
     nohide = true,
 }
-ENT.ClientProps["lamps_salon_off"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(852-159,0.1,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off1"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(799-159,0.1,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off2"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(746-159,0.1,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off3"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(691-159,0.1,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off4"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(636-159,0.1,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off5"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(581-159,0.1,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off6"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(527-159,0.1,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off7"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(474-159,0.1,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off8"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(419-159,0.1,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
 
-ENT.ClientProps["lamps_salon_off_fr"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(852-159,-58.5,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off_fr1"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(799-159,-58.5,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off_fr2"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(746-159,-58.5,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off_fr3"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(691-159,-58.5,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off_fr4"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(636-159,-58.5,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off_fr5"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(581-159,-58.5,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off_fr6"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(527-159,-58.5,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off_fr7"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(474-159,-58.5,0),
-    ang = Angle(0,-180,0),
-    hide=2,
-}
-ENT.ClientProps["lamps_salon_off_fr8"] = {
-    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off_new.mdl",
-    pos = Vector(419-159,-58.5,0),
-    ang = Angle(0,-180,0),
+ENT.ClientProps["lamps_salon_off"] = {
+    model = "models/metrostroi_train/81-740/salon/lamps/lamps_off.mdl",
+    pos = Vector(-15,-0.2,0),
+    ang = Angle(0,0,0),
     hide=2,
 }
 
 --Аварийка
 ENT.ClientProps["lamps_salon_on_avar1"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(689-159,-58,-74.15),
+    pos = Vector(689-159,-58.2,-74.15),
     ang = Angle(0,-180,0),
 	hide=2,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on_avar2"] = { 
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(309-159,0.5,-74.15),
+    pos = Vector(309-159,0.3,-74.15),
     ang = Angle(0,-180,0),
 	hide=2,
     color = Color(245,238,223),		
@@ -353,63 +251,63 @@ ENT.ClientProps["lamps_salon_on_avar2"] = {
 
 ENT.ClientProps["lamps_salon_on1"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(689-159,0.5,-74.15),
+    pos = Vector(689-159,0.3,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on2"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(636-159,0.5,-74.15),
+    pos = Vector(636-159,0.3,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on3"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(581-159,0.5,-74.15),
+    pos = Vector(581-159,0.3,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on4"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(527-159,0.5,-74.15),
+    pos = Vector(527-159,0.3,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on5"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(473-159,0.5,-74.15),
+    pos = Vector(473-159,0.3,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on6"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(419-159,0.5,-74.15),
+    pos = Vector(419-159,0.3,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on7"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(364-159,0.5,-74.15),
+    pos = Vector(364-159,0.3,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on8"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(309-159,0.5,-74.15),
+    pos = Vector(309-159,0.3,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on9"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(255-159,0.5,-74.15),
+    pos = Vector(255-159,0.3,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
@@ -417,63 +315,63 @@ ENT.ClientProps["lamps_salon_on9"] = {
 
 ENT.ClientProps["lamps_salon_on_fr1"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(689-159,-58,-74.15),
+    pos = Vector(689-159,-58.25,-74.15),
     ang = Angle(0,180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on_fr2"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(635-159,-58,-74.15),
+    pos = Vector(635-159,-58.25,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on_fr3"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(581-159,-58,-74.15),
+    pos = Vector(581-159,-58.2,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on_fr4"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(527-159,-58,-74.15),
+    pos = Vector(527-159,-58.2,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on_fr5"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(473-159,-58,-74.15),
+    pos = Vector(473-159,-58.2,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on_fr6"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(418.7-159,-58,-74.15),
+    pos = Vector(418.7-159,-58.2,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on_fr7"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(364-159,-58,-74.15),
+    pos = Vector(364-159,-58.2,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on_fr8"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(310-159,-58,-74.15),
+    pos = Vector(310-159,-58.2,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
 }
 ENT.ClientProps["lamps_salon_on_fr9"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(255.5-159,-58,-74.15),
+    pos = Vector(255.9-159,-58.2,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),		
@@ -740,7 +638,6 @@ ENT.ButtonMap["VoltHelper2"] = {
     buttons = {
         {ID = "!HV",x=0, y=0, w=60, h=50, tooltip = ""},
         {ID = "!I1_3",x=0, y=64, w=60, h=50, tooltip = ""},
-        --{ID = "!I2_4",x=0, y=130, w=60, h=60, tooltip = ""},
     }
 }
 
