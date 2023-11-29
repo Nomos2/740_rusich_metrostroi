@@ -321,8 +321,10 @@ end	]]
 end
 --если на карте нету сигналки включить ВП
 function ENT:NonSupportTrigger()
-	--self.ALSFreqBlock:TriggerInput("Set",1)
-	--self.Plombs.ALSFreqBlock = nil
+    self.ALS:TriggerInput("Set",1)
+    self.ALSk:TriggerInput("Set",0)
+    self.Plombs.ALS = nil
+    self.Plombs.ALSk = nil
 end
 function ENT:TriggerLightSensor(coil,plate)
 	--self.Prost_Kos:TriggerSensor(coil,plate)
@@ -402,13 +404,6 @@ function ENT:TrainSpawnerUpdate()
 	
     self:UpdateLampsColors()		
 	
-end
-
-function ENT:NonSupportTrigger()
-    self.ALS:TriggerInput("Set",1)
-    self.ALSk:TriggerInput("Set",0)
-    self.Plombs.ALS = nil
-    self.Plombs.ALSk = nil
 end
 
 function ENT:UpdateLampsColors()
@@ -504,6 +499,7 @@ function ENT:CreatePricep(pos)
     end
 
 	constraint.NoCollide(self.MiddleBogey,ent,0,0)
+	constraint.NoCollide(self,ent,0,0)		
 	constraint.NoCollide(ent,self.MiddleBogey,0,0)
 	constraint.NoCollide(self.MiddleBogey,self,0,0)	
 		
@@ -584,6 +580,76 @@ function ENT:CreatePricep(pos)
 		Vector(0,0,-1),	
 		false
 		)		
+	else	
+	
+	if Map:find("gm_mustox_neocrimson_line") or
+	Map:find("gm_mus_neoorange") or
+	Map:find("gm_metro_nekrasovskaya_line") then	
+	constraint.AdvBallsocket(
+		self,
+		self.MiddleBogey,
+		0, --bone
+		0, --bone
+		Vector(0,0,0),
+		Vector(-305,0,0),		
+		0, --forcelimit
+		0, --torquelimit
+		0, --xmin
+		0, --ymin
+		-60, --zmin
+		0, --xmax
+		0, --ymax
+		60, --zmax
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		true	
+	)	
+	
+	constraint.AdvBallsocket(
+		self.MiddleBogey,	
+		ent,
+		0, --bone
+		0, --bone		
+		Vector(-30,0,65),
+		Vector(30,0,65),		
+		0, --forcelimit
+		0, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-60, --zmin
+		2, --xmax
+		2, --ymax
+		60, --zmax
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1--nocollide
+	)
+	constraint.AdvBallsocket(
+		self.MiddleBogey,	
+		ent,
+		0, --bone
+		0, --bone		
+		Vector(-30,0,-65),
+		Vector(-30,0,65),	
+		0, --forcelimit
+		0, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-60, --zmin
+		2, --xmax
+		2, --ymax
+		60, --zmax
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1--nocollide
+	)
 	else	
 	 
 	constraint.AdvBallsocket(
@@ -675,7 +741,7 @@ function ENT:CreatePricep(pos)
 		1,--nocollide
 		true	
 	)
---end	
+end	
 end 
 	
     self:RerailChange(self.FrontBogey, true)
