@@ -67,7 +67,7 @@ function TRAIN_SYSTEM:Outputs()
 end
 
 function TRAIN_SYSTEM:Inputs()
-    return {"ReservePower"}
+    return {""}
 end
 function TRAIN_SYSTEM:CState(name,value)
     if self.CurrentBUP and (self.Reset or self.States[name] ~= value) then
@@ -221,7 +221,7 @@ function TRAIN_SYSTEM:Think()
     if self.Reset and self.Reset ~= CurTime() then
         self.Reset = nil
     end
-    self.IVO = Train.Electric.Battery80V > 67 and (self.BBE > 0 or Train.Electric.EqualizingCircuits > 0) and self.I*10+math.Round(math.Rand(2,6),1) or -00.1	
+    self.IVO = Train.Electric.Battery80V > 67 and self.BBE > 0 and self.I*2.6+math.Round(math.Rand(1,5),1) or -00.1	
     self.BBE = not self:Get("PVU8") and self:Get("BBE") and Train.SFV7.Value or 0
     if Train.Electric.Main750V < 650 or Train.Electric.Main750V > 975 then self.BBE = 0 end
     if self.BBE == 0 and self.MainLights and not self.MainLightsTimer then self.MainLightsTimer = CurTime() end
@@ -231,10 +231,8 @@ function TRAIN_SYSTEM:Think()
     self.BlockTorec = not self:Get("PVU6") and self:Get("BlockDoorTorec") and Train.SFV15.Value > 0
     local Ft = IsValid(Train.FrontTrain) and Train.FrontTrain
     local Rt = IsValid(Train.RearTrain) and Train.RearTrain
-    if Train.KV then
-        Train.Electric:TriggerInput("ReservePower",Rt and (Rt.Electric.Battery80V*Rt.SFV32.Value > 0 and 1 or 0) or Ft and (Ft.Electric.Battery80V*Ft.SFV32.Value > 0 and 1 or 0) or 0)
-    end
-    Train.Electric:TriggerInput("EqualizingCircuits",Ft and (Ft.Electric.Battery80V*Ft.BUV.BBE*Ft.SFV32.Value*Train.Battery.Value*Train.SFV32.Value > 0 and 1 or 0) or Rt and (Rt.Electric.Battery80V*Rt.BUV.BBE*Rt.SFV32.Value*Train.Battery.Value*Train.SFV32.Value > 0 and 1 or 0) or 0)
+ 
+    --Train.Electric:TriggerInput("EqualizingCircuits",Ft and (Ft.Electric.Battery80V*Ft.BUV.BBE*Ft.SFV32.Value*Train.Battery.Value*Train.SFV32.Value > 0 and 1 or 0) or Rt and (Rt.Electric.Battery80V*Rt.BUV.BBE*Rt.SFV32.Value*Train.Battery.Value*Train.SFV32.Value > 0 and 1 or 0) or 0)
     if self:Get("Slope") then self.Slope = CurTime() elseif Train:ReadTrainWire(5) > 0 and self.Slope then self.Slope = false end
 	if self.Slope and self.TargetStrength > 0 then
 		self.SchemeSlope = true
