@@ -355,42 +355,7 @@ function ENT:CreatePricep(pos)
 			0,
 			Vector(0,0,-1),	
 			false
-		)		
-	elseif Map:find("gm_metro_pink_line_redux") or
-	Map:find("gm_jar_pll_redux") or
-	Map:find("gm_metro_crossline") or	
-	Map:find("gm_metro_mosldl") or	
-	Map:find("gm_metro_nsk_line") or		
-	Map:find("gm_smr_1987") then
-		constraint.Axis(
-			self.MiddleBogey,		
-			ent,
-			0,
-			0,
-			Vector(0,0,0),
-			Vector(0,0,0),
-			0,
-			0,
-			0,
-			0,
-			Vector(0,0,-1),	
-			false
 		)
-
-		constraint.Axis(
-			self.MiddleBogey,		
-			self,
-			0,
-			0,
-			Vector(0,0,0),
-			Vector(0,0,0),
-			0,
-			0,
-			0,
-			0,
-			Vector(0,0,-1),	
-			false
-		)		
 	elseif Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
 	Map:find("gm_metro_nekrasovskaya_line") then	
@@ -399,7 +364,7 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,
 			0, --bone
 			0, --bone
-			Vector(0,0,0),
+			Vector(0,0,30),
 			Vector(-305,0,0),		
 			0, --forcelimit
 			0, --torquelimit
@@ -418,20 +383,20 @@ function ENT:CreatePricep(pos)
 		)	
 		
 		constraint.AdvBallsocket(
-			self.MiddleBogey,	
 			ent,
+			self.MiddleBogey,
 			0, --bone
 			0, --bone		
-			Vector(-30,0,65),
-			Vector(30,0,65),		
+			Vector(280,0,30),
+			pos,		
 			0, --forcelimit
 			0, --torquelimit
 			-2, --xmin
 			-2, --ymin
-			-60, --zmin
+			-5, --zmin
 			2, --xmax
 			2, --ymax
-			60, --zmax
+			5, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
@@ -439,20 +404,20 @@ function ENT:CreatePricep(pos)
 			1--nocollide
 		)
 		constraint.AdvBallsocket(
-			self.MiddleBogey,	
 			ent,
+			self.MiddleBogey,
 			0, --bone
 			0, --bone		
-			Vector(-30,0,-65),
-			Vector(-30,0,65),	
+			Vector(280,0,-10),
+			pos,	
 			0, --forcelimit
 			0, --torquelimit
 			-2, --xmin
 			-2, --ymin
-			-60, --zmin
+			-5, --zmin
 			2, --xmax
 			2, --ymax
-			60, --zmax
+			5, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
@@ -465,15 +430,15 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,
 			0, --bone
 			0, --bone
-			Vector(0,0,0),
-			Vector(-305,0,0),		
+			Vector(0,0,-20),
+			pos,		
 			0, --forcelimit
 			0, --torquelimit
-			0, --xmin
-			0, --ymin
+			-1, --xmin
+			-1, --ymin
 			-60, --zmin
-			0, --xmax
-			0, --ymax
+			1, --xmax
+			1, --ymax
 			60, --zmax
 			0, --xfric
 			0, --yfric
@@ -482,6 +447,28 @@ function ENT:CreatePricep(pos)
 			1,--nocollide
 			true	
 		)
+			constraint.AdvBallsocket(	
+			self,
+			self.MiddleBogey,
+			0, --bone
+			0, --bone
+			Vector(0,0,20),
+			pos,		
+			0, --forcelimit
+			0, --torquelimit
+			-1, --xmin
+			-1, --ymin
+			-60, --zmin
+			1, --xmin
+			1, --ymin
+			60, --zmax
+			0, --xfric
+			0, --yfric
+			0, --zfric
+			0, --rotonly
+			1,--nocollide
+			true	
+		)		
 
 		constraint.AdvBallsocket(
 			ent,
@@ -494,10 +481,10 @@ function ENT:CreatePricep(pos)
 			0, --torquelimit
 			-10, --xmin
 			-10, --ymin
-			-90, --zmin
+			-15, --zmin
 			10, --xmax
 			10, --ymax
-			90, --zmax
+			15, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
@@ -510,16 +497,16 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,
 			0, --bone
 			0, --bone,		
-			Vector(280,0,5),
+			Vector(280,0,15),
 			Vector(-310,0,0),	
 			0, --forcelimit
 			0, --torquelimit
 			-10, --xmin
 			-10, --ymin
-			-90, --zmin
+			-15, --zmin
 			10, --xmax
 			10, --ymax
-			90, --zmax
+			15, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
@@ -538,10 +525,10 @@ function ENT:CreatePricep(pos)
 			0, --torquelimit
 			-10, --xmin
 			-10, --ymin
-			-90, --zmin
+			-15, --zmin
 			10, --xmax
 			10, --ymax
-			90, --zmax
+			15, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
