@@ -193,3 +193,6 @@ function ENT:OnButtonPress(button,ply)
 	if button == "RearBrakeLineIsolationToggle" then train.RearBrakeLineIsolation:TriggerInput("Toggle",1) end
 	if button == "RearTrainLineIsolationToggle" then train.RearTrainLineIsolation:TriggerInput("Toggle",1) end
 end	
+
+function ENT:OnButtonRelease(button,ply)
+end

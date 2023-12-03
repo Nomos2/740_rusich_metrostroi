@@ -702,12 +702,12 @@ function ENT:CreatePricep(pos)
 			Vector(-310,0,0),		
 			0, --forcelimit
 			0, --torquelimit
-			-10, --xmin
-			-10, --ymin
-			-15, --zmin
-			10, --xmax
-			10, --ymax
-			15, --zmax
+			-5, --xmin
+			-5, --ymin
+			-10, --zmin
+			5, --xmax
+			5, --ymax
+			10, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
@@ -724,12 +724,12 @@ function ENT:CreatePricep(pos)
 			Vector(-310,0,0),	
 			0, --forcelimit
 			0, --torquelimit
-			-10, --xmin
-			-10, --ymin
-			-15, --zmin
-			10, --xmax
-			10, --ymax
-			15, --zmax
+			-5, --xmin
+			-5, --ymin
+			-10, --zmin
+			5, --xmax
+			5, --ymax
+			10, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
@@ -746,12 +746,12 @@ function ENT:CreatePricep(pos)
 			Vector(-310,0,0),	
 			0, --forcelimit
 			0, --torquelimit
-			-10, --xmin
-			-10, --ymin
-			-15, --zmin
-			10, --xmax
-			10, --ymax
-			15, --zmax
+			-5, --xmin
+			-5, --ymin
+			-5, --zmin
+			5, --xmax
+			5, --ymax
+			10, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
@@ -772,7 +772,6 @@ function ENT:CreatePricep(pos)
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
 	ent.KeyMap = {}
-	ent.InteractionZones = {}	
 end			
 ---------------------------------------------------------------------------
 function ENT:Think()
