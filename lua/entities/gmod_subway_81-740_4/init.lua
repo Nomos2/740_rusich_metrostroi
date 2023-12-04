@@ -78,7 +78,7 @@ function ENT:Initialize()
     self.InstructorsSeat4:SetColor(Color(0,0,0,0))
 	self.InstructorsSeat4.m_tblToolsAllowed = { "none" }		
 	
-	self.LightSensor = self:AddLightSensor(Vector(627,0,-110),Angle(0,90,0))
+	self.LightSensor = self:AddLightSensor(Vector(627,0,-130),Angle(0,90,0))
 	
 	self.ASSensor = self:AddLightSensor(Vector(515,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
 	
