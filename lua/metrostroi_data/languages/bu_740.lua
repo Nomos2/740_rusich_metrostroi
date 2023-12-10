@@ -42,12 +42,6 @@ Spawner.740.ZavodTable2    = Тип 1 близо до кабината на во
 Spawner.740.ZavodTable3    = Тип 2 близо до прехода между секциите
 Spawner.740.ZavodTable4    = Тип 3 Близо до крайната врата на задната секция
 
-Spawner.740.BBESound    = ИПП тип звук
-Spawner.740.BBESound.Random   = Случайно
-Spawner.740.BBESound2    = Тип 1
-Spawner.740.BBESound3    = Тип 2 
-Spawner.740.BBESound4    = Тип 3
-
 Spawner.740.RingSound    = Тип звук на звънене
 Spawner.740.RingSound.Random   = Случайно
 Spawner.740.RingSound2    = Тип 1
@@ -563,12 +557,6 @@ Entities.gmod_subway_81-740_4.Spawner.ZavodTable.1 		  	  = @[Spawner.740.ZavodT
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.2         	  = @[Spawner.740.ZavodTable2]
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.3            = @[Spawner.740.ZavodTable3]
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.4         	  = @[Spawner.740.ZavodTable4]
-
-Entities.gmod_subway_81-740_4.Spawner.BBESound.Name 		  = @[Spawner.740.BBESound] 
-Entities.gmod_subway_81-740_4.Spawner.BBESound.1 		  	  = @[Spawner.740.BBESound.Random] 
-Entities.gmod_subway_81-740_4.Spawner.BBESound.2         	  = @[Spawner.740.BBESound2]
-Entities.gmod_subway_81-740_4.Spawner.BBESound.3           	  = @[Spawner.740.BBESound3]
-Entities.gmod_subway_81-740_4.Spawner.BBESound.4         	  = @[Spawner.740.BBESound4]
 
 Entities.gmod_subway_81-740_4.Spawner.VentSound.Name 		  = @[Spawner.740.VentSound] 
 Entities.gmod_subway_81-740_4.Spawner.VentSound.1 		  	  = @[Spawner.740.VentSound.Random] 

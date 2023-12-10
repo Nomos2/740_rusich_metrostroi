@@ -383,13 +383,7 @@ function ENT:TrainSpawnerUpdate()
        if ZavodTable == 1 then
             ZavodTable = math.ceil(math.random()*2+0.5)
           else ZavodTable = ZavodTable-1 end	
-	self:SetNW2Int("ZavodTable",ZavodTable)	
-	
-	local BBEs = self:GetNW2Int("BBESound")	
-       if BBEs == 1 then
-            BBEs = math.ceil(math.random()*2+0.5)
-          else BBEs = BBEs-1 end	
-	self:SetNW2Int("BBESound",BBEs)		
+	self:SetNW2Int("ZavodTable",ZavodTable)		
 
 	local VentSound = self:GetNW2Int("VentSound")	
        if VentSound == 1 then
@@ -521,7 +515,6 @@ function ENT:CreatePricep(pos)
 		Vector(0,0,-1)
 		)
 	--Сцепка, крепление к вагону.
-	constraint.RemoveConstraints(self.RearCouple, "AdvBallsocket")	
 	constraint.AdvBallsocket(
 		ent,
         self.RearCouple,
@@ -543,6 +536,15 @@ function ENT:CreatePricep(pos)
         0, --rotonly
         1 --nocollide
     ) 	
+	
+	local xmin = -3
+	local xmax = 3
+	
+	local ymin = -3
+	local ymax = 3
+	
+	local zmin = -60
+	local zmax = 60		
 	
 	local Map = game.GetMap():lower() or ""        
 	if Map:find("gm_metro_pink_line_redux") or
@@ -587,7 +589,7 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,
 			0, --bone
 			0, --bone
-			Vector(0,0,30),
+			Vector(0,0,-30),
 			Vector(-305,0,0),		
 			0, --forcelimit
 			0, --torquelimit
@@ -610,16 +612,16 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,
 			0, --bone
 			0, --bone		
-			Vector(280,0,30),
+			Vector(305,0,30),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
 			-2, --xmin
 			-2, --ymin
-			-5, --zmin
+			zmin, --zmin
 			2, --xmax
 			2, --ymax
-			5, --zmax
+			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
@@ -631,16 +633,16 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,
 			0, --bone
 			0, --bone		
-			Vector(280,0,-10),
+			Vector(305,0,-30),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit
 			-2, --xmin
 			-2, --ymin
-			-5, --zmin
+			zmin, --zmin
 			2, --xmax
 			2, --ymax
-			5, --zmax
+			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
@@ -697,17 +699,17 @@ function ENT:CreatePricep(pos)
 			ent,
 			self.MiddleBogey,
 			0, --bone
-			0, --bone
-			Vector(280,0,50),
-			Vector(-310,0,0),		
+			0, --bone,		
+			Vector(300,0,-20),
+			pos,		
 			0, --forcelimit
 			0, --torquelimit
-			-5, --xmin
-			-5, --ymin
-			-10, --zmin
-			5, --xmax
-			5, --ymax
-			10, --zmax
+			xmin, --xmin
+			ymin, --ymin
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
+			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
@@ -720,38 +722,16 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,
 			0, --bone
 			0, --bone,		
-			Vector(280,0,15),
-			Vector(-310,0,0),	
+			Vector(300,0,20),
+			pos,	
 			0, --forcelimit
 			0, --torquelimit
-			-5, --xmin
-			-5, --ymin
-			-10, --zmin
-			5, --xmax
-			5, --ymax
-			10, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true	
-		)
-		constraint.AdvBallsocket(
-			ent,
-			self.MiddleBogey,
-			0, --bone
-			0, --bone,		
-			Vector(280,0,20),
-			Vector(-310,0,0),	
-			0, --forcelimit
-			0, --torquelimit
-			-5, --xmin
-			-5, --ymin
-			-5, --zmin
-			5, --xmax
-			5, --ymax
-			10, --zmax
+			xmin, --xmin
+			ymin, --ymin
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
+			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
@@ -779,7 +759,6 @@ function ENT:Think()
     local power = self.Electric.Battery80V > 62
     local powerPPZ = (power and self.SF1.Value > 0) or self.Electric.ReservePower > 0
 	local Panel = self.Panel
-    --print(self,self.BPTI.T,self.BPTI.State)	
 	
     local state = math.abs(self.AsyncInverter.InverterFrequency/(11+self.AsyncInverter.State*5))--(10+8*math.Clamp((self.AsyncInverter.State-0.4)/0.4,0,1)))
     self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+self.AsyncInverter.State/1),0,1)*math.Clamp(self.Speed/6,0,1))

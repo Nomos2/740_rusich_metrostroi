@@ -88,7 +88,7 @@ function ENT:InitializeSounds()
 	
     self.SoundNames["chopper_onix"]   = {"subway_trains/rusich/chopper.wav",loop = true}
     self.SoundPositions["chopper_onix"] = {200,1e9,Vector(144,0,0),2}	
-    self.SoundNames["ONIX"]   = {"subway_trains/rusich/inverter/inverter.wav", loop = true}
+    self.SoundNames["ONIX"]   = {"subway_trains/rusich/inverter.wav", loop = true}
     self.SoundPositions["ONIX"] = {400,1e9,Vector(344,0,0),1.5}	
 	
     for i=1,4 do
@@ -154,8 +154,8 @@ function ENT:InitializeSounds()
     self.SoundNames["pak_on"] = "subway_trains/717/switches/rc_on.mp3"
     self.SoundNames["pak_off"] = "subway_trains/717/switches/rc_off.mp3"
 	
-    self.SoundNames["door_cab_open"] = 	"subway_trains/rusich/door/torec/door_torec_open_end.wav"
-    self.SoundNames["door_cab_close"] = "subway_trains/rusich/door/torec/door_close_1.mp3"	
+    self.SoundNames["door_cab_open"] = 	"subway_trains/rusich/doors/torec/door_torec_open_end.wav"
+    self.SoundNames["door_cab_close"] = "subway_trains/rusich/doors/torec/door_close_1.mp3"	
 
 	local loop = math.random (1,2)
 	local start = math.random (1,5)		

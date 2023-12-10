@@ -91,15 +91,11 @@ function ENT:InitializeSounds()
 	
     self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
 	
-    self.SoundNames["bbe_v1"]   = {"subway_trains/rusich/bbes/bbe.wav",loop = true}
-    self.SoundPositions["bbe_v1"] = {800,1e9,Vector(50,0,-40),0.4}	
-    self.SoundNames["bbe_v2"]   = {"subway_trains/rusich/bbes/bbe_1.wav",loop = true}
-    self.SoundPositions["bbe_v2"] = {800,1e9,Vector(50,0,-40),0.4} 	
-    self.SoundNames["bbe_v3"]   = {"subway_trains/rusich/bbes/bbe_new.wav",loop = true}
-    self.SoundPositions["bbe_v3"] = {800,1e9,Vector(50,0,-40),0.4}		
+    self.SoundNames["bbe"]   = {"subway_trains/rusich/bbe.wav",loop = true}
+    self.SoundPositions["bbe"] = {800,1e9,Vector(50,0,-40),2.1}			
 
-	self.SoundNames["cab_door_open"] = "subway_trains/rusich/door/torec/door_torec_open_end.wav"
-    self.SoundNames["cab_door_close"] = "subway_trains/rusich/door/torec/door_close_1.mp3"	
+	self.SoundNames["cab_door_open"] = "subway_trains/rusich/doors/torec/door_torec_open_end.wav"
+    self.SoundNames["cab_door_close"] = "subway_trains/rusich/doors/torec/door_close_1.mp3"	
 	local j = math.random (1,3)	
     self.SoundNames["release_rear"] = {loop=true,"subway_trains/rusich/pneumo_release_"..j..".wav"}
     self.SoundPositions["release_rear"] = {1200,1e9,Vector(600-144,0,-70),0.4}		

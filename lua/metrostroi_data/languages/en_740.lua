@@ -42,12 +42,6 @@ Spawner.740.ZavodTable2    = Type 1 Near the driver's cab/front section front do
 Spawner.740.ZavodTable3    = Type 2 Near the transition between sections
 Spawner.740.ZavodTable4    = Type 3 Near the end door of the rear section
 
-Spawner.740.BBESound    = Type of IPP sound
-Spawner.740.BBESound.Random   = Random
-Spawner.740.BBESound2    = Type 1
-Spawner.740.BBESound3    = Type 2 
-Spawner.740.BBESound4    = Type 3
-
 Spawner.740.RingSound    = Type of ring sound
 Spawner.740.RingSound.Random   = Random
 Spawner.740.RingSound2    = Type 1
@@ -504,7 +498,6 @@ Entities.gmod_subway_81-740_4.Buttons.ALSPANELLAMPS.!Back     = @[Common.740.Bac
 Entities.gmod_subway_kuzov.Buttons.RearPneumatic.RearTrainLineIsolationToggle    = @[Common.741.RearTrainLineIsolationToggle]
 Entities.gmod_subway_kuzov.Buttons.RearPneumatic.RearBrakeLineIsolationToggle    = @[Common.741.RearBrakeLineIsolationToggle]
 Entities.gmod_subway_kuzov.Buttons.RearDoor.RearDoor   							 = @[Common.741.RearDoor]
-Entities.gmod_subway_kuzov_741.Buttons.RearDoor_front.RearDoor   				 = @[Common.741.RearDoor]
 
 #gmod_subway_81-741_4
 Entities.gmod_subway_81-741_4.Buttons.Battery.BatteryToggle   = @[Common.740.VB]
@@ -562,12 +555,6 @@ Entities.gmod_subway_81-740_4.Spawner.ZavodTable.1 		  	  = @[Spawner.740.ZavodT
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.2         	  = @[Spawner.740.ZavodTable2]
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.3            = @[Spawner.740.ZavodTable3]
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.4         	  = @[Spawner.740.ZavodTable4]
-
-Entities.gmod_subway_81-740_4.Spawner.BBESound.Name 		  = @[Spawner.740.BBESound] 
-Entities.gmod_subway_81-740_4.Spawner.BBESound.1 		  	  = @[Spawner.740.BBESound.Random] 
-Entities.gmod_subway_81-740_4.Spawner.BBESound.2         	  = @[Spawner.740.BBESound2]
-Entities.gmod_subway_81-740_4.Spawner.BBESound.3           	  = @[Spawner.740.BBESound3]
-Entities.gmod_subway_81-740_4.Spawner.BBESound.4         	  = @[Spawner.740.BBESound4]
 
 Entities.gmod_subway_81-740_4.Spawner.VentSound.Name 		  = @[Spawner.740.VentSound] 
 Entities.gmod_subway_81-740_4.Spawner.VentSound.1 		  	  = @[Spawner.740.VentSound.Random] 

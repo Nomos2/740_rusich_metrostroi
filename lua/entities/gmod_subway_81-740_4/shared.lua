@@ -86,24 +86,9 @@ function ENT:InitializeSounds()
 	
 	--Костыль в лице id2 и 3, они работают только на передней секции, цель - переписать их под заднюю секцию без внедрения кода непосредственно в заднюю секцию.	
 
---[[
-    self.SoundNames["async1"]   = {"subway_trains/rusich/inverter/inverter1.wav",loop = true}
-    self.SoundPositions["async1"] = {400,1e9,Vector(700-144,0,0),1} --FIXME: Pos
-    self.SoundNames["async2"]   = {"subway_trains/rusich/inverter/inverter2.wav",loop = true}
-    self.SoundPositions["async2"] = {400,1e9,Vector(700-144,0,0),1} --FIXME: Pos
-    self.SoundNames["async3"]   = {"subway_trains/rusich/inverter/inverter3.wav",loop = true}
-    self.SoundPositions["async3"] = {400,1e9,Vector(700-144,0,0),1} --FIXME: Pos
-    self.SoundNames["async4"]   = {"subway_trains/rusich/inverter/inverter4.wav",loop = true}
-    self.SoundPositions["async4"] = {400,1e9,Vector(700-144,0,0),1} --FIXME: Pos
-    self.SoundNames["async5"]   = {"subway_trains/rusich/inverter/inverter5.wav",loop = true}
-    self.SoundPositions["async5"] = {400,1e9,Vector(700-144,0,0),1} --FIXME: Pos
-    --self.SoundNames["async6"]   = {"subway_trains/rusich/inverter/inverter6.wav",loop = true} --5 инвертер переименован в звук рекуперации.
-    --self.SoundPositions["async6"] = {400,1e9,Vector(700-144,0,0),1} --FIXME: Pos		
-]]
-
     self.SoundNames["chopper_onix"]   = {"subway_trains/rusich/chopper.wav",loop = true}
     self.SoundPositions["chopper_onix"] = {200,1e9,Vector(144-15,0,0),2}	
-    self.SoundNames["ONIX"]   = {"subway_trains/rusich/inverter/inverter.wav", loop = true}
+    self.SoundNames["ONIX"]   = {"subway_trains/rusich/inverter.wav", loop = true}
     self.SoundPositions["ONIX"] = {400,1e9,Vector(344-15,0,0),1.5}	
 	
     for i=1,4 do
@@ -313,11 +298,11 @@ function ENT:InitializeSounds()
     self.SoundNames["button_square_on"] = {"subway_trains/720/switches/butts_on.mp3","subway_trains/720/switches/butts_on2.mp3"}
     self.SoundNames["button_square_off"] = {"subway_trains/720/switches/butts_off.mp3","subway_trains/720/switches/butts_off2.mp3"}
 
-    self.SoundNames["door_cab_open"] = {"subway_trains/rusich/door/cab/door_cab_open.mp3","subway_trains/rusich/door/cab/door_cab_open2.mp3"}
-    self.SoundNames["door_cab_close"] = {"subway_trains/rusich/door/cab/door_cab_close.mp3","subway_trains/rusich/door/cab/door_cab_close2.mp3"}
+    self.SoundNames["door_cab_open"] = {"subway_trains/rusich/doors/cab/door_cab_open.mp3","subway_trains/rusich/doors/cab/door_cab_open2.mp3"}
+    self.SoundNames["door_cab_close"] = {"subway_trains/rusich/doors/cab/door_cab_close.mp3","subway_trains/rusich/doors/cab/door_cab_close2.mp3"}
 	
 	local rol = math.random (1,2)	
-    self.SoundNames["door_cab_roll"] = "subway_trains/rusich/door/cab/cabdoor_roll.wav"
+    self.SoundNames["door_cab_roll"] = "subway_trains/rusich/doors/cab/cabdoor_roll.wav"
     self.SoundNames["rolling_5"] = {loop=true,"subway_trains/rusich/rolling/skrip1.mp3"}	
     self.SoundNames["rolling_10"] = {loop=true,"subway_trains/rusich/rolling/rolling_10.wav"}
     self.SoundNames["rolling_30"] = {loop=true,"subway_trains/rusich/rolling/rolling_30.wav"}
@@ -514,8 +499,7 @@ ENT.Spawner = {
 	{"Announcer","Spawner.740.Announcer","List",Announcer},	
 	{},
 	{"RingSound","Spawner.740.RingSound","List",{"Spawner.740.RingSound1","Spawner.740.RingSound2","Spawner.740.RingSound3","Spawner.740.RingSound4","Spawner.740.RingSound.Random"}},	
-	{"ZavodTable","Spawner.740.ZavodTable","List",{"Spawner.740.ZavodTable.Random","Spawner.740.ZavodTable1","Spawner.740.ZavodTable2","Spawner.740.ZavodTable3"}}, 
-	{"BBESound","Spawner.740.BBESound","List",{"Spawner.740.BBESound.Random","Spawner.740.BBESound1","Spawner.740.BBESound2","Spawner.740.BBESound3"}}, 	
+	{"ZavodTable","Spawner.740.ZavodTable","List",{"Spawner.740.ZavodTable.Random","Spawner.740.ZavodTable1","Spawner.740.ZavodTable2","Spawner.740.ZavodTable3"}}, 	
 	{"MotorType","Spawner.740.MotorType","List",{"Spawner.740.MotorType.Random","Spawner.740.MotorType1","Spawner.740.MotorType2","Spawner.740.MotorType3","Spawner.740.MotorType4","Spawner.740.MotorType5"}},	
 	{"VentSound","Spawner.740.VentSound","List",{"Spawner.740.VentSound.Random","Spawner.740.VentSound1","Spawner.740.VentSound2"}}, 	
 	{},
@@ -542,7 +526,7 @@ ENT.Spawner = {
 				ent:GetNW2Entity("gmod_subway_kuzov").RearDoor = val == 2			
 				end)				
 				
-                ent.PassScheme:TriggerInput("Set",val==1 and 1 or 0)
+                --ent.PassScheme:TriggerInput("Set",val==1 and 1 or 0)
 				--ent.BUKP.State = 0	
 				--ent.Ticker:TriggerInput("Set",val==1 and 1 or 0)
                 if val==1 then

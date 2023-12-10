@@ -104,7 +104,7 @@ ENT.ClientProps["handrails_offside"] = {
 }
 ENT.ClientProps["handrails"] = {
 	model = "models/metrostroi_train/81-740/salon/handrails/handrails_r.mdl",
-    pos = Vector(-116.7, -1, -75),
+    pos = Vector(-115.4, -1, -75),
     ang = Angle(0,180,0),
 	hide = 1.5, 	
 }
@@ -176,6 +176,7 @@ ENT.ClientProps["RearBrake"] = {
 	ang = Angle(0,90,0),
 	hide = 2,	
 }
+
 ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
 ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,5,1,50,1e3,Angle(-90,0,0)}}
 
@@ -432,16 +433,7 @@ end
     end		
 	
     if not IsValid(train) then return end		
-	local BBEs = train:GetNW2Int("BBESound",1)	
-	if BBEs==1 then		
-    self:SetSoundState("bbe_v1", self:GetPackedBool("BBEWork") and 1 or 0, 1)
-	end
-	if BBEs==2 then		
-    self:SetSoundState("bbe_v2", self:GetPackedBool("BBEWork") and 1 or 0, 1)
-	end	
-	if BBEs==3 then		
-    self:SetSoundState("bbe_v3", self:GetPackedBool("BBEWork") and 1 or 0, 1)
-	end		
+    self:SetSoundState("bbe", self:GetPackedBool("BBEWork") and 1 or 0, 1)
    
 	local door_cab_t = self:Animate("door_cab_t",self:GetPackedBool("RearDoor") and 0.99 or -0.05, 0, 0.55, 4.5, 0.55) 	
 	local door4s = (door_cab_t > 0 or self:GetPackedBool("RearDoor"))
