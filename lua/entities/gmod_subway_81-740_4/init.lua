@@ -242,10 +242,10 @@ end	]]
         [18]  = { "light",Vector(832-159, -27.5, -23), Angle(0,0,0), Color(255,220,180), brightness = 0.5, scale = 0.5, texture = "sprites/light_glow02.vmt" },
         [19]  = { "light",Vector(832-159, -40.5, -20.5), Angle(0,0,0), Color(255,220,180), brightness = 0.5, scale = 0.5, texture = "sprites/light_glow02.vmt" },
         --красные огни 
-        [3] = { "light",Vector(690-15, 41.5, -60), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
-		[4] = { "light",Vector(690-15, -41.5, -60), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
-		[5] = { "light",Vector(656-15, 40, 57), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
-		[6] = { "light",Vector(656-15, -40, 57), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
+        [3] = { "light",Vector(690-14.5, 41.5, -60), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
+		[4] = { "light",Vector(690-14.5, -41.5, -60), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
+		[5] = { "light",Vector(656-14.5, 40, 57), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
+		[6] = { "light",Vector(656-14.5, -40, 57), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
         --освещение в кабине
         [10] = { "dynamiclight",    Vector( 755-159, 0, 40), Angle(0,0,0), Color(206,135,80), brightness = 1.5, distance = 550 },
         -- Interior
@@ -538,13 +538,13 @@ function ENT:CreatePricep(pos)
     ) 	
 	
 	local xmin = -3
-	local xmax = 3
+	local xmax = 2
 	
-	local ymin = -3
+	local ymin = -2
 	local ymax = 3
 	
-	local zmin = -60
-	local zmax = 60		
+	local zmin = -10
+	local zmax = 10		
 	
 	local Map = game.GetMap():lower() or ""        
 	if Map:find("gm_metro_pink_line_redux") or
@@ -661,16 +661,16 @@ function ENT:CreatePricep(pos)
 			0, --torquelimit
 			-1, --xmin
 			-1, --ymin
-			-60, --zmin
+			zmin, --zmin
 			1, --xmax
 			1, --ymax
-			60, --zmax
+			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)
 			constraint.AdvBallsocket(	
 			self,
@@ -683,16 +683,16 @@ function ENT:CreatePricep(pos)
 			0, --torquelimit
 			-1, --xmin
 			-1, --ymin
-			-60, --zmin
+			zmin, --zmin
 			1, --xmin
 			1, --ymin
-			60, --zmax
+			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)		
 
 		constraint.AdvBallsocket(
@@ -715,7 +715,7 @@ function ENT:CreatePricep(pos)
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)
 		constraint.AdvBallsocket(
 			ent,
@@ -737,7 +737,7 @@ function ENT:CreatePricep(pos)
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)
 	end	
 	

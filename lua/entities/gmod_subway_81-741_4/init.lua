@@ -315,13 +315,13 @@ function ENT:CreatePricep(pos)
     ) 	
 	
 	local xmin = -3
-	local xmax = 3
+	local xmax = 2
 	
-	local ymin = -3
+	local ymin = -2
 	local ymax = 3
 	
-	local zmin = -60
-	local zmax = 60		
+	local zmin = -10
+	local zmax = 10		
 	
 	local Map = game.GetMap():lower() or ""        
 	if Map:find("gm_metro_pink_line_redux") or
@@ -438,16 +438,16 @@ function ENT:CreatePricep(pos)
 			0, --torquelimit
 			-1, --xmin
 			-1, --ymin
-			-60, --zmin
+			zmin, --zmin
 			1, --xmax
 			1, --ymax
-			60, --zmax
+			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)
 			constraint.AdvBallsocket(	
 			self,
@@ -460,16 +460,16 @@ function ENT:CreatePricep(pos)
 			0, --torquelimit
 			-1, --xmin
 			-1, --ymin
-			-60, --zmin
+			zmin, --zmin
 			1, --xmin
 			1, --ymin
-			60, --zmax
+			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)		
 
 		constraint.AdvBallsocket(
@@ -492,7 +492,7 @@ function ENT:CreatePricep(pos)
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)
 		constraint.AdvBallsocket(
 			ent,
@@ -514,7 +514,7 @@ function ENT:CreatePricep(pos)
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)
 	end	
 	
