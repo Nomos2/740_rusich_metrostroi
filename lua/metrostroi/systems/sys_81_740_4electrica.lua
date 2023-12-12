@@ -91,7 +91,7 @@ end
 
 function TRAIN_SYSTEM:Outputs()
     return { "Brake", "Drive","BVonSelfLocking","BV_NoAA","DisableBV",
-             "Main750V", "Power750V", "Aux750V", "Aux80V", "Lights80V", "Battery80V","ReservePower","EqualizingCircuits",
+             "Main750V", "Power750V", "Aux750V", "Aux80V", "Lights80V", "Battery80V","ReservePower",
              "BTB","V2","V1","ConditionerPower","ConditionerWork",
              "BVKA_KM1","BVKA_KM2","BUTPReady","Vent2",
              "Recurperation","Iexit","IChopped","Chopper","ElectricEnergyUsed","ElectricEnergyDissipated","EnergyChange"
@@ -126,57 +126,13 @@ local function C(x) return x and 1 or 0 end
 local min,max,abs = math.min,math.max,math.abs
 
 function TRAIN_SYSTEM:TriggerInput(name,value)
-    if name == "ReservePower" then
-		self.ReservePower = value
-	end
     if name == "Slope" then
 		self.Slope = value
-	end
-    if name == "EqualizingCircuits" then
-		self.EqualizingCircuits = value
 	end
     if name == "BVDisableSignal" then
 		self.DisableBV = value
 	end
 end
-
---[[
-
-НАЗНАЧЕНИЕ ПОЕЗДНЫХ ПРОВОДОВ
-
-№ ПРОВОДА       НАЗНАЧЕНИЕ                      КРЕСТ НА АВТОСЦЕПКЕ             ПРИМЕЧАНИЕ
-500,501         0В в бортовой сети                                          Ну тут без шансев
-503         Противоположная ориентация вагона
-504         Одинаковая ориентация вагона
-505,506         Радиооповещение
-508,509     Экстренная связь пассажир-машинист                              
-510         Резервное включение компрессоров
-511         Отключение стояночных тормозов
-512         Направление движения "ВПЕРЕД" для БУТП      Х
-513         Направление движения "НАЗАД" для БУТП       Х
-515,516     Управление ИПС                                                  БУЦИК
-517,518     Система пожаротушения "Игла"
-519         Резервное управление "Ход-1"
-520-523     Линия канала последовательной передачи данных
-524         + 50 В прямой провод                                            Петля безопасности
-525         0 В                                                             Петля безопасности
-526         + 50 В обратный провод                                          Петля безопасности
-527         + 75 В. Питание В1, В2 в БЭПП
-528         0 В БТБ для включения реле К к БУВ
-529         0 В. Включение В2 в БЭПП при ручном управлении ЭПТ
-530         0 В. Включение В1 в БЭПП при ручном управлении ЭПТ
-531         Включение стояночных тормозов   
-532,533     Управление СОВС                                                 Ну тут без шансев
-534         Резервное включение БУТП
-536         Основное включение БУТП
-537         Открытие правых дверей                      Х
-538         Открытие левых дверей                       Х
-539         Резервное закрытие дверей
-540         Включение режима резервного закрытия дверей
-545         Резервное управление "Ход-2"
-549,550     + 75 В бортовой сети                                            Ну тут без шансев
-
-]]
 
 --------------------------------------------------------------------------------
 function TRAIN_SYSTEM:Think(dT)
@@ -200,7 +156,7 @@ function TRAIN_SYSTEM:Think(dT)
     self.Aux80V = BBE and 82 or 65
     self.Lights80V = BBE and 82 or 0--Train.PowerSupply.XT3_4
 
-    self.Battery80V = (Train.Battery.Value > 0) and ((BBE or self.EqualizingCircuits > 0) and 82 or 65) or 0
+    self.Battery80V = (Train.Battery.Value > 0) and (BBE and 82 or 65) or 0
 
     ----------------------------------------------------------------------------
     -- Some internal electric

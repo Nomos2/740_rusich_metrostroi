@@ -486,7 +486,7 @@ ENT.ButtonMap["PUR"] = {
         }},
         {ID = "EmerBrakeToggle",x=149, y=55, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_black.mdl",z=-5.1,        --b6
-           -- lamp = {model = "models/pult/button_lmini.mdl",var="EmerBrakeWork",z=0.1,anim=true,skin=2},
+            lamp = {model = "models/metrostroi_train/81-722/lamp_black.mdl",var="EmerBrakeWork",anim = true,color = Color(200,200,200)},
             var="EmerBrake",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.3, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
@@ -1385,12 +1385,24 @@ ENT.ClientProps["EmergencyBrakeValve"] = {
 	ang = Angle(0,180,2),
 	hide = 2,
 }
-ENT.ClientProps["stopkran"] = {
-    model = "models/metrostroi_train/81-717/stop_mvm.mdl",
-    pos = Vector(788.5-159,-59.7,13.2),
-    ang = Angle(0,180,2),
-	hide = 2,
+
+ENT.ButtonMap["EmergencyBrake1"] = {
+    pos = Vector(635,-59.7,14),
+    ang = Angle(0,180,90),
+    width = 70,
+    height = 600,
+    scale = 0.1,
+    buttons = {
+        {ID = "EmerBrakeCrane1Toggle",x=0, y=0, w= 70,h = 600, tooltip = "Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай \n Дёргай",model = {
+            model = "models/metrostroi_train/81-717/stop_mvm.mdl",
+            pos = Vector(55,10,0),ang = Angle(-90,0,0),
+            var="EmerBrakeCrane1",speed=1.5, vmin=0, vmax=0.25,
+            --sndvol = 0.5,snd = function(val) return val and "pnm_button1_on" or "pnm_button1_off" end,
+            sndmin = 50,sndmax = 1e3,sndang = Angle(-90,0,0),
+        }},
+    }
 }
+
 ENT.ButtonMap["GV"] = {
     pos = Vector(222-15,50,-82),
     ang = Angle(0,90,-90),
@@ -1640,11 +1652,11 @@ ENT.ButtonMap["CAMS"] = {
 	hide=0.5,
 }
 ENT.ButtonMap["Vityaz"] = {
-	pos = Vector(816-159, -6.3, 11.8),
+	pos = Vector(658, -4.7, 12.1),
     ang = Angle(0,-122.4,90),
     width = 0,
     height = 0,
-    scale = 0.007,    
+    scale = 0.0125,    
 	hide=0.5,
 }
 
@@ -1655,7 +1667,7 @@ ENT.ButtonMap["Vityaz"] = {
 }
 function ENT:Initialize()
 	self.BaseClass.Initialize(self)
-	self.Vityaz = self:CreateRT("740Vityaz",1000,1024)
+	self.Vityaz = self:CreateRT("740Vityaz",800,600)
 	self.ASNP = self:CreateRT("740ASNP",512,128)
 	self.IGLA = self:CreateRT("740IGLA",512,128)
     self.Tickers = self:CreateRT("740Ticker",1024,64)
@@ -2655,6 +2667,10 @@ end
     self.EmergencyValveRamp = math.Clamp(self.EmergencyValveRamp + (emergencyValve-self.EmergencyValveRamp)*dT*16,0,1)
     self:SetSoundState("emer_brake",self.EmergencyValveRamp,1.0)
 
+    local emergencyBrakeValve = self:GetPackedRatio("EmergencyBrakeValve_dPdT", 0)
+    self.EmergencyBrakeValveRamp = math.Clamp(self.EmergencyBrakeValveRamp + (emergencyBrakeValve-self.EmergencyBrakeValveRamp)*dT*8,0,1)
+    self:SetSoundState("valve_brake",self.EmergencyBrakeValveRamp,0.8+math.min(0.4,self.EmergencyBrakeValveRamp*0.8))
+
 	local RingSound = self:GetNW2Int("RingSound",1)
 	
     local state = self:GetPackedBool("RingEnabled")
@@ -2822,7 +2838,7 @@ function ENT:DrawPost(special)
     self:DrawOnPanel("Vityaz",function(...)
         surface.SetMaterial(self.RTMaterial)
         surface.SetDrawColor(255,255,255)
-        surface.DrawTexturedRectRotated(440,520,1430,1140,0) --1024 ебет \\\витязь vityaz
+        surface.DrawTexturedRectRotated(400,300,800,600,0)
     end)
     self.RTMaterial:SetTexture("$basetexture", self.ASNP)
     self:DrawOnPanel("ASNPScreen",function(...)

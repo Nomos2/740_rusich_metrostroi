@@ -317,7 +317,6 @@ function TRAIN_SYSTEM:Think(dT)
         self:equalizePressure(dT,"BrakeLinePressure", 1.01*math.min(3.0,self.TrainToBrakeReducedPressure), pr_speed,nil, nil, 1.0)
     end
 
-
     if Train.BARS then
         local leak = 0
         if self.EmergencyValve then
@@ -327,9 +326,17 @@ function TRAIN_SYSTEM:Think(dT)
                 self.EmergencyValve = false
             end
             self.Leak = true
+            Train:SetPackedRatio("EmergencyValve_dPdT", -leak)
         end
-        self.Train:SetPackedRatio("EmergencyValve_dPdT", -leak)
     end
+    
+    local leak = 0
+    if Train.EmerBrakeCrane1.Value > 0 or (Train.EmerBrakeCrane2 and Train.EmerBrakeCrane2.Value > 0) then
+        self:equalizePressure(dT,"BrakeLinePressure", 0.0,pr_speed,false,false,0.4)
+        leak = self:equalizePressure(dT,"BrakeLinePressure", 0.0,pr_speed,false,false,0.4)
+        self.Leak = true
+    end
+    self.Train:SetPackedRatio("EmergencyBrakeValve_dPdT", -leak)
     self.Train:SetPackedRatio("Crane_dPdT", self.BrakeLinePressure_dPdT )
     trainLineConsumption_dPdT = trainLineConsumption_dPdT + math.max(0,self.BrakeLinePressure_dPdT)
 --[[
@@ -530,6 +537,7 @@ function TRAIN_SYSTEM:Think(dT)
         end
     end
 
+    
 
     local commandLeft =  (Train:ReadTrainWire(40) > 0 or Train.BUV.OpenLeft) and (Train:ReadTrainWire(38) > 0 or Train:ReadTrainWire(39) > 0) and Train.SFV13.Value > 0
     local commandRight =  (Train:ReadTrainWire(40) > 0 or Train.BUV.OpenRight) and (Train:ReadTrainWire(37) > 0 or Train:ReadTrainWire(39) > 0) and Train.SFV14.Value > 0

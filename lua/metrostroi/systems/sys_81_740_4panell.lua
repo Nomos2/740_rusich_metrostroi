@@ -124,7 +124,7 @@ function TRAIN_SYSTEM:Initialize()
     self.Train:LoadSystem("Pant1","Relay","Switch",{bass=true})
     self.Train:LoadSystem("Pant2","Relay","Switch",{bass=true})
     self.Train:LoadSystem("Vent2","Relay","Switch",{bass=true})
-    self.Train:LoadSystem("Conditioner","Relay","Switch",{bass=true})   -- Вместо Vent2 потом поставлю
+    --self.Train:LoadSystem("Conditioner","Relay","Switch",{bass=true})   -- Вместо Vent2 потом поставлю
     self.Train:LoadSystem("PassLight","Relay","Switch",{bass=true})
     self.Train:LoadSystem("CabLight","Relay","Switch",{bass=true})
     self.Train:LoadSystem("Headlights1","Relay","Switch",{bass=true})
@@ -143,6 +143,8 @@ function TRAIN_SYSTEM:Initialize()
 
     self.Train:LoadSystem("ALSFreqBlock","Relay","Switch",{bass=true})
 	self.Train:LoadSystem("VP_Block","Relay","Switch",{bass=true})
+    self.Train:LoadSystem("EmerBrakeCrane1","Relay","Switch",{bass=true})
+    self.Train:LoadSystem("EmerBrakeCrane2","Relay","Switch",{bass=true})
 
     self.Train:LoadSystem("PB","Relay","Switch",{bass=true})
     self.Controller = 0

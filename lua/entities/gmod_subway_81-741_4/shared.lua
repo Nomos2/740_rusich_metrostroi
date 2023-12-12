@@ -128,6 +128,9 @@ function ENT:InitializeSounds()
     self.SoundPositions["rolling_medium1"] = {480,1e12,Vector(520,0,0),0.90*0.4}
     self.SoundPositions["rolling_medium2"] = {480,1e12,Vector(520,0,0),0.90*0.4}
     self.SoundPositions["rolling_high2"] = {480,1e12,Vector(520,0,0),1.00*0.4}
+
+    self.SoundNames["valve_brake"] = {loop=true,"subway_trains/common/pneumatic/epv_loop.wav"}
+    self.SoundPositions["valve_brake"] = {400,1e9,Vector(418.25,-49.2,1.3),1} -- Скорректируйте позицию
 	
     self.SoundNames["rolling_5_middle"] = {loop=true,"subway_trains/rusich/rolling/skrip1.mp3"}	
     self.SoundNames["rolling_10_middle"] = {loop=true,"subway_trains/rusich/rolling/rolling_10.wav"}

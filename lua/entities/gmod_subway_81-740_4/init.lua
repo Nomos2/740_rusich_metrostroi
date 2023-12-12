@@ -31,7 +31,7 @@ ENT.SyncTable = {
     "ParkingBrake","TorecDoors","BBER","BBE","Compressor","CabLightStrength","AppLights1","AppLights2",
     "Battery", "ALSFreqBlock",
     "VityazF1", "VityazF2", "VityazF3", "VityazF4", "Vityaz1",  "Vityaz4",  "Vityaz7",  "Vityaz2",  "Vityaz5",  "Vityaz8",  "Vityaz0",  "Vityaz3",  "Vityaz6",  "Vityaz9",  "VityazF5", "VityazF6", "VityazF7", "VityazF8", "VityazF9",
-    "K29", "UAVA",
+    "K29", "UAVA", "EmerBrakeCrane1","EmerBrakeCrane2",
     "EmerX1","EmerX2","EmerCloseDoors","EmergencyDoors",
     "R_ASNPMenu","R_ASNPUp","R_ASNPDown","R_ASNPOn",
     "VentHeatMode",
@@ -366,7 +366,10 @@ function ENT:TrainSpawnerUpdate()
 			self:SetNW2Bool("SalonLightBroken"..i, false)
 		end	
 	end	
-	
+    
+    local bukpType = self:GetNW2Int("BUKPVersion")
+    self.BUKP:TriggerInput("OldVersion",(bukpType == 1 and math.random() > 0.3) or bukpType == 2)
+
 	local MotorType = self:GetNW2Int("MotorType")	
        if MotorType == 1 then
             MotorType = math.ceil(math.random()*4+0.5)

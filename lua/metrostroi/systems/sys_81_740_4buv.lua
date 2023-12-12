@@ -149,6 +149,7 @@ function TRAIN_SYSTEM:Think()
 		end
         
 		self:CState("Strength",self.Strength)
+		self:CState("Scheme", ((Train.Speed < 6.5 and 0 or brake)+drive > 0 and (drive > 0 and (Train.Pneumatic.BrakeCylinderPressure < 0.7 or self.Slope1 or Train:ReadTrainWire(19)+Train:ReadTrainWire(45) > 0) or brake > 0 and Train.Pneumatic.BrakeCylinderPressure < 1.7+Train.Pneumatic.WeightLoadRatio)) and SchemeWork > 0.5)
 		self.Scheme_E = (Train.Speed < 6.5 and 0 or brake)+drive > 0 and (drive > 0 and (Train.Pneumatic.BrakeCylinderPressure < 0.7 or self.Slope1 or Train:ReadTrainWire(19)+Train:ReadTrainWire(45) > 0) or brake > 0 and Train.Pneumatic.BrakeCylinderPressure < 1.7+Train.Pneumatic.WeightLoadRatio) and SchemeWork > 0.5
         self:CState("ParkingBrakeEnabled", Train.Pneumatic.ParkingBrakePressure < 3)
         self:CState("BEPPBroken", false)
@@ -288,18 +289,6 @@ function TRAIN_SYSTEM:Think()
 		elseif Train.AsyncInverter.Brake == 1 and Train.Speed < 7 or self:Get("PVU9") then
 			self.EnginesDone = true
 		end
-		--[[
-		local PTReplace = self.States.EnginesBrakeBroke
-		if PTReplace and not self.PTReplace then
-			self.PTReplace =  CurTime()
-			if Train.AsyncInverter.Torque ~= 0 then
-				self.PTReplace = self.PTReplace + 1.3
-			end
-			if self:Get("PVU9")  then
-				self.PTReplace = self.PTReplace - 1.2
-			end
-		end
-		if not PTReplace and self.PTReplace then self.PTReplace = nil end]]
 
 		if (self.EnginesDone or self.States.EnginesDone) and self.Strength < 0 and Train.Speed > 7 then
 			self.EnginesDone = false
@@ -322,9 +311,8 @@ function TRAIN_SYSTEM:Think()
 	end
 	local PN = self.PTReplace --self.PTReplace and CurTime()-self.PTReplace > 1.2 or self.States.EnginesDone
 	self.PN1 = (self:Get("PN1") and self:Get("PN1") > 0) or PN and (self:Get("DriveStrength") and self:Get("DriveStrength") > 0) or self:Get("PR") and self.TargetStrength <=0 --or (self.Pant and Train.TR.Main750V == 0 or Train.BV.Value*Train.GV.Value == 0) --or (Train.AsyncInverter.PrevVoltage > 975 or Train.AsyncInverter.PrevVoltage < 550) and Train.AsyncInverter.Brake > 0.5) and self.Strength < 0
-	self.PN2 = self.Slope and self:Get("SlopeSpeed") or (self:Get("PN2") and self:Get("PN2") > 0) or PN and (self:Get("DriveStrength") and self:Get("DriveStrength") > 2) --[[and not (self:Get("BARSBrake") or self:Get("AO"))]] -- or (self.Pant and Train.TR.Main750V == 0 or Train.BV.Value*Train.GV.Value == 0) --or (Train.AsyncInverter.PrevVoltage > 975 or Train.AsyncInverter.PrevVoltage < 550) and Train.AsyncInverter.Brake > 0.5) and self.Strength < -1
+	self.PN2 = self.Slope and self:Get("SlopeSpeed") or (self:Get("PN2") and self:Get("PN2") > 0) or PN and (self:Get("DriveStrength") and self:Get("DriveStrength") > 2)  --[[and not (self:Get("BARSBrake") or self:Get("AO"))]] -- or (self.Pant and Train.TR.Main750V == 0 or Train.BV.Value*Train.GV.Value == 0) --or (Train.AsyncInverter.PrevVoltage > 975 or Train.AsyncInverter.PrevVoltage < 550) and Train.AsyncInverter.Brake > 0.5) and self.Strength < -1
 	self.Recurperation = self:Get("RecurperationDisable") and 1 or 0
-    
     self.MK = not self:Get("PVU3") and self:Get("Compressor") and 1 or 0
 
     self.OpenLeft = not self:Get("PVU2") and self:Get("OpenLeft") and self.Orientation or self:Get("OpenRight") and not self.Orientation

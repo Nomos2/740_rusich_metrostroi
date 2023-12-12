@@ -45,6 +45,8 @@ function TRAIN_SYSTEM:Initialize()
     self.Train:LoadSystem("SFV32","Relay","Switch",{normally_closed = true,bass=true})
     self.Train:LoadSystem("SFV33","Relay","Switch",{normally_closed = true,bass=true})
 
+    self.Train:LoadSystem("EmerBrakeCrane1","Relay","Switch",{bass=true})
+
     self.AnnouncerPlaying = 0
 	
     self.TickerPower = 0

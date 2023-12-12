@@ -49,6 +49,10 @@ Spawner.740.RingSound3    = Type 2
 Spawner.740.RingSound4    = Type 3
 Spawner.740.RingSound5    = Type 4
 
+Spawner.740.BUKPVersion   = BUKP firmware version
+Spawner.740.BUKPVersion1  = Old
+Spawner.740.BUKPVersion2  = New
+
 Spawner.740.VentSound    = Air conditioner noise sound type
 Spawner.740.VentSound.Random   = Random
 Spawner.740.VentSound2    = Type 1
@@ -281,6 +285,8 @@ Entities.gmod_subway_81-740_4.Buttons.BackVent.VentCondMode-      = @[Common.740
 Entities.gmod_subway_81-740_4.Buttons.BackVent.VentCondMode+      = @[Common.740.VentCMode] @[Common.ALL.CW]
 Entities.gmod_subway_81-740_4.Buttons.BackVent.VentStrengthMode-  = @[Common.740.VentSMode-] @[Common.ALL.CCW]
 Entities.gmod_subway_81-740_4.Buttons.BackVent.VentStrengthMode+  = @[Common.740.VentSMode+] @[Common.ALL.CW]
+
+Entities.gmod_subway_81-740_4.Buttons.EmergencyBrake1.EmerBrakeCrane1Toggle = @[Common.ALL.EmergencyBrakeValve]
 
 Entities.gmod_subway_81-740_4.Buttons.RV.EmerX1Set                = @[Common.740.EmerX1]
 Entities.gmod_subway_81-740_4.Buttons.RV.EmerX2Set                = @[Common.740.EmerX2]
@@ -567,6 +573,11 @@ Entities.gmod_subway_81-740_4.Spawner.RingSound.2         	  = @[Spawner.740.Rin
 Entities.gmod_subway_81-740_4.Spawner.RingSound.3             = @[Spawner.740.RingSound3]
 Entities.gmod_subway_81-740_4.Spawner.RingSound.4         	  = @[Spawner.740.RingSound4]
 Entities.gmod_subway_81-740_4.Spawner.RingSound.5             = @[Spawner.740.RingSound5]
+
+Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.Name 		  = @[Spawner.740.BUKPVersion]
+Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.1 	      = @[Spawner.740.RingSound.Random] 
+Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.2 		  = @[Spawner.740.BUKPVersion1]
+Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.3 		  = @[Spawner.740.BUKPVersion2]
 
 Entities.gmod_subway_81-740_4.Spawner.SpawnMode.Name          = @[Common.Spawner.SpawnMode]
 Entities.gmod_subway_81-740_4.Spawner.SpawnMode.1             = @[Common.Spawner.SpawnMode.Full]

@@ -58,6 +58,10 @@ Spawner.740.RingSound3    = Тип 2
 Spawner.740.RingSound4    = Тип 3
 Spawner.740.RingSound5    = Тип 4
 
+Spawner.740.BUKPVersion   = Версия прошивки БУКП
+Spawner.740.BUKPVersion1  = Старая
+Spawner.740.BUKPVersion2  = Новая
+
 Spawner.740.VentSound    = Тип звука шума кондиционера
 Spawner.740.VentSound.Random   = Случайно
 Spawner.740.VentSound2    = Тип 1
@@ -327,6 +331,8 @@ Entities.gmod_subway_81-740_4.Buttons.VityazButtons.VityazTV1Set   = @[Common.74
 Entities.gmod_subway_81-740_4.Buttons.VityazButtons.VityazTV2Set   = @[Common.740.Vityaz.TV2]
 Entities.gmod_subway_81-740_4.Buttons.VityazButtons.VityazNothSet  = @[Common.740.Vityaz.Noth]
 
+Entities.gmod_subway_81-740_4.Buttons.EmergencyBrake1.EmerBrakeCrane1Toggle = @[Common.ALL.EmergencyBrakeValve]
+
 Entities.gmod_subway_81-740_4.Buttons.CraneCap2.ABSDToggle   	   = @[Common.740.ABSD]
 Entities.gmod_subway_81-740_4.Buttons.CraneCap2.RTEToggle  		   = @[Common.740.RTE]
 
@@ -573,6 +579,11 @@ Entities.gmod_subway_81-740_4.Spawner.RingSound.2         	  = @[Spawner.740.Rin
 Entities.gmod_subway_81-740_4.Spawner.RingSound.3             = @[Spawner.740.RingSound3]
 Entities.gmod_subway_81-740_4.Spawner.RingSound.4         	  = @[Spawner.740.RingSound4]
 Entities.gmod_subway_81-740_4.Spawner.RingSound.5             = @[Spawner.740.RingSound5]
+
+Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.Name 		  = @[Spawner.740.BUKPVersion]
+Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.1 	      = @[Spawner.740.RingSound.Random] 
+Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.2 		  = @[Spawner.740.BUKPVersion1]
+Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.3 		  = @[Spawner.740.BUKPVersion2]
 
 Entities.gmod_subway_81-740_4.Spawner.SpawnMode.Name          = @[Common.Spawner.SpawnMode]
 Entities.gmod_subway_81-740_4.Spawner.SpawnMode.1             = @[Common.Spawner.SpawnMode.Full]

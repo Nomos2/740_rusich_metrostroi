@@ -334,6 +334,9 @@ function ENT:InitializeSounds()
     self.SoundPositions["rolling_medium2_middle"] = {480,1e12,Vector(-15-16.5,0),0.90*0.4}
     self.SoundPositions["rolling_high2_middle"] = {480,1e12,Vector(-15-16.5,0),1.00*0.4}
 
+    self.SoundNames["valve_brake"] = {loop=true,"subway_trains/common/pneumatic/epv_loop.wav"}
+    self.SoundPositions["valve_brake"] = {400,1e9,Vector(635,-59.7,-41),1}
+
     self.SoundNames["gv_f"] = {"subway_trains/717/kv70/reverser_0-b_1.mp3","subway_trains/717/kv70/reverser_0-b_2.mp3"}
     self.SoundNames["gv_b"] = {"subway_trains/717/kv70/reverser_b-0_1.mp3","subway_trains/717/kv70/reverser_b-0_2.mp3"}
     self.SoundPositions["gv_f"] = {80,1e9,Vector(126.4-159,50,-60-23.5),0.8}
@@ -502,6 +505,7 @@ ENT.Spawner = {
 	{"ZavodTable","Spawner.740.ZavodTable","List",{"Spawner.740.ZavodTable.Random","Spawner.740.ZavodTable1","Spawner.740.ZavodTable2","Spawner.740.ZavodTable3"}}, 	
 	{"MotorType","Spawner.740.MotorType","List",{"Spawner.740.MotorType.Random","Spawner.740.MotorType1","Spawner.740.MotorType2","Spawner.740.MotorType3","Spawner.740.MotorType4","Spawner.740.MotorType5"}},	
 	{"VentSound","Spawner.740.VentSound","List",{"Spawner.740.VentSound.Random","Spawner.740.VentSound1","Spawner.740.VentSound2"}}, 	
+    {"BUKPVersion","Spawner.740.BUKPVersion","List",{"Spawner.740.BUKPVersion.Random","Spawner.740.BUKPVersion1","Spawner.740.BUKPVersion2"}},
 	{},
 	{"SpawnMode","Spawner.Common.SpawnMode","List",{"Spawner.Common.SpawnMode.Full","Spawner.Common.SpawnMode.Deadlock","Spawner.Common.SpawnMode.NightDeadlock","Spawner.Common.SpawnMode.Depot"},nil,function(ent,val,rot,i,wagnum,rclk)	
         if rclk then return end
