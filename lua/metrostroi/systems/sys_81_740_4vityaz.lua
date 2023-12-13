@@ -1009,7 +1009,7 @@ else
 			font = font,
 			size = size,
 			weight = weight or 400,
-			blursize = blur or false,,
+			blursize = blur or false,
 			antialias = true,
 			underline = underline,
 			italic = false,
