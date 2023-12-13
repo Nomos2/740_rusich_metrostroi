@@ -254,20 +254,12 @@ function ENT:CreatePricep(pos)
 	self.MiddleBogey:SetNWInt("MotorSoundType",2)
 	self.MiddleBogey:SetNWInt("Async",true)
 	self.MiddleBogey:SetNWBool("DisableEngines",true)			
-	self.MiddleBogey.DisableSound = 1				
+	self.MiddleBogey.DisableSound = 1	
 	self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
-	self.RearCouple:GetPhysicsObject():SetMass(5000)	
+	self.RearCouple:GetPhysicsObject():SetMass(5000)
 	self.MiddleBogey.m_tblToolsAllowed = { "none" }
-    if not self.NoPhysics then
-        self.MiddleBogey:SetMoveType(MOVETYPE_VPHYSICS)
-    end
-    self.MiddleBogey:SetUseType(SIMPLE_USE)
-    self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)		
-
-    -- Set proper parameters for the bogey
-    if IsValid(self.MiddleBogey:GetPhysicsObject()) then
-        self.MiddleBogey:GetPhysicsObject():SetMass(5000)
-    end	
+    self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)	
+    self.MiddleBogey:GetPhysicsObject():SetMass(5000)
 	
 	constraint.NoCollide(self.MiddleBogey,ent,0,0)
 	constraint.NoCollide(self,ent,0,0)	

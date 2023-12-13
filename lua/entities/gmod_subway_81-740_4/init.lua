@@ -484,16 +484,8 @@ function ENT:CreatePricep(pos)
 	self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
 	self.RearCouple:GetPhysicsObject():SetMass(5000)
 	self.MiddleBogey.m_tblToolsAllowed = { "none" }
-    if not self.NoPhysics then
-        self.MiddleBogey:SetMoveType(MOVETYPE_VPHYSICS)
-    end
-    self.MiddleBogey:SetUseType(SIMPLE_USE)
     self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)	
-
-    -- Set proper parameters for the bogey
-    if IsValid(self.MiddleBogey:GetPhysicsObject()) then
-        self.MiddleBogey:GetPhysicsObject():SetMass(5000)
-    end
+    self.MiddleBogey:GetPhysicsObject():SetMass(5000)
 
 	constraint.NoCollide(self.MiddleBogey,ent,0,0)
 	constraint.NoCollide(self,ent,0,0)		
@@ -541,9 +533,9 @@ function ENT:CreatePricep(pos)
     ) 	
 	
 	local xmin = -3
-	local xmax = 2
+	local xmax = 3
 	
-	local ymin = -2
+	local ymin = -3
 	local ymax = 3
 	
 	local zmin = -10
@@ -662,11 +654,11 @@ function ENT:CreatePricep(pos)
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
-			-1, --xmin
-			-1, --ymin
+			-0.5, --xmin
+			-0.5, --ymin
 			zmin, --zmin
-			1, --xmax
-			1, --ymax
+			0.5, --xmax
+			0.5, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
@@ -684,11 +676,11 @@ function ENT:CreatePricep(pos)
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
-			-1, --xmin
-			-1, --ymin
+			-0.5, --xmin
+			-0.5, --ymin
 			zmin, --zmin
-			1, --xmin
-			1, --ymin
+			0.5, --xmin
+			0.5, --ymin
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
@@ -754,7 +746,7 @@ function ENT:CreatePricep(pos)
 
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
-	ent.KeyMap = {}
+	ent.KeyMap = {}	 
 end			
 ---------------------------------------------------------------------------
 function ENT:Think()

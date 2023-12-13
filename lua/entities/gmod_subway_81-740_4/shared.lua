@@ -528,11 +528,7 @@ ENT.Spawner = {
 				timer.Simple(0,function()	
 				if not IsValid(ent) then return end				
 				ent:GetNW2Entity("gmod_subway_kuzov").RearDoor = val == 2			
-				end)				
-				
-                --ent.PassScheme:TriggerInput("Set",val==1 and 1 or 0)
-				--ent.BUKP.State = 0	
-				--ent.Ticker:TriggerInput("Set",val==1 and 1 or 0)
+				end)
                 if val==1 then
 					timer.Simple(1,function()
                         if not IsValid(ent) then return end
