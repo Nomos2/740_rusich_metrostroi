@@ -16,7 +16,6 @@ ENT.ClientProps = {}
 ENT.ButtonMap = {}
 ENT.AutoAnims = {}
 ENT.ClientSounds = {}
---
 ENT.ClientPropsInitialized = false
 
 --[[ENT.ClientProps["test_prop"] = {
@@ -112,7 +111,7 @@ ENT.ClientProps["lamps_salon_off_r"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_off.mdl",
     pos = Vector(1.1, 0.05, -0.4),
     ang = Angle(0,0,0), 
-	hide = 2,
+	hide = 1,
 }
 ENT.ClientProps["door_cab_t"] = {
 	model = "models/metrostroi_train/81-740/salon/door_br.mdl",
@@ -166,19 +165,19 @@ ENT.ButtonMap["RearPneumatic"] = {
 }	
 ENT.ClientProps["RearTrain"] = {
 	model = "models/metrostroi_train/bogey/disconnect_valve_blue.mdl",
-	pos = Vector(-336, -25, -54),
+	pos = Vector(-336, -25, -53.9),
 	ang = Angle(0,90,0),
 	hide = 1,			
 }
 ENT.ClientProps["RearBrake"] = {
     model = "models/metrostroi_train/bogey/disconnect_valve_red.mdl",
-	pos = Vector(-336, 25, -54),
+	pos = Vector(-336, 25, -53.9),
 	ang = Angle(0,90,0),
 	hide = 2,	
 }
 
-ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
-ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,5,1,50,1e3,Angle(-90,0,0)}}
+--ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
+--ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,5,1,50,1e3,Angle(-90,0,0)}}
 
 ENT.ButtonMap["Tickers_rear"] = {
 	pos = Vector(286.2,27,65.85), --446 -- 14 -- -0,5
@@ -256,7 +255,8 @@ local yventpos = {
 
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
-	
+	self.RBLICache = false
+	self.RTLICache = false
     self.PassengerEnts = {}
     self.PassengerEntsStucked = {}	
     self.PassengerPositions = {}	
@@ -287,9 +287,7 @@ end
 
 function ENT:Think()
     self.BaseClass.Think(self)
-    if not self.RenderClientEnts or self.CreatingCSEnts then
-        return
-    end 	
+    if not self.RenderClientEnts or self.CreatingCSEnts then return end 	
     self.HeadTrain = self:GetNW2Entity("HeadTrain")	
     local train = self.HeadTrain 
     if not IsValid(train) then return end		
@@ -305,6 +303,15 @@ self.ClientProps["TrainNumberL"..k] = {
 		end,
     } 
 end
+if self.RBLICache ~= self:GetNW2Bool("RBLI") then
+        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 1, 0, 400, 1e9, Vector(50,0,-40))
+        self.RBLICache = self:GetNW2Bool("RBLI")
+    end
+
+    if self.RTLICache ~= self:GetNW2Bool("RTLI") then
+        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 1, 0, 400, 1e9, Vector(50,0,-40)) 
+        self.RTLICache = self:GetNW2Bool("RTLI")
+    end
 
 --[[train.ClientProps["test_prop"] = {
 	model = "models/props_junk/metalbucket01a.mdl",
@@ -395,7 +402,7 @@ end
 
     if not IsValid(train) then return end		
     self:Animate("RearBrake", train:GetNW2Bool("RbI") and 0 or 1,0,1, 3, false)
-    self:Animate("RearTrain", train:GetNW2Bool("RtI") and 1 or 0,0,1, 3, false)	
+    self:Animate("RearTrain", train:GetNW2Bool("RtI") and 1 or 0,0,1, 3, false)
 	
     local dPdT = train:GetPackedRatio("BrakeCylinderPressure_dPdT")
     if not IsValid(train) then return end		
@@ -431,8 +438,7 @@ end
         self:SetSoundState("vent1"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
 		end 	
     end		
-	
-    if not IsValid(train) then return end		
+		
     self:SetSoundState("bbe", self:GetPackedBool("BBEWork") and 1 or 0, 1)
    
 	local door_cab_t = self:Animate("door_cab_t",self:GetPackedBool("RearDoor") and 0.99 or -0.05, 0, 0.55, 4.5, 0.55) 	

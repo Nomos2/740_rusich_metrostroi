@@ -746,7 +746,8 @@ function ENT:CreatePricep(pos)
 
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
-	ent.KeyMap = {}	 
+	ent.KeyMap = {}	
+	ent.InteractionZones = {}
 end			
 ---------------------------------------------------------------------------
 function ENT:Think()

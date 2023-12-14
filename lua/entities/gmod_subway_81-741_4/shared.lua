@@ -31,7 +31,6 @@ end
 function ENT:GetStandingArea()
     return Vector(530,-25,-47), Vector(50,25,-41)
 end
-
 local function GetDoorPosition(b,k)	--Правые двери			--Левые двери
 	return Vector(652.5  - 35.0*k     -  338.8*b, -67.5*(1-2*k), 4.3)
 end

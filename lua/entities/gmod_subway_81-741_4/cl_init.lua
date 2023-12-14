@@ -24,41 +24,6 @@ ENT.ClientPropsInitialized = false
 	ang = Angle(0,0,0),
 	scale = 0.5,	
 	nohide = true,
-}
-ENT.ClientProps["test_prop1"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(324,-34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}
-ENT.ClientProps["test_prop2"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(550,-34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}
-ENT.ClientProps["test_prop3"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(600,34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}
-ENT.ClientProps["test_prop4"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(362,34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}
-ENT.ClientProps["test_prop5"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(136,34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
 }]]
 
 
@@ -372,7 +337,7 @@ ENT.ClientProps["lamps_salon_off"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_off.mdl",
     pos = Vector(379,0,0),
     ang = Angle(0,0,0),
-	nohide = true,
+	hide = 1,
 }
 ENT.ClientProps["handrails_offside_front"] = {
     model = "models/metrostroi_train/81-740/body/740_body_additional.mdl",
@@ -434,18 +399,18 @@ ENT.ButtonMap["FrontPneumatic"] = {
 }
 ENT.ClientProps["FrontBrake"] = {
     model = "models/metrostroi_train/bogey/disconnect_valve_red.mdl",
-    pos = Vector(660, -25, -56.5), 
+    pos = Vector(660, -25, -53.9), 
     ang = Angle(15,-90,0),
 	hide = 1,
 }
 ENT.ClientProps["FrontTrain"] = {
     model = "models/metrostroi_train/bogey/disconnect_valve_blue.mdl",
-    pos = Vector(660, 25, -56.5),
+    pos = Vector(660, 25, -53.9),
     ang = Angle( -15,-90,0),
 	hide = 1,
 }
-ENT.ClientSounds["FrontBrakeLineIsolation"] = {{"FrontBrake",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
-ENT.ClientSounds["FrontTrainLineIsolation"] = {{"FrontTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["FrontBrakeLineIsolation"] = {{"FrontBrake",function() return "disconnect_valve" end,2,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["FrontTrainLineIsolation"] = {{"FrontTrain",function() return "disconnect_valve" end,2,1,50,1e3,Angle(-90,0,0)}}
 
 --Новые модели 2023.
 ENT.ClientProps["Zavod_table_front"] = { --Заводская табличка
@@ -925,6 +890,7 @@ end
 
 function ENT:Think()
     self.BaseClass.Think(self)
+    if not self.RenderClientEnts or self.CreatingCSEnts then return end		
 	local MiddleBogey = self:GetNW2Entity("MiddleBogey")	
 	local refresh = false--true		
 	

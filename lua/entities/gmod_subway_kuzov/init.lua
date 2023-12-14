@@ -122,16 +122,19 @@ function ENT:Think()
 	self:SetPackedBool("RearDoor",self.RearDoor)
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain
-	self.TrainWires = {}	
-    self.WireIOSystems = {}
-    self.Systems = {}	
-	local retVal = train.BaseClass.Think(self)		
+	--self.TrainWires = {}	
+    --self.WireIOSystems = {}
+    --self.Systems = {}	
+	local retVal = self.BaseClass.Think(self)		
     if not IsValid(train) then return end		
     local power = train.Electric.Battery80V > 62
     self:SetPackedBool("Vent2Work",train.Electric.Vent2>0)	
     self:SetPackedBool("BBEWork",power and train.BUV.BBE > 0)
     self:SetPackedBool("CompressorWork",train.Pneumatic.Compressor) 
     self:SetPackedBool("AnnPlay",train.Panel.AnnouncerPlaying > 0)
+	
+	self:SetNW2Bool("RBLI",train.RearBrakeLineIsolation.Value > 0)
+	self:SetNW2Bool("RTLI",train.RearTrainLineIsolation.Value > 0)	
 	
     --local state = math.abs(train.AsyncInverter.InverterFrequency/(11+train.AsyncInverter.State*5))--(10+8*math.Clamp((self.AsyncInverter.State-0.4)/0.4,0,1)))
     --self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+train.AsyncInverter.State/1),0,1)*math.Clamp(train.Speed/6,0,1))
@@ -194,5 +197,5 @@ function ENT:OnButtonPress(button,ply)
 	if button == "RearTrainLineIsolationToggle" then train.RearTrainLineIsolation:TriggerInput("Toggle",1) end
 end	
 
-function ENT:OnButtonRelease(button,ply)
+function ENT:OnButtonRelease(button)
 end

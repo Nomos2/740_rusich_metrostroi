@@ -16,8 +16,6 @@ ENT.ClientProps = {}
 ENT.ButtonMap = {}
 ENT.AutoAnims = {}
 ENT.ClientSounds = {}
---
-ENT.ClientPropsInitialized = false
 
 --Головная часть 
 ENT.ButtonMap["PUU"] = {
@@ -1233,7 +1231,6 @@ ENT.ClientProps["PasswordProp"] = {
 	scale = 1,	
     hide = 1,
 }
-
 ---Segments
 ENT.ClientProps["speed1"] = {
     model = "models/metrostroi_train/81-720/digits/digit.mdl",
@@ -1459,6 +1456,7 @@ ENT.ClientProps["controller"] = {
     hideseat = 0.2,
 	scale = 0.8,
 }
+ENT.ClientPropsInitialized = false
 ENT.ClientProps["km013"] = {
     model = "models/metrostroi_train/81-720/720_km013.mdl",
     pos = Vector(780-159,-8,-25.3),
@@ -1471,7 +1469,7 @@ table.insert(ENT.ClientSounds["br_013"],{"km013",function(ent,_,var) return "br_
 ENT.ClientProps["PB"] = {
     model = "models/metrostroi_train/81-720/720_pb.mdl",
     pos = Vector(810.138672-159,35.572510,-30),
-    ang = Angle(0.000000,-90.000000,0.000000),
+    ang = Angle(0,-90,0),
     hideseat = 0.2,
 }
 if not ENT.ClientSounds["PB"] then ENT.ClientSounds["PB"] = {} end
@@ -1694,7 +1692,7 @@ function ENT:Initialize()
 	self.EmergencyValveEPKRamp = 0
 	self.EmergencyBrakeValveRamp = 0
     self.FrontLeak = 0
-    self.RearLeak = 0	
+    self.RearLeak = 0
 
     self.ParkingBrake = 0
 
@@ -2261,6 +2259,7 @@ end
 	
 function ENT:Think()
     self.BaseClass.Think(self)
+    if not self.RenderClientEnts or self.CreatingCSEnts then return end	
 	local MiddleBogey = self:GetNW2Entity("MiddleBogey")	
 	local refresh = false--true		
 		
