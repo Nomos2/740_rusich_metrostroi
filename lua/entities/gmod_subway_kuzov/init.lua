@@ -121,12 +121,12 @@ end
 function ENT:Think()	
 	self:SetPackedBool("RearDoor",self.RearDoor)
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
-	local train = self.HeadTrain		
+	local train = self.HeadTrain
 	self.TrainWires = {}	
     self.WireIOSystems = {}
-    self.Systems = {}		
+    self.Systems = {}	
+	local retVal = train.BaseClass.Think(self)		
     if not IsValid(train) then return end		
-	local retVal = train.BaseClass.Think(self)
     local power = train.Electric.Battery80V > 62
     self:SetPackedBool("Vent2Work",train.Electric.Vent2>0)	
     self:SetPackedBool("BBEWork",power and train.BUV.BBE > 0)

@@ -39,10 +39,7 @@ end
 function ENT:GetStandingArea()    --смещение пассажиров
 	return Vector(270-15,-25,-47),Vector(-285,25,-46) 	
 end	
-function ENT:BoardPassengers(delta)
-    self.HeadTrain = self:GetNW2Entity("HeadTrain")	
-    local train = self.HeadTrain
-	if not IsValid(train) then return end		
+function ENT:BoardPassengers(delta)	
 	self:SetNW2Float("PassengerCount", math.max(0,math.min(self:PassengerCapacity(),self:GetNW2Float("PassengerCount") + delta)))
 end
 

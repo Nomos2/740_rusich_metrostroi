@@ -440,13 +440,9 @@ end
     if self.Door4 ~= door4s then
         self.Door4 = door4s
         self:PlayOnce("RearDoor","bass",door4s and 1 or 0)
-    end
-
-    self.HeadTrain = self:GetNW2Entity("HeadTrain")	
-    local train = self.HeadTrain 
-    if not IsValid(train) then return end		
+    end	
 	
-    local work = train:GetPackedBool("AnnPlay")	
+    local work = self:GetPackedBool("AnnPlay")	
     for k,v in ipairs(self.AnnouncerPositions) do
         if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
             self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)

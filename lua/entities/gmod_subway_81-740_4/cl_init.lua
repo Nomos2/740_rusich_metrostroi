@@ -1098,9 +1098,9 @@ ENT.ButtonMap["BTO"] = {
 }
 
 ENT.ButtonMap["FrontPneumatic"] = {
-    pos = Vector(835-159,-40.0,-44),
+    pos = Vector(835-160,-35.0,-44),
     ang = Angle(0,90,90),
-    width = 800,
+    width = 700,
     height = 100,
     scale = 0.1,
     hideseat=0.2,
@@ -1108,8 +1108,8 @@ ENT.ButtonMap["FrontPneumatic"] = {
     screenHide = true,
 
     buttons = {
-        {ID = "FrontBrakeLineIsolationToggle",x=100, y=0, w=300, h=100, tooltip=""},
-        {ID = "FrontTrainLineIsolationToggle",x=500, y=0, w=300, h=100, tooltip=""},
+        {ID = "FrontBrakeLineIsolationToggle",x=0, y=0, w=300, h=100, tooltip=""},
+        {ID = "FrontTrainLineIsolationToggle",x=400, y=0, w=300, h=100, tooltip=""},
     }
 }
 ENT.ClientProps["FrontBrake"] = {--
@@ -1624,15 +1624,15 @@ ENT.ButtonMap["Antenna"] = {
     }
 }
 ENT.ButtonMap["Password"] = {
-    pos = Vector(672.4-15,-5.5,4.3),
+    pos = Vector(672.25-15,-6,4.2),
     ang = Angle(0,-123,90),
-    width = 65,
-    height = 26,
+    width = 50,
+    height = 25,
     scale = 0.0625,
     hideseat=0.2,
 	
 	buttons = {
-        {ID = "Password",x=0,y=0,w=65,h=26,tooltip="",},
+        {ID = "Password",x=0,y=0,w=50,h=25	,tooltip="",},
     }
 }
 
@@ -2423,14 +2423,6 @@ end
     self:Animate("km013", Cpos[self:GetPackedRatio("Cran")] or 0, 0, 0.7,  2,false)
     self:Animate("PB",  self:GetPackedBool("PB") and 1 or 0,0,0.2,  8,false)
 	
-    --if IsValid(Pricep) and IsValid(MiddleBogey) then
-        --print(MiddleBogey:GetAngles())
-		--Fence:ManipulateBoneAngles(0,Fence:WorldToLocalAngles(Angle(MiddleBogey:GetAngles().y-90,-MiddleBogey:GetAngles().z,MiddleBogey:GetAngles().z)))
-		--MiddleBogey:ManipulateBoneAngles(0,MiddleBogey:WorldToLocalAngles(Angle(Pricep:GetAngles().y-90,-Pricep:GetAngles().z,Pricep:GetAngles().z)))	
-		--Fence:ManipulateBonePosition(0,Vector(0,0,-68))		 
-        --MiddleBogey:SetParent(Pricep)
-    --end
-	
 	self:ShowHide("AntennaProp",not self:GetNW2Bool("Antenna"))
 	self:ShowHide("PasswordProp",not self:GetNW2Bool("Password"))	
 	
@@ -2758,47 +2750,8 @@ end
     self:SetSoundState("rolling_medium2_middle",rol40*rollings,rol40p) --57
     self:SetSoundState("rolling_high2_middle"  ,rol70*rollings,rol70p) --70		
 	
-    --local state = (RealTime()%4/3)^1.5
-    --local strength = 1--self:GetPackedRatio("asyncstate")*(1-math.Clamp((speed-15)/15,0,1))
     local state = self:GetPackedRatio("asynccurrent")--^1.5--RealTime()%2.5/2	
     local strength = self:GetPackedRatio("asyncstate")*(1-math.Clamp((speed-23)/23,0,1))
-	--print(state/0.3+0.2)
-	--self:SetSoundState("async1", tunstreet*math.Clamp((state)/0.26+0.2,0,1)*strength, 1)
-    --self:SetSoundState("chopper", tunstreet*self:GetPackedRatio("chopper"), 1)  	
-	
---[[	
-    --local state = (RealTime()%4/3)^1.5
-    --local strength = 1--self:GetPackedRatio("asyncstate")*(1-math.Clamp((speed-15)/15,0,1))
-    local state = self:GetPackedRatio("asynccurrent")--^1.5--RealTime()%2.5/2	
-    local strength = self:GetPackedRatio("asyncstate")*(1-math.Clamp((speed-23)/23,0,1))
-	--print(state/0.3+0.2)
-	--self:SetSoundState("async1", tunstreet*math.Clamp((state)/0.26+0.2,0,1)*strength, 1)
-    --self:SetSoundState("chopper", tunstreet*self:GetPackedRatio("chopper"), 1)  	
-	
-    local state = self:GetPackedRatio("RNState")
-    self.TISUVol = math.Clamp(self.TISUVol+(state-self.TISUVol)*dT*8,0,1)
-	
-	local AsyncSound = self:GetNW2Int("AsyncSound",1)
-	if AsyncSound==1 then		
-    self:SetSoundState("async1", self.TISUVol/1.5, 1)
-	end
-	if AsyncSound==2 then		
-    self:SetSoundState("async2", self.TISUVol/1.5, 1)
-	end		
-	if AsyncSound==3 then		
-    self:SetSoundState("async3", self.TISUVol/1.5, 1)
-	end		
-	if AsyncSound==4 then		
-    self:SetSoundState("async4", self.TISUVol/1.5, 1)
-	end		
-	if AsyncSound==5 then		
-    self:SetSoundState("async5", self.TISUVol/1.5, 1)
-	end	
-	if AsyncSound==6 then		
-    self:SetSoundState("async6", self.TISUVol/1.5, 1)
-	end		
-	]]
-	
     local state = self:GetPackedRatio("asynccurrent")--^1.5--RealTime()%2.5/2	
     local strength = self:GetPackedRatio("asyncstate")*(1-math.Clamp((speed-23)/23,0,1))*0.5
 		
