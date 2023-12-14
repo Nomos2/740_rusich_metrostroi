@@ -363,6 +363,10 @@ if SERVER then
 				self.State2 = 4
 				self.Selected = 3
 			end
+			if name == "Vityaz9" then
+				self.State2 = 4
+				self.Selected = 1
+			end
 			if name == "VityazF7" then
 				self.State2 = 4
 				self.Selected = 0
@@ -686,6 +690,7 @@ if SERVER then
 					Train:SetNW2Int("VityazSpeed",Train.BARS.Speed)
 					Train:SetNW2Int("VityazSpeedLimit",Train.BARS.SpeedLimit)
 					Train:SetNW2Int("BARSFreq",Train.ALSFreqBlock.Value)
+					Train:SetNW2Int("BARSLN",Train.BARS.LN)
 					Train:SetNW2Bool("BARSNoFreq",Train.BARS.BINoFreq)
 					Train:SetNW2Int("VityazSpeedLimitNext",Train.BARS.NextLimit)
 					-- Если честно, я понятия не имею на счёт полного перечня сообщений
@@ -1692,7 +1697,7 @@ else
 				local cb = 10+xAddOffset -- cubebegin
 
 				--
-				self:PrintText(2+xAddOffset,1,"█",Color(80,10,10))
+				if err > 0 then self:PrintText(2+xAddOffset,1,"█",Color(80,10,10)) end
 				if err > 0 and self.Counter%70 > 35  then	self:PrintText(3,1,"?", yellow) end -- Пока что пусть будет так # ПРОВЕРЬТЕ НА ЛАГИ
 				self:PrintText(4+xAddOffset,1,"РЕЖИМ:",yellow)
 					local typ = Train:GetNW2Int("VityazType",0)
@@ -1817,7 +1822,7 @@ else
 				local vityazs = Train:GetNW2Int("VityazS",-1000)/100
 				local prostact = vityazs~=-1000 and (vityazs < 200 and ProstActive or Metka and vityazs > 200)
 				
-				if alsfreq == 0 and Train:GetNW2Bool("LN") then 
+				if alsfreq == 1 and Train:GetNW2Bool("BARSLN") then 
 					self:PrintText(37+xRightAddOffet,2,"Н", green)
 				end
 				if Train:GetNW2Bool("ProstVersion",false) then
