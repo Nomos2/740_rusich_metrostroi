@@ -539,16 +539,16 @@ function ENT:ReInitBogeySounds(bogey)
     --bogey.SoundNames["tedm_703"]  = "subway_trains/bogey/engines/703/engines_medium.wav"
 
     --bogey.SoundNames["ted11_720"] = "subway_trains/760/engines/engine_80.wav"
-    bogey.SoundNames["ted1_740"]  = "subway_trains/rusich/engines/engine_8.wav"
-    bogey.SoundNames["ted2_740"]  = "subway_trains/rusich/engines/engine_16.wav"
-    bogey.SoundNames["ted3_740"]  = "subway_trains/rusich/engines/engine_24.wav"
-    bogey.SoundNames["ted4_740"]  = "subway_trains/rusich/engines/engine_32.wav"
-    bogey.SoundNames["ted5_740"]  = "subway_trains/rusich/engines/engine_40.wav"
-    bogey.SoundNames["ted6_740"]  = "subway_trains/rusich/engines/engine_48.wav"
-    bogey.SoundNames["ted7_740"]  = "subway_trains/rusich/engines/engine_56.wav"
-    bogey.SoundNames["ted8_740"]  = "subway_trains/rusich/engines/engine_64.wav"
-    bogey.SoundNames["ted9_740"]  = "subway_trains/rusich/engines/engine_72.wav"
-    bogey.SoundNames["ted10_740"] = "subway_trains/rusich/engines/engine_80.wav"
+    bogey.SoundNames["ted1_740"]  = "subway_trains/740_4/engines/engine_8.wav"
+    bogey.SoundNames["ted2_740"]  = "subway_trains/740_4/engines/engine_16.wav"
+    bogey.SoundNames["ted3_740"]  = "subway_trains/740_4/engines/engine_24.wav"
+    bogey.SoundNames["ted4_740"]  = "subway_trains/740_4/engines/engine_32.wav"
+    bogey.SoundNames["ted5_740"]  = "subway_trains/740_4/engines/engine_40.wav"
+    bogey.SoundNames["ted6_740"]  = "subway_trains/740_4/engines/engine_48.wav"
+    bogey.SoundNames["ted7_740"]  = "subway_trains/740_4/engines/engine_56.wav"
+    bogey.SoundNames["ted8_740"]  = "subway_trains/740_4/engines/engine_64.wav"
+    bogey.SoundNames["ted9_740"]  = "subway_trains/740_4/engines/engine_72.wav"
+    bogey.SoundNames["ted10_740"] = "subway_trains/740_4/engines/engine_80.wav"
 
     --bogey.SoundNames["ted11_720"] = "subway_trains/760/engines/engine_80.wav"
     bogey.SoundNames["ted11_720"] = "subway_trains/bogey/engines/720/speed_88.wav"
@@ -566,12 +566,12 @@ function ENT:ReInitBogeySounds(bogey)
     --*1.025
 	local skr = math.random (1,2)
 	local skripit = math.random (1,5)	
-    bogey.SoundNames["flangea"]      = "subway_trains/rusich/bogey/skrip1_"..skr..".wav"
-    bogey.SoundNames["flangeb"]      = "subway_trains/rusich/bogey/skrip2_"..skripit..".wav"
-    bogey.SoundNames["flange1"]      = "subway_trains/rusich/bogey/flange_9.wav"
-    bogey.SoundNames["flange2"]      = "subway_trains/rusich/bogey/Flange_10.wav"
-    bogey.SoundNames["brakea_loop1"]       = "subway_trains/rusich/bogey/braking_async3.wav"
-    bogey.SoundNames["brakea_loop2"]       = "subway_trains/rusich/bogey/braking_async3.wav"
+    bogey.SoundNames["flangea"]      = "subway_trains/740_4/bogey/skrip1_"..skr..".wav"
+    bogey.SoundNames["flangeb"]      = "subway_trains/740_4/bogey/skrip2_"..skripit..".wav"
+    bogey.SoundNames["flange1"]      = "subway_trains/740_4/bogey/flange_9.wav"
+    bogey.SoundNames["flange2"]      = "subway_trains/740_4/bogey/Flange_10.wav"
+    bogey.SoundNames["brakea_loop1"]       = "subway_trains/740_4/bogey/braking_async3.wav"
+    bogey.SoundNames["brakea_loop2"]       = "subway_trains/740_4/bogey/braking_async3.wav"
     bogey.SoundNames["brake_loop1"]       = "subway_trains/bogey/brake_rattle3.wav"
     bogey.SoundNames["brake_loop2"]       = "subway_trains/bogey/brake_rattle4.wav"
     bogey.SoundNames["brake_loop3"]       = "subway_trains/bogey/brake_rattle5.wav"
@@ -611,16 +611,16 @@ if MotorType==2 then
     --bogey.SoundNames["tedm_703"]  = "subway_trains/bogey/engines/703/engines_medium.wav"
 
     --bogey.SoundNames["ted11_720"] = "subway_trains/760/engines/engine_80.wav"
-    bogey.SoundNames["ted1_740"]  = "subway_trains/rusich/engines/engine_8.wav"
-    bogey.SoundNames["ted2_740"]  = "subway_trains/rusich/engines/engine_16.wav"
-    bogey.SoundNames["ted3_740"]  = "subway_trains/rusich/engines/engine_24.wav"
-    bogey.SoundNames["ted4_740"]  = "subway_trains/rusich/engines/engine_32.wav"
-    bogey.SoundNames["ted5_740"]  = "subway_trains/rusich/engines/engine_40.wav"
-    bogey.SoundNames["ted6_740"]  = "subway_trains/rusich/engines/engine_48.wav"
-    bogey.SoundNames["ted7_740"]  = "subway_trains/rusich/engines/engine_56.wav"
-    bogey.SoundNames["ted8_740"]  = "subway_trains/rusich/engines/engine_64.wav"
-    bogey.SoundNames["ted9_740"]  = "subway_trains/rusich/engines/engine_72.wav"
-    bogey.SoundNames["ted10_740"] = "subway_trains/rusich/engines/engine_80.wav"
+    bogey.SoundNames["ted1_740"]  = "subway_trains/740_4/engines/engine_8.wav"
+    bogey.SoundNames["ted2_740"]  = "subway_trains/740_4/engines/engine_16.wav"
+    bogey.SoundNames["ted3_740"]  = "subway_trains/740_4/engines/engine_24.wav"
+    bogey.SoundNames["ted4_740"]  = "subway_trains/740_4/engines/engine_32.wav"
+    bogey.SoundNames["ted5_740"]  = "subway_trains/740_4/engines/engine_40.wav"
+    bogey.SoundNames["ted6_740"]  = "subway_trains/740_4/engines/engine_48.wav"
+    bogey.SoundNames["ted7_740"]  = "subway_trains/740_4/engines/engine_56.wav"
+    bogey.SoundNames["ted8_740"]  = "subway_trains/740_4/engines/engine_64.wav"
+    bogey.SoundNames["ted9_740"]  = "subway_trains/740_4/engines/engine_72.wav"
+    bogey.SoundNames["ted10_740"] = "subway_trains/740_4/engines/engine_80.wav"
 
     --bogey.SoundNames["ted11_720"] = "subway_trains/760/engines/engine_80.wav"
     bogey.SoundNames["ted11_720"] = "subway_trains/bogey/engines/720/speed_88.wav"
@@ -638,12 +638,12 @@ if MotorType==2 then
     --*1.025
 	local skr = math.random (1,2)
 	local skripit = math.random (1,5)	
-    bogey.SoundNames["flangea"]      = "subway_trains/rusich/bogey/skrip1_"..skr..".wav"
-    bogey.SoundNames["flangeb"]      = "subway_trains/rusich/bogey/skrip2_"..skripit..".wav"
-    bogey.SoundNames["flange1"]      = "subway_trains/rusich/bogey/flange_9.wav"
-    bogey.SoundNames["flange2"]      = "subway_trains/rusich/bogey/Flange_10.wav"
-    bogey.SoundNames["brakea_loop1"]       = "subway_trains/rusich/bogey/braking_async3.wav"
-    bogey.SoundNames["brakea_loop2"]       = "subway_trains/rusich/bogey/braking_async3.wav"
+    bogey.SoundNames["flangea"]      = "subway_trains/740_4/bogey/skrip1_"..skr..".wav"
+    bogey.SoundNames["flangeb"]      = "subway_trains/740_4/bogey/skrip2_"..skripit..".wav"
+    bogey.SoundNames["flange1"]      = "subway_trains/740_4/bogey/flange_9.wav"
+    bogey.SoundNames["flange2"]      = "subway_trains/740_4/bogey/Flange_10.wav"
+    bogey.SoundNames["brakea_loop1"]       = "subway_trains/740_4/bogey/braking_async3.wav"
+    bogey.SoundNames["brakea_loop2"]       = "subway_trains/740_4/bogey/braking_async3.wav"
     bogey.SoundNames["brake_loop1"]       = "subway_trains/bogey/brake_rattle3.wav"
     bogey.SoundNames["brake_loop2"]       = "subway_trains/bogey/brake_rattle4.wav"
     bogey.SoundNames["brake_loop3"]       = "subway_trains/bogey/brake_rattle5.wav"
@@ -748,16 +748,16 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     bogey.SoundNames["ted10_703"] = "subway_trains/bogey/engines/703/speed_80.wav"
     bogey.SoundNames["ted11_703"] = "subway_trains/bogey/engines/703/speed_88.wav"
 
-    bogey.SoundNames["ted1_740"]  = "subway_trains/rusich/engines_new_1/engine_8.wav"
-    bogey.SoundNames["ted2_740"]  = "subway_trains/rusich/engines_new_1/engine_16.wav"
-    bogey.SoundNames["ted3_740"]  = "subway_trains/rusich/engines_new_1/engine_24.wav"
-    bogey.SoundNames["ted4_740"]  = "subway_trains/rusich/engines_new_1/engine_32.wav"
-    bogey.SoundNames["ted5_740"]  = "subway_trains/rusich/engines_new_1/engine_40.wav"
-    bogey.SoundNames["ted6_740"]  = "subway_trains/rusich/engines_new_1/engine_48.wav"
-    bogey.SoundNames["ted7_740"]  = "subway_trains/rusich/engines_new_1/engine_56.wav"
-    bogey.SoundNames["ted8_740"]  = "subway_trains/rusich/engines_new_1/engine_64.wav"
-    bogey.SoundNames["ted9_740"]  = "subway_trains/rusich/engines_new_1/engine_72.wav"
-    bogey.SoundNames["ted10_740"] = "subway_trains/rusich/engines_new_1/engine_80.wav"
+    bogey.SoundNames["ted1_740"]  = "subway_trains/740_4/engines_new_1/engine_8.wav"
+    bogey.SoundNames["ted2_740"]  = "subway_trains/740_4/engines_new_1/engine_16.wav"
+    bogey.SoundNames["ted3_740"]  = "subway_trains/740_4/engines_new_1/engine_24.wav"
+    bogey.SoundNames["ted4_740"]  = "subway_trains/740_4/engines_new_1/engine_32.wav"
+    bogey.SoundNames["ted5_740"]  = "subway_trains/740_4/engines_new_1/engine_40.wav"
+    bogey.SoundNames["ted6_740"]  = "subway_trains/740_4/engines_new_1/engine_48.wav"
+    bogey.SoundNames["ted7_740"]  = "subway_trains/740_4/engines_new_1/engine_56.wav"
+    bogey.SoundNames["ted8_740"]  = "subway_trains/740_4/engines_new_1/engine_64.wav"
+    bogey.SoundNames["ted9_740"]  = "subway_trains/740_4/engines_new_1/engine_72.wav"
+    bogey.SoundNames["ted10_740"] = "subway_trains/740_4/engines_new_1/engine_80.wav"
 
     bogey.SoundNames["ted11_720"] = "subway_trains/bogey/engines/720/speed_88.wav"
     bogey.SoundNames["ted1_720"]  = "subway_trains/bogey/engines/720/speed_8.wav"
@@ -774,12 +774,12 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     --*1.025
 	local skr = math.random (1,2)
 	local skripit = math.random (1,5)	
-    bogey.SoundNames["flangea"]      = "subway_trains/rusich/bogey/skrip1_"..skr..".wav"
-    bogey.SoundNames["flangeb"]      = "subway_trains/rusich/bogey/skrip2_"..skripit..".wav"
-    bogey.SoundNames["flange1"]      = "subway_trains/rusich/bogey/flange_9.wav"
-    bogey.SoundNames["flange2"]      = "subway_trains/rusich/bogey/Flange_10.wav"
-    bogey.SoundNames["brakea_loop1"]       = "subway_trains/rusich/bogey/braking_async4.wav"
-    bogey.SoundNames["brakea_loop2"]       = "subway_trains/rusich/bogey/braking_async4.wav"
+    bogey.SoundNames["flangea"]      = "subway_trains/740_4/bogey/skrip1_"..skr..".wav"
+    bogey.SoundNames["flangeb"]      = "subway_trains/740_4/bogey/skrip2_"..skripit..".wav"
+    bogey.SoundNames["flange1"]      = "subway_trains/740_4/bogey/flange_9.wav"
+    bogey.SoundNames["flange2"]      = "subway_trains/740_4/bogey/Flange_10.wav"
+    bogey.SoundNames["brakea_loop1"]       = "subway_trains/740_4/bogey/braking_async4.wav"
+    bogey.SoundNames["brakea_loop2"]       = "subway_trains/740_4/bogey/braking_async4.wav"
     bogey.SoundNames["brake_loop1"]       = "subway_trains/bogey/brake_rattle3.wav"
     bogey.SoundNames["brake_loop2"]       = "subway_trains/bogey/brake_rattle4.wav"
     bogey.SoundNames["brake_loop3"]       = "subway_trains/bogey/brake_rattle5.wav"
@@ -818,16 +818,16 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
 
     --bogey.SoundNames["ted11_720"] = "subway_trains/760/engines/engine_80.wav"
 	local eng = math.random (1,2)	
-    bogey.SoundNames["ted1_740"]  = "subway_trains/rusich/engines_1/engine_8.wav"
-    bogey.SoundNames["ted2_740"]  = "subway_trains/rusich/engines_1/engine_16_"..eng..".wav"
-    bogey.SoundNames["ted3_740"]  = "subway_trains/rusich/engines_1/engine_24_"..eng..".wav"
-    bogey.SoundNames["ted4_740"]  = "subway_trains/rusich/engines_1/engine_32.wav"
-    bogey.SoundNames["ted5_740"]  = "subway_trains/rusich/engines_1/engine_40.wav"
-    bogey.SoundNames["ted6_740"]  = "subway_trains/rusich/engines_1/engine_48.wav"
-    bogey.SoundNames["ted7_740"]  = "subway_trains/rusich/engines_1/engine_56.wav"
-    bogey.SoundNames["ted8_740"]  = "subway_trains/rusich/engines_1/engine_64.wav"
-    bogey.SoundNames["ted9_740"]  = "subway_trains/rusich/engines_1/engine_72.wav"
-    bogey.SoundNames["ted10_740"] = "subway_trains/rusich/engines_1/engine_80.wav"
+    bogey.SoundNames["ted1_740"]  = "subway_trains/740_4/engines_1/engine_8.wav"
+    bogey.SoundNames["ted2_740"]  = "subway_trains/740_4/engines_1/engine_16_"..eng..".wav"
+    bogey.SoundNames["ted3_740"]  = "subway_trains/740_4/engines_1/engine_24_"..eng..".wav"
+    bogey.SoundNames["ted4_740"]  = "subway_trains/740_4/engines_1/engine_32.wav"
+    bogey.SoundNames["ted5_740"]  = "subway_trains/740_4/engines_1/engine_40.wav"
+    bogey.SoundNames["ted6_740"]  = "subway_trains/740_4/engines_1/engine_48.wav"
+    bogey.SoundNames["ted7_740"]  = "subway_trains/740_4/engines_1/engine_56.wav"
+    bogey.SoundNames["ted8_740"]  = "subway_trains/740_4/engines_1/engine_64.wav"
+    bogey.SoundNames["ted9_740"]  = "subway_trains/740_4/engines_1/engine_72.wav"
+    bogey.SoundNames["ted10_740"] = "subway_trains/740_4/engines_1/engine_80.wav"
 
     --bogey.SoundNames["ted11_720"] = "subway_trains/760/engines/engine_80.wav"
     bogey.SoundNames["ted11_720"] = "subway_trains/bogey/engines/720/speed_88.wav"
@@ -845,12 +845,12 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     --*1.025
 	local skr = math.random (1,2)
 	local skripit = math.random (1,5)	
-    bogey.SoundNames["flangea"]      = "subway_trains/rusich/bogey/skrip1_"..skr..".wav"
-    bogey.SoundNames["flangeb"]      = "subway_trains/rusich/bogey/skrip2_"..skripit..".wav"
-    bogey.SoundNames["flange1"]      = "subway_trains/rusich/bogey/flange_9.wav"
-    bogey.SoundNames["flange2"]      = "subway_trains/rusich/bogey/Flange_10.wav"
-    bogey.SoundNames["brakea_loop1"]       = "subway_trains/rusich/bogey/braking_async4.wav"
-    bogey.SoundNames["brakea_loop2"]       = "subway_trains/rusich/bogey/braking_async4.wav"
+    bogey.SoundNames["flangea"]      = "subway_trains/740_4/bogey/skrip1_"..skr..".wav"
+    bogey.SoundNames["flangeb"]      = "subway_trains/740_4/bogey/skrip2_"..skripit..".wav"
+    bogey.SoundNames["flange1"]      = "subway_trains/740_4/bogey/flange_9.wav"
+    bogey.SoundNames["flange2"]      = "subway_trains/740_4/bogey/Flange_10.wav"
+    bogey.SoundNames["brakea_loop1"]       = "subway_trains/740_4/bogey/braking_async4.wav"
+    bogey.SoundNames["brakea_loop2"]       = "subway_trains/740_4/bogey/braking_async4.wav"
     bogey.SoundNames["brake_loop1"]       = "subway_trains/bogey/brake_rattle3.wav"
     bogey.SoundNames["brake_loop2"]       = "subway_trains/bogey/brake_rattle4.wav"
     bogey.SoundNames["brake_loop3"]       = "subway_trains/bogey/brake_rattle5.wav"
@@ -858,8 +858,8 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     bogey.SoundNames["brake_loopb"]       = "subway_trains/common/junk/junk_background_braking1.wav"
     bogey.SoundNames["brake2_loop1"]       = "subway_trains/bogey/brake_rattle2.wav"
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
-    bogey.SoundNames["brake_squeal1"]       = "subway_trains/rusich/bogey/skrip1_"..skr..".wav"
-    bogey.SoundNames["brake_squeal2"]       = "subway_trains/rusich/bogey/skrip2_"..skripit..".wav"
+    bogey.SoundNames["brake_squeal1"]       = "subway_trains/740_4/bogey/skrip1_"..skr..".wav"
+    bogey.SoundNames["brake_squeal2"]       = "subway_trains/740_4/bogey/skrip2_"..skripit..".wav"
 		
     -- Remove old sounds
     if bogey.Sounds then
@@ -895,30 +895,30 @@ function ENT:Think()
 	local refresh = false--true		
 	
 	if self:GetNW2Int("MotorType")==1 then		
-		if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines/engine_8.wav" 
+		if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/engine_8.wav" 
 	or self.FrontBogey.EngineSNDConfig and self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
 	end
-	if IsValid(MiddleBogey) and MiddleBogey.SoundNames and MiddleBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines/engine_8.wav" 
+	if IsValid(MiddleBogey) and MiddleBogey.SoundNames and MiddleBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/engine_8.wav" 
 	or MiddleBogey.EngineSNDConfig and MiddleBogey.EngineSNDConfig[1] and MiddleBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
 		self:ReInitBogeySounds(MiddleBogey)
 	end
-	if IsValid(self.RearBogey) and self.RearBogey.SoundNames and (self.RearBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines/engine_8.wav" 
+	if IsValid(self.RearBogey) and self.RearBogey.SoundNames and (self.RearBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/engine_8.wav" 
 	or self.RearBogey.EngineSNDConfig and self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
 	end		
 	end
 	
 	if self:GetNW2Int("MotorType")==2 then		
-		if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines_new/engine_8.wav" 
+		if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines_new/engine_8.wav" 
 	or self.FrontBogey.EngineSNDConfig and self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
 	end
-	if IsValid(MiddleBogey) and MiddleBogey.SoundNames and MiddleBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines_new/engine_8.wav" 
+	if IsValid(MiddleBogey) and MiddleBogey.SoundNames and MiddleBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines_new/engine_8.wav" 
 	or MiddleBogey.EngineSNDConfig and MiddleBogey.EngineSNDConfig[1] and MiddleBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
 		self:ReInitBogeySounds(MiddleBogey)
 	end
-	if IsValid(self.RearBogey) and self.RearBogey.SoundNames and (self.RearBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines_new/engine_8.wav" 
+	if IsValid(self.RearBogey) and self.RearBogey.SoundNames and (self.RearBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines_new/engine_8.wav" 
 	or self.RearBogey.EngineSNDConfig and self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
 	end	
@@ -940,30 +940,30 @@ function ENT:Think()
 	end
 	
 	if self:GetNW2Int("MotorType")==4 then		
-	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines_new_1/engine_8.wav" 
+	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines_new_1/engine_8.wav" 
 	or self.FrontBogey.EngineSNDConfig and self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
 	end	
-	if IsValid(MiddleBogey) and MiddleBogey.SoundNames and MiddleBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines_new_1/engine_8.wav" 
+	if IsValid(MiddleBogey) and MiddleBogey.SoundNames and MiddleBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines_new_1/engine_8.wav" 
 	or MiddleBogey.EngineSNDConfig and MiddleBogey.EngineSNDConfig[1] and MiddleBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
 		self:ReInitBogeySounds(MiddleBogey)
 	end	
-	if IsValid(self.RearBogey) and self.RearBogey.SoundNames and (self.RearBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines_new_1/engine_8.wav" 
+	if IsValid(self.RearBogey) and self.RearBogey.SoundNames and (self.RearBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines_new_1/engine_8.wav" 
 	or self.RearBogey.EngineSNDConfig and self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
 	end	
 	end
 	
 	if self:GetNW2Int("MotorType")==5 then		
-	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines_1/engine_8.wav" 
+	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines_1/engine_8.wav" 
 	or self.FrontBogey.EngineSNDConfig and self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
 	end		
-	if IsValid(MiddleBogey) and MiddleBogey.SoundNames and MiddleBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines_1/engine_8.wav" 
+	if IsValid(MiddleBogey) and MiddleBogey.SoundNames and MiddleBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines_1/engine_8.wav" 
 	or MiddleBogey.EngineSNDConfig and MiddleBogey.EngineSNDConfig[1] and MiddleBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
 		self:ReInitBogeySounds(MiddleBogey)
 	end	
-	if IsValid(self.RearBogey) and self.RearBogey.SoundNames and (self.RearBogey.SoundNames["ted1_740"] ~= "subway_trains/rusich/engines_1/engine_8.wav" 
+	if IsValid(self.RearBogey) and self.RearBogey.SoundNames and (self.RearBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines_1/engine_8.wav" 
 	or self.RearBogey.EngineSNDConfig and self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
 	end	

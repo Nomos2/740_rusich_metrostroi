@@ -74,25 +74,25 @@ function ENT:InitializeSounds()
 	
     self.SoundNames["rear_isolation"] = {loop=true,"subway_trains/common/pneumatic/isolation_leak.wav"}
     self.SoundPositions["rear_isolation"] = {300,1e9,Vector(-456+144, 0,-63),1}
-    self.SoundNames["compressor"] = {loop=2,"subway_trains/rusich/compressor/compressor740_start.wav","subway_trains/rusich/compressor/compressor740_loop.wav","subway_trains/rusich/compressor/compressor740_stop.wav"}
+    self.SoundNames["compressor"] = {loop=2,"subway_trains/740_4/compressor/compressor740_start.wav","subway_trains/740_4/compressor/compressor740_loop.wav","subway_trains/740_4/compressor/compressor740_stop.wav"}
     self.SoundPositions["compressor"] = {800,1e9,Vector(-18,-40,-66),0.4}	
 	
     for i=1,4 do
-        self.SoundNames["vent"..i] = {loop=true,"subway_trains/rusich/vent/vent_loop.wav"}
+        self.SoundNames["vent"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop.wav"}
         self.SoundPositions["vent"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
-        self.SoundNames["vent1"..i] = {loop=true,"subway_trains/rusich/vent/vent_loop_1.wav"}
+        self.SoundNames["vent1"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop_1.wav"}
         self.SoundPositions["vent1"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
     end		
 	
     --self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
 	
-    self.SoundNames["bbe"]   = {"subway_trains/rusich/bbe.wav",loop = true}
+    self.SoundNames["bbe"]   = {"subway_trains/740_4/bbe.wav",loop = true}
     self.SoundPositions["bbe"] = {800,1e9,Vector(50,0,-40),2.1}			
 
-	self.SoundNames["cab_door_open"] = "subway_trains/rusich/doors/torec/door_torec_open_end.wav"
-    self.SoundNames["cab_door_close"] = "subway_trains/rusich/doors/torec/door_close_1.mp3"	
+	self.SoundNames["cab_door_open"] = "subway_trains/740_4/doors/torec/door_torec_open_end.wav"
+    self.SoundNames["cab_door_close"] = "subway_trains/740_4/doors/torec/door_close_1.mp3"	
 	local j = math.random (1,3)	
-    self.SoundNames["release_rear"] = {loop=true,"subway_trains/rusich/pneumo_release_"..j..".wav"}
+    self.SoundNames["release_rear"] = {loop=true,"subway_trains/740_4/pneumo_release_"..j..".wav"}
     self.SoundPositions["release_rear"] = {1200,1e9,Vector(600-144,0,-70),0.4}		
 
 	local loop = math.random (1,2)
@@ -101,13 +101,13 @@ function ENT:InitializeSounds()
 	local open = math.random (1,3)	
     for i=0,2 do	
 	for k=0,1 do	
-            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/rusich/doors/door_loop_"..loop..".wav",loop=true}
+            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop_"..loop..".wav",loop=true}
             self.SoundPositions["door"..i.."x"..k.."r"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/rusich/doors/door_start_"..start..".wav"}
+            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_start_"..start..".wav"}
             self.SoundPositions["door"..i.."x"..k.."s"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/rusich/doors/door_open_end"..open..".wav"}
+            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..open..".wav"}
             self.SoundPositions["door"..i.."x"..k.."o"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/rusich/doors/door_close"..closed..".wav"}
+            self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/740_4/doors/door_close"..closed..".wav"}
             self.SoundPositions["door"..i.."x"..k.."c"] = {200,1e9,GetDoorPosition(i,k),0.5}
         end	
 	end
@@ -115,7 +115,7 @@ end
 
 ENT.AnnouncerPositions = {}
 ENT.AnnouncerPositions = {
-    {Vector(190,-34,55),250,0.1},
+    {Vector(190,-34,55),250,1},
 	--{Vector(-38,-34,55),50,0.1},
     --{Vector(-275,-34,55),50,0.1},
     --{Vector(-228,34,55),50,0.1},

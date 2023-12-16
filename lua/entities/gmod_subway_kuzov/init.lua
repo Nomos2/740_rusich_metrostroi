@@ -45,7 +45,7 @@ function ENT:Initialize()
 	self.InteractionZones = {	
 		{
 			ID = "RearBrakeLineIsolationToggle",
-			Pos = Vector(-206-131,-22.0,-44), Radius = 8,
+			Pos = Vector(-206-131,22.0,-44), Radius = 8,
         },
 		{
 			ID = "RearTrainLineIsolationToggle",
@@ -131,10 +131,7 @@ function ENT:Think()
     self:SetPackedBool("Vent2Work",train.Electric.Vent2>0)	
     self:SetPackedBool("BBEWork",power and train.BUV.BBE > 0)
     self:SetPackedBool("CompressorWork",train.Pneumatic.Compressor) 
-    self:SetPackedBool("AnnPlay",train.Panel.AnnouncerPlaying > 0)
-	
-	self:SetNW2Bool("RBLI",train.RearBrakeLineIsolation.Value > 0)
-	self:SetNW2Bool("RTLI",train.RearTrainLineIsolation.Value > 0)	
+    self:SetPackedBool("AnnPlay",train.Panel.AnnouncerPlaying)
 	
     --local state = math.abs(train.AsyncInverter.InverterFrequency/(11+train.AsyncInverter.State*5))--(10+8*math.Clamp((self.AsyncInverter.State-0.4)/0.4,0,1)))
     --self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+train.AsyncInverter.State/1),0,1)*math.Clamp(train.Speed/6,0,1))
@@ -195,6 +192,11 @@ function ENT:OnButtonPress(button,ply)
 
 	if button == "RearBrakeLineIsolationToggle" then train.RearBrakeLineIsolation:TriggerInput("Toggle",1) end
 	if button == "RearTrainLineIsolationToggle" then train.RearTrainLineIsolation:TriggerInput("Toggle",1) end
+	
+timer.Simple(0.1, function()		
+	self:SetNW2Bool("RBLI",train.RearBrakeLineIsolation.Value > 0)
+	self:SetNW2Bool("RTLI",train.RearTrainLineIsolation.Value > 0)
+end)	
 end	
 
 function ENT:OnButtonRelease(button)

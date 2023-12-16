@@ -271,11 +271,11 @@ end	]]
 		
 		{
 			ID = "FrontBrakeLineIsolationToggle",
-			Pos = Vector(835-159,-25.0,-44), Radius = 8,
+			Pos = Vector(830-159,-25.0,-42), Radius = 14,
         },
 		{
 			ID = "FrontTrainLineIsolationToggle",
-			Pos = Vector(835-159,25.0,-44), Radius = 8,
+			Pos = Vector(830-159,25.0,-42), Radius = 14,
         },
 		{
 			ID = "GVToggle",
@@ -895,7 +895,7 @@ function ENT:Think()
     --self:SetNW2Int("PassSchemesLEDN",self.PassSchemes.PassSchemeNext)
     --self:SetPackedBool("PassSchemesLEDO",self.PassSchemes.PassSchemePath)
 
-    self:SetPackedBool("AnnPlay",Panel.AnnouncerPlaying > 0)
+    --self:SetPackedBool("AnnPlay",Panel.AnnouncerPlaying > 0)
     self:SetPackedRatio("Cran", self.Pneumatic.DriverValvePosition) 
     self:SetPackedRatio("BL", self.Pneumatic.BrakeLinePressure/16.0) 
     self:SetPackedRatio("TL", self.Pneumatic.TrainLinePressure/16.0) 

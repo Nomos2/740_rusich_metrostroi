@@ -257,6 +257,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
 	self.RBLICache = false
 	self.RTLICache = false
+	self.AnnPlayCache = false
     self.PassengerEnts = {}
     self.PassengerEntsStucked = {}	
     self.PassengerPositions = {}	
@@ -304,12 +305,12 @@ self.ClientProps["TrainNumberL"..k] = {
     } 
 end
 if self.RBLICache ~= self:GetNW2Bool("RBLI") then
-        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 1, 0, 400, 1e9, Vector(50,0,-40))
+        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 400, 1e9, Vector(50,0,-40))
         self.RBLICache = self:GetNW2Bool("RBLI")
     end
 
     if self.RTLICache ~= self:GetNW2Bool("RTLI") then
-        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 1, 0, 400, 1e9, Vector(50,0,-40)) 
+        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 400, 1e9, Vector(50,0,-40)) 
         self.RTLICache = self:GetNW2Bool("RTLI")
     end
 
@@ -448,12 +449,20 @@ end
         self:PlayOnce("RearDoor","bass",door4s and 1 or 0)
     end	
 	
-    local work = self:GetPackedBool("AnnPlay")	
+	--[[if self.AnnouncerPositions then
+            for k, v in ipairs(self.AnnouncerPositions) do
+                self:PlayOnceFromPos("announcer" .. k, snd, v[3] or 1, 1, v[2] or 400, 1e9, v[1])
+            end
+        else
+            self:PlayOnceFromPos("announcer", snd, 1, 1, 600, 1e9, Vector(0, 0, 0))
+    end]]	
+	
+    local work = train:GetPackedBool("AnnPlay")	
     for k,v in ipairs(self.AnnouncerPositions) do
         if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
             self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
 		end 
-	end		
+	end	
 end
 
 function ENT:Draw()

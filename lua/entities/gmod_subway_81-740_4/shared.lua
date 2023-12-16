@@ -49,18 +49,18 @@ function ENT:InitializeSounds()
 		local id1 = Format("b1tunnel_%d",i)
 		local id2 = Format("b2tunnel_%d",i)
 		local id3 = Format("b3tunnel_%d",i)		
-		self.SoundNames[id1.."a"] = "subway_trains/rusich/bogey/st"..i.."a.wav"
-		self.SoundNames[id1.."b"] = "subway_trains/rusich/bogey/st"..i.."b.wav"
+		self.SoundNames[id1.."a"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."a.wav"
+		self.SoundNames[id1.."b"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."b.wav"
 		self.SoundPositions[id1.."a"] = {700,1e9,Vector( 520-25,0,-75),1}
 		self.SoundPositions[id1.."b"] = self.SoundPositions[id1.."a"]
 		
-		self.SoundNames[id2.."a"] = "subway_trains/rusich/bogey/st"..i.."a.wav"
-		self.SoundNames[id2.."b"] = "subway_trains/rusich/bogey/st"..i.."b.wav"
+		self.SoundNames[id2.."a"] = "subway_trains/740_4/bogey/wheels/tunnel/yakobs/st"..i.."a.wav"
+		self.SoundNames[id2.."b"] = "subway_trains/740_4/bogey/wheels/tunnel/yakobs/st"..i.."b.wav"
 		self.SoundPositions[id2.."a"] = {700,1e9,Vector(-15-16.5,0,-74),1}
 		self.SoundPositions[id2.."b"] = self.SoundPositions[id2.."a"]
 		
-		self.SoundNames[id3.."a"] = "subway_trains/rusich/bogey/st"..i.."a.wav"
-		self.SoundNames[id3.."b"] = "subway_trains/rusich/bogey/st"..i.."b.wav"
+		self.SoundNames[id3.."a"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."a.wav"
+		self.SoundNames[id3.."b"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."b.wav"
 		self.SoundPositions[id3.."a"] = {700,1e9,Vector(-532-25,0,-74.5),1}
 		self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]		
 	end
@@ -68,33 +68,33 @@ function ENT:InitializeSounds()
 		local id1 = Format("b1street_%d",i)
 		local id2 = Format("b2street_%d",i)
 		local id3 = Format("b3street_%d",i)		
-		self.SoundNames[id1.."a"] = "subway_trains/rusich/bogey/wheels/street_"..i.."a.mp3"
-		self.SoundNames[id1.."b"] = "subway_trains/rusich/bogey/wheels/street_"..i.."b.mp3"
+		self.SoundNames[id1.."a"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."a.mp3"
+		self.SoundNames[id1.."b"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."b.mp3"
 		self.SoundPositions[id1.."a"] = {700,1e9,Vector(520-25,0,-75),1.5}
 		self.SoundPositions[id1.."b"] = self.SoundPositions[id1.."a"]
 		
-		self.SoundNames[id2.."a"] = "subway_trains/rusich/bogey/wheels/street_"..i.."a.mp3"
-		self.SoundNames[id2.."b"] = "subway_trains/rusich/bogey/wheels/street_"..i.."b.mp3"
+		self.SoundNames[id2.."a"] = "subway_trains/740_4/bogey/wheels/street/yakobs/street_"..i.."a.mp3"
+		self.SoundNames[id2.."b"] = "subway_trains/740_4/bogey/wheels/street/yakobs/street_"..i.."b.mp3"
 		self.SoundPositions[id2.."a"] = {700,1e9,Vector(-15-15.5,0,-74),1.5}
 		self.SoundPositions[id2.."b"] = self.SoundPositions[id2.."a"]
 		
-		self.SoundNames[id3.."a"] = "subway_trains/rusich/bogey/wheels/street_"..i.."a.mp3"
-		self.SoundNames[id3.."b"] = "subway_trains/rusich/bogey/wheels/street_"..i.."b.mp3"
+		self.SoundNames[id3.."a"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."a.mp3"
+		self.SoundNames[id3.."b"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."b.mp3"
 		self.SoundPositions[id3.."a"] = {700,1e9,Vector(-532-25,0,-74.5),1.5}
 		self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]		
 	end
 	
 	--Костыль в лице id2 и 3, они работают только на передней секции, цель - переписать их под заднюю секцию без внедрения кода непосредственно в заднюю секцию.	
 
-    self.SoundNames["chopper_onix"]   = {"subway_trains/rusich/chopper.wav",loop = true}
+    self.SoundNames["chopper_onix"]   = {"subway_trains/740_4/chopper.wav",loop = true}
     self.SoundPositions["chopper_onix"] = {200,1e9,Vector(144-15,0,0),2}	
-    self.SoundNames["ONIX"]   = {"subway_trains/rusich/inverter.wav", loop = true}
+    self.SoundNames["ONIX"]   = {"subway_trains/740_4/inverter.wav", loop = true}
     self.SoundPositions["ONIX"] = {400,1e9,Vector(344-15,0,0),1.5}	
 	
     for i=1,4 do
-        self.SoundNames["vent"..i] = {loop=true,"subway_trains/rusich/vent/vent_loop.wav"}
+        self.SoundNames["vent"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop.wav"}
         self.SoundPositions["vent"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
-        self.SoundNames["vent1"..i] = {loop=true,"subway_trains/rusich/vent/vent_loop_1.wav"}
+        self.SoundNames["vent1"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop_1.wav"}
         self.SoundPositions["vent1"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
     end	
 
@@ -109,31 +109,31 @@ function ENT:InitializeSounds()
         "subway_trains/717/cover/cover_close3.mp3",
     }
 
-	self.SoundNames["ring"] = {loop=0.0,"subway_trains/rusich/rings/ring_start.wav","subway_trains/rusich/rings/ring_loop.wav","subway_trains/rusich/rings/ring_end.wav"}
+	self.SoundNames["ring"] = {loop=0.0,"subway_trains/740_4/rings/ring_start.wav","subway_trains/740_4/rings/ring_loop.wav","subway_trains/740_4/rings/ring_end.wav"}
     self.SoundPositions["ring"] = {100,1e9,Vector(803-159,25.6,-26.3),0.45}
 	
-    self.SoundNames["ring_old"] = {loop=0.0,"subway_trains/rusich/rings/ring_start1.wav","subway_trains/rusich/rings/ring_loop1.wav","subway_trains/rusich/rings/ring_end1.wav"}
+    self.SoundNames["ring_old"] = {loop=0.0,"subway_trains/740_4/rings/ring_start1.wav","subway_trains/740_4/rings/ring_loop1.wav","subway_trains/740_4/rings/ring_end1.wav"}
     self.SoundPositions["ring_old"] = {100,1e9,Vector(803-159,25.6,-26.3),0.45}	
 	
-    self.SoundNames["ring_new"] = {loop=0.0,"subway_trains/rusich/rings/ring_start2.wav","subway_trains/rusich/rings/ring_loop2.wav","subway_trains/rusich/rings/ring_end2.wav"}
+    self.SoundNames["ring_new"] = {loop=0.0,"subway_trains/740_4/rings/ring_start2.wav","subway_trains/740_4/rings/ring_loop2.wav","subway_trains/740_4/rings/ring_end2.wav"}
     self.SoundPositions["ring_new"] = {100,1e9,Vector(803-159,25.6,-26.3),0.45}	
 
-    self.SoundNames["ring_1"] = {loop=0.0,"subway_trains/rusich/rings/ring_start3.wav","subway_trains/rusich/rings/ring_loop3.wav","subway_trains/rusich/rings/ring_end3.wav"}
+    self.SoundNames["ring_1"] = {loop=0.0,"subway_trains/740_4/rings/ring_start3.wav","subway_trains/740_4/rings/ring_loop3.wav","subway_trains/740_4/rings/ring_end3.wav"}
     self.SoundPositions["ring_1"] = {100,1e9,Vector(803-159,25.6,-26.3),0.45}		
 	
-	self.SoundNames["ring_vityaz"] = "subway_trains/rusich/rings/ring_start1.wav"
+	self.SoundNames["ring_vityaz"] = "subway_trains/740_4/rings/ring_start1.wav"
 	self.SoundPositions["ring_vityaz"] = {100,1e9,Vector(803-159,25.6,-26.3),0.45}
 	
-	self.SoundNames["ring_cams"] = "subway_trains/rusich/rings/ring_start.wav"
+	self.SoundNames["ring_cams"] = "subway_trains/740_4/rings/ring_cam.wav"
 	self.SoundPositions["ring_cams"] = {100,1e9,Vector(803-159,25.6,-26.3),0.45}
 
-    self.SoundNames["compressor_pn"] = "subway_trains/rusich/compressor/compressor_psh.wav"
+    self.SoundNames["compressor_pn"] = "subway_trains/740_4/compressor/compressor_psh.wav"
     self.SoundPositions["compressor_pn"] = {485,1e9,Vector(-18+-159,-40,-66),0.7} --FIXME: Pos
 
 	 local j = math.random (1,3)
-    self.SoundNames["release_front"] = {loop=true,"subway_trains/rusich/pneumo_release_"..j..".wav"}
+    self.SoundNames["release_front"] = {loop=true,"subway_trains/740_4/pneumo_release_"..j..".wav"}
     self.SoundPositions["release_front"] = {1200,1e9,Vector(0-159,0,-70),0.4}
-    self.SoundNames["release_middle"] = {loop=true,"subway_trains/rusich/pneumo_release_"..j..".wav"}
+    self.SoundNames["release_middle"] = {loop=true,"subway_trains/740_4/pneumo_release_"..j..".wav"}
 	self.SoundPositions["release_middle"] = {1200,1e9,Vector(800-159,0,-70),0.4}
     self.SoundNames["parking_brake"] = {loop=true,"subway_trains/common/pneumatic/autostop_loop.wav"}
     self.SoundPositions["parking_brake"] = {400,1e9,Vector(-13+159,0,-70),0.95}
@@ -204,23 +204,23 @@ function ENT:InitializeSounds()
         "subway_trains/common/pnm/pnm_button_release5.mp3",
     }
 
-    self.SoundNames["horn"] = {loop=0.6,"subway_trains/rusich/horn/horn8_start.wav","subway_trains/rusich/horn/horn8_loop.wav", "subway_trains/rusich/horn/horn8_end.wav"}
+    self.SoundNames["horn"] = {loop=0.6,"subway_trains/740_4/horn/horn8_start.wav","subway_trains/740_4/horn/horn8_loop.wav", "subway_trains/740_4/horn/horn8_end.wav"}
     self.SoundPositions["horn"] = {1100,1e9,Vector(820-159,0,-30),0.8}
 
-    self.SoundNames["KV_-3_-2"] = "subway_trains/rusich/controller/t3_t2.mp3"
-    self.SoundNames["KV_-2_-1"] = "subway_trains/rusich/controller/t2_t1.mp3"
-    self.SoundNames["KV_-1_0"] = "subway_trains/rusich/controller/t1_0.mp3"
-    self.SoundNames["KV_0_1"] = "subway_trains/rusich/controller/0_x1.mp3"
-    self.SoundNames["KV_1_2"] = "subway_trains/rusich/controller/x1_x2.mp3"
-    self.SoundNames["KV_2_3"] = "subway_trains/rusich/controller/x2_x3.mp3"
-    self.SoundNames["KV_3_4"] = "subway_trains/rusich/controller/x3_x4.mp3"
-    self.SoundNames["KV_4_3"] = "subway_trains/rusich/controller/x4_x3.mp3"
-    self.SoundNames["KV_3_2"] = "subway_trains/rusich/controller/x3_x2.mp3"
-    self.SoundNames["KV_2_1"] = "subway_trains/rusich/controller/x2_x1.mp3"
-    self.SoundNames["KV_1_0"] = "subway_trains/rusich/controller/x1_0.mp3"
-    self.SoundNames["KV_0_-1"] = "subway_trains/rusich/controller/0_t1.mp3"
-    self.SoundNames["KV_-1_-2"] = "subway_trains/rusich/controller/t1_t2.mp3"
-    self.SoundNames["KV_-2_-3"] = "subway_trains/rusich/controller/t2_t3.mp3"
+    self.SoundNames["KV_-3_-2"] = "subway_trains/740_4/controller/t3_t2.mp3"
+    self.SoundNames["KV_-2_-1"] = "subway_trains/740_4/controller/t2_t1.mp3"
+    self.SoundNames["KV_-1_0"] = "subway_trains/740_4/controller/t1_0.mp3"
+    self.SoundNames["KV_0_1"] = "subway_trains/740_4/controller/0_x1.mp3"
+    self.SoundNames["KV_1_2"] = "subway_trains/740_4/controller/x1_x2.mp3"
+    self.SoundNames["KV_2_3"] = "subway_trains/740_4/controller/x2_x3.mp3"
+    self.SoundNames["KV_3_4"] = "subway_trains/740_4/controller/x3_x4.mp3"
+    self.SoundNames["KV_4_3"] = "subway_trains/740_4/controller/x4_x3.mp3"
+    self.SoundNames["KV_3_2"] = "subway_trains/740_4/controller/x3_x2.mp3"
+    self.SoundNames["KV_2_1"] = "subway_trains/740_4/controller/x2_x1.mp3"
+    self.SoundNames["KV_1_0"] = "subway_trains/740_4/controller/x1_0.mp3"
+    self.SoundNames["KV_0_-1"] = "subway_trains/740_4/controller/0_t1.mp3"
+    self.SoundNames["KV_-1_-2"] = "subway_trains/740_4/controller/t1_t2.mp3"
+    self.SoundNames["KV_-2_-3"] = "subway_trains/740_4/controller/t2_t3.mp3"
     self.SoundPositions["KV_-3_-2"] = {80,1e9,Vector(830.8-159,25.3,-10)}
     self.SoundPositions["KV_-2_-1"] = self.SoundPositions["KV_-3_-2"]
     self.SoundPositions["KV_-1_0"] = self.SoundPositions["KV_-3_-2"]
@@ -298,16 +298,16 @@ function ENT:InitializeSounds()
     self.SoundNames["button_square_on"] = {"subway_trains/720/switches/butts_on.mp3","subway_trains/720/switches/butts_on2.mp3"}
     self.SoundNames["button_square_off"] = {"subway_trains/720/switches/butts_off.mp3","subway_trains/720/switches/butts_off2.mp3"}
 
-    self.SoundNames["door_cab_open"] = {"subway_trains/rusich/doors/cab/door_cab_open.mp3","subway_trains/rusich/doors/cab/door_cab_open2.mp3"}
-    self.SoundNames["door_cab_close"] = {"subway_trains/rusich/doors/cab/door_cab_close.mp3","subway_trains/rusich/doors/cab/door_cab_close2.mp3"}
+    self.SoundNames["door_cab_open"] = {"subway_trains/740_4/doors/cab/door_cab_open.mp3","subway_trains/740_4/doors/cab/door_cab_open2.mp3"}
+    self.SoundNames["door_cab_close"] = {"subway_trains/740_4/doors/cab/door_cab_close.mp3","subway_trains/740_4/doors/cab/door_cab_close2.mp3"}
 	
 	local rol = math.random (1,2)	
-    self.SoundNames["door_cab_roll"] = "subway_trains/rusich/doors/cab/cabdoor_roll.wav"
-    self.SoundNames["rolling_5"] = {loop=true,"subway_trains/rusich/rolling/skrip1.mp3"}	
-    self.SoundNames["rolling_10"] = {loop=true,"subway_trains/rusich/rolling/rolling_10.wav"}
-    self.SoundNames["rolling_30"] = {loop=true,"subway_trains/rusich/rolling/rolling_30.wav"}
-    self.SoundNames["rolling_55"] = {loop=true,"subway_trains/rusich/rolling/rolling_55.wav"}
-    self.SoundNames["rolling_75"] = {loop=true,"subway_trains/rusich/rolling/rolling_75.wav"}
+    self.SoundNames["door_cab_roll"] = "subway_trains/740_4/doors/cab/cabdoor_roll.wav"
+    self.SoundNames["rolling_5"] = {loop=true,"subway_trains/740_4/rolling/skrip1.mp3"}	
+    self.SoundNames["rolling_10"] = {loop=true,"subway_trains/740_4/rolling/rolling_10.wav"}
+    self.SoundNames["rolling_30"] = {loop=true,"subway_trains/740_4/rolling/rolling_30.wav"}
+    self.SoundNames["rolling_55"] = {loop=true,"subway_trains/740_4/rolling/rolling_55.wav"}
+    self.SoundNames["rolling_75"] = {loop=true,"subway_trains/740_4/rolling/rolling_75.wav"}
     self.SoundPositions["door_cab_roll"] = {485,1e9,Vector(516-159,0,0),0.5}
 	
     self.SoundPositions["rolling_5"] = {485,1e9,Vector(520-25,0,0),0.6}	
@@ -315,9 +315,9 @@ function ENT:InitializeSounds()
     self.SoundPositions["rolling_30"] = {485,1e9,Vector(520-25,0,0),0.8}
     self.SoundPositions["rolling_55"] = {485,1e9,Vector(520-25,0,0),0.9}
     self.SoundPositions["rolling_75"] = {485,1e9,Vector(520-25,0,0),0.95}
-    self.SoundNames["rolling_low"] = {loop=true,"subway_trains/rusich/rolling/rolling_outside_low.wav"}
-    self.SoundNames["rolling_medium2"] = {loop=true,"subway_trains/rusich/rolling/rolling_outside_medium"..rol..".wav"}
-    self.SoundNames["rolling_high2"] = {loop=true,"subway_trains/rusich/rolling/rolling_outside_high"..rol..".wav"}
+    self.SoundNames["rolling_low"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_low.wav"}
+    self.SoundNames["rolling_medium2"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_medium"..rol..".wav"}
+    self.SoundNames["rolling_high2"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_high"..rol..".wav"}
     self.SoundPositions["rolling_low"] = {480,1e12,Vector(520-25,0,0),0.6*0.4}
     self.SoundPositions["rolling_medium2"] = {480,1e12,Vector(520-25,0,0),0.90*0.4}
     self.SoundPositions["rolling_high2"] = {480,1e12,Vector(520-25,0,0),1.00*0.4}
@@ -327,9 +327,9 @@ function ENT:InitializeSounds()
     self.SoundPositions["rolling_30_middle"] = {485,1e9,Vector(-15-16.5,0),0.8}
     self.SoundPositions["rolling_55_middle"] = {485,1e9,Vector(-15-16.5,0),0.9}
     self.SoundPositions["rolling_75_middle"] = {485,1e9,Vector(-15-16.5,0),0.95}
-    self.SoundNames["rolling_low_middle"] = {loop=true,"subway_trains/rusich/rolling/rolling_outside_low.wav"}
-    self.SoundNames["rolling_medium2_middle"] = {loop=true,"subway_trains/rusich/rolling/rolling_outside_medium"..rol..".wav"}
-    self.SoundNames["rolling_high2_middle"] = {loop=true,"subway_trains/rusich/rolling/rolling_outside_high"..rol..".wav"}
+    self.SoundNames["rolling_low_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_low.wav"}
+    self.SoundNames["rolling_medium2_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_medium"..rol..".wav"}
+    self.SoundNames["rolling_high2_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_high"..rol..".wav"}
     self.SoundPositions["rolling_low_middle"] = {480,1e12,Vector(-15-16.5,0),0.6*0.4}
     self.SoundPositions["rolling_medium2_middle"] = {480,1e12,Vector(-15-16.5,0),0.90*0.4}
     self.SoundPositions["rolling_high2_middle"] = {480,1e12,Vector(-15-16.5,0),1.00*0.4}
@@ -349,13 +349,13 @@ function ENT:InitializeSounds()
     for i=0,2 do	
     for i=0,1 do
         for k=0,1 do
-            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/rusich/doors/door_loop_"..loop..".wav",loop=true}
+            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop_"..loop..".wav",loop=true}
             self.SoundPositions["door"..i.."x"..k.."r"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/rusich/doors/door_start_"..start..".wav"}
+            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_start_"..start..".wav"}
             self.SoundPositions["door"..i.."x"..k.."s"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/rusich/doors/door_open_end"..open..".wav"}
+            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..open..".wav"}
             self.SoundPositions["door"..i.."x"..k.."o"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/rusich/doors/door_close"..closed..".wav"}
+            self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/740_4/doors/door_close"..closed..".wav"}
             self.SoundPositions["door"..i.."x"..k.."c"] = {200,1e9,GetDoorPosition(i,k),0.5}
 	        end
     end		
@@ -371,10 +371,10 @@ function ENT:InitializeSounds()
     self.SoundNames["igla_off"] = "subway_trains/common/other/igla/igla_off2.mp3"
     self.SoundNames["igla_start1"]  = "subway_trains/common/other/igla/igla2_start1.mp3"
     self.SoundNames["igla_start2"]  = "subway_trains/common/other/igla/igla2_start2.mp3"
-    self.SoundPositions["igla_on"] = {50,1e9,Vector(800-155,42.3,45.71),0.05}
-    self.SoundPositions["igla_off"] = {50,1e9,Vector(800-155,42.3,45.71),0.05}
-    self.SoundPositions["igla_start1"] = {50,1e9,Vector(800-155,42.3,45.71),0.05}
-    self.SoundPositions["igla_start2"] = {50,1e9,Vector(800-155,42.3,45.71),0.05}
+    self.SoundPositions["igla_on"] = {50,1e9,Vector(780-155,42.3,45.71),0.2}
+    self.SoundPositions["igla_off"] = {50,1e9,Vector(780-155,42.3,45.71),0.2}
+    self.SoundPositions["igla_start1"] = {50,1e9,Vector(780-155,42.3,45.71),0.2}
+    self.SoundPositions["igla_start2"] = {50,1e9,Vector(780-155,42.3,45.71),0.2}
 
     self.SoundNames["emer_brake"] = {loop=true,"subway_trains/common/pneumatic/autostop_loop.wav"}
     self.SoundPositions["emer_brake"] = {90,1e9,Vector(780-159,-45,-75),0.85}
@@ -395,7 +395,7 @@ function ENT:InitializeSystems()
 
     self:LoadSystem("Panel","81_740_4Panel")
 
-    self:LoadSystem("Announcer","81_71_Announcer", "AnnouncementsASNP")
+    self:LoadSystem("Announcer","81_74_Announcer", "AnnouncementsASNP")
     self:LoadSystem("ASNP","81_74_ASNP")
     self:LoadSystem("RouteInf","81_740_4router")
     self:LoadSystem("ASNP_VV","81_74_ASNP_VV")
