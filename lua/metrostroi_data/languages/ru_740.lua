@@ -1,15 +1,5 @@
---NICIX (Pussy Podkradoolya)
--- malmih(Праздник теплой еды)
---Nom(Подкрадулеходы Drive)
---𝓥𝓡𝓑 (Подкрадуля Пердёжная)
---KASKADA (Шлютти Реквием)
---LiWinDom (sudo rm -rf /)
---plenka (fixinit75)
---Valjas SaretoScripto (Valjasse)
-
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
-or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
@@ -38,21 +28,18 @@ Train.740.CameraPVZ     = ПВЗ
 #common 
 
 Spawner.740.MotorType    = Тип звука ТЭД
-Spawner.740.MotorType.Random   = Случайно
+Spawner.740.Common.Random   = Случайно
 Spawner.740.MotorType2    = Тип 1
 Spawner.740.MotorType3    = Тип 2
 Spawner.740.MotorType4    = Тип 3 Старые (С Яузы)
 Spawner.740.MotorType5    = Тип 4
 Spawner.740.MotorType6    = Тип 5
 
-Spawner.740.ZavodTable    = Расположение таблички завода-изготовителя
-Spawner.740.ZavodTable.Random   = Случайно
-Spawner.740.ZavodTable2    = Тип 1 Около кабины машиниста/торцевой двери передней секции
-Spawner.740.ZavodTable3    = Тип 2 Около перехода между секциями
-Spawner.740.ZavodTable4    = Тип 3 Около торцевой двери задней секции
+Spawner.740.ZavodTable     = Расположение таблички завода-изготовителя
+Spawner.740.ZavodTable2    = Тип 1 Около кабины машиниста/торцевой двери передней секции и около перехода между секциями
+Spawner.740.ZavodTable3    = Тип 2 Около торцевой двери задней секции и около перехода между секциями
 
-Spawner.740.RingSound    = Тип звука звонка
-Spawner.740.RingSound.Random   = Случайно
+Spawner.740.RingSound     = Тип звука звонка
 Spawner.740.RingSound2    = Тип 1
 Spawner.740.RingSound3    = Тип 2
 Spawner.740.RingSound4    = Тип 3
@@ -63,7 +50,6 @@ Spawner.740.BUKPVersion1  = Старая
 Spawner.740.BUKPVersion2  = Новая
 
 Spawner.740.VentSound    = Тип звука шума кондиционера
-Spawner.740.VentSound.Random   = Случайно
 Spawner.740.VentSound2    = Тип 1
 Spawner.740.VentSound3    = Тип 2 
 
@@ -287,6 +273,8 @@ Common.740.AO				= АО: Лампа получения сигнала абсол
 Common.740.Forw				= Движение вперёд
 Common.740.Back				= Движение назад
 
+Common.740.EmergencyBrakeValve				= Стопкран
+
 #gmod_subway_81-740_4
 #Buttons:
 
@@ -294,6 +282,8 @@ Entities.gmod_subway_81-740_4.Buttons.BackVent.VentCondMode-      = @[Common.740
 Entities.gmod_subway_81-740_4.Buttons.BackVent.VentCondMode+      = @[Common.740.VentCMode] @[Common.ALL.CW]
 Entities.gmod_subway_81-740_4.Buttons.BackVent.VentStrengthMode-  = @[Common.740.VentSMode-] @[Common.ALL.CCW]
 Entities.gmod_subway_81-740_4.Buttons.BackVent.VentStrengthMode+  = @[Common.740.VentSMode+] @[Common.ALL.CW]
+
+Entities.gmod_subway_81-740_4.Buttons.EmergencyBrake1.EmerBrakeCrane1Toggle = @[Common.740.EmergencyBrakeValve]
 
 Entities.gmod_subway_81-740_4.Buttons.RV.EmerX1Set                = @[Common.740.EmerX1]
 Entities.gmod_subway_81-740_4.Buttons.RV.EmerX2Set                = @[Common.740.EmerX2]
@@ -330,8 +320,6 @@ Entities.gmod_subway_81-740_4.Buttons.VityazButtons.VityazUTVSet   = @[Common.74
 Entities.gmod_subway_81-740_4.Buttons.VityazButtons.VityazTV1Set   = @[Common.740.Vityaz.TV1]
 Entities.gmod_subway_81-740_4.Buttons.VityazButtons.VityazTV2Set   = @[Common.740.Vityaz.TV2]
 Entities.gmod_subway_81-740_4.Buttons.VityazButtons.VityazNothSet  = @[Common.740.Vityaz.Noth]
-
-Entities.gmod_subway_81-740_4.Buttons.EmergencyBrake1.EmerBrakeCrane1Toggle = @[Common.ALL.EmergencyBrakeValve]
 
 Entities.gmod_subway_81-740_4.Buttons.CraneCap2.ABSDToggle   	   = @[Common.740.ABSD]
 Entities.gmod_subway_81-740_4.Buttons.CraneCap2.RTEToggle  		   = @[Common.740.RTE]
@@ -377,6 +365,8 @@ Entities.gmod_subway_81-740_4.Buttons.BackDown.AppLights2Toggle       = @[Common
 Entities.gmod_subway_81-740_4.Buttons.BackDown.BARSBlock-             = @[Common.740.BARSBlock] @[Common.ALL.CCW]
 Entities.gmod_subway_81-740_4.Buttons.BackDown.BARSBlock+             = @[Common.740.BARSBlock] @[Common.ALL.CW]
 Entities.gmod_subway_81-740_4.Buttons.BackDown.BatteryToggle          = @[Common.740.VB]
+Entities.gmod_subway_81-740_4.Buttons.BackDown.ALSFreqBlockToggle     = @[Common.740.ALSFreqBlock-]
+Entities.gmod_subway_81-740_4.Buttons.BackDown.ALSFreqBlockToggle     = @[Common.740.ALSFreqBlock+]
 
 Entities.gmod_subway_81-740_4.Buttons.PUU.!DoorsClosed                = @[Common.740.LSD]
 Entities.gmod_subway_81-740_4.Buttons.PUU.StandToggle                 = @[Common.740.Stand]
@@ -555,7 +545,7 @@ Entities.gmod_subway_81-741_4.Buttons.FrontPneumatic.FrontTrainLineIsolationTogg
 Entities.gmod_subway_81-740_4.Spawner.Announcer.Name          = @[Common.Spawner.Announcer]
 
 Entities.gmod_subway_81-740_4.Spawner.MotorType.Name 		  = @[Spawner.740.MotorType] 
-Entities.gmod_subway_81-740_4.Spawner.MotorType.1 		  	  = @[Spawner.740.MotorType.Random] 
+Entities.gmod_subway_81-740_4.Spawner.MotorType.1 		  	  = @[Spawner.740.Common.Random] 
 Entities.gmod_subway_81-740_4.Spawner.MotorType.2         	  = @[Spawner.740.MotorType2]
 Entities.gmod_subway_81-740_4.Spawner.MotorType.3          	  = @[Spawner.740.MotorType3]
 Entities.gmod_subway_81-740_4.Spawner.MotorType.4          	  = @[Spawner.740.MotorType4]
@@ -563,25 +553,24 @@ Entities.gmod_subway_81-740_4.Spawner.MotorType.5          	  = @[Spawner.740.Mo
 Entities.gmod_subway_81-740_4.Spawner.MotorType.6          	  = @[Spawner.740.MotorType6]
 
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.Name 		  = @[Spawner.740.ZavodTable] 
-Entities.gmod_subway_81-740_4.Spawner.ZavodTable.1 		  	  = @[Spawner.740.ZavodTable.Random] 
+Entities.gmod_subway_81-740_4.Spawner.ZavodTable.1 		  	  = @[Spawner.740.Common.Random] 
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.2         	  = @[Spawner.740.ZavodTable2]
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.3            = @[Spawner.740.ZavodTable3]
-Entities.gmod_subway_81-740_4.Spawner.ZavodTable.4         	  = @[Spawner.740.ZavodTable4]
 
 Entities.gmod_subway_81-740_4.Spawner.VentSound.Name 		  = @[Spawner.740.VentSound] 
-Entities.gmod_subway_81-740_4.Spawner.VentSound.1 		  	  = @[Spawner.740.VentSound.Random] 
+Entities.gmod_subway_81-740_4.Spawner.VentSound.1 		  	  = @[Spawner.740.Common.Random] 
 Entities.gmod_subway_81-740_4.Spawner.VentSound.2         	  = @[Spawner.740.VentSound2]
 Entities.gmod_subway_81-740_4.Spawner.VentSound.3             = @[Spawner.740.VentSound3]
 
 Entities.gmod_subway_81-740_4.Spawner.RingSound.Name 		  = @[Spawner.740.RingSound] 
-Entities.gmod_subway_81-740_4.Spawner.RingSound.1 		  	  = @[Spawner.740.RingSound.Random] 
+Entities.gmod_subway_81-740_4.Spawner.RingSound.1 		  	  = @[Spawner.740.Common.Random] 
 Entities.gmod_subway_81-740_4.Spawner.RingSound.2         	  = @[Spawner.740.RingSound2]
 Entities.gmod_subway_81-740_4.Spawner.RingSound.3             = @[Spawner.740.RingSound3]
 Entities.gmod_subway_81-740_4.Spawner.RingSound.4         	  = @[Spawner.740.RingSound4]
 Entities.gmod_subway_81-740_4.Spawner.RingSound.5             = @[Spawner.740.RingSound5]
 
 Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.Name 		  = @[Spawner.740.BUKPVersion]
-Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.1 	      = @[Spawner.740.RingSound.Random] 
+Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.1 	      = @[Spawner.740.Common.Random] 
 Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.2 		  = @[Spawner.740.BUKPVersion1]
 Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.3 		  = @[Spawner.740.BUKPVersion2]
 

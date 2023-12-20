@@ -1,6 +1,5 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
-or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
@@ -29,7 +28,7 @@ Train.740.CameraPVZ     = PVZ
 #common 
 
 Spawner.740.MotorType     = Sound type TED
-Spawner.740.MotorType.Random   = Random
+Spawner.740.Common.Random  = Random
 Spawner.740.MotorType2    = Type 1
 Spawner.740.MotorType3    = Type 2
 Spawner.740.MotorType4    = Type 3 Old (From Yauza)
@@ -37,13 +36,10 @@ Spawner.740.MotorType5    = Type 4
 Spawner.740.MotorType6    = Type 5
 
 Spawner.740.ZavodTable    = Location of the manufacturer's nameplate
-Spawner.740.ZavodTable.Random   = Random
-Spawner.740.ZavodTable2    = Type 1 Near the driver's cab/front section front door
-Spawner.740.ZavodTable3    = Type 2 Near the transition between sections
-Spawner.740.ZavodTable4    = Type 3 Near the end door of the rear section
+Spawner.740.ZavodTable2    = Type 1 Near the driver's cab/front section front door and near the transition between sections
+Spawner.740.ZavodTable3    = Type 2 Near the end door of the rear section and near the transition between sections
 
 Spawner.740.RingSound    = Type of ring sound
-Spawner.740.RingSound.Random   = Random
 Spawner.740.RingSound2    = Type 1
 Spawner.740.RingSound3    = Type 2
 Spawner.740.RingSound4    = Type 3
@@ -54,7 +50,6 @@ Spawner.740.BUKPVersion1  = Old
 Spawner.740.BUKPVersion2  = New
 
 Spawner.740.VentSound    = Air conditioner noise sound type
-Spawner.740.VentSound.Random   = Random
 Spawner.740.VentSound2    = Type 1
 Spawner.740.VentSound3    = Type 2 
 
@@ -121,6 +116,9 @@ Common.740.Vityaz.TV1 		     = Vityaz: ТV 1
 Common.740.Vityaz.TV2 		     = Vityaz: ТV 2
 Common.740.Vityaz.Noth 		     = Vityaz: Don't use
 
+Common.740.ABSD 				 = Emergency locking of the pressure sensor (ABSD)
+Common.740.RTE 				 	 = Emergency backup brake (RTE)
+
 Common.740.VentCMode        = Fan operation mode
 Common.740.VentCMode+       = Increasing the heating power
 Common.740.VentCMode-       = Reducing the heating force
@@ -138,7 +136,7 @@ Common.740.SF3              = SF3: Backup management
 Common.740.SF4              = SF4: BARS
 Common.740.SF5              = SF5: BUP (train control unit)
 Common.740.SF6              = SF6: BKU (control circuit switching unit)
-Common.740.SF7              = SF7: SOFTWARE (Automated control system)
+Common.740.SF7              = SF7: ACS (Automated control system)
 Common.740.SF8              = SF8: Notification
 Common.740.SF9              = SF9: Radio communication
 Common.740.SF10             = SF10: Orientation of the car
@@ -191,17 +189,17 @@ Common.740.SpeedAccept1 	= Permissible speed
 Common.740.Forward          = Moving forward
 Common.740.Backward 		= Moving backwards
 
-Common.740.AccelRate		= Enabling the "Rise" mode"
-Common.740.HVoltage 		= Lamp for the absence of voltage in the contact network
-Common.740.Stand            = Warming up the pads
-Common.740.ALS				= Button for switching the APC system to locomotive alarm mode
-Common.740.Ring             = Transfer of control (call)
-Common.740.PassScheme       = Turning on the door display in the passenger compartment
-Common.740.DisableBV 		= Disabling the BV
-Common.740.R_Line 			= Turning on the driver's microphone
-Common.740.R_Emer			= Enabling emergency communication
-Common.740.Wiper 			= Turning on the windscreen wiper
-Common.740.R_Announcer      = Washer
+Common.740.AccelRate			= Enabling the "Rise" mode"
+Common.740.HVoltage 			= Lamp for the absence of voltage in the contact network
+Common.740.Stand            	= Warming up the pads
+Common.740.ALS					= Button for switching the APC system to locomotive alarm mode
+Common.740.Ring             	= Transfer of control (call)
+Common.740.PassScheme       	= Turning on the door display in the passenger compartment
+Common.740.DisableBV 			= Disabling the BV
+Common.740.R_Line 				= Turning on the driver's microphone
+Common.740.R_Emer				= Enabling emergency communication
+Common.740.Wiper 				= Turning on the windscreen wiper
+Common.740.R_Announcer      	= Washer
 Common.740.EmergencyCompressor	= Backup motor compressor button
 Common.740.EmergencyControls	= Control circuit backup switch
 Common.740.DoorSelectL          = Selecting the left doors
@@ -231,9 +229,6 @@ Common.740.CAMS7Set 			= Overview: Headsets
 Common.740.CAMS8Set 			= Overview: Tail Lights
 Common.740.CAMS9Set 			= Overview: Left
 Common.740.CAMS10Set		 	= Overview: Right
-
-Common.740.ABSD 				 = Emergency locking of the pressure sensor (ABSD)
-Common.740.RTE 				 	 = Emergency backup brake (RTE)
 
 Common.740.SFV1             = SF1: Power supply for car control circuits
 Common.740.SFV2             = SF2: Car control unit power supply
@@ -278,6 +273,8 @@ Common.740.AO				= AO: Absolute stop signal receiving lamp
 Common.740.Forw				= Forward movement
 Common.740.Back				= Backward movement
 
+Common.740.EmergencyBrakeValve				= Emergency brake
+
 #gmod_subway_81-740_4
 #Buttons:
 
@@ -286,7 +283,7 @@ Entities.gmod_subway_81-740_4.Buttons.BackVent.VentCondMode+      = @[Common.740
 Entities.gmod_subway_81-740_4.Buttons.BackVent.VentStrengthMode-  = @[Common.740.VentSMode-] @[Common.ALL.CCW]
 Entities.gmod_subway_81-740_4.Buttons.BackVent.VentStrengthMode+  = @[Common.740.VentSMode+] @[Common.ALL.CW]
 
-Entities.gmod_subway_81-740_4.Buttons.EmergencyBrake1.EmerBrakeCrane1Toggle = @[Common.ALL.EmergencyBrakeValve]
+Entities.gmod_subway_81-740_4.Buttons.EmergencyBrake1.EmerBrakeCrane1Toggle = @[Common.740.EmergencyBrakeValve]
 
 Entities.gmod_subway_81-740_4.Buttons.RV.EmerX1Set                = @[Common.740.EmerX1]
 Entities.gmod_subway_81-740_4.Buttons.RV.EmerX2Set                = @[Common.740.EmerX2]
@@ -365,6 +362,8 @@ Entities.gmod_subway_81-740_4.Buttons.BackDown.AppLights2Toggle       = @[Common
 Entities.gmod_subway_81-740_4.Buttons.BackDown.BARSBlock-             = @[Common.740.BARSBlock] @[Common.ALL.CCW]
 Entities.gmod_subway_81-740_4.Buttons.BackDown.BARSBlock+             = @[Common.740.BARSBlock] @[Common.ALL.CW]
 Entities.gmod_subway_81-740_4.Buttons.BackDown.BatteryToggle          = @[Common.740.VB]
+Entities.gmod_subway_81-740_4.Buttons.BackDown.ALSFreqBlockToggle     = @[Common.740.ALSFreqBlock-]
+Entities.gmod_subway_81-740_4.Buttons.BackDown.ALSFreqBlockToggle     = @[Common.740.ALSFreqBlock+]
 
 Entities.gmod_subway_81-740_4.Buttons.PUU.!DoorsClosed                = @[Common.740.LSD]
 Entities.gmod_subway_81-740_4.Buttons.PUU.StandToggle                 = @[Common.740.Stand]
@@ -549,7 +548,7 @@ Entities.gmod_subway_81-741_4.Buttons.FrontPneumatic.FrontTrainLineIsolationTogg
 Entities.gmod_subway_81-740_4.Spawner.Announcer.Name          = @[Common.Spawner.Announcer]
 
 Entities.gmod_subway_81-740_4.Spawner.MotorType.Name 		  = @[Spawner.740.MotorType] 
-Entities.gmod_subway_81-740_4.Spawner.MotorType.1 		  	  = @[Spawner.740.MotorType.Random] 
+Entities.gmod_subway_81-740_4.Spawner.MotorType.1 		  	  = @[Spawner.740.Common.Random] 
 Entities.gmod_subway_81-740_4.Spawner.MotorType.2         	  = @[Spawner.740.MotorType2]
 Entities.gmod_subway_81-740_4.Spawner.MotorType.3          	  = @[Spawner.740.MotorType3]
 Entities.gmod_subway_81-740_4.Spawner.MotorType.4          	  = @[Spawner.740.MotorType4]
@@ -557,25 +556,24 @@ Entities.gmod_subway_81-740_4.Spawner.MotorType.5          	  = @[Spawner.740.Mo
 Entities.gmod_subway_81-740_4.Spawner.MotorType.6          	  = @[Spawner.740.MotorType6]
 
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.Name 		  = @[Spawner.740.ZavodTable] 
-Entities.gmod_subway_81-740_4.Spawner.ZavodTable.1 		  	  = @[Spawner.740.ZavodTable.Random] 
+Entities.gmod_subway_81-740_4.Spawner.ZavodTable.1 		  	  = @[Spawner.740.Common.Random] 
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.2         	  = @[Spawner.740.ZavodTable2]
 Entities.gmod_subway_81-740_4.Spawner.ZavodTable.3            = @[Spawner.740.ZavodTable3]
-Entities.gmod_subway_81-740_4.Spawner.ZavodTable.4         	  = @[Spawner.740.ZavodTable4]
 
 Entities.gmod_subway_81-740_4.Spawner.VentSound.Name 		  = @[Spawner.740.VentSound] 
-Entities.gmod_subway_81-740_4.Spawner.VentSound.1 		  	  = @[Spawner.740.VentSound.Random] 
+Entities.gmod_subway_81-740_4.Spawner.VentSound.1 		  	  = @[Spawner.740.Common.Random] 
 Entities.gmod_subway_81-740_4.Spawner.VentSound.2         	  = @[Spawner.740.VentSound2]
 Entities.gmod_subway_81-740_4.Spawner.VentSound.3             = @[Spawner.740.VentSound3]
 
 Entities.gmod_subway_81-740_4.Spawner.RingSound.Name 		  = @[Spawner.740.RingSound] 
-Entities.gmod_subway_81-740_4.Spawner.RingSound.1 		  	  = @[Spawner.740.RingSound.Random] 
+Entities.gmod_subway_81-740_4.Spawner.RingSound.1 		  	  = @[Spawner.740.Common.Random] 
 Entities.gmod_subway_81-740_4.Spawner.RingSound.2         	  = @[Spawner.740.RingSound2]
 Entities.gmod_subway_81-740_4.Spawner.RingSound.3             = @[Spawner.740.RingSound3]
 Entities.gmod_subway_81-740_4.Spawner.RingSound.4         	  = @[Spawner.740.RingSound4]
 Entities.gmod_subway_81-740_4.Spawner.RingSound.5             = @[Spawner.740.RingSound5]
 
 Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.Name 		  = @[Spawner.740.BUKPVersion]
-Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.1 	      = @[Spawner.740.RingSound.Random] 
+Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.1 	      = @[Spawner.740.Common.Random] 
 Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.2 		  = @[Spawner.740.BUKPVersion1]
 Entities.gmod_subway_81-740_4.Spawner.BUKPVersion.3 		  = @[Spawner.740.BUKPVersion2]
 

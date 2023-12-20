@@ -1,6 +1,5 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
-or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
@@ -21,7 +20,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)	
     self:SetPos(self:GetPos() + Vector(0,0,0))	
 	
-	self.NormalMass = 15500		
+	self.NormalMass = 24000		
 	
     self.PassengerSeat = self:CreateSeat("passenger",Vector(-135,-40,-25),Angle(0,90,0),"models/nova/airboat_seat.mdl")
     self.PassengerSeat2 = self:CreateSeat("passenger",Vector(-135,40,-25),Angle(0,270,0),"models/nova/airboat_seat.mdl")  
@@ -122,6 +121,7 @@ function ENT:Think()
 	self:SetPackedBool("RearDoor",self.RearDoor)
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain
+	local Panel = train.Panel	
 	--self.TrainWires = {}	
     --self.WireIOSystems = {}
     --self.Systems = {}	
@@ -131,7 +131,10 @@ function ENT:Think()
     self:SetPackedBool("Vent2Work",train.Electric.Vent2>0)	
     self:SetPackedBool("BBEWork",power and train.BUV.BBE > 0)
     self:SetPackedBool("CompressorWork",train.Pneumatic.Compressor) 
-    self:SetPackedBool("AnnPlay",train.Panel.AnnouncerPlaying)
+    self:SetPackedBool("ANNPlAY",Panel.AnnouncerPlaying > 0)
+
+	self:SetNW2Bool("RBLI",train.RearBrakeLineIsolation.Value > 0)
+	self:SetNW2Bool("RTLI",train.RearTrainLineIsolation.Value > 0)
 	
     --local state = math.abs(train.AsyncInverter.InverterFrequency/(11+train.AsyncInverter.State*5))--(10+8*math.Clamp((self.AsyncInverter.State-0.4)/0.4,0,1)))
     --self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+train.AsyncInverter.State/1),0,1)*math.Clamp(train.Speed/6,0,1))
@@ -187,17 +190,10 @@ end
 function ENT:OnButtonPress(button,ply)
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")
 	local train = self.HeadTrain
-    if not IsValid(train) then return end		
+    if not IsValid(train) then return end	
     if button == "RearDoor" and (self.RearDoor or not train.BUV.BlockTorec) then self.RearDoor = not self.RearDoor end
-
 	if button == "RearBrakeLineIsolationToggle" then train.RearBrakeLineIsolation:TriggerInput("Toggle",1) end
 	if button == "RearTrainLineIsolationToggle" then train.RearTrainLineIsolation:TriggerInput("Toggle",1) end
-	
-timer.Simple(0.1, function()		
-	self:SetNW2Bool("RBLI",train.RearBrakeLineIsolation.Value > 0)
-	self:SetNW2Bool("RTLI",train.RearTrainLineIsolation.Value > 0)
-end)	
 end	
-
 function ENT:OnButtonRelease(button)
 end

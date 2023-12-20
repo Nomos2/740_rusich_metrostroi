@@ -1,6 +1,5 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
-or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
@@ -303,11 +302,11 @@ function ENT:InitializeSounds()
 	
 	local rol = math.random (1,2)	
     self.SoundNames["door_cab_roll"] = "subway_trains/740_4/doors/cab/cabdoor_roll.wav"
-    self.SoundNames["rolling_5"] = {loop=true,"subway_trains/740_4/rolling/skrip1.mp3"}	
-    self.SoundNames["rolling_10"] = {loop=true,"subway_trains/740_4/rolling/rolling_10.wav"}
-    self.SoundNames["rolling_30"] = {loop=true,"subway_trains/740_4/rolling/rolling_30.wav"}
-    self.SoundNames["rolling_55"] = {loop=true,"subway_trains/740_4/rolling/rolling_55.wav"}
-    self.SoundNames["rolling_75"] = {loop=true,"subway_trains/740_4/rolling/rolling_75.wav"}
+    self.SoundNames["rolling_5"] = {loop=true,"subway_trains/740_4/bogey/skrip1.mp3"}	
+    self.SoundNames["rolling_10"] = {loop=true,"subway_trains/740_4/bogey/rolling_10.wav"}
+    self.SoundNames["rolling_30"] = {loop=true,"subway_trains/740_4/bogey/rolling_30.wav"}
+    self.SoundNames["rolling_55"] = {loop=true,"subway_trains/740_4/bogey/rolling_55.wav"}
+    self.SoundNames["rolling_75"] = {loop=true,"subway_trains/740_4/bogey/rolling_75.wav"}
     self.SoundPositions["door_cab_roll"] = {485,1e9,Vector(516-159,0,0),0.5}
 	
     self.SoundPositions["rolling_5"] = {485,1e9,Vector(520-25,0,0),0.6}	
@@ -315,9 +314,9 @@ function ENT:InitializeSounds()
     self.SoundPositions["rolling_30"] = {485,1e9,Vector(520-25,0,0),0.8}
     self.SoundPositions["rolling_55"] = {485,1e9,Vector(520-25,0,0),0.9}
     self.SoundPositions["rolling_75"] = {485,1e9,Vector(520-25,0,0),0.95}
-    self.SoundNames["rolling_low"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_low.wav"}
-    self.SoundNames["rolling_medium2"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_medium"..rol..".wav"}
-    self.SoundNames["rolling_high2"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_high"..rol..".wav"}
+    self.SoundNames["rolling_low"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_low.wav"}
+    self.SoundNames["rolling_medium2"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_medium"..rol..".wav"}
+    self.SoundNames["rolling_high2"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_high"..rol..".wav"}
     self.SoundPositions["rolling_low"] = {480,1e12,Vector(520-25,0,0),0.6*0.4}
     self.SoundPositions["rolling_medium2"] = {480,1e12,Vector(520-25,0,0),0.90*0.4}
     self.SoundPositions["rolling_high2"] = {480,1e12,Vector(520-25,0,0),1.00*0.4}
@@ -327,18 +326,31 @@ function ENT:InitializeSounds()
     self.SoundPositions["rolling_30_middle"] = {485,1e9,Vector(-15-16.5,0),0.8}
     self.SoundPositions["rolling_55_middle"] = {485,1e9,Vector(-15-16.5,0),0.9}
     self.SoundPositions["rolling_75_middle"] = {485,1e9,Vector(-15-16.5,0),0.95}
-    self.SoundNames["rolling_low_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_low.wav"}
-    self.SoundNames["rolling_medium2_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_medium"..rol..".wav"}
-    self.SoundNames["rolling_high2_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_high"..rol..".wav"}
+    self.SoundNames["rolling_low_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_low.wav"}
+    self.SoundNames["rolling_medium2_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_medium"..rol..".wav"}
+    self.SoundNames["rolling_high2_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_high"..rol..".wav"}
     self.SoundPositions["rolling_low_middle"] = {480,1e12,Vector(-15-16.5,0),0.6*0.4}
     self.SoundPositions["rolling_medium2_middle"] = {480,1e12,Vector(-15-16.5,0),0.90*0.4}
     self.SoundPositions["rolling_high2_middle"] = {480,1e12,Vector(-15-16.5,0),1.00*0.4}
 
-    self.SoundNames["valve_brake"] = {loop=true,"subway_trains/common/pneumatic/epv_loop.wav"}
+    self.SoundNames["valve_brake"] = {loop=true,"subway_trains/740_4/new/stopkran_loop.wav"}
     self.SoundPositions["valve_brake"] = {400,1e9,Vector(635,-59.7,-41),1}
+	
+	self.SoundNames["br_013"]		= {
+		"subway_trains/740_4/new/km013/013_1-2.mp3",
+		"subway_trains/740_4/new/km013/013_2-1.mp3",
+		"subway_trains/740_4/new/km013/013_2-3.mp3",
+		"subway_trains/740_4/new/km013/013_3-2.mp3",
+		"subway_trains/740_4/new/km013/013_3-4.mp3",
+		"subway_trains/740_4/new/km013/013_4-3.mp3",
+		"subway_trains/740_4/new/km013/013_4-5.mp3",
+		"subway_trains/740_4/new/km013/013_5-4.mp3",
+		"subway_trains/740_4/new/km013/013_5-6.mp3",
+		"subway_trains/740_4/new/km013/013_6-5.mp3",			
+	}
 
-    self.SoundNames["gv_f"] = {"subway_trains/717/kv70/reverser_0-b_1.mp3","subway_trains/717/kv70/reverser_0-b_2.mp3"}
-    self.SoundNames["gv_b"] = {"subway_trains/717/kv70/reverser_b-0_1.mp3","subway_trains/717/kv70/reverser_b-0_2.mp3"}
+    self.SoundNames["gv_f"] = {"subway_trains/740_4/new/bru/bru_off-on.mp3","subway_trains/740_4/new/bru/bru_off-on2.mp3"}
+    self.SoundNames["gv_b"] = {"subway_trains/740_4/new/bru/bru_on-off.mp3","subway_trains/740_4/new/bru/bru_on-off.mp3"}
     self.SoundPositions["gv_f"] = {80,1e9,Vector(126.4-159,50,-60-23.5),0.8}
     self.SoundPositions["gv_b"] = {80,1e9,Vector(126.4-159,50,-60-23.5),0.8}
 	
@@ -419,9 +431,9 @@ ENT.AnnouncerPositions = {
     {Vector(158,34,55),50,0.4},
     {Vector(495,34,55),50,0.4},
     {Vector(580,34,55),50,0.4},	
-    {Vector(-140,0,55),50,0.4},	-- костыль под информатор.	
-    {Vector(-360,0,55),50,0.4}, -- костыль под информатор.
-    {Vector(-590,0,55),50,0.4},	-- костыль под информатор.
+    --{Vector(-140,0,55),50,0.4},	-- костыль под информатор.	
+    --{Vector(-360,0,55),50,0.4}, -- костыль под информатор.
+    --{Vector(-590,0,55),50,0.4},	-- костыль под информатор.
 }
 ENT.Cameras = {
     {Vector(770-159,36,42),Angle(0,180,0),"Train.740.CameraCond"},
@@ -501,11 +513,11 @@ ENT.Spawner = {
 	
 	{"Announcer","Spawner.740.Announcer","List",Announcer},	
 	{},
-	{"RingSound","Spawner.740.RingSound","List",{"Spawner.740.RingSound1","Spawner.740.RingSound2","Spawner.740.RingSound3","Spawner.740.RingSound4","Spawner.740.RingSound.Random"}},	
-	{"ZavodTable","Spawner.740.ZavodTable","List",{"Spawner.740.ZavodTable.Random","Spawner.740.ZavodTable1","Spawner.740.ZavodTable2","Spawner.740.ZavodTable3"}}, 	
-	{"MotorType","Spawner.740.MotorType","List",{"Spawner.740.MotorType.Random","Spawner.740.MotorType1","Spawner.740.MotorType2","Spawner.740.MotorType3","Spawner.740.MotorType4","Spawner.740.MotorType5"}},	
-	{"VentSound","Spawner.740.VentSound","List",{"Spawner.740.VentSound.Random","Spawner.740.VentSound1","Spawner.740.VentSound2"}}, 	
-    {"BUKPVersion","Spawner.740.BUKPVersion","List",{"Spawner.740.BUKPVersion.Random","Spawner.740.BUKPVersion1","Spawner.740.BUKPVersion2"}},
+	{"RingSound","Spawner.740.RingSound","List",{"Spawner.740.RingSound1","Spawner.740.RingSound2","Spawner.740.RingSound3","Spawner.740.RingSound4","Spawner.740.Common.Random"}},	
+	{"ZavodTable","Spawner.740.ZavodTable","List",{"Spawner.740.Common.Random","Spawner.740.ZavodTable1","Spawner.740.ZavodTable2"}}, 	
+	{"MotorType","Spawner.740.MotorType","List",{"Spawner.740.Common.Random","Spawner.740.MotorType1","Spawner.740.MotorType2","Spawner.740.MotorType3","Spawner.740.MotorType4","Spawner.740.MotorType5"}},	
+	{"VentSound","Spawner.740.VentSound","List",{"Spawner.740.Common.Random","Spawner.740.VentSound1","Spawner.740.VentSound2"}}, 	
+    {"BUKPVersion","Spawner.740.BUKPVersion","List",{"Spawner.740.Common.Random","Spawner.740.BUKPVersion1","Spawner.740.BUKPVersion2"}},
 	{},
 	{"SpawnMode","Spawner.Common.SpawnMode","List",{"Spawner.Common.SpawnMode.Full","Spawner.Common.SpawnMode.Deadlock","Spawner.Common.SpawnMode.NightDeadlock","Spawner.Common.SpawnMode.Depot"},nil,function(ent,val,rot,i,wagnum,rclk)	
         if rclk then return end

@@ -1,6 +1,5 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
-or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
@@ -21,6 +20,8 @@ ENT.Contact         = ""
 ENT.Purpose         = ""
 ENT.Instructions    = ""
 ENT.Model 			= "models/metrostroi_train/81-740/body/81-740_4_rear_reference.mdl"
+
+--ENT.NoTrain = true
 
 local yventpos = {
     -14.5+0*117-144,
@@ -84,7 +85,7 @@ function ENT:InitializeSounds()
         self.SoundPositions["vent1"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
     end		
 	
-    --self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
+    self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
 	
     self.SoundNames["bbe"]   = {"subway_trains/740_4/bbe.wav",loop = true}
     self.SoundPositions["bbe"] = {800,1e9,Vector(50,0,-40),2.1}			
@@ -112,10 +113,9 @@ function ENT:InitializeSounds()
         end	
 	end
 end
-
 ENT.AnnouncerPositions = {}
 ENT.AnnouncerPositions = {
-    {Vector(190,-34,55),250,1},
+    {Vector(190,-34,55),250,2},
 	--{Vector(-38,-34,55),50,0.1},
     --{Vector(-275,-34,55),50,0.1},
     --{Vector(-228,34,55),50,0.1},
@@ -129,3 +129,5 @@ for i=0,3 do
     table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,1))
     table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
 end
+
+--ENT.SubwayTrain = nil

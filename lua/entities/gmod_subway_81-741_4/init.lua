@@ -1,6 +1,5 @@
 local Map = game.GetMap():lower() or ""
-if(Map:find("gm_metro_minsk") 
-or Map:find("gm_metro_kalinin")
+if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
@@ -158,7 +157,7 @@ function ENT:TrainSpawnerUpdate()
 
 	local ZavodTable = self:GetNW2Int("ZavodTable")	
        if ZavodTable == 1 then
-            ZavodTable = math.ceil(math.random()*2+0.5)
+            ZavodTable = math.ceil(math.random()*1+0.5)
           else ZavodTable = ZavodTable-1 end	
 	self:SetNW2Int("ZavodTable",ZavodTable)	
 	
@@ -307,10 +306,10 @@ function ENT:CreatePricep(pos)
     ) 	
 	
 	local xmin = -3
-	local xmax = 2
+	local xmax = 3
 	
-	local ymin = -2
-	local ymax = 3
+	local ymin = -2.5
+	local ymax = 2.5
 	
 	local zmin = -10
 	local zmax = 10		
@@ -352,6 +351,7 @@ function ENT:CreatePricep(pos)
 		)
 	elseif Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
+	Map:find("gm_metro_kalinin") or	
 	Map:find("gm_metro_nekrasovskaya_line") then	
 		constraint.AdvBallsocket(
 			self,
@@ -364,10 +364,10 @@ function ENT:CreatePricep(pos)
 			0, --torquelimit
 			0, --xmin
 			0, --ymin
-			-60, --zmin
+			zmin, --zmin
 			0, --xmax
 			0, --ymax
-			60, --zmax
+			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric

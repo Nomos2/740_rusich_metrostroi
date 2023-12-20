@@ -1,6 +1,5 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
-or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
@@ -110,47 +109,47 @@ function ENT:InitializeSounds()
     self.SoundNames["front_isolation"] = {loop=true,"subway_trains/common/pneumatic/isolation_leak.wav"}
     self.SoundPositions["front_isolation"] = {300,1e9,Vector(443, 0,-63),1}
 	
-    self.SoundNames["rolling_5"] = {loop=true,"subway_trains/740_4/rolling/skrip1.mp3"}	
-    self.SoundNames["rolling_10"] = {loop=true,"subway_trains/740_4/rolling/rolling_10.wav"}
-    self.SoundNames["rolling_30"] = {loop=true,"subway_trains/740_4/rolling/rolling_30.wav"}
-    self.SoundNames["rolling_55"] = {loop=true,"subway_trains/740_4/rolling/rolling_55.wav"}
-    self.SoundNames["rolling_75"] = {loop=true,"subway_trains/740_4/rolling/rolling_75.wav"}
+    self.SoundNames["rolling_5"] = {loop=true,"subway_trains/740_4/bogey/skrip1.mp3"}	
+    self.SoundNames["rolling_10"] = {loop=true,"subway_trains/740_4/bogey/rolling_10.wav"}
+    self.SoundNames["rolling_30"] = {loop=true,"subway_trains/740_4/bogey/rolling_30.wav"}
+    self.SoundNames["rolling_55"] = {loop=true,"subway_trains/740_4/bogey/rolling_55.wav"}
+    self.SoundNames["rolling_75"] = {loop=true,"subway_trains/740_4/bogey/rolling_75.wav"}
     self.SoundPositions["rolling_5"] = {485,1e9,Vector(520,0,0),0.4}	
     self.SoundPositions["rolling_10"] = {485,1e9,Vector(520,0,0),0.53}
     self.SoundPositions["rolling_30"] = {485,1e9,Vector(520,0,0),0.7}
     self.SoundPositions["rolling_55"] = {485,1e9,Vector(520,0,0),0.85}
     self.SoundPositions["rolling_75"] = {485,1e9,Vector(520,0,0),0.9}
-    self.SoundNames["rolling_low"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_low.wav"}
-    self.SoundNames["rolling_medium2"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_medium"..rol..".wav"}
-    self.SoundNames["rolling_high2"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_high"..rol..".wav"}
+    self.SoundNames["rolling_low"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_low.wav"}
+    self.SoundNames["rolling_medium2"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_medium"..rol..".wav"}
+    self.SoundNames["rolling_high2"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_high"..rol..".wav"}
     self.SoundPositions["rolling_low"] = {480,1e12,Vector(520,0,0),0.6*0.4}
     self.SoundPositions["rolling_medium1"] = {480,1e12,Vector(520,0,0),0.90*0.4}
     self.SoundPositions["rolling_medium2"] = {480,1e12,Vector(520,0,0),0.90*0.4}
     self.SoundPositions["rolling_high2"] = {480,1e12,Vector(520,0,0),1.00*0.4}
 
-    self.SoundNames["valve_brake"] = {loop=true,"subway_trains/common/pneumatic/epv_loop.wav"}
+    self.SoundNames["valve_brake"] = {loop=true,"subway_trains/740_4/new/stopkran_loop.wav"}
     self.SoundPositions["valve_brake"] = {400,1e9,Vector(418.25,-49.2,1.3),1} -- Скорректируйте позицию
 	
-    self.SoundNames["rolling_5_middle"] = {loop=true,"subway_trains/740_4/rolling/skrip1.mp3"}	
-    self.SoundNames["rolling_10_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_10.wav"}
-    self.SoundNames["rolling_30_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_30.wav"}
-    self.SoundNames["rolling_55_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_55.wav"}
-    self.SoundNames["rolling_75_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_75.wav"}
+    self.SoundNames["rolling_5_middle"] = {loop=true,"subway_trains/740_4/bogey/skrip1.mp3"}	
+    self.SoundNames["rolling_10_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_10.wav"}
+    self.SoundNames["rolling_30_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_30.wav"}
+    self.SoundNames["rolling_55_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_55.wav"}
+    self.SoundNames["rolling_75_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_75.wav"}
     self.SoundPositions["rolling_5_middle"] = {485,1e9,Vector(-1,0,0),0.4}	
     self.SoundPositions["rolling_10_middle"] = {485,1e9,Vector(-1,0,0),0.53}
     self.SoundPositions["rolling_30_middle"] = {485,1e9,Vector(-1,0,0),0.7}
     self.SoundPositions["rolling_55_middle"] = {485,1e9,Vector(-1,0,0),0.85}
     self.SoundPositions["rolling_75_middle"] = {485,1e9,Vector(-1,0,0),0.9}
-    self.SoundNames["rolling_low_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_low.wav"}
-    self.SoundNames["rolling_medium2_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_medium"..rol..".wav"}
-    self.SoundNames["rolling_high2_middle"] = {loop=true,"subway_trains/740_4/rolling/rolling_outside_high"..rol..".wav"}
+    self.SoundNames["rolling_low_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_low.wav"}
+    self.SoundNames["rolling_medium2_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_medium"..rol..".wav"}
+    self.SoundNames["rolling_high2_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_high"..rol..".wav"}
     self.SoundPositions["rolling_low_middle"] = {480,1e12,Vector(-1,0,0),0.6*0.4}
     self.SoundPositions["rolling_medium1_middle"] = {480,1e12,Vector(-1,0,0),0.90*0.4}
     self.SoundPositions["rolling_medium2_middle"] = {480,1e12,Vector(-1,0,0),0.90*0.4}
     self.SoundPositions["rolling_high2_middle"] = {480,1e12,Vector(-1,0,0),1.00*0.4}	
 
-    self.SoundNames["gv_f"] = {"subway_trains/717/kv70/reverser_0-b_1.mp3","subway_trains/717/kv70/reverser_0-b_2.mp3"}
-    self.SoundNames["gv_b"] = {"subway_trains/717/kv70/reverser_b-0_1.mp3","subway_trains/717/kv70/reverser_b-0_2.mp3"}
+    self.SoundNames["gv_f"] = {"subway_trains/740_4/new/bru/bru_off-on.mp3","subway_trains/740_4/new/bru/bru_off-on2.mp3"}
+    self.SoundNames["gv_b"] = {"subway_trains/740_4/new/bru/bru_on-off.mp3","subway_trains/740_4/new/bru/bru_on-off.mp3"}
     self.SoundPositions["gv_f"] = {80,1e9,Vector(-126.4,50,-60-23.5),0.8}
     self.SoundPositions["gv_b"] = {80,1e9,Vector(-126.4,50,-60-23.5),0.8}
     self.SoundNames["pak_on"] = "subway_trains/717/switches/rc_on.mp3"

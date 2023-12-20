@@ -1,6 +1,5 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
-or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
@@ -72,14 +71,14 @@ ENT.ClientProps["Naddver_off_740"] = {
     model = "models/metrostroi_train/81-740/salon/naddverka_off_740.mdl",
 	pos = Vector(-15.8,-37.15,57.1),
     ang = Angle(0,0,0),
-	scale = 1,	
+	scale = 1,
 }
 ENT.ClientProps["Zavod_table_sochl"] = { 
     model = "models/metrostroi_train/81-740/salon/zavod.mdl",
-	pos = Vector(287.2,44,48),
+	pos = Vector(287.48,44,48),
     ang = Angle(90,-180,0),
 	scale = 3,
-	hide = 1,		
+	hide = 1,
 }
 ENT.ClientProps["Zavod_table_sochl_torec"] = { 
     model = "models/metrostroi_train/81-740/salon/zavod.mdl",
@@ -176,8 +175,8 @@ ENT.ClientProps["RearBrake"] = {
 	hide = 2,	
 }
 
---ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
---ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,5,1,50,1e3,Angle(-90,0,0)}}
+--ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,2,1,50,1e3,Angle(-90,0,0)}}
+--ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,2,1,50,1e3,Angle(-90,0,0)}}
 
 ENT.ButtonMap["Tickers_rear"] = {
 	pos = Vector(286.2,27,65.85), --446 -- 14 -- -0,5
@@ -257,7 +256,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
 	self.RBLICache = false
 	self.RTLICache = false
-	self.AnnPlayCache = false
+	--self.AnnPlayCache = false
     self.PassengerEnts = {}
     self.PassengerEntsStucked = {}	
     self.PassengerPositions = {}	
@@ -313,28 +312,7 @@ if self.RBLICache ~= self:GetNW2Bool("RBLI") then
         self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 400, 1e9, Vector(50,0,-40)) 
         self.RTLICache = self:GetNW2Bool("RTLI")
     end
-
---[[train.ClientProps["test_prop"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(-140,0,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}
-train.ClientProps["test_prop_1"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(-360,0,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}
-train.ClientProps["test_prop_2"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(-590,0,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}]]
+	
 for avar = 1,2 do
 	local animation = math.random (5,12)	
 	local animation1 = math.random (0.5,1)	
@@ -357,8 +335,8 @@ end
 	
 	local ZavodTable = train:GetNW2Int("ZavodTable",1)	
     if not IsValid(train) then return end		
-    self:ShowHide("Zavod_table_sochl",ZavodTable==2)
-    self:ShowHide("Zavod_table_sochl_torec",ZavodTable==3)
+    self:ShowHide("Zavod_table_soch",ZavodTable==2)	
+    self:ShowHide("Zavod_table_sochl_torec",ZavodTable==2)
 	
 	--Анимация дверей.
 	if not self.DoorStates then self.DoorStates = {} end
@@ -441,29 +419,32 @@ end
     end		
 		
     self:SetSoundState("bbe", self:GetPackedBool("BBEWork") and 1 or 0, 1)
+	
+	local work = train:GetPackedBool("AnnPlay")
+    for k,v in ipairs(self.AnnouncerPositions) do
+	if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
+            self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
+		end
+	end	
    
 	local door_cab_t = self:Animate("door_cab_t",self:GetPackedBool("RearDoor") and 0.99 or -0.05, 0, 0.55, 4.5, 0.55) 	
 	local door4s = (door_cab_t > 0 or self:GetPackedBool("RearDoor"))
     if self.Door4 ~= door4s then
         self.Door4 = door4s
         self:PlayOnce("RearDoor","bass",door4s and 1 or 0)
-    end	
-	
-	--[[if self.AnnouncerPositions then
-            for k, v in ipairs(self.AnnouncerPositions) do
-                self:PlayOnceFromPos("announcer" .. k, snd, v[3] or 1, 1, v[2] or 400, 1e9, v[1])
-            end
-        else
-            self:PlayOnceFromPos("announcer", snd, 1, 1, 600, 1e9, Vector(0, 0, 0))
-    end]]	
-	
-    local work = train:GetPackedBool("AnnPlay")	
-    for k,v in ipairs(self.AnnouncerPositions) do
-        if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
-            self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
-		end 
-	end	
+    end 
 end
+
+ENT.AnnouncerPositions = {}
+ENT.AnnouncerPositions = {
+    {Vector(0,-0,0),250,2},
+    --{Vector(190,-34,55),250,2},
+	--{Vector(-38,-34,55),50,0.1},
+    --{Vector(-275,-34,55),50,0.1},
+    --{Vector(-228,34,55),50,0.1},
+    --{Vector(3,34,55),250,0.1},
+    --{Vector(235,34,55),250,0.1},
+}
 
 function ENT:Draw()
     self.BaseClass.Draw(self)

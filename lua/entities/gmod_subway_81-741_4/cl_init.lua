@@ -1,6 +1,5 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
-or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
@@ -1038,22 +1037,16 @@ end
     self:SetSoundState("release_middle",math.Clamp(self.ReleasedPdT,0,1)^1.65,1.0)
 
 for avar = 1,2 do	
-    -----------------------Задняя часть	
     local colV = self:GetNW2Vector("Lamp7404"..avar)
     local col = Color(colV.x,colV.y,colV.z)		
-    -----------------------Задняя часть
-    -----------------------Передняя часть	
     self:ShowHideSmooth("lamps_salon_on_avar_front"..avar,self:Animate("LampsEmer",self:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,1,5,false),col)	
-    -----------------------Передняя часть		
 end	
 
 for i = 0,11 do	
-    -----------------------Передняя часть
     local colV = self:GetNW2Vector("Lamp7404"..i)
     local col = Color(colV.x,colV.y,colV.z)	
 	self:ShowHideSmooth("lamps_salon_on_front"..i,self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,1,5,false),col)
 	self:ShowHideSmooth("lamps_salon_on_front_left"..i,self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,1,5,false),col)
-	-----------------------Передняя часть
 end
 
     self:Animate("FrontBrake", self:GetNW2Bool("FbI") and 0 or 1,0,1, 3, false)
@@ -1182,39 +1175,6 @@ end
     self:SetSoundState("rolling_low_middle"    ,rol10*rollings,rol10p) --15
     self:SetSoundState("rolling_medium2_middle",rol40*rollings,rol40p) --57
     self:SetSoundState("rolling_high2_middle"  ,rol70*rollings,rol70p) --70
-
---[[	
-    --local state = (RealTime()%4/3)^1.5
-    --local strength = 1--self:GetPackedRatio("asyncstate")*(1-math.Clamp((speed-15)/15,0,1))
-    local state = self:GetPackedRatio("asynccurrent")--^1.5--RealTime()%2.5/2	
-    local strength = self:GetPackedRatio("asyncstate")*(1-math.Clamp((speed-23)/23,0,1))
-	--print(state/0.3+0.2)
-	--self:SetSoundState("async1", tunstreet*math.Clamp((state)/0.26+0.2,0,1)*strength, 1)
-    --self:SetSoundState("chopper", tunstreet*self:GetPackedRatio("chopper"), 1)  	
-	
-    local state = self:GetPackedRatio("RNState")
-    self.TISUVol = math.Clamp(self.TISUVol+(state-self.TISUVol)*dT*8,0,1)
-	
-	local AsyncSound = self:GetNW2Int("AsyncSound",1)
-	if AsyncSound==1 then		
-    self:SetSoundState("async1", self.TISUVol/1.5, 1)
-	end
-	if AsyncSound==2 then		
-    self:SetSoundState("async2", self.TISUVol/1.5, 1)
-	end		
-	if AsyncSound==3 then		
-    self:SetSoundState("async3", self.TISUVol/1.5, 1)
-	end		
-	if AsyncSound==4 then		
-    self:SetSoundState("async4", self.TISUVol/1.5, 1)
-	end		
-	if AsyncSound==5 then		
-    self:SetSoundState("async5", self.TISUVol/1.5, 1)
-	end	
-	if AsyncSound==6 then		
-    self:SetSoundState("async6", self.TISUVol/1.5, 1)
-	end		
-	]]
 	
     local state = self:GetPackedRatio("asynccurrent")--^1.5--RealTime()%2.5/2	
     local strength = self:GetPackedRatio("asyncstate")*(1-math.Clamp((speed-23)/23,0,1))*0.5

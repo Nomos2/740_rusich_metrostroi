@@ -1,6 +1,5 @@
 ﻿local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
-or Map:find("gm_metro_kalinin")
 or Map:find("gm_metro_krl")
 or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
@@ -1697,7 +1696,6 @@ function ENT:Initialize()
     self.ParkingBrake = 0
 
     self.PreviousRingState = false
-    self.TISUVol = 0
 
     self.VentRand = {}
     self.VentState = {}
@@ -2756,10 +2754,9 @@ end
 		
     self:SetSoundState("ONIX", tunstreet*math.Clamp((state)/0.26+0.2,0,1)*strength, 1)--+math.Clamp(state,0,1)*0.1)
     self:SetSoundState("chopper_onix", tunstreet*self:GetPackedRatio("chopper"), 1)
-
     local work = self:GetPackedBool("AnnPlay")
     for k,v in ipairs(self.AnnouncerPositions) do
-        if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
+	if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
             self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
 		end 
 	end	
