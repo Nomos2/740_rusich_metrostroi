@@ -256,7 +256,6 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
 	self.RBLICache = false
 	self.RTLICache = false
-	--self.AnnPlayCache = false
     self.PassengerEnts = {}
     self.PassengerEntsStucked = {}	
     self.PassengerPositions = {}	

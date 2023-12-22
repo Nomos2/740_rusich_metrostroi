@@ -168,14 +168,8 @@ function ENT:InitializeSounds()
         "subway_trains/717/switches/tumbler_slim_on3.mp3",
         "subway_trains/717/switches/tumbler_slim_on4.mp3",
     }
-
-    self.SoundNames["pneumo_disconnect_close"] = {"subway_trains/720/013_close1.mp3","subway_trains/720/013_close2.mp3","subway_trains/720/013_close3.mp3"}
-    self.SoundNames["pneumo_disconnect_open"] = {
-        "subway_trains/720/013_open1.mp3",
-        "subway_trains/720/013_open2.mp3",
-        "subway_trains/720/013_open3.mp3",
-        "subway_trains/720/013_open4.mp3",
-    }
+    self.SoundNames["pneumo_disconnect_close"] = {"subway_trains/740_4/new/013_close1.mp3","subway_trains/740_4/new/013_close2.mp3","subway_trains/740_4/new/013_close3.mp3"}
+    self.SoundNames["pneumo_disconnect_open"] = {"subway_trains/740_4/new/013_open1.mp3","subway_trains/740_4/new/013_open2.mp3","subway_trains/740_4/new/013_open3.mp3","subway_trains/740_4/new/013_open4.mp3"}
     self.SoundPositions["pneumo_disconnect_close"] = {800,1e9,Vector(795-159,40,-55),0.4}
     self.SoundPositions["pneumo_disconnect_open"] = {800,1e9,Vector(795-159,40,-55),0.4}
     self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
@@ -336,7 +330,7 @@ function ENT:InitializeSounds()
     self.SoundNames["valve_brake"] = {loop=true,"subway_trains/740_4/new/stopkran_loop.wav"}
     self.SoundPositions["valve_brake"] = {400,1e9,Vector(635,-59.7,-41),1}
 	
-	self.SoundNames["br_013"]		= {
+	self.SoundNames["br_013"]= {
 		"subway_trains/740_4/new/km013/013_1-2.mp3",
 		"subway_trains/740_4/new/km013/013_2-1.mp3",
 		"subway_trains/740_4/new/km013/013_2-3.mp3",
