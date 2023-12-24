@@ -420,7 +420,7 @@ if SERVER then
 	end
 	function TRAIN_SYSTEM:CheckError(id,cond)
 
-		if (id == 21 or id == 24 or id == 25) then
+		if (id == 21 or id == 22 or id == 24 or id == 25) then
 			if cond then
 				if self.Errors[id] ~= false then self.Errors[id] = CurTime() end
 			else
