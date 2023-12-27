@@ -44,15 +44,15 @@ function ENT:Initialize()
 	self.InteractionZones = {	
 		{
 			ID = "RearBrakeLineIsolationToggle",
-			Pos = Vector(-206-131,22.0,-44), Radius = 8,
+			Pos = Vector(-337,22.0,-44), Radius = 8,
         },
 		{
 			ID = "RearTrainLineIsolationToggle",
-			Pos = Vector(-206-131,22.0,-44), Radius = 8, 
+			Pos = Vector(-337,-22.0,-44), Radius = 8, 
         },
         {
             ID = "RearDoor",
-            Pos = Vector(-310, 5, 0), Radius = 31
+            Pos = Vector(-320, 0, 0), Radius = 31
         },
 	}   	
 	
@@ -71,6 +71,25 @@ function ENT:Initialize()
 end	
 
 function ENT:TrainSpawnerUpdate()
+	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
+	local train = self.HeadTrain	
+    if not IsValid(train) then return end		
+	local ahahaha =  math.random (1,5)
+	for i = 1,12 do
+		self:SetNW2Int("DoorsAnim"..i,math.random(ahahaha,15))
+	end
+	
+		local sp = math.random (-6,-15)		
+		local sp1 = math.random (10,17)			
+		--скорость дверей
+		for k,v in pairs(train.Pneumatic.LeftDoorSpeed) do
+			train.Pneumatic.LeftDoorSpeed[k] = -3.5 + math.random(sp,sp1) / 12
+		end
+		
+		for k,v in pairs(train.Pneumatic.RightDoorSpeed) do
+			train.Pneumatic.RightDoorSpeed[k] = -3.5 + math.random(sp,sp1) / 12	
+		end	
+
     self:UpdateLampsColors()
 end
 

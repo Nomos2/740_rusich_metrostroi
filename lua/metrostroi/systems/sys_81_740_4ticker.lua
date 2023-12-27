@@ -131,7 +131,24 @@ function TRAIN_SYSTEM:Initialize()
     self.EnStations["Куровская"] = "Kurovskaya"
     self.ReplaceStations["Ул. Кляйнера"] = "Улица Айзека Кляйнера"
     self.EnStations["Ул. Кляйнера"] = "Ulitsa Ajzeka Klyajnera"
-
+	
+    --b50
+    self.EnStations["Автозаводская"] = "Avtozavodskaya"
+    self.EnStations["Индустриальная"] = "Industrialnaya"
+    self.EnStations["Московская"] = "Moskovskaya"
+    self.EnStations["Октябрьская"] = "Oktybr'skaya"
+    self.EnStations["Площадь Мира"] = "Ploshad' Mira"
+    self.EnStations["Новоармейская"] = "Novoarmeyskaya"
+    self.EnStations["Вокзальная"] = "Volzalnaya"
+    self.EnStations["Комсомольская"] = "Komsomolskaya"
+    self.EnStations["Электросила"] = "Electrosila"	
+    self.EnStations["Театральная площадь"] = "Teatralnaya Ploshad'"
+    self.EnStations["Синеозерная"] = "Sineozernaya"
+    self.EnStations["Минская"] = "Minskaya"	
+    self.EnStations["Царские ворота"] = "Tsarskiye vorota"
+    self.EnStations["Междустройская"] = "Mezdustroiskaya"
+    self.EnStations["Музей скульптур"] = "Muzei Skulptur"		
+    self.EnStations["Автостанция Южная"] = "Avtostanciya Yuzhaya"		
 
     self.Advert = 1
     self.AdvertSymbol = 0

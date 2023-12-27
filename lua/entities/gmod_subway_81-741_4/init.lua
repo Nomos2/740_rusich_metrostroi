@@ -96,15 +96,15 @@ end)
     self.InteractionZones = {
         {
             ID = "FrontBrakeLineIsolationToggle",
-            Pos = Vector(660,-35.0,-45), Radius = 16,
+            Pos = Vector(660,-22.0,-45), Radius = 16,
         },
         {
             ID = "FrontTrainLineIsolationToggle",
-            Pos = Vector(660,-35.0,-45), Radius = 16,
+            Pos = Vector(660,22.0,-45), Radius = 16,
         },
         {
             ID = "FrontDoor",
-            Pos = Vector(654,15,55), Radius = 20,
+            Pos = Vector(654,0,25), Radius = 20,
         },
         {
             ID = "GVToggle",
@@ -171,7 +171,23 @@ function ENT:TrainSpawnerUpdate()
 	--self:SetNW2Int("tablo_color", ALS)
 	--print(self:GetNW2String("Texture"))
 	
-    self:UpdateLampsColors()		
+    self:UpdateLampsColors()	
+	
+local ahahaha =  math.random (1,5)
+	for i = 1,12 do
+		self:SetNW2Int("DoorsAnim"..i,math.random(ahahaha,15))
+	end
+	
+		local sp = math.random (-6,-15)		
+		local sp1 = math.random (10,17)			
+		--скорость дверей
+		for k,v in pairs(self.Pneumatic.LeftDoorSpeed) do
+			self.Pneumatic.LeftDoorSpeed[k] = -5.5 + math.random(-sp,sp1) / 12
+		end
+		
+		for k,v in pairs(self.Pneumatic.RightDoorSpeed) do
+			self.Pneumatic.RightDoorSpeed[k] = -15.5 + math.random(-sp,sp1) / 12
+		end	
 	
 end	
 
@@ -304,54 +320,83 @@ function ENT:CreatePricep(pos)
         1 --nocollide
     ) 	
 	
-	local xmin = -2.3
-	local xmax = 2.3
-	
-	local ymin = -2.3
-	local ymax = 2.3
-	
-	local zmin = -7
-	local zmax = 7	
-	
-	local Map = game.GetMap():lower() or ""        
+		local Map = game.GetMap():lower() or ""        
 	if Map:find("gm_metro_pink_line_redux") or
 	Map:find("gm_jar_pll_redux") or
 	Map:find("gm_metro_crossline") or	
 	Map:find("gm_metro_mosldl") or	
 	Map:find("gm_metro_nsk_line") or		
-	Map:find("gm_smr_1987") then
-        constraint.Axis(
-			self.MiddleBogey,		
-			ent,
-			0,
-			0,
-			Vector(0,0,0),
-			Vector(0,0,0),
-			0,
-			0,
-			0,
-			0,
-			Vector(0,0,-1),	
-			false
-		)
-		constraint.Axis(
-			self.MiddleBogey,		
+	Map:find("gm_smr_1987") then	
+	
+	local xmin = 0
+	local xmax = 0
+	
+	local ymin = 0
+	local ymax = 0
+	
+	local zmin = -10
+	local zmax = 10	
+	
+	constraint.AdvBallsocket(
 			self,
-			0,
-			0,
-			Vector(0,0,0),
-			Vector(0,0,0),
-			0,
-			0,
-			0,
-			0,
-			Vector(0,0,-1),	
-			false
-		)
+			self.MiddleBogey,
+			0, --bone
+			0, --bone
+			Vector(0,0,-30),
+			pos,		
+			0, --forcelimit
+			0, --torquelimit
+			xmin, --xmin
+			ymin, --ymin
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
+			zmax, --zmax
+			0, --xfric
+			0, --yfric
+			0, --zfric
+			0, --rotonly
+			1,--nocollide
+			true
+		)	
+
+		constraint.AdvBallsocket(
+			ent,
+			self.MiddleBogey,
+			0, --bone
+			0, --bone,		
+			Vector(300,0,-30),
+			pos,		
+			0, --forcelimit
+			0, --torquelimit
+			xmin, --xmin
+			ymin, --ymin
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
+			zmax, --zmax
+			0, --xfric
+			0, --yfric
+			0, --zfric
+			0, --rotonly
+			1,--nocollide
+			true	
+		) 
+	
 	elseif Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
 	Map:find("gm_metro_kalinin") or	
 	Map:find("gm_metro_nekrasovskaya_line") then	
+	
+	local xmin = 0
+	local xmax = 0
+	
+	local ymin = 0
+	local ymax = 0
+	
+	local zmin = -10
+	local zmax = 10		
+	
 		constraint.AdvBallsocket(
 			self,
 			self.MiddleBogey,
@@ -361,11 +406,11 @@ function ENT:CreatePricep(pos)
 			Vector(-305,0,0),		
 			0, --forcelimit
 			0, --torquelimit
-			0, --xmin
-			0, --ymin
+			xmin, --xmin
+			ymin, --ymin
 			zmin, --zmin
-			0, --xmax
-			0, --ymax
+			xmax, --xmax
+			ymax, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
@@ -373,9 +418,9 @@ function ENT:CreatePricep(pos)
 			0, --rotonly
 			1,--nocollide
 			true	
-		)	
+		)
 		
-		constraint.AdvBallsocket(
+	constraint.AdvBallsocket(
 			ent,
 			self.MiddleBogey,
 			0, --bone
@@ -417,58 +462,23 @@ function ENT:CreatePricep(pos)
 			0, --rotonly
 			1--nocollide
 		)
-	else	
-		constraint.AdvBallsocket(
+	else
+	
+	local xmin = -1.5
+	local xmax = 1.5
+	
+	local ymin = -1.5
+	local ymax = 1.5
+	
+	local zmin = -10
+	local zmax = 10
+	
+	constraint.AdvBallsocket(
 			self,
 			self.MiddleBogey,
 			0, --bone
 			0, --bone
-			Vector(0,0,-20),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			-0.4, --xmin
-			-0.4, --ymin
-			zmin, --zmin
-			0.4, --xmax
-			0.4, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true
-		)
-		constraint.AdvBallsocket(	
-			self,
-			self.MiddleBogey,
-			0, --bone
-			0, --bone
-			Vector(0,0,20),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			-0.4, --xmin
-			-0.4, --ymin
-			zmin, --zmin
-			0.4, --xmax
-			0.4, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true
-		)	
-
-		constraint.AdvBallsocket(
-			ent,
-			self.MiddleBogey,
-			0, --bone
-			0, --bone,		
-			Vector(300,0,-21),
+			Vector(0,0,50),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -483,14 +493,59 @@ function ENT:CreatePricep(pos)
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			false	
+			true
+		)
+		constraint.AdvBallsocket(	
+			self,
+			self.MiddleBogey,
+			0, --bone
+			0, --bone
+			Vector(0,0,-10),
+			pos,		
+			0, --forcelimit
+			0, --torquelimit
+			xmin, --xmin
+			ymin, --ymin
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
+			zmax, --zmax
+			0, --xfric
+			0, --yfric
+			0, --zfric
+			0, --rotonly
+			1,--nocollide
+			true
+		)		
+
+		constraint.AdvBallsocket(
+			ent,
+			self.MiddleBogey,
+			0, --bone
+			0, --bone,		
+			Vector(300,0,40),
+			pos,		
+			0, --forcelimit
+			0, --torquelimit
+			xmin, --xmin
+			ymin, --ymin
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
+			zmax, --zmax
+			0, --xfric
+			0, --yfric
+			0, --zfric
+			0, --rotonly
+			1,--nocollide
+			true	
 		)
 		constraint.AdvBallsocket(
 			ent,
 			self.MiddleBogey,
 			0, --bone
 			0, --bone,		
-			Vector(300,0,21),
+			Vector(300,0,-10),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit
@@ -505,23 +560,19 @@ function ENT:CreatePricep(pos)
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			false	
+			true	
 		)
-	end	
+	end
 	
     self:RerailChange(self.FrontBogey, true)
     self:RerailChange(self.MiddleBogey, true)
-    self:RerailChange(self.RearBogey, true)			
+    self:RerailChange(self.RearBogey, true)		
 
 	--Метод mirror 				
-	ent.HeadTrain = self 
-    ent:SetNW2Entity("HeadTrain", self)	
-
-    ent.ButtonBuffer = {}
-    ent.KeyBuffer = {}
-    ent.KeyMap = {}
-	ent.InteractionZones = {}	
-end	
+    ent.HeadTrain = self 
+    ent:SetNW2Entity("HeadTrain", self)
+	ent.SubwayTrain = {}	
+end
 --------------------------------------------------------------------------------
 --Основное
 function ENT:Think()	
@@ -533,16 +584,6 @@ function ENT:Think()
     self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+self.AsyncInverter.State/1),0,1)*math.Clamp(self.Speed/6,0,1))
     self:SetPackedRatio("asyncstate", math.Clamp(self.AsyncInverter.State/0.2*math.abs(self.AsyncInverter.Current)/100,0,1))
     self:SetPackedRatio("chopper", math.Clamp(self.Electric.Chopper>0 and self.Electric.IChopped/100 or 0,0,1))	 
-
-		local sp = math.random (-1,-2)		
-		--скорость дверей
-		for k,v in pairs(self.Pneumatic.LeftDoorSpeed) do
-			self.Pneumatic.LeftDoorSpeed[k] = sp, 12
-		end
-		
-		for k,v in pairs(self.Pneumatic.RightDoorSpeed) do
-			self.Pneumatic.RightDoorSpeed[k] = sp, 12
-		end
 		
 	local lightsActive1 = power and self.SFV20.Value > 0 
     local lightsActive2 = power and self.BUV.MainLights 

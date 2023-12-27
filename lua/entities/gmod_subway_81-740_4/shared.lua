@@ -130,9 +130,9 @@ function ENT:InitializeSounds()
     self.SoundPositions["compressor_pn"] = {485,1e9,Vector(-18+-159,-40,-66),0.7} --FIXME: Pos
 
 	 local j = math.random (1,3)
-    self.SoundNames["release_front"] = {loop=true,"subway_trains/740_4/pneumo_release_"..j..".wav"}
+    self.SoundNames["release_front"] = {loop=true,"subway_trains/740_4/new/pneumo_release_"..j..".wav"}
     self.SoundPositions["release_front"] = {1200,1e9,Vector(0-159,0,-70),0.4}
-    self.SoundNames["release_middle"] = {loop=true,"subway_trains/740_4/pneumo_release_"..j..".wav"}
+    self.SoundNames["release_middle"] = {loop=true,"subway_trains/740_4/new/pneumo_release_"..j..".wav"}
 	self.SoundPositions["release_middle"] = {1200,1e9,Vector(800-159,0,-70),0.4}
     self.SoundNames["parking_brake"] = {loop=true,"subway_trains/common/pneumatic/autostop_loop.wav"}
     self.SoundPositions["parking_brake"] = {400,1e9,Vector(-13+159,0,-70),0.95}
@@ -197,7 +197,7 @@ function ENT:InitializeSounds()
         "subway_trains/common/pnm/pnm_button_release5.mp3",
     }
 
-    self.SoundNames["horn"] = {loop=0.6,"subway_trains/740_4/horn/horn8_start.wav","subway_trains/740_4/horn/horn8_loop.wav", "subway_trains/740_4/horn/horn8_end.wav"}
+    self.SoundNames["horn"] = {loop=0.6,"subway_trains/740_4/new/horn/horn_start.wav","subway_trains/740_4/new/horn/horn_loop.wav", "subway_trains/740_4/new/horn/horn_end.wav"}
     self.SoundPositions["horn"] = {1100,1e9,Vector(820-159,0,-30),0.8}
 
     self.SoundNames["KV_-3_-2"] = "subway_trains/740_4/controller/t3_t2.mp3"
@@ -328,7 +328,7 @@ function ENT:InitializeSounds()
     self.SoundPositions["rolling_high2_middle"] = {480,1e12,Vector(-15-16.5,0),1.00*0.4}
 
     self.SoundNames["valve_brake"] = {loop=true,"subway_trains/740_4/new/stopkran_loop.wav"}
-    self.SoundPositions["valve_brake"] = {400,1e9,Vector(635,-59.7,-41),1}
+    self.SoundPositions["valve_brake"] = {100,1e9,Vector(635,-59.7,-41),1}
 	
 	self.SoundNames["br_013"]= {
 		"subway_trains/740_4/new/km013/013_1-2.mp3",
@@ -343,8 +343,8 @@ function ENT:InitializeSounds()
 		"subway_trains/740_4/new/km013/013_6-5.mp3",			
 	}
 
-    self.SoundNames["gv_f"] = {"subway_trains/740_4/new/bru/bru_off-on.mp3","subway_trains/740_4/new/bru/bru_off-on2.mp3"}
-    self.SoundNames["gv_b"] = {"subway_trains/740_4/new/bru/bru_on-off.mp3","subway_trains/740_4/new/bru/bru_on-off.mp3"}
+    self.SoundNames["gv_f"] = {"subway_trains/740_4/new/bru/bru_off-on.mp3","subway_trains/740_4/new/bru/bru_off-on2.mp3","subway_trains/740_4/new/bru/bru_off-on3.mp3"}
+    self.SoundNames["gv_b"] = {"subway_trains/740_4/new/bru/bru_on-off.mp3","subway_trains/740_4/new/bru/bru_on-off2.mp3"}
     self.SoundPositions["gv_f"] = {80,1e9,Vector(126.4-159,50,-60-23.5),0.8}
     self.SoundPositions["gv_b"] = {80,1e9,Vector(126.4-159,50,-60-23.5),0.8}
 	
@@ -466,7 +466,7 @@ ENT.SubwayTrain = {
     },
     EKKType = 740
 }
-ENT.NumberRanges = {{0154,0209},{0212,0335}}
+ENT.NumberRanges = {{0154,0209},{0212,0225},{0227,0233},{0235,0236},{0238,0239},{0248,0257},{0260,0284},{0285,0293},{0296,0297},{0304,0308},{0311,0311},{0318,0324},{0326,0335}}
 local Texture = {}
 local Announcer = {}
 for k,v in pairs(Metrostroi.AnnouncementsASNP or {}) do Announcer[k] = v.name or k end	

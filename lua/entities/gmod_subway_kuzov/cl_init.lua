@@ -148,7 +148,7 @@ ENT.ButtonMap["RearDoor_front"] = {
 }
 
 ENT.ButtonMap["RearPneumatic"] = {
-    pos = Vector(-206-131,45,-46),
+    pos = Vector(-337,45,-46),
     ang = Angle(180,90,270),
     width = 900,
     height = 100,
@@ -256,6 +256,11 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
 	self.RBLICache = false
 	self.RTLICache = false
+	self.DoorsAnims = {}
+	for i = 1,12 do
+		self.DoorsAnims[i] = self:GetNW2Int("DoorsAnim"..i,15)
+	end	
+	self:GetNW2Entity("HeadTrain").CompressorVol = 0	
     self.PassengerEnts = {}
     self.PassengerEntsStucked = {}	
     self.PassengerPositions = {}	
@@ -303,12 +308,12 @@ self.ClientProps["TrainNumberL"..k] = {
     } 
 end
 if self.RBLICache ~= self:GetNW2Bool("RBLI") then
-        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 400, 1e9, Vector(50,0,-40))
+        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 200, 1e9, Vector(50,0,-40))
         self.RBLICache = self:GetNW2Bool("RBLI")
     end
 
     if self.RTLICache ~= self:GetNW2Bool("RTLI") then
-        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 400, 1e9, Vector(50,0,-40)) 
+        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 200, 1e9, Vector(50,0,-40)) 
         self.RTLICache = self:GetNW2Bool("RTLI")
     end
 	

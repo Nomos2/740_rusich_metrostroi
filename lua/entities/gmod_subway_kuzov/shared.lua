@@ -39,7 +39,10 @@ function ENT:GetStandingArea()    --смещение пассажиров
 	return Vector(270-15,-25,-47),Vector(-285,25,-46) 	
 end	
 function ENT:BoardPassengers(delta)	
-	self:SetNW2Float("PassengerCount", math.max(0,math.min(self:PassengerCapacity(),self:GetNW2Float("PassengerCount") + delta)))
+	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
+	local train = self.HeadTrain 
+	if not IsValid(train) then return end		
+	self:SetNW2Float("PassengerCount", math.max(0,math.min(self:PassengerCapacity(),train:GetNW2Float("PassengerCount") + delta)))
 end
 
 function ENT:InitializeSounds()
@@ -75,8 +78,8 @@ function ENT:InitializeSounds()
 	
     self.SoundNames["rear_isolation"] = {loop=true,"subway_trains/common/pneumatic/isolation_leak.wav"}
     self.SoundPositions["rear_isolation"] = {300,1e9,Vector(-456+144, 0,-63),1}
-    self.SoundNames["compressor"] = {loop=2,"subway_trains/740_4/compressor/compressor740_start.wav","subway_trains/740_4/compressor/compressor740_loop.wav","subway_trains/740_4/compressor/compressor740_stop.wav"}
-    self.SoundPositions["compressor"] = {800,1e9,Vector(-18,-40,-66),0.4}	
+    self.SoundNames["compressor"] = {loop=115,"subway_trains/740_4/compressor/compressor_start.wav","subway_trains/740_4/compressor/compressor_loop.wav","subway_trains/740_4/compressor/compressor_end.wav"}
+    self.SoundPositions["compressor"] = {300,1e9,Vector(-18,-40,-66),0.4}	
 	
     for i=1,4 do
         self.SoundNames["vent"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop.wav"}
@@ -88,12 +91,12 @@ function ENT:InitializeSounds()
     self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
 	
     self.SoundNames["bbe"]   = {"subway_trains/740_4/bbe.wav",loop = true}
-    self.SoundPositions["bbe"] = {800,1e9,Vector(50,0,-40),2.1}			
+    self.SoundPositions["bbe"] = {800,1e9,Vector(50,0,-40),0.5}			
 
 	self.SoundNames["cab_door_open"] = "subway_trains/740_4/doors/torec/door_torec_open_end.wav"
     self.SoundNames["cab_door_close"] = "subway_trains/740_4/doors/torec/door_close_1.mp3"	
 	local j = math.random (1,3)	
-    self.SoundNames["release_rear"] = {loop=true,"subway_trains/740_4/pneumo_release_"..j..".wav"}
+    self.SoundNames["release_rear"] = {loop=true,"subway_trains/740_4/new/pneumo_release_"..j..".wav"}
     self.SoundPositions["release_rear"] = {1200,1e9,Vector(600-144,0,-70),0.4}		
 
 	local loop = math.random (1,2)

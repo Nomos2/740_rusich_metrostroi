@@ -101,7 +101,7 @@ function ENT:InitializeSounds()
 
 	local rol = math.random (1,2)
 	local j = math.random (1,3)
-    self.SoundNames["release_front"] = {loop=true,"subway_trains/740_4/pneumo_release_"..j..".wav"}
+    self.SoundNames["release_front"] = {loop=true,"subway_trains/740_4/new/pneumo_release_"..j..".wav"}
     self.SoundPositions["release_front"] = {485,1e9,Vector(-53,0,-70),0.25}
     self.SoundNames["parking_brake"] = {loop=true,"subway_trains/common/pneumatic/autostop_loop.wav"}
     self.SoundPositions["parking_brake"] = {400,1e9,Vector(-13+144,0,-70),0.95}
@@ -148,8 +148,8 @@ function ENT:InitializeSounds()
     self.SoundPositions["rolling_medium2_middle"] = {480,1e12,Vector(-1,0,0),0.90*0.4}
     self.SoundPositions["rolling_high2_middle"] = {480,1e12,Vector(-1,0,0),1.00*0.4}	
 
-    self.SoundNames["gv_f"] = {"subway_trains/740_4/new/bru/bru_off-on.mp3","subway_trains/740_4/new/bru/bru_off-on2.mp3"}
-    self.SoundNames["gv_b"] = {"subway_trains/740_4/new/bru/bru_on-off.mp3","subway_trains/740_4/new/bru/bru_on-off.mp3"}
+    self.SoundNames["gv_f"] = {"subway_trains/740_4/new/bru/bru_off-on.mp3","subway_trains/740_4/new/bru/bru_off-on2.mp3","subway_trains/740_4/new/bru/bru_off-on3.mp3"}
+    self.SoundNames["gv_b"] = {"subway_trains/740_4/new/bru/bru_on-off.mp3","subway_trains/740_4/new/bru/bru_on-off2.mp3"}
     self.SoundPositions["gv_f"] = {80,1e9,Vector(-126.4,50,-60-23.5),0.8}
     self.SoundPositions["gv_b"] = {80,1e9,Vector(-126.4,50,-60-23.5),0.8}
     self.SoundNames["pak_on"] = "subway_trains/717/switches/rc_on.mp3"
@@ -223,4 +223,4 @@ ENT.SubwayTrain = {
     Manufacturer = "MVM",
     EKKType = 740
 }
-ENT.NumberRanges = {{0681,0683},{0735,0800},{0802,0804},{0809,0917}}
+ENT.NumberRanges = {{0681,0683},{0735,0762},{0767,0784},{0786,0800},{0808,0815},{0817,0823},{0825,0844},{0847,0852},{0854,0854},{0856,0870},{0872,0881},{0882,0884},{0886,0890},{0894,0905},{0909,0911},{0913,0917}}
