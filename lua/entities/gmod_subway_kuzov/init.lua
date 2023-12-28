@@ -20,7 +20,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)	
     self:SetPos(self:GetPos() + Vector(0,0,0))	
 	
-	self.NormalMass = 20000		
+    self.NormalMass = 17000
 	
     self.PassengerSeat = self:CreateSeat("passenger",Vector(-135,-40,-25),Angle(0,90,0),"models/nova/airboat_seat.mdl")
     self.PassengerSeat2 = self:CreateSeat("passenger",Vector(-135,40,-25),Angle(0,270,0),"models/nova/airboat_seat.mdl")  

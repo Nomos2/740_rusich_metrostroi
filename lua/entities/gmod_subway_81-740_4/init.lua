@@ -48,7 +48,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
     self:SetPos(self:GetPos() + Vector(0,0,140))
 	
-    self.NormalMass = 20000
+    self.NormalMass = 17000
 
     -- Create seat entities
     self.DriverSeat = self:CreateSeat("driver",Vector(775-159,19,-27))
@@ -697,7 +697,7 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,
 			0, --bone
 			0, --bone
-			Vector(0,0,50),
+			Vector(0,0,40),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -742,7 +742,7 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,
 			0, --bone
 			0, --bone,		
-			Vector(300,0,40),
+			Vector(310,0,40),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -764,7 +764,7 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,
 			0, --bone
 			0, --bone,		
-			Vector(300,0,-10),
+			Vector(310,0,-10),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit
