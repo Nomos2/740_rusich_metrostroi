@@ -753,7 +753,7 @@ for k,buttbl in ipairs(ENT.ButtonMap["BackPPZ"].buttons) do
     buttbl.model = {
         model = "models/metrostroi_train/81-720/button_av1.mdl",z=-18, ang=-90,
         var=buttbl.ID:Replace("Toggle",""),speed=9, vmin=0,vmax=1,
-        sndvol = 0.8, snd = function(val) return val and "av_on" or "av_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        sndvol = 0.8, snd = function(val) return val and "switch2_on" or "switch2_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
     }
 end
 ENT.ButtonMap["PVZ"] = {
@@ -822,12 +822,12 @@ ENT.ButtonMap["BackDown"] = {
         {ID = "Pant1Toggle",x=85, y=62, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="Pant1",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "Pant2Toggle",x=120, y=62, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="Pant2",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "Vent2Toggle",x=158+30, y=62, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-502/buttons/tumbler_b_a.mdl",z=-2.6, ang=180,
@@ -837,62 +837,62 @@ ENT.ButtonMap["BackDown"] = {
         {ID = "PassLightToggle",x=222, y=62, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="PassLight",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "CabLightToggle",x=260, y=62, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="CabLight",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "Headlights1Toggle",x=290, y=62, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="Headlights1",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "Headlights2Toggle",x=330, y=62, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="Headlights2",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "ParkingBrakeToggle",x=81, y=118, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="ParkingBrake",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "TorecDoorsToggle",x=115, y=118, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="TorecDoors",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "BBERToggle",x=152, y=118, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="BBER",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "BBEToggle",x=183, y=118, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="BBE",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "CompressorToggle",x=210, y=118, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="Compressor",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "CabLightStrengthToggle",x=250, y=118, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="CabLightStrength",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "AppLights1Toggle",x=290, y=118, radius=12, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="AppLights1",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "AppLights2Toggle",x=335, y=118, radius=12, tooltip = "", model = {
             model = "models/metrostroi_train/81-720/tumbler1.mdl",z=-2.6, ang=180,
             var="AppLights2",speed=12,
-            sndvol = 0.5, snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switch_ppz_on_new" or "switch_ppz_off_new" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "!BARSBlock",x=214, y=190, radius=0, model = {
             model = "models/metrostroi_train/81-720/rc_rotator1.mdl",z=12,
@@ -941,7 +941,7 @@ ENT.ButtonMap["CraneCap2"] = {
             model = "models/metrostroi_train/81-710/ezh3_tumbler_pp250.mdl",ang = 180,z=-6,
             var="RTE",speed=16,
             plomb = {model = "models/metrostroi_train/81/plomb.mdl",ang=-90,x=-1,y=24,z=0,var="RTEPl",ID="RTEPl",},
-            sndvol = 1,snd = function(val) return val and "switch2_on" or "switch2_off" end,
+            sndvol = 1,snd = function(val) return val and "switchbl_on" or "switchbl_off" end,
             sndmin = 90,sndmax = 1e3,sndang = Angle(-90,0,0),
         }},
     }
@@ -1748,6 +1748,7 @@ for n=0,1 do
     end
 end
 
+if Metrostroi.Version >= 1537278077 then
 function ENT:ReInitBogeySounds(bogey)
 	if not IsValid(bogey) then return end
 	
@@ -2136,10 +2137,12 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     --bogey.MotorSoundType = nil
 end
 end
+else return end
 	
 function ENT:Think()
     self.BaseClass.Think(self)
-    if not self.RenderClientEnts or self.CreatingCSEnts then return end		
+    if not self.RenderClientEnts or self.CreatingCSEnts then return end	
+if Metrostroi.Version >= 1537278077 then	
 	local MiddleBogey = self:GetNW2Entity("MiddleBogey")	
 	local refresh = false--true		
 	
@@ -2216,7 +2219,8 @@ function ENT:Think()
 	or self.RearBogey.EngineSNDConfig and self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
 	end	
-end	
+end
+else return end
 
 for k=0,3 do
     self.ClientProps["TrainNumberR"..k] = {

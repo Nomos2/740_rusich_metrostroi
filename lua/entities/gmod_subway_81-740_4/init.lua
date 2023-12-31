@@ -688,8 +688,8 @@ function ENT:CreatePricep(pos)
 	local ymin = -1.5
 	local ymax = 1.5
 	
-	local zmin = -35
-	local zmax = 35
+	local zmin = -15
+	local zmax = 15
 	
 	constraint.AdvBallsocket(
 			self.MiddleBogey,

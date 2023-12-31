@@ -140,9 +140,10 @@ function ENT:Think()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain
 	local Panel = train.Panel	
-	--self.TrainWires = {}	
-    --self.WireIOSystems = {}
-    --self.Systems = {}	
+    self.WireIOSystems = {}
+    self.Systems = {}
+    self.TrainEntities = {}
+    self.TrainWires = {}
 	local retVal = self.BaseClass.Think(self)		
     if not IsValid(train) then return end		
     local power = train.Electric.Battery80V > 62

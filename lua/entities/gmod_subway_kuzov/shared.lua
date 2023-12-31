@@ -20,7 +20,7 @@ ENT.Purpose         = ""
 ENT.Instructions    = ""
 ENT.Model 			= "models/metrostroi_train/81-740/body/81-740_4_rear_reference.mdl"
 
---ENT.NoTrain = true
+ENT.NoTrain = true
 
 local yventpos = {
     -14.5+0*117-144,
@@ -77,7 +77,7 @@ function ENT:InitializeSounds()
 	
     self.SoundNames["rear_isolation"] = {loop=true,"subway_trains/common/pneumatic/isolation_leak.wav"}
     self.SoundPositions["rear_isolation"] = {300,1e9,Vector(-456+144, 0,-63),1}
-    self.SoundNames["compressor"] = {loop=115,"subway_trains/740_4/compressor/compressor_start.wav","subway_trains/740_4/compressor/compressor_loop.wav","subway_trains/740_4/compressor/compressor_end.wav"}
+    self.SoundNames["compressor"] = {loop=58,"subway_trains/740_4/compressor/compressor_start.wav","subway_trains/740_4/compressor/compressor_loop.wav","subway_trains/740_4/compressor/compressor_end.wav"}
     self.SoundPositions["compressor"] = {300,1e9,Vector(-18,-40,-66),0.4}	
 	
     for i=1,4 do
@@ -92,25 +92,25 @@ function ENT:InitializeSounds()
     self.SoundNames["bbe"]   = {"subway_trains/740_4/bbe.wav",loop = true}
     self.SoundPositions["bbe"] = {800,1e9,Vector(50,0,-40),0.5}			
 
-	self.SoundNames["cab_door_open"] = "subway_trains/740_4/doors/torec/door_torec_open_end.wav"
-    self.SoundNames["cab_door_close"] = "subway_trains/740_4/doors/torec/door_close_1.mp3"	
+	self.SoundNames["cab_door_open"] = "subway_trains/740_4/doors/torec/door_torec_open.mp3"
+    self.SoundNames["cab_door_close"] = "subway_trains/740_4/doors/torec/door_torec_close.mp3"	
 	local j = math.random (1,3)	
     self.SoundNames["release_rear"] = {loop=true,"subway_trains/740_4/new/pneumo_release_"..j..".wav"}
     self.SoundPositions["release_rear"] = {1200,1e9,Vector(600-144,0,-70),0.4}		
 
 	local loop = math.random (1,2)
-	local start = math.random (1,5)		
-	local closed = math.random (1,5)	
-	local open = math.random (1,3)	
+	local start = math.random (1,2)		
+	local closed = math.random (1,3)	
+	local open = math.random (1,2)	
     for i=0,2 do	
 	for k=0,1 do	
-            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop_"..loop..".wav",loop=true}
+            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop"..loop..".wav",loop=true}
             self.SoundPositions["door"..i.."x"..k.."r"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_start_"..start..".wav"}
+            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_open_start"..start..".wav"}
             self.SoundPositions["door"..i.."x"..k.."s"] = {200,1e9,GetDoorPosition(i,k),1}
             self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..open..".wav"}
             self.SoundPositions["door"..i.."x"..k.."o"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/740_4/doors/door_close"..closed..".wav"}
+            self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/740_4/doors/door_close_end"..closed..".wav"}
             self.SoundPositions["door"..i.."x"..k.."c"] = {200,1e9,GetDoorPosition(i,k),0.5}
         end	
 	end
@@ -132,4 +132,4 @@ for i=0,3 do
     table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
 end
 
---ENT.SubwayTrain = nil
+ENT.SubwayTrain = nil

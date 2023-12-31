@@ -154,25 +154,25 @@ function ENT:InitializeSounds()
     self.SoundNames["pak_on"] = "subway_trains/717/switches/rc_on.mp3"
     self.SoundNames["pak_off"] = "subway_trains/717/switches/rc_off.mp3"
 	
-    self.SoundNames["door_cab_open"] = 	"subway_trains/740_4/doors/torec/door_torec_open_end.wav"
-    self.SoundNames["door_cab_close"] = "subway_trains/740_4/doors/torec/door_close_1.mp3"	
+  	self.SoundNames["door_cab_open"] = "subway_trains/740_4/doors/torec/door_torec_open.mp3"
+    self.SoundNames["door_cab_close"] = "subway_trains/740_4/doors/torec/door_torec_close.mp3"	
 
 	local loop = math.random (1,2)
-	local start = math.random (1,5)		
-	local closed = math.random (3,5)	
-	local open = math.random (1,3)		
-    for i=0,2 do
-        for k=0,1 do
-            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop_"..loop..".wav",loop=true}
+	local start = math.random (1,2)		
+	local closed = math.random (1,3)	
+	local open = math.random (1,2)	
+    for i=0,2 do	
+	for k=0,1 do	
+            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop"..loop..".wav",loop=true}
             self.SoundPositions["door"..i.."x"..k.."r"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_start_"..start..".wav"}
+            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_open_start"..start..".wav"}
             self.SoundPositions["door"..i.."x"..k.."s"] = {200,1e9,GetDoorPosition(i,k),1}
             self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..open..".wav"}
             self.SoundPositions["door"..i.."x"..k.."o"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/740_4/doors/door_close"..closed..".wav"}
-            self.SoundPositions["door"..i.."x"..k.."c"] = {200,1e9,GetDoorPosition(i,k),0.5}		
-        end
-    end
+            self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/740_4/doors/door_close_end"..closed..".wav"}
+            self.SoundPositions["door"..i.."x"..k.."c"] = {200,1e9,GetDoorPosition(i,k),0.5}
+        end	
+	end
     self.SoundNames["batt_on"] = "subway_trains/720/batt_on.mp3"
     self.SoundPositions["batt_on"] = {400,1e9,Vector(126.4,50,-60-23.5),0.3}
 end
