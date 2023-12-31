@@ -1,7 +1,6 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
-or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
@@ -138,7 +137,7 @@ function ENT:InitializeSounds()
     self.SoundPositions["parking_brake"] = {400,1e9,Vector(-13+159,0,-70),0.95}
     self.SoundNames["crane013_brake"] = {loop=true,"subway_trains/common/pneumatic/release_2.wav"}
     self.SoundPositions["crane013_brake"] = {80,1e9,Vector(813-159,-14.8,-47.9),0.86}
-    self.SoundNames["crane013_brake2"] = {loop=true,"subway_trains/common/pneumatic/013_brake2.wav"}
+    self.SoundNames["crane013_brake2"] = {loop=true,"subway_trains/740_4/new/013_brake2.wav"}
     self.SoundPositions["crane013_brake2"] = {80,1e9,Vector(813-159,-14.8,-47.9),0.86}
     self.SoundNames["crane013_release"] = {loop=true,"subway_trains/common/pneumatic/013_release.wav"}
     self.SoundPositions["crane013_release"] = {80,1e9,Vector(813-159,-14.8,-47.9),0.4}
@@ -415,7 +414,13 @@ function ENT:InitializeSystems()
 	self:LoadSystem("IGLA_PCBK","IGLA_740_4PCBK")
 	self:LoadSystem("Prost_Kos","81_740_4PROST")
 	
-	self:LoadSystem("AsyncInverter","81_760_AsyncInverter")	
+	self:LoadSystem("AsyncInverter","81_760_AsyncInverter")
+
+	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
+	local train1 = self.HeadTrain1 
+	if not IsValid(train1) then return end	
+		
+	train1:LoadSystem("Panel","81_740_4Panel")	
 end
 
 ENT.AnnouncerPositions = {}
@@ -425,9 +430,9 @@ ENT.AnnouncerPositions = {
     {Vector(158,34,55),50,0.4},
     {Vector(495,34,55),50,0.4},
     {Vector(580,34,55),50,0.4},	
-    {Vector(-140,0,55),50,0.4},	-- костыль под информатор.	
-    {Vector(-360,0,55),50,0.4}, -- костыль под информатор.
-    {Vector(-590,0,55),50,0.4},	-- костыль под информатор.
+    --{Vector(-140,0,55),50,0.4},	-- костыль под информатор.	
+    --{Vector(-360,0,55),50,0.4}, -- костыль под информатор.
+    --{Vector(-590,0,55),50,0.4},	-- костыль под информатор.
 }
 ENT.Cameras = {
     {Vector(770-159,36,42),Angle(0,180,0),"Train.740.CameraCond"},
@@ -436,8 +441,9 @@ ENT.Cameras = {
     {Vector(815-159,-42,-4),Angle(50,0,0),"Train.Common.ASNP"},
     {Vector(800-159,-9,8),Angle(90-46,0,0),"Train.740.CameraVityaz"},
     {Vector(777-159,-35,-30),Angle(40,90,0),"Train.740.CameraKRMH"},
-    {Vector(767-159,36,-18),Angle(0,180,0),"Train.740.CameraPVZ"},
+    {Vector(717-159,36,25),Angle(0,180,0),"Train.740.CameraPVZ"},
     {Vector(840-159,0,-20),Angle(60,0,0),"Train.Common.CouplerCamera"},
+    {Vector(800-157,-9),Angle(90-46,0,0),"Train.740.BUCIK"},	
 }
 -- Setup door positions
 ENT.LeftDoorPositions = {}

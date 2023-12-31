@@ -1,7 +1,6 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
-or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
@@ -48,7 +47,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
     self:SetPos(self:GetPos() + Vector(0,0,140))
 	
-    self.NormalMass = 17000
+    self.NormalMass = 20000
 
     -- Create seat entities
     self.DriverSeat = self:CreateSeat("driver",Vector(775-159,19,-27))
@@ -557,11 +556,11 @@ function ENT:CreatePricep(pos)
 	local zmax = 10	
 	
 	constraint.AdvBallsocket(
+			self.MiddleBogey,	
 			self,
-			self.MiddleBogey,
 			0, --bone
 			0, --bone
-			Vector(0,0,-30),
+			Vector(0,0,0),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -584,7 +583,7 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,
 			0, --bone
 			0, --bone,		
-			Vector(300,0,-30),
+			Vector(300,0,0),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -617,8 +616,8 @@ function ENT:CreatePricep(pos)
 	local zmax = 10		
 	
 		constraint.AdvBallsocket(
+			self.MiddleBogey,	
 			self,
-			self.MiddleBogey,
 			0, --bone
 			0, --bone
 			Vector(0,0,-30),
@@ -689,15 +688,15 @@ function ENT:CreatePricep(pos)
 	local ymin = -1.5
 	local ymax = 1.5
 	
-	local zmin = -10
-	local zmax = 10
+	local zmin = -35
+	local zmax = 35
 	
 	constraint.AdvBallsocket(
-			self,
 			self.MiddleBogey,
+			self,
 			0, --bone
 			0, --bone
-			Vector(0,0,40),
+			Vector(0,0,30),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -715,8 +714,8 @@ function ENT:CreatePricep(pos)
 			true
 		)
 		constraint.AdvBallsocket(	
-			self,
 			self.MiddleBogey,
+			self,
 			0, --bone
 			0, --bone
 			Vector(0,0,-10),
@@ -737,12 +736,12 @@ function ENT:CreatePricep(pos)
 			true
 		)		
 
-		constraint.AdvBallsocket(
+		constraint.AdvBallsocket(			
 			ent,
-			self.MiddleBogey,
+			self.MiddleBogey,			
 			0, --bone
 			0, --bone,		
-			Vector(310,0,40),
+			Vector(305,0,25),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -761,10 +760,10 @@ function ENT:CreatePricep(pos)
 		)
 		constraint.AdvBallsocket(
 			ent,
-			self.MiddleBogey,
+			self.MiddleBogey,	
 			0, --bone
 			0, --bone,		
-			Vector(310,0,-10),
+			Vector(305,0,-10),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit

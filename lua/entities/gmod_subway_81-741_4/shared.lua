@@ -1,7 +1,6 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
 or Map:find("gm_metro_krl")
-or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")

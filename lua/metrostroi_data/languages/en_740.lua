@@ -1,7 +1,6 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
 or Map:find("gm_metro_krl")
-or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
@@ -24,6 +23,7 @@ Train.740.CameraPV      = VPU
 Train.740.CameraVityaz  = SAU "Vityaz" 
 Train.740.CameraKRMH    = KRMSH and UAVA valves 
 Train.740.CameraPVZ     = PVZ 
+Train.740.BUCIK    		= BUCIK (Not working)
 
 #common 
 

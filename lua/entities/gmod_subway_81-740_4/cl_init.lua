@@ -1,7 +1,6 @@
 ﻿local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
-or Map:find("gm_dnipro")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
@@ -758,8 +757,8 @@ for k,buttbl in ipairs(ENT.ButtonMap["BackPPZ"].buttons) do
     }
 end
 ENT.ButtonMap["PVZ"] = {
-    pos = Vector(735.52-159,25,-14), --446 -- 14 -- -0,5
-    ang = Angle(0,90,90),
+    pos = Vector(700.52-159,60,32.2), --446 -- 14 -- -0,5
+    ang = Angle(0,0,94),
     width = 330,
     height = 160,
     scale = 0.0625,
@@ -2322,6 +2321,7 @@ end
 	or Map:find("gm_metro_ruralline")
 	or Map:find("gm_metro_nsk_line")		
 	or Map:find("gm_line_2")	
+	or Map:find("gm_dnipro")	
 	
 	
     self:ShowHide("Gerb_msk",kek1)
