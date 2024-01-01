@@ -569,6 +569,10 @@ function ENT:CreatePricep(pos)
 	--Метод mirror 				
     ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)
+	
+	ent.ButtonBuffer = {}
+	ent.KeyBuffer = {}
+	ent.KeyMap = {}			
 end
 --------------------------------------------------------------------------------
 --Основное
