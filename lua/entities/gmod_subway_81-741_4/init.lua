@@ -253,8 +253,6 @@ function ENT:CreatePricep(pos)
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end	
     --PrintTable(ent:GetTable())
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
-	ent.NoTrain = true
-	ent.SubwayTrain = nil	
 	
 	table.insert(self.TrainEntities,ent)
     table.insert(ent.TrainEntities,self)	
