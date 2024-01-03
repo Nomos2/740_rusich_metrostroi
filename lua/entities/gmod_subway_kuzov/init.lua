@@ -67,7 +67,7 @@ function ENT:Initialize()
 	
     self:UpdateLampsColors()		
 	
-end	
+end
 
 function ENT:TrainSpawnerUpdate()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	

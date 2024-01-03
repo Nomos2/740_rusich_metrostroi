@@ -2142,7 +2142,6 @@ else return end
 function ENT:Think()
     self.BaseClass.Think(self)
     if not self.RenderClientEnts or self.CreatingCSEnts then return end	
-if Metrostroi.Version >= 1537278077 then	
 	local MiddleBogey = self:GetNW2Entity("MiddleBogey")	
 	local refresh = false--true		
 	
@@ -2220,7 +2219,6 @@ if Metrostroi.Version >= 1537278077 then
 		self:ReInitBogeySounds(self.RearBogey)
 	end	
 end
-else return end
 
 for k=0,3 do
     self.ClientProps["TrainNumberR"..k] = {

@@ -84,6 +84,14 @@ if Metrostroi.Version >= 1623941696 then
             print("[Metrostroi 81-740] Inject sounds")
         end)
     end
+	
+    for k,v in pairs(Metrostroi.TrainClasses) do
+        if v == "gmod_subway_kuzov" then
+            Metrostroi.TrainClasses[k] = nil
+            Metrostroi.IsTrainClass[v] = nil
+            break
+        end
+    end	
 
 	if CLIENT then return end
 	else
@@ -149,6 +157,14 @@ timer.Simple(0,function()
 			end)	
 		end 	
 	end) 
+	
+    for k,v in pairs(Metrostroi.TrainClasses) do
+        if v == "gmod_subway_kuzov" then
+            Metrostroi.TrainClasses[k] = nil
+            Metrostroi.IsTrainClass[v] = nil
+            break
+        end
+    end		
 end
 
 --[[mezhvag --межвагонки будут переделаны

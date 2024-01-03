@@ -317,11 +317,11 @@ if self.RBLICache ~= self:GetNW2Bool("RBLI") then
     end
 	
 for avar = 1,2 do
+	if not IsValid(train) then return end
 	local animation = math.random (5,12)	
 	local animation1 = math.random (0.5,1)	
     local colV = self:GetNW2Vector("Lamp7404"..avar)
     local col = Color(colV.x,colV.y,colV.z)	
-	if not IsValid(train) then return end		
 	self:ShowHideSmooth("lamps_salon_on_rear_avar"..avar,train:Animate("LampsEmer",train:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,animation1,animation,false),col)  
 end	
 
@@ -329,9 +329,9 @@ end
     self:SetSoundState("compressor",state and 1.0 or 0,1)
 
 for i = 1,11 do	
+	if not IsValid(train) then return end	
     local colV = self:GetNW2Vector("Lamp7404"..i)
     local col = Color(colV.x,colV.y,colV.z)	   
-	if not IsValid(train) then return end	
 	self:ShowHideSmooth("lamps_salon_on_rear"..i-1,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
     self:ShowHideSmooth("lamps_salon_on_rear1"..i,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
 end
@@ -389,7 +389,7 @@ end
     local dPdT = train:GetPackedRatio("BrakeCylinderPressure_dPdT")
     if not IsValid(train) then return end		
     train.ReleasedPdT = math.Clamp(train.ReleasedPdT + 4*(-train:GetPackedRatio("BrakeCylinderPressure_dPdT",0)-train.ReleasedPdT)*dT,0,1)
-    self:SetSoundState("release_rear",math.Clamp(train.ReleasedPdT,0,1)^1.65,1.0)		
+    self:SetSoundState("release_rear",math.Clamp(train.ReleasedPdT,0,1)^1.65,1.0)
 	
 	local speed = train:GetPackedRatio("Speed", 0)
 
