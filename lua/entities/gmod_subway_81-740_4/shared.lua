@@ -430,12 +430,6 @@ function ENT:InitializeSystems()
 	self:LoadSystem("Prost_Kos","81_740_4PROST")
 	
 	self:LoadSystem("AsyncInverter","81_760_AsyncInverter")
-
-	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end	
-		
-	train1:LoadSystem("Panel","81_740_4Panel")	
 end
 
 ENT.AnnouncerPositions = {}

@@ -133,7 +133,7 @@ function ENT:UpdateLampsColors()
 		self.Lamps.broken[i] = math.random() > rand and math.random() > 0.7	
 		--PrintTable(self.Lamps.broken)	
 	end
-end	
+end
 	
 function ENT:Think()	
 	self:SetPackedBool("RearDoor",self.RearDoor)
@@ -144,7 +144,7 @@ function ENT:Think()
     self.Systems = {}
     self.TrainEntities = {}
     self.TrainWires = {}
-	local retVal = self.BaseClass.Think(self)		
+	local retVal = train.BaseClass.Think(self)		
     if not IsValid(train) then return end		
     local power = train.Electric.Battery80V > 62
     self:SetPackedBool("Vent2Work",train.Electric.Vent2>0)	
