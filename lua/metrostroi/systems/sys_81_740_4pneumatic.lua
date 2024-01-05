@@ -326,17 +326,18 @@ function TRAIN_SYSTEM:Think(dT)
                 self.EmergencyValve = false
             end
             self.Leak = true
-            Train:SetPackedRatio("EmergencyValve_dPdT", -leak)
         end
+        Train:SetPackedRatio("EmergencyValve_dPdT", -leak)
     end
     
-    local leak = 0
+    local leakByEmerCrane = 0
     if Train.EmerBrakeCrane1.Value > 0 or (Train.EmerBrakeCrane2 and Train.EmerBrakeCrane2.Value > 0) then
         self:equalizePressure(dT,"BrakeLinePressure", 0.0,pr_speed,false,false,0.4)
-        leak = self:equalizePressure(dT,"BrakeLinePressure", 0.0,pr_speed,false,false,0.4)
+        leakByEmerCrane = self:equalizePressure(dT,"BrakeLinePressure", 0.0,pr_speed,false,false,0.4)
         self.Leak = true
     end
-    self.Train:SetPackedRatio("EmergencyBrakeValve_dPdT", -leak)
+
+    self.Train:SetPackedRatio("EmergencyBrakeValve_dPdT", -leakByEmerCrane)
     self.Train:SetPackedRatio("Crane_dPdT", self.BrakeLinePressure_dPdT )
     trainLineConsumption_dPdT = trainLineConsumption_dPdT + math.max(0,self.BrakeLinePressure_dPdT)
 --[[
