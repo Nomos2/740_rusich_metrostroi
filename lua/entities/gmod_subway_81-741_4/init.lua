@@ -21,14 +21,14 @@ ENT.SyncTable = {
     "FrontBrakeLineIsolation","FrontTrainLineIsolation","Battery","PVZ_otsek","PVZ_otsek_open",
     "GV",
 }
---------------------------------------------------------------------------------
+--
 function ENT:Initialize()
     -- Set model and initialize
     self:SetModel("models/metrostroi_train/81-741/body/81-741_4_front.mdl")
     self.BaseClass.Initialize(self)
     self:SetPos(self:GetPos() + Vector(0,0,140))	
 
-    self.NormalMass = 20000
+    self.NormalMass = 24000--20000
 
     -- Create seat entities
 	self.DriverSeat = self:CreateSeat("instructor",Vector(610,11,-35),Angle(0,90,0),"models/vehicles/prisoner_pod_inner.mdl")
@@ -48,8 +48,8 @@ function ENT:Initialize()
 		self.RearBogey:SetNWInt("MotorSoundType",2)		
 	    self.RearBogey.DisableContacts = true	
 		self.RearBogey.PneumaticPow = 0.7			
-        self.FrontCouple = self:CreateCouple(Vector(607,0,-60),Angle(0,0,0),true,"717")		
-        self.RearCouple = self:CreateCouple(Vector(-611,0,-60),Angle(0,-180,0),false,"740")
+        self.FrontCouple = self:CreateCouple(Vector(608,0,-60),Angle(0,0,0),true,"717")		
+        self.RearCouple = self:CreateCouple(Vector(-612,0,-60),Angle(0,-180,0),false,"740")
 		self.RearCouple:SetModel("models/metrostroi_train/81-740/bogey/metro_couple_740.mdl") --
 		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)		
 		
@@ -72,7 +72,7 @@ end)
     local rand = math.random()*0.05
     self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
     self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)
---------------------------------------------------------------------------------	
+--	
     -- Initialize key mapping
     self.KeyMap = {
         [KEY_F] = "PneumaticBrakeUp",
@@ -163,12 +163,7 @@ function ENT:TrainSpawnerUpdate()
        if VentSound == 1 then
             VentSound = math.ceil(math.random()*1+0.5)
           else VentSound = VentSound-1 end	
-	self:SetNW2Int("VentSound",VentSound)	
-    --рандомизация цвета табло
-	--local ALS = math.random(1, 3)
-	--self:SetNW2Int("tablo_color", ALS)
-	--print(self:GetNW2String("Texture"))
-	
+	self:SetNW2Int("VentSound",VentSound)
     self:UpdateLampsColors()	
 	
 local ahahaha =  math.random (1,5)
@@ -314,75 +309,19 @@ function ENT:CreatePricep(pos)
         1, --zfric
         0, --rotonly
         1 --nocollide
-    ) 	
+    )
 	
-	local Map = game.GetMap():lower() or ""        
-	if Map:find("gm_metro_pink_line_redux") or
+	local Map = game.GetMap():lower() or ""    	
+	if Map:find("gm_mustox_neocrimson_line") or
+	Map:find("gm_mus_neoorange") or
+	Map:find("gm_metro_kalinin") or	
+	Map:find("gm_metro_nekrasovskaya_line") or	
+	Map:find("gm_metro_pink_line_redux") or
 	Map:find("gm_jar_pll_redux") or
 	Map:find("gm_metro_crossline") or	
 	Map:find("gm_metro_mosldl") or	
 	Map:find("gm_metro_nsk_line") or		
-	Map:find("gm_smr_1987") then	
-	
-	local xmin = 0
-	local xmax = 0
-	
-	local ymin = 0
-	local ymax = 0
-	
-	local zmin = -10
-	local zmax = 10	
-	
-	constraint.AdvBallsocket(
-			self.MiddleBogey,	
-			self,
-			0, --bone
-			0, --bone
-			Vector(0,0,0),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true
-		)	
-
-		constraint.AdvBallsocket(
-			ent,
-			self.MiddleBogey,
-			0, --bone
-			0, --bone,		
-			Vector(300,0,0),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true	
-		) 
-	
-	elseif Map:find("gm_mustox_neocrimson_line") or
-	Map:find("gm_mus_neoorange") or
-	Map:find("gm_metro_kalinin") or	
-	Map:find("gm_metro_nekrasovskaya_line") then	
+	Map:find("gm_smr_1987") then		
 	
 	local xmin = 0
 	local xmax = 0
@@ -496,7 +435,7 @@ function ENT:CreatePricep(pos)
 			self,
 			0, --bone
 			0, --bone
-			Vector(0,0,-10),
+			Vector(0,0,-5),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -519,7 +458,7 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,			
 			0, --bone
 			0, --bone,		
-			Vector(305,0,25),
+			Vector(305,0,30),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -572,7 +511,7 @@ function ENT:CreatePricep(pos)
 	ent.KeyBuffer = {}
 	ent.KeyMap = {}			
 end
---------------------------------------------------------------------------------
+--
 --Основное
 function ENT:Think()	
     local retVal = self.BaseClass.Think(self)
@@ -582,7 +521,7 @@ function ENT:Think()
     local state = math.abs(self.AsyncInverter.InverterFrequency/(11+self.AsyncInverter.State*5))--(10+8*math.Clamp((self.AsyncInverter.State-0.4)/0.4,0,1)))
     self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+self.AsyncInverter.State/1),0,1)*math.Clamp(self.Speed/6,0,1))
     self:SetPackedRatio("asyncstate", math.Clamp(self.AsyncInverter.State/0.2*math.abs(self.AsyncInverter.Current)/100,0,1))
-    self:SetPackedRatio("chopper", math.Clamp(self.Electric.Chopper>0 and self.Electric.IChopped/100 or 0,0,1))	 
+    self:SetPackedRatio("chopper", math.Clamp(self.Electric.Chopper>0 and self.Electric.IChopped/100 or 0,0,1))
 		
 	local lightsActive1 = power and self.SFV20.Value > 0 
     local lightsActive2 = power and self.BUV.MainLights 
@@ -628,11 +567,7 @@ function ENT:Think()
 
     self:SetPackedBool("AnnPlay",Panel.AnnouncerPlaying > 0)
     self:SetPackedBool("FrontDoor",self.FrontDoor)
-	
-    self:SetPackedRatio("SalonLighting",passlight)
-    --local mul = self.SF45.Value > 0.5 and self.BUV.MainLights and 1 or self.SF46.Value > 0.5 and 0.5 or 0
-    --self:SetLightPower(11,self.BUV.Power and mul > 0, mul)
-    --self:SetLightPower(12,self.BUV.Power and mul > 0, mul)
+	self:SetPackedRatio("SalonLighting",passlight)
     self.AsyncInverter:TriggerInput("Speed",self.Speed)
     
     --мощность двигателей и тормозов    
@@ -681,7 +616,7 @@ function ENT:Think()
     end
     return retVal
 end
---------------------------------------------------------------------------------	 
+--	 
 --При сцепке открывать краны
 function ENT:OnCouple(train,isfront)
     if isfront and self.FrontAutoCouple then

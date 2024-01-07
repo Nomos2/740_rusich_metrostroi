@@ -1,19 +1,9 @@
 vedro740 = vedro740 or {} --check 81-740 addon availability by other addons
 --beb = beb or {} --uncomment to disable als autofreq
 
-	for k,v in pairs(Metrostroi.TrainClasses) do
-        if v == "gmod_subway_kuzov" then
-            Metrostroi.TrainClasses[k] = nil
-            Metrostroi.IsTrainClass[v] = nil
-			break
-		end	
-	end
-
 if Metrostroi.Version >= 1623941696 then
-
-	if SERVER then		
-		timer.Simple(1,function()
-		
+	if SERVER then
+		timer.Simple(1,function()	
 		local models = {
 		["models/metrostroi_train/81-740/body/81-740_4_front.mdl"] = true,
 		["models/metrostroi_train/81-740/body/81-740_4_rear.mdl"] = true,
@@ -75,7 +65,7 @@ if Metrostroi.Version >= 1623941696 then
     }
     
     if CLIENT then
-        timer.Simple(1, function()
+        timer.Simple(1, function()		
             local BogeyTbl = scripted_ents.GetStored("gmod_train_bogey").t
             
             BogeyTbl.SoundNames["ted1_740"]  = "subway_trains/rusich/engines/engine_8.wav"
@@ -92,7 +82,9 @@ if Metrostroi.Version >= 1623941696 then
             print("[Metrostroi 81-740] Inject sounds")
         end)
     end
+	
 	if CLIENT then return end
+	
 	else
 
 --custom bogey and couple
@@ -116,7 +108,6 @@ timer.Simple(0,function()
 	
 	if SERVER then
 		timer.Simple(1,function()
-		
 			-- регистрируем тележки
 			local tbl = scripted_ents.Get("gmod_train_bogey")
 			if tbl then	

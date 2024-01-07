@@ -12,7 +12,7 @@ function TRAIN_SYSTEM:Initialize()
 	self.EmergencyBrake = 0
 	self.CommandKos = false
 	self.Stop = false	
-	self.Stop1 = false
+	self.Stop1 = false 
 	self.Metka = {}	
 	
 	self.BlockDoorsL = true

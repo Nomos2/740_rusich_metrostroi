@@ -185,7 +185,7 @@ function ENT:InitializeSystems()
     self:LoadSystem("Panel","81_741_4Panel")
     self:LoadSystem("Tickers","81_740_4Ticker")
     --self:LoadSystem("PassSchemes","81_740_4PassScheme")
-	self:LoadSystem("AsyncInverter","81_760_AsyncInverter")	
+	self:LoadSystem("AsyncInverter","81_760_AsyncInverter")
     self:LoadSystem("IGLA_PCBK","IGLA_740_4PCBK")	
 end
 

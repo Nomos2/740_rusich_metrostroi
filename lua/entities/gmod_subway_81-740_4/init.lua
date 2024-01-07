@@ -38,7 +38,7 @@ ENT.SyncTable = {
 	"CAMS5","CAMS6","CAMS7","CAMS8","CAMS9","CAMS10",
     "PB",   "GV",	"EmergencyBrakeValve","stopkran",
 }
---------------------------------------------------------------------------------
+--
 
 function ENT:Initialize()
     -- Set model and initialize
@@ -47,7 +47,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
     self:SetPos(self:GetPos() + Vector(0,0,140))
 	
-    self.NormalMass = 20000
+    self.NormalMass = 24000--20000
 
     -- Create seat entities
     self.DriverSeat = self:CreateSeat("driver",Vector(775-159,19,-27))
@@ -86,8 +86,8 @@ function ENT:Initialize()
 		self.RearBogey:SetNWInt("MotorSoundType",2)
         self.RearBogey.DisableContacts = true	
 		self.RearBogey.PneumaticPow = 0.7		
-        self.FrontCouple = self:CreateCouple(Vector(626.9,0,-60),Angle(0,0,0),true,"717")
-        self.RearCouple = self:CreateCouple(Vector(-640,0,-60),Angle(0,-180,0),false,"740") 
+        self.FrontCouple = self:CreateCouple(Vector(627,0,-60),Angle(0,0,0),true,"717")
+        self.RearCouple = self:CreateCouple(Vector(-641,0,-60),Angle(0,-180,0),false,"740") 
 		self.RearCouple:SetModel("models/metrostroi_train/81-740/bogey/metro_couple_740.mdl") 
 		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)				
 			
@@ -132,7 +132,7 @@ function Bogey:PhysicsCollide(data,physobj)
 		end
 	end
 end	]]	
---------------------------------------------------------------------------------					
+--					
     -- Initialize key mapping
     self.KeyMap = {
         [KEY_W] = "PanelKVUp",
@@ -296,9 +296,7 @@ end	]]
         ABSD = true,
         UAVA = true,
         Init = true,
-        --ALSFreqBlock = true,		
 		R_ASNPOn = true,		
-		--ALSFreqBlock = ALSFreqPlomb,
     }
 	self.Lamps = {
         broken = {},
@@ -401,12 +399,6 @@ function ENT:TrainSpawnerUpdate()
             VentSound = math.ceil(math.random()*1+0.5)
           else VentSound = VentSound-1 end	
 	self:SetNW2Int("VentSound",VentSound)	
-		
-    --рандомизация цвета табло
-	--local ALS = math.random(1, 3)
-	--self:SetNW2Int("tablo_color", ALS)
-	--print(self:GetNW2String("Texture"))	
-	
     self:UpdateLampsColors()
 end
 
@@ -536,73 +528,17 @@ function ENT:CreatePricep(pos)
         1 --nocollide
     ) 	
 	
-	local Map = game.GetMap():lower() or ""        
-	if Map:find("gm_metro_pink_line_redux") or
+	local Map = game.GetMap():lower() or ""    	
+	if Map:find("gm_mustox_neocrimson_line") or
+	Map:find("gm_mus_neoorange") or
+	Map:find("gm_metro_kalinin") or	
+	Map:find("gm_metro_nekrasovskaya_line") or	
+	Map:find("gm_metro_pink_line_redux") or
 	Map:find("gm_jar_pll_redux") or
 	Map:find("gm_metro_crossline") or	
 	Map:find("gm_metro_mosldl") or	
 	Map:find("gm_metro_nsk_line") or		
-	Map:find("gm_smr_1987") then	
-	
-	local xmin = 0
-	local xmax = 0
-	
-	local ymin = 0
-	local ymax = 0
-	
-	local zmin = -10
-	local zmax = 10	
-	
-	constraint.AdvBallsocket(
-			self.MiddleBogey,	
-			self,
-			0, --bone
-			0, --bone
-			Vector(0,0,0),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true
-		)	
-
-		constraint.AdvBallsocket(
-			ent,
-			self.MiddleBogey,
-			0, --bone
-			0, --bone,		
-			Vector(300,0,0),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true	
-		) 
-	
-	elseif Map:find("gm_mustox_neocrimson_line") or
-	Map:find("gm_mus_neoorange") or
-	Map:find("gm_metro_kalinin") or	
-	Map:find("gm_metro_nekrasovskaya_line") then	
+	Map:find("gm_smr_1987") then		
 	
 	local xmin = 0
 	local xmax = 0
@@ -680,14 +616,14 @@ function ENT:CreatePricep(pos)
 		)
 	else
 	
-	local xmin = -1.5
-	local xmax = 1.5
+	local xmin = -2.5
+	local xmax = 2.5
 	
-	local ymin = -1.5
-	local ymax = 1.5
+	local ymin = -2.5
+	local ymax = 2.5
 	
-	local zmin = -15
-	local zmax = 15
+	local zmin = -35
+	local zmax = 35
 	
 	constraint.AdvBallsocket(
 			self.MiddleBogey,
@@ -716,7 +652,7 @@ function ENT:CreatePricep(pos)
 			self,
 			0, --bone
 			0, --bone
-			Vector(0,0,-10),
+			Vector(0,0,-5),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -736,10 +672,10 @@ function ENT:CreatePricep(pos)
 
 		constraint.AdvBallsocket(			
 			ent,
-			self.MiddleBogey,			
+			self.MiddleBogey,	
 			0, --bone
 			0, --bone,		
-			Vector(305,0,25),
+			Vector(305,0,40),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -761,7 +697,7 @@ function ENT:CreatePricep(pos)
 			self.MiddleBogey,	
 			0, --bone
 			0, --bone,		
-			Vector(305,0,-10),
+			Vector(305,0,-15),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit
@@ -978,7 +914,7 @@ function ENT:Think()
 
     end
     return retVal
-end	 
+end
 
 function ENT:OnCouple(train,isfront)   	
     if isfront and self.FrontAutoCouple then
