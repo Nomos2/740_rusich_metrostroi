@@ -306,7 +306,10 @@ function TRAIN_SYSTEM:Think(dT)
     else
         Async:TriggerInput("TargetCurrent",0)
     end
-	self.EnergyChange = Async.Mode>0 and (Async.Current^2)*2.2 or 0
+	self.EnergyChange = async.Mode>0 and (async.Current^2)*2.2 or 0
+    self.ElectricEnergyUsed = self.ElectricEnergyUsed + max(0,self.EnergyChange)*dT		
+    self.ElectricEnergyDissipated = self.ElectricEnergyDissipated + max(0,-self.EnergyChange)*dT
+    self.Itotal = Async.Current
     --[[ if self.Main750V > 900 or Async.Mode>0 then
         self.Recurperation = false
     elseif self.Main750V < 875 and Async.Mode<0 then

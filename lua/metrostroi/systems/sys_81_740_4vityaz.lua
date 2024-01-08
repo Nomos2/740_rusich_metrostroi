@@ -821,7 +821,7 @@ if SERVER then
 							local train = self.Trains[self.Trains[i]]
 							Train:SetNW2Int("VityazBrakeStrength"..i,math.abs((train.BrakeStrength or 0))*20)
 							Train:SetNW2Int("VityazDriveStrength"..i,math.abs((train.DriveStrength or 0))*20)
-							--Train:SetNW2Int("VityazElectricEnergyUsed"..i,train.ElectricEnergyUsed*10)
+							Train:SetNW2Float("VityazElectricEnergyUsed"..i,train.ElectricEnergyUsed)
 						end
 					elseif self.State2 == 0 then
 							for i=1,self.WagNum do
@@ -1028,15 +1028,20 @@ else
 			scanlines = scanlines or false,
 		})
 	end
-	
+	local checkFontSize,fontSize4Bold = true
+	if checkFontSize then
+		surface.SetFont("Metrostroi_7404_VityazBold")
+		fontSize4Bold = select(1,surface.GetTextSize("█")) ~= 15 and 25 or 28
+	end
 	createFont("VityazComm","Lucida Console",25,410,0.5,1,false)
 	createFont("VityazComm2","FreeSans",40,500,0.5,2,false)
-    createFont("VityazBold","FreeSans",28,400,0.5,2,false)
+    createFont("VityazBold","FreeSans",fontSize4Bold,400,0.5,2,false)
 	createFont("VityazPU","PerfectDOSVGA437",26,400,0,0,false)
 	createFont("VityazPU1","Lucida Console",24,500,false)
 	createFont("VityazPU2","Lucida Console",21,300,false) 
 	createFont("VityazPU3","Arial",34,600,false)
 	createFont("VityazPU4","Lucida Console",17,600,false)
+	
 	local State5 = surface.GetTextureID("models/81-740/State5_1")
 	
 	function TRAIN_SYSTEM:ClientThink()
@@ -1507,14 +1512,16 @@ else
 			elseif sel == 1 then
 				self:PrintText(23,13,"УСИЛИЕ",yellow)
 				self:PrintText(23,15,"ТЯГ",yellow)
-				self:PrintText(29,15,"ТОРМ",yellow)
-				--self:PrintText(30,13,"ЭНЕРГИЯ",yellow)
-				--self:PrintText(31,15,"ПОТР",yellow)
+				self:PrintText(28,15,"ТОРМ",yellow)
+				if not isOld then
+					self:PrintText(33,13,"ЭНЕРГИЯ",yellow)
+					self:PrintText(34,15,"ПОТР",yellow)
+				end
 				for i = 1,wagnum do 
 					self:PrintText(21,16+i,tostring(i),yellow)
-					self:PrintText(23,16+i,Format("%02d",Train:GetNW2Int("VityazBrakeStrength"..i,0)*2),green)
-					self:PrintText(30,16+i,Format("%02d",Train:GetNW2Int("VityazDriveStrength"..i,0)*2),aqua)
-					--self:PrintText(30,16+i,Format("%07.1f",Train:GetNW2Int("VityazElectricEnergyUsed"..i,0)),red)
+					self:PrintText(29,16+i,Format("%02d",Train:GetNW2Int("VityazBrakeStrength"..i,0)*2),aqua)
+					self:PrintText(23,16+i,Format("%02d",Train:GetNW2Int("VityazDriveStrength"..i,0)*2),green)
+					if not isOld then self:PrintText(33,16+i,Format("%07.1f",Train:GetNW2Float("VityazElectricEnergyUsed"..i,0)),red) end
 				end
 			end
 		elseif self.State == 5 and state2 == 0 then
@@ -1876,8 +1883,9 @@ else
 				self:PrintText(5,24,"000"..Train:GetNW2Int("ProstStength"),yellow)
 				self:PrintText(10,24,#tohex(prostTotalDist) == 1 and "000"..tohex(prostTotalDist) or #tohex(prostTotalDist) == 2 and "00"..tohex(prostTotalDist) or #tohex(prostTotalDist) == 3 and "0"..tohex(prostTotalDist) or "0000",yellow)
 				self:PrintText(15,24,prostTimer > 4096 and tohex(prostTimer) or "0000",yellow)
-				
-				self:PrintText(37,24,prostMark > 4096 and tohex(prostMark) or "0000",yellow)
+				if mainmsg == 0 then
+					self:PrintText(37,24,prostMark > 4096 and tohex(prostMark) or "0000",yellow)
+				end
 			end
 		end
 	end
