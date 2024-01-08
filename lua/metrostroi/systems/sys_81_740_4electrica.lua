@@ -306,7 +306,7 @@ function TRAIN_SYSTEM:Think(dT)
     else
         Async:TriggerInput("TargetCurrent",0)
     end
-	self.EnergyChange = async.Mode>0 and (async.Current^2)*2.2 or 0
+	self.EnergyChange = Async.Mode>0 and (Async.Current^2)*2.2 or 0
     self.ElectricEnergyUsed = self.ElectricEnergyUsed + max(0,self.EnergyChange)*dT		
     self.ElectricEnergyDissipated = self.ElectricEnergyDissipated + max(0,-self.EnergyChange)*dT
     self.Itotal = Async.Current
