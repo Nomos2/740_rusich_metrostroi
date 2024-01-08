@@ -617,7 +617,7 @@ if SERVER then
 						local doorclose = true
 						for i=1,8 do
 							if not train["Door"..i.."Closed"] then
-								doorclose = false0
+								doorclose = false
 								break
 							end
 						end
