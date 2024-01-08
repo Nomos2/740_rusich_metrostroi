@@ -436,6 +436,7 @@ if SERVER then
 	end
 	function TRAIN_SYSTEM:Think(dT)
 		--print(self.ProstCanEnDis)
+		
         if self.State > 0 and self.Reset and self.Reset ~= 1 then self.Reset = false end
         local Train = self.Train
 		Train:SetNW2Bool("OldVersion", self.OldVersion)
@@ -464,6 +465,7 @@ if SERVER then
             self.State = Power and -1 or -3
             self.VityazTimer = CurTime()
         end
+	
 		if self.State == -1 and CurTime()-self.VityazTimer > 1 then
 
 			self.State = 1
@@ -614,6 +616,9 @@ if SERVER then
 					for i=1,self.WagNum do
 						local trainid = self.Trains[i]
 						local train = self.Trains[trainid]
+						if not train then
+							self.State = 1
+						end
 						local doorclose = true
 						for i=1,8 do
 							if not train["Door"..i.."Closed"] then
@@ -1028,22 +1033,20 @@ else
 			scanlines = scanlines or false,
 		})
 	end
-	local checkFontSize,fontSize4Bold = true
-	if checkFontSize then
-		surface.SetFont("Metrostroi_7404_VityazBold")
-		fontSize4Bold = select(1,surface.GetTextSize("█")) ~= 15 and 25 or 28
-	end
+	
 	createFont("VityazComm","Lucida Console",25,410,0.5,1,false)
 	createFont("VityazComm2","FreeSans",40,500,0.5,2,false)
+	createFont("VityazBold1","FreeSans",28,400,0.5,2,false)
+	surface.SetFont("Metrostroi_7404_VityazBold1")
+	local txt = "█"
+	local fontSize4Bold = select(1,surface.GetTextSize(txt)) ~= 15 and 24 or 28
     createFont("VityazBold","FreeSans",fontSize4Bold,400,0.5,2,false)
 	createFont("VityazPU","PerfectDOSVGA437",26,400,0,0,false)
 	createFont("VityazPU1","Lucida Console",24,500,false)
 	createFont("VityazPU2","Lucida Console",21,300,false) 
 	createFont("VityazPU3","Arial",34,600,false)
 	createFont("VityazPU4","Lucida Console",17,600,false)
-	
-	local State5 = surface.GetTextureID("models/81-740/State5_1")
-	
+
 	function TRAIN_SYSTEM:ClientThink()
 		local state = self.Train:GetNW2Int("VityazState",0)
 		--print(state.." state")
