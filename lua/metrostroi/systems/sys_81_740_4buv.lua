@@ -147,7 +147,8 @@ function TRAIN_SYSTEM:Think()
 			drive = self.Drive*bv--*Train.Electric.BUTP
 			strength = self.DriveStrength
 		end
-        self.Recurperation = self:Get("RecurperationDisable")
+        -- Раскомменитруйте, когда сделаете привод, эта переменная управляет рекуперацией
+        --self.Recurperation = self:Get("RecurperationDisable")
 		self:CState("Strength",self.Strength)
 		self:CState("Scheme", ((Train.Speed < 6.5 and 0 or brake)+drive > 0 and (drive > 0 and (Train.Pneumatic.BrakeCylinderPressure < 0.7 or self.Slope1 or Train:ReadTrainWire(19)+Train:ReadTrainWire(45) > 0) or brake > 0 and Train.Pneumatic.BrakeCylinderPressure < 1.7+Train.Pneumatic.WeightLoadRatio)) and SchemeWork > 0.5)
 		self.Scheme_E = (Train.Speed < 6.5 and 0 or brake)+drive > 0 and (drive > 0 and (Train.Pneumatic.BrakeCylinderPressure < 0.7 or self.Slope1 or Train:ReadTrainWire(19)+Train:ReadTrainWire(45) > 0) or brake > 0 and Train.Pneumatic.BrakeCylinderPressure < 1.7+Train.Pneumatic.WeightLoadRatio) and SchemeWork > 0.5
