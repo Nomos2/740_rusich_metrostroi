@@ -40,30 +40,37 @@ function ENT:Initialize()
 	self.DriverSeat.m_tblToolsAllowed = { "none" }		
 
  -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 520,0,-75),Angle(0,180,0),true,"740PER")
+        self.FrontBogey = self:CreateBogey(Vector( 505,0,-80),Angle(0,180,0),true,"740PER")
 		self.FrontBogey.PneumaticPow = 0.7			
-        self.RearBogey  = self:CreateBogey(Vector(-520,0,-75),Angle(0,0,0),false,"740NOTR") --110 0 -80  
+        self.RearBogey  = self:CreateBogey(Vector(-540,0,-80),Angle(0,0,0),false,"740NOTR") --110 0 -80  
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)	
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)		
 	    self.RearBogey.DisableContacts = true	
 		self.RearBogey.PneumaticPow = 0.7			
-        self.FrontCouple = self:CreateCouple(Vector(608,0,-60),Angle(0,0,0),true,"717")		
-        self.RearCouple = self:CreateCouple(Vector(-612,0,-60),Angle(0,-180,0),false,"740")
-		self.RearCouple:SetModel("models/metrostroi_train/81-740/bogey/metro_couple_740.mdl") --
-		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)		
+        self.FrontCouple = self:CreateCouple(Vector(608-17,0,-60),Angle(0,0,0),true,"740")		
+        self.RearCouple = self:CreateCouple(Vector(-612-17,0,-60),Angle(0,-180,0),false,"740")
+		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
+		local opt = Vector(67,0,0)
+		self.FrontCouple.CouplingPointOffset = opt		
+		self.RearCouple.CouplingPointOffset = opt			
 		
 		self.FrontCouple.m_tblToolsAllowed = { "none" }	
 		self.RearCouple.m_tblToolsAllowed = { "none" }	
 		self.FrontBogey.m_tblToolsAllowed = { "none" }	
 		self.RearBogey.m_tblToolsAllowed = { "none" }		
 		
-	self:SetNW2Entity("FrontBogey",self.FrontBogey)
-	self:SetNW2Entity("RearBogey",self.RearBogey)	
+		self:SetNW2Entity("FrontBogey",self.FrontBogey)
+		self:SetNW2Entity("RearBogey",self.RearBogey)	
+		self:SetNW2Entity("RearCouple",self.RearCouple)	
+		self:SetNW2Entity("FrontCouple",self.FrontCouple)  		
 	
 timer.Simple(0.1, function()	
         if not IsValid(self) then return end
-		self.Pricep = self:CreatePricep(Vector(-326.1,0,0))		--вагон			
+		self.Pricep = self:CreatePricep(Vector(-343,0,0))--вагон
+		local opt65 = Vector(65,0,0)	
+		self.RearCouple.CouplingPointOffset = opt65
+		self.FrontCouple.CouplingPointOffset = opt65					
 end)
 	
 	self.FrontBogey:SetNWBool("Async",true)
@@ -252,7 +259,7 @@ function ENT:CreatePricep(pos)
 	table.insert(self.TrainEntities,ent)
     table.insert(ent.TrainEntities,self)	
 
-	self.MiddleBogey = self:CreateBogey(Vector(-1,0,-74),Angle(0,0,0),true,"740G")--тележка  ---160,0,-75 -410,0,-75	
+	self.MiddleBogey = self:CreateBogey(Vector(-18,0,-80),Angle(0,0,0),true,"740G")--тележка  ---160,0,-75 -410,0,-75	
 	self:SetNW2Entity("MiddleBogey",self.MiddleBogey)	
     local rand = math.random()*0.05	
 	self.MiddleBogey:SetNWFloat("SqualPitch",1.45+rand) 		
@@ -399,16 +406,38 @@ function ENT:CreatePricep(pos)
 		)
 	else
 	
-	local xmin = -1.5
-	local xmax = 1.5
+		local xmin = -2
+	local xmax = 2
 	
-	local ymin = -1.5
-	local ymax = 1.5
+	local ymin = -2
+	local ymax = 2
 	
 	local zmin = -35
 	local zmax = 35
 	
 	constraint.AdvBallsocket(
+			self.MiddleBogey,
+			self,
+			0, --bone
+			0, --bone
+			Vector(0,0,50),
+			pos,		
+			0, --forcelimit
+			0, --torquelimit
+			xmin, --xmin
+			ymin, --ymin
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
+			zmax, --zmax
+			0, --xfric
+			0, --yfric
+			0, --zfric
+			0, --rotonly
+			1,--nocollide
+			true
+		)
+		constraint.AdvBallsocket(	
 			self.MiddleBogey,
 			self,
 			0, --bone
@@ -429,7 +458,7 @@ function ENT:CreatePricep(pos)
 			0, --rotonly
 			1,--nocollide
 			true
-		)
+		)		
 		constraint.AdvBallsocket(	
 			self.MiddleBogey,
 			self,
@@ -453,12 +482,12 @@ function ENT:CreatePricep(pos)
 			true
 		)		
 
-		constraint.AdvBallsocket(			
-			ent,
+		constraint.AdvBallsocket(	
 			self.MiddleBogey,			
+			ent,
 			0, --bone
 			0, --bone,		
-			Vector(305,0,30),
+			Vector(0,0,50),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -476,11 +505,11 @@ function ENT:CreatePricep(pos)
 			true	
 		)
 		constraint.AdvBallsocket(
+			self.MiddleBogey,			
 			ent,
-			self.MiddleBogey,	
 			0, --bone
 			0, --bone,		
-			Vector(305,0,-10),
+			Vector(0,0,30),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit
@@ -497,6 +526,28 @@ function ENT:CreatePricep(pos)
 			1,--nocollide
 			true	
 		)
+		constraint.AdvBallsocket(
+			self.MiddleBogey,			
+			ent,
+			0, --bone
+			0, --bone,		
+			Vector(0,0,-5),
+			pos,	
+			0, --forcelimit
+			0, --torquelimit
+			xmin, --xmin
+			ymin, --ymin
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
+			zmax, --zmax
+			0, --xfric
+			0, --yfric
+			0, --zfric
+			0, --rotonly
+			1,--nocollide
+			true	
+		)		
 	end
 	
     self:RerailChange(self.FrontBogey, true)

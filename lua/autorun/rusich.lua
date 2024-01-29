@@ -1,5 +1,4 @@
 vedro740 = vedro740 or {} --check 81-740 addon availability by other addons
---beb = beb or {} --uncomment to disable als autofreq
 
 if Metrostroi.Version >= 1623941696 then
 	if SERVER then
@@ -18,7 +17,7 @@ if Metrostroi.Version >= 1623941696 then
 			if tbl then	
 				tbl.Types["740PER"] = { -- тележка
 					"models/metrostroi_train/81-740/bogey/metro_bogey_740.mdl",
-					Vector(0,0.0,-10.5),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
+					Vector(0,0.0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
 					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
@@ -32,7 +31,7 @@ if Metrostroi.Version >= 1623941696 then
 				}
 				tbl.Types["740NOTR"] = { -- немоторная тележка
 					"models/metrostroi_train/81-740/bogey/metro_bogey_notr.mdl",
-					Vector(0,0.0,-10.1),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
+					Vector(0,0.0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
 					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
@@ -68,16 +67,16 @@ if Metrostroi.Version >= 1623941696 then
         timer.Simple(1, function()		
             local BogeyTbl = scripted_ents.GetStored("gmod_train_bogey").t
             
-            BogeyTbl.SoundNames["ted1_740"]  = "subway_trains/rusich/engines/engine_8.wav"
-            BogeyTbl.SoundNames["ted2_740"]  = "subway_trains/rusich/engines/engine_16.wav"
-            BogeyTbl.SoundNames["ted3_740"]  = "subway_trains/rusich/engines/engine_24.wav"
-            BogeyTbl.SoundNames["ted4_740"]  = "subway_trains/rusich/engines/engine_32.wav"
-            BogeyTbl.SoundNames["ted5_740"]  = "subway_trains/rusich/engines/engine_40.wav"
-            BogeyTbl.SoundNames["ted6_740"]  = "subway_trains/rusich/engines/engine_48.wav"
-            BogeyTbl.SoundNames["ted7_740"]  = "subway_trains/rusich/engines/engine_56.wav"
-            BogeyTbl.SoundNames["ted8_740"]  = "subway_trains/rusich/engines/engine_64.wav"
-            BogeyTbl.SoundNames["ted9_740"]  = "subway_trains/rusich/engines/engine_72.wav"
-            BogeyTbl.SoundNames["ted10_740"] = "subway_trains/rusich/engines/engine_80.wav"
+            BogeyTbl.SoundNames["ted1_740"]  = "subway_trains/740_4/engines/engine_8.wav"
+            BogeyTbl.SoundNames["ted2_740"]  = "subway_trains/740_4/engines/engine_16.wav"
+            BogeyTbl.SoundNames["ted3_740"]  = "subway_trains/740_4/engines/engine_24.wav"
+            BogeyTbl.SoundNames["ted4_740"]  = "subway_trains/740_4/engines/engine_32.wav"
+            BogeyTbl.SoundNames["ted5_740"]  = "subway_trains/740_4/engines/engine_40.wav"
+            BogeyTbl.SoundNames["ted6_740"]  = "subway_trains/740_4/engines/engine_48.wav"
+            BogeyTbl.SoundNames["ted7_740"]  = "subway_trains/740_4/engines/engine_56.wav"
+            BogeyTbl.SoundNames["ted8_740"]  = "subway_trains/740_4/engines/engine_64.wav"
+            BogeyTbl.SoundNames["ted9_740"]  = "subway_trains/740_4/engines/engine_72.wav"
+            BogeyTbl.SoundNames["ted10_740"] = "subway_trains/740_4/engines/engine_80.wav"
             BogeyTbl.EngineSNDConfig[5] = ClBogeyConf
             print("[Metrostroi 81-740] Inject sounds")
         end)
@@ -113,7 +112,7 @@ timer.Simple(0,function()
 			if tbl then	
 				tbl.Types["740PER"] = { -- тележка
 					"models/metrostroi_train/81-740/bogey/metro_bogey_740.mdl",
-					Vector(0,0,-10.5),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
+					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
 					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
@@ -127,7 +126,7 @@ timer.Simple(0,function()
 				}
 				tbl.Types["740NOTR"] = { -- немоторная тележка
 					"models/metrostroi_train/81-740/bogey/metro_bogey_notr.mdl",
-					Vector(0,0.0,-10.1),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
+					Vector(0,0.0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
 					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),

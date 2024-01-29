@@ -150,7 +150,7 @@ function ENT:Think()
     self:SetPackedBool("Vent2Work",train.Electric.Vent2>0)	
     self:SetPackedBool("BBEWork",power and train.BUV.BBE > 0)
     self:SetPackedBool("CompressorWork",train.Pneumatic.Compressor) 
-    self:SetPackedBool("ANNPlAY",Panel.AnnouncerPlaying > 0)
+    self:SetPackedBool("AnnPlay",Panel.AnnouncerPlaying > 0)
 
 	self:SetNW2Bool("RBLI",train.RearBrakeLineIsolation.Value > 0)
 	self:SetNW2Bool("RTLI",train.RearTrainLineIsolation.Value > 0)
@@ -161,7 +161,7 @@ function ENT:Think()
     --self:SetPackedRatio("chopper", math.Clamp(train.Electric.Chopper>0 and train.Electric.IChopped/100 or 0,0,1))		
 	
     if self.AnnouncementToLeaveWagon ~= train.AnnouncementToLeaveWagon then self.AnnouncementToLeaveWagon = train.AnnouncementToLeaveWagon end
-	
+	 
       self:SetPackedBool("DoorL",train.DoorLeft)
       self:SetPackedBool("DoorR",train.DoorRight)    
       self.LeftDoorsOpening = train.DoorLeft

@@ -419,16 +419,16 @@ end
 		if VentSound==2 then
         self:SetSoundState("vent1"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
 		end 	
-    end		
-		
-    self:SetSoundState("bbe", self:GetPackedBool("BBEWork") and 1 or 0, 1)
+    end
 	
-	local work = train:GetPackedBool("AnnPlay")
+	local work = self:GetPackedBool("AnnPlay")
     for k,v in ipairs(self.AnnouncerPositions) do
 	if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
             self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
 		end
-	end	
+	end		
+		
+    self:SetSoundState("bbe", self:GetPackedBool("BBEWork") and 1 or 0, 1)
    
 	local door_cab_t = self:Animate("door_cab_t",self:GetPackedBool("RearDoor") and 0.99 or -0.05, 0, 0.55, 4.5, 0.55) 	
 	local door4s = (door_cab_t > 0 or self:GetPackedBool("RearDoor"))
@@ -437,17 +437,6 @@ end
         self:PlayOnce("RearDoor","bass",door4s and 1 or 0)
     end 
 end
-
-ENT.AnnouncerPositions = {}
-ENT.AnnouncerPositions = {
-    {Vector(0,-0,0),250,2},
-    --{Vector(190,-34,55),250,2},
-	--{Vector(-38,-34,55),50,0.1},
-    --{Vector(-275,-34,55),50,0.1},
-    --{Vector(-228,34,55),50,0.1},
-    --{Vector(3,34,55),250,0.1},
-    --{Vector(235,34,55),250,0.1},
-}
 
 function ENT:Draw()
     self.BaseClass.Draw(self)
