@@ -936,9 +936,9 @@ if SERVER then
 				Train:SetNW2Int("VityazMainMsg",Back and RV>0 and 3 or Back and 2 or RV==0 and 1 or 0)
 			end
 			if self.State < 5 and self.Prost then
-			self.Prost = false
-			self.Kos = false
-			self.Ovr = false
+				self.Prost = false
+				self.Kos = false
+				self.Ovr = false
 			end
 			for i=1,9 do
 				Train:SetNW2Int("VityazWagNum"..i,self.Trains[i] or 0)
@@ -954,7 +954,6 @@ if SERVER then
 			end
 			self:CState("RV",RV*Train.SF2.Value > 0,"BUKP")
 			--self:CState("RVPB",(1-Train.KV["KRO5-6"])*Train.SF2.Value > 0)
-			self:CState("Ring",Train.Ring.Value > 0,"BUKP")
 			self.ControllerState = stength
 			self:CState("DriveStrength",math.abs(stength))
 			self:CState("Brake",stength < 0 and 1 or 0)
@@ -969,9 +968,9 @@ if SERVER then
 				end
 			end
 			local ring = false
-			for i=1,self.WagNum do
+			for i=2,self.WagNum do
 				local train = self.Trains[self.Trains[i]]
-				if train and train.Ring then
+				if train and train.Ring and train.RV then
 					ring = true
 				end
 			end
@@ -987,6 +986,7 @@ if SERVER then
 			if Train.DoorClose.Value > 0 then -- В новых машинах при наличии признака активной кабины и ДАЖЕ ПРИ ОТКЛЮЧЕННОМ РЕВЕРСЕ двери закроются (проврено ИРЛ)
 				doorClose = true
 			end
+			self:CState("Ring",Train.Ring.Value > 0,"BUKP")
 			self:CState("CloseDoors",doorClose)
 			self:CState("TP1",Train.Pant1.Value > 0)
 			self:CState("TP2",Train.Pant2.Value > 0)
