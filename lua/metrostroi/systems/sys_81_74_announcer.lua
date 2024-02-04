@@ -25,7 +25,7 @@ if SERVER then
         self.AnnTable = tbl
     end
 
-    util.AddNetworkString("metrostroi_announcer")
+    util.AddNetworkString("metrostroi_announcer_74")
 
     function TRAIN_SYSTEM:TriggerInput(name,value)
         if name == "Reset" then
@@ -57,7 +57,7 @@ if SERVER then
     end
     function TRAIN_SYSTEM:WriteMessage(msg)
         for i = 1, #self.Train.WagonList do
-            net.Start("metrostroi_announcer", true)
+            net.Start("metrostroi_announcer_74", true)
             local train = self.Train.WagonList[i]
             net.WriteEntity(train)
             net.WriteString(msg)
@@ -140,7 +140,7 @@ if SERVER then
         end
     end
 else
-    net.Receive("metrostroi_announcer", function(len, pl) 
+    net.Receive("metrostroi_announcer_74", function(len, pl) 
         local train = net.ReadEntity()	--голова
 	    if not IsValid(train) or not train.RenderClientEnts then return end			
 		local snd = net.ReadString()			
@@ -150,9 +150,9 @@ else
             end
         else
             train:PlayOnceFromPos("announcer", snd, 1, 1, 600, 1e9, Vector(0, 0, 0))
-        end
+        end 
 			
-		train1 = train:GetNW2Entity("gmod_subway_kuzov")	--задняя секция 		
+		train1 = train:GetNW2Entity("gmod_subway_kuzov")	
 		if not IsValid(train1) then return end	
 	    if train1.AnnouncerPositions then
             for k, v in ipairs(train1.AnnouncerPositions) do
