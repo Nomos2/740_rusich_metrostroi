@@ -55,9 +55,9 @@ function ENT:Initialize()
         self.FrontCouple = self:CreateCouple(Vector(608-17,0,-60),Angle(0,0,0),true,"740")		
         self.RearCouple = self:CreateCouple(Vector(-612-17,0,-60),Angle(0,-180,0),false,"740")
 		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
-		local opt = Vector(64.99,0,0)
+		local opt = Vector(67,0,0)
 		self.FrontCouple.CouplingPointOffset = opt		
-		self.RearCouple.CouplingPointOffset = opt
+		self.RearCouple.CouplingPointOffset = opt - Vector(1,0,0)
 		
 		self.FrontCouple.m_tblToolsAllowed = { "none" }	
 		self.RearCouple.m_tblToolsAllowed = { "none" }	
@@ -410,7 +410,7 @@ function ENT:CreatePricep(pos)
 		)
 	else
 	
-		local xmin = -2
+	local xmin = -2
 	local xmax = 2
 	
 	local ymin = -2

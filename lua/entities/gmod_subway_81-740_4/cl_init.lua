@@ -1687,9 +1687,9 @@ ENT.ButtonMap["Vityaz"] = {
 
 
  ENT.Lights = {
-    [1] = { "headlight",	Vector(690-15-9,0,-35), Angle(0,0,0), Color(216,161,92), farz=5144,brightness = 4, hfov=105,vfov=105, texture = "models/metrostroi_train/equipment/headlight",shadows = 1,headlight=true}, --Фары 
-    [2] = { "headlight",    Vector(968-159-9,0,50), Angle(-1,0,0), Color(255,0,0), fov=170 ,brightness = 0.3, farz=450,texture = "models/metrostroi_train/equipment/headlight2",shadows = 0,backlight=true}, --Красные фары 
-    [3] = { "headlight",    Vector(358-159-9,40,43.9), Angle(50,40,-0), Color(206,135,80), fov=100,farz=200,brightness = 0,shadows=1}, --отсеки
+    [1] = { "headlight",Vector(690-15-9,0,-35),Angle(0,0,0),Color(216,161,92),farz=5144,brightness = 4,hfov=105,vfov=105,texture = "models/metrostroi_train/equipment/headlight",shadows = 1,headlight=true}, --Фары 
+    [2] = { "headlight",Vector(968-159-9,0,50),Angle(-1,0,0),Color(255,0,0),fov=170,brightness = 0.3,farz=450,texture = "models/metrostroi_train/equipment/headlight2",shadows = 0,backlight=true}, --Красные фары 
+    [3] = { "headlight",Vector(358-159-9,40,43.9),Angle(50,40,-0),Color(206,135,80),fov=100,farz=200,brightness = 0,shadows=1}, --отсеки
 }
 function ENT:Initialize()
 

@@ -101,8 +101,8 @@ function ENT:Initialize()
 		self:SetNW2Entity("RearCouple",self.RearCouple)	
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)  
 		local opt = Vector(70,0,0)
-		self.FrontCouple.CouplingPointOffset = opt		
-		self.RearCouple.CouplingPointOffset = Vector(82,0,0)	   		
+		self.FrontCouple.CouplingPointOffset = opt		 
+		self.RearCouple.CouplingPointOffset = Vector(85,0,0)	   		
 		
 timer.Simple(0.1, function()			
         if not IsValid(self) then return end
