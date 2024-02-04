@@ -282,6 +282,13 @@ self.ClientProps["TrainNumberL"..k] = {
 		end,
     } 
 end
+    self.HeadTrain = self:GetNW2Entity("HeadTrain")	
+    local train = self.HeadTrain 
+    if not IsValid(train) then return end		
+	
+	train.HeadTrain = self 
+	train:SetNW2Entity("HeadTrain", self)	
+	
 if self.RBLICache ~= self:GetNW2Bool("RBLI") then
         self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 200, 1e9, Vector(50,0,-40))
         self.RBLICache = self:GetNW2Bool("RBLI")
@@ -395,11 +402,11 @@ end
 		VentSound==2 then
         self:SetSoundState("vent1"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
 		end 	
-    end
-		
+    end	
+	
     self:SetSoundState("bbe", self:GetPackedBool("BBEWork") and 1 or 0, 1)
    
-	local door_cab_t = self:Animate("door_cab_t",self:GetPackedBool("RearDoor") and 0.99 or -0.05, 0, 0.55, 4.5, 0.55) 	
+	local door_cab_t = self:Animate("door_cab_t",self:GetPackedBool("RearDoor") and 1 or -0.05, 0, 0.54, 4.5, 0.55) 	
 	local door4s = (door_cab_t > 0 or self:GetPackedBool("RearDoor"))
     if self.Door4 ~= door4s then
         self.Door4 = door4s

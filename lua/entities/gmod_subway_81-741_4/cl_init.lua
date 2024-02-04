@@ -1200,7 +1200,7 @@ end
 	end
 	
     local door_f = self:GetPackedBool("FrontDoor")
-    local door_cab_f = self:Animate("door_cab_f",door_f and 0.99 or -0.05, 0, 0.5, 4.5, 0.55)
+    local door_cab_f = self:Animate("door_cab_f",door_f and 1 or -0.05, 0, 0.52, 4.5, 0.55)
 	local door1s = (door_cab_f > 0 or door_f)
     if self.Door1 ~= door1s then
         self.Door1 = door1s

@@ -69,7 +69,7 @@ ENT.ButtonMap["PUU"] = {
         {ID = "ALSkToggle",x=127+37.83*4, y=27.5+10, w=40,h=20, tooltip="", model = {
             model = "models/metrostroi_train/81/krishka.mdl", ang = 0, z = 1,
             var="ALSk",speed=8,min=0.32,max=0.721, disable="ALSToggle",
-            plomb = {model = "models/metrostroi_train/81/plomb.mdl",ang=70,x=15,y=-40,z=-3.6,var="ALSPl", ID="ALSPl",},
+            plomb = {model = "models/metrostroi_train/81/plomb.mdl",ang=70,x=15,y=-40,z=-1.3,var="ALSPl", ID="ALSPl",},
             sndvol = 1, snd = function(val) return val and "kr_close" or "kr_open" end,
             sndmin = 90, sndmax = 1e3, sndang = Angle(-90,0,0),
         }},

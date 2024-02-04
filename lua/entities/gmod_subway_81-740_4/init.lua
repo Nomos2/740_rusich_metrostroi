@@ -77,7 +77,7 @@ function ENT:Initialize()
     self.InstructorsSeat4:SetColor(Color(0,0,0,0))
 	self.InstructorsSeat4.m_tblToolsAllowed = { "none" }		
 	
-	self.LightSensor = self:AddLightSensor(Vector(627-9,0,-130),Angle(0,90,0))
+	self.LightSensor = self:AddLightSensor(Vector(627-9,0,-125),Angle(0,90,0))
 	
 	self.ASSensor = self:AddLightSensor(Vector(515-9,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
 	
@@ -93,7 +93,8 @@ function ENT:Initialize()
         self.FrontCouple = self:CreateCouple(Vector(627-9,0,-60),Angle(0,0,0),true,"740")
         self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")
 		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)				
-			
+		self.RearCouple:GetPhysicsObject():SetMass(5000)
+		
 		self.FrontCouple.m_tblToolsAllowed = { "none" }
 		self.RearCouple.m_tblToolsAllowed = { "none" }	
 		self.FrontBogey.m_tblToolsAllowed = { "none" }	
@@ -471,10 +472,8 @@ function ENT:CreatePricep(pos)
 	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())	
-	ent:DrawShadow(false)			
-	--ent.m_tblToolsAllowed = { "none" }		
+	ent:DrawShadow(false)				
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end	
-    --PrintTable(ent:GetTable())
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 
 	table.insert(self.TrainEntities,ent)      
@@ -488,8 +487,7 @@ function ENT:CreatePricep(pos)
 	self.MiddleBogey:SetNWInt("Async",true)
 	self.MiddleBogey:SetNWBool("DisableEngines",true)			
 	self.MiddleBogey.DisableSound = 1
-	self.RearCouple:GetPhysicsObject():SetMass(5000)
-	--self.MiddleBogey.m_tblToolsAllowed = { "none" }
+	self.MiddleBogey.m_tblToolsAllowed = { "none" }
     self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)	
     self.MiddleBogey:GetPhysicsObject():SetMass(5000)
 
@@ -549,13 +547,14 @@ function ENT:CreatePricep(pos)
 	Map:find("gm_metro_crossline") or	
 	Map:find("gm_metro_mosldl") or	
 	Map:find("gm_metro_nsk_line") or		
+	Map:find("gm_metro_jar_imagine_line") or	
 	Map:find("gm_smr_1987") then		
 	
 	local xmin = 0
 	local xmax = 0
 	
-	local ymin = 0
-	local ymax = 0
+	local ymin = xmin
+	local ymax = xmax
 	
 	local zmin = -10
 	local zmax = 10		
@@ -609,8 +608,7 @@ function ENT:CreatePricep(pos)
 			ent,
 			0, --bone
 			0, --bone		
-			Vector(0,0,-30),			
-			--Vector(305,0,-30),
+			Vector(0,0,-30),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit
@@ -628,11 +626,11 @@ function ENT:CreatePricep(pos)
 		)
 	else
 	
-	local xmin = -2
-	local xmax = 2
+	local xmin = -1.7
+	local xmax = 1.7
 	
-	local ymin = -2
-	local ymax = 2
+	local ymin = xmin
+	local ymax = xmax
 	
 	local zmin = -35
 	local zmax = 35
@@ -664,7 +662,7 @@ function ENT:CreatePricep(pos)
 			self,
 			0, --bone
 			0, --bone
-			Vector(0,0,30),
+			Vector(0,0,20),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -709,7 +707,7 @@ function ENT:CreatePricep(pos)
 			ent,
 			0, --bone
 			0, --bone,		
-			Vector(0,0,50),
+			Vector(0,0,40),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -731,7 +729,7 @@ function ENT:CreatePricep(pos)
 			ent,
 			0, --bone
 			0, --bone,		
-			Vector(0,0,30),
+			Vector(0,0,20),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit

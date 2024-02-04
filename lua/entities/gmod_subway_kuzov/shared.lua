@@ -84,6 +84,9 @@ function ENT:InitializeSounds()
     self.SoundNames["compressor"] = {loop=58,"subway_trains/740_4/compressor/compressor_start.wav","subway_trains/740_4/compressor/compressor_loop.wav","subway_trains/740_4/compressor/compressor_end.wav"}
     self.SoundPositions["compressor"] = {300,1e9,Vector(-18,-40,-66),0.4}	
 	
+	self.SoundNames["compressor_pn"] = {loop=false,"subway_trains/740_4/compressor/compressor_psh.wav"}
+    self.SoundPositions["compressor_pn"] = {485,1e9,Vector(-18,-40,-66),0.5} --FIXME: Pos
+	
     for i=1,4 do
         self.SoundNames["vent"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop.wav"}
         self.SoundPositions["vent"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
@@ -120,9 +123,6 @@ function ENT:InitializeSounds()
 	end
 end
 
-function ENT:InitializeSystems()
-    train:LoadSystem("Announcer","81_74_Announcer", "AnnouncementsASNP")
-end
 ENT.AnnouncerPositions = {}
 ENT.AnnouncerPositions = {
     {Vector(190,-34,55),250,0.2},
