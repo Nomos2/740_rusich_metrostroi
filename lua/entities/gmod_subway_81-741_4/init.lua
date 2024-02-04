@@ -367,11 +367,11 @@ function ENT:CreatePricep(pos)
 		)
 		
 	constraint.AdvBallsocket(
-			ent,
 			self.MiddleBogey,
+			ent,
 			0, --bone
 			0, --bone		
-			Vector(305,0,30),
+			Vector(0,0,30),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -388,11 +388,12 @@ function ENT:CreatePricep(pos)
 			1--nocollide
 		)
 		constraint.AdvBallsocket(
+			self.MiddleBogey,	
 			ent,
-			self.MiddleBogey,
 			0, --bone
 			0, --bone		
-			Vector(305,0,-30),
+			Vector(0,0,-30),			
+			--Vector(305,0,-30),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit
@@ -554,9 +555,9 @@ function ENT:CreatePricep(pos)
 		)		
 	end
 	
-    self:RerailChange(self.FrontBogey, true)
-    self:RerailChange(self.MiddleBogey, true)
-    self:RerailChange(self.RearBogey, true)		
+    Metrostroi:RerailChange(self.FrontBogey, true)
+    Metrostroi:RerailChange(self.MiddleBogey, true)
+    Metrostroi:RerailChange(self.RearBogey, true)
 
 	--Метод mirror 				
     ent.HeadTrain = self 

@@ -584,11 +584,11 @@ function ENT:CreatePricep(pos)
 		)
 		
 	constraint.AdvBallsocket(
-			ent,
 			self.MiddleBogey,
+			ent,
 			0, --bone
 			0, --bone		
-			Vector(305,0,30),
+			Vector(0,0,30),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -605,11 +605,12 @@ function ENT:CreatePricep(pos)
 			1--nocollide
 		)
 		constraint.AdvBallsocket(
+			self.MiddleBogey,	
 			ent,
-			self.MiddleBogey,
 			0, --bone
 			0, --bone		
-			Vector(305,0,-30),
+			Vector(0,0,-30),			
+			--Vector(305,0,-30),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit

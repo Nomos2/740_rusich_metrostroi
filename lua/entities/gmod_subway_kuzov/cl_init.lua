@@ -391,8 +391,8 @@ end
 		local VentSound = train:GetNW2Int("VentSound",1)	
 		if VentSound==1 then
         self:SetSoundState("vent"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
-		end	
-		if VentSound==2 then
+		elseif		
+		VentSound==2 then
         self:SetSoundState("vent1"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
 		end 	
     end
