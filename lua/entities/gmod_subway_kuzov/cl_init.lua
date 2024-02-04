@@ -1,7 +1,11 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
 or Map:find("gm_metro_krl")
+or Map:find("gm_metro_kaluzh_line")
+or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
+or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then
@@ -15,49 +19,6 @@ ENT.ButtonMap = {}
 ENT.AutoAnims = {}
 ENT.ClientSounds = {}
 ENT.ClientPropsInitialized = false
-
---[[ENT.ClientProps["test_prop"] = {
-	model = "models/props_junk/metalbucket01a.mdl", --Заготовка под информатор нормальный.
-	pos = Vector(190,-34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}
-ENT.ClientProps["test_prop1"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(-38,-34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}
-ENT.ClientProps["test_prop2"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(-275,-34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}
-ENT.ClientProps["test_prop3"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(-228,34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}
-ENT.ClientProps["test_prop4"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(3,34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}
-ENT.ClientProps["test_prop5"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(235,34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}]]
 
 ENT.ClientProps["salonR"] = {
 	model = "models/metrostroi_train/81-740/salon/salon_rear.mdl",
@@ -219,31 +180,43 @@ ENT.ClientProps["lamps_salon_on_rear1"..i] = {
 }
 end
 
-local function GetDoorPosition(n,G,j)
-	if j == 0 			--	x						--	y        --	z
-	then return Vector(195.5 - -35.0*G - 232.1*n, -66*(1-2*G), 4.3)
-	else return Vector(265.6 - 35.0*(1+G) - 232.1*n,-67.5*(1-2*G),4.3)
-	end
-end
+ENT.ClientProps["door0x0"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(213.1,60.5,4),
+	ang = Angle(0,-90,0),
+	hide = 2
+}
+ENT.ClientProps["door1x0"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(-18.5,60.5,4),
+	ang = Angle(0,-90,0),
+	hide = 2
+}
+ENT.ClientProps["door2x0"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(-251.5,60.5,4),
+	ang = Angle(0,-90,0),
+	hide = 2
+}
 
-for n=0,2 do
-	for G=0,1 do
-		ENT.ClientProps["door"..n.."x"..G.."a"] = {
-			model =  "models/metrostroi_train/81-740/body/81-740_leftdoor1.mdl",
-			pos = GetDoorPosition(n,G,0),
-			ang = Angle(0,90 +180*G,0), 
-			hide = 2,				
-			scale = 1.001,			    			
-		}
-		ENT.ClientProps["door"..n.."x"..G.."b"] = {
-			model =  "models/metrostroi_train/81-740/body/81-740_leftdoor2.mdl",
-			pos = GetDoorPosition(n,G,1),
-			ang = Angle(0,90 +180*G,0),
-			hide = 2,					
-			scale = 1.001,		  			
-		}
-		end
-end
+ENT.ClientProps["door0x1"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(213.1,-60.6,4),
+	ang = Angle(0,90,0),
+	hide = 2
+}
+ENT.ClientProps["door1x1"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(-18.5,-60.6,4),
+	ang = Angle(0,90,0),
+	hide = 2
+}
+ENT.ClientProps["door2x1"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(-251.5,-60.6,4),
+	ang = Angle(0,90,0),
+	hide = 2
+}
 
 local yventpos = {
     414.5+0*117-159,
@@ -295,6 +268,9 @@ function ENT:Think()
     local train = self.HeadTrain 
     if not IsValid(train) then return end		
 	
+	train.HeadTrain = self 
+	train:SetNW2Entity("HeadTrain", self)	
+	
 for k=0,3 do
 self.ClientProps["TrainNumberL"..k] = {
         model = "models/metrostroi_train/common/bort_numbers.mdl",
@@ -345,9 +321,9 @@ end
 	if not self.DoorStates then self.DoorStates = {} end
     if not self.DoorLoopStates then self.DoorLoopStates = {} end
     if not IsValid(train) then return end		
-    for b=0,2 do
-        for k=0,1 do
-            local st = k==1 and "DoorL" or "DoorR"
+    for b=0,3 do
+        for k=0,2 do
+            local st = k==1 and "DoorR" or "DoorL"
             local doorstate = train:GetPackedBool(st)
             local id,sid = st..(b+1),"door"..b.."x"..k
             local state = train:GetPackedRatio(id)
@@ -370,10 +346,10 @@ end
                 self.DoorLoopStates[id] = math.Clamp((self.DoorLoopStates[id] or 0) - 6*train.DeltaTime,0,1)
             end
 	        self:SetSoundState(sid.."r",self.DoorLoopStates[id],0.9+self.DoorLoopStates[id]*0.1)					
-			local n_l1 = "door"..b.."x"..k.."a"
-            local n_r1 = "door"..b.."x"..k.."b"							
-            self:Animate(n_r1,state,0,1,15,1)--0.8 + (-0.2+0.4*math.random()),0)			
-			self:Animate(n_l1,state,0,1,15,1)--0.8 + (-0.2+0.4*math.random()),0)
+            local n_l = "door"..b.."x"..k--.."a"
+			local n_r = "door"..b.."x"..k.."b"								
+            self:Animate(n_r,state,0,1,15,1)		
+			self:Animate(n_l,state,0,1,15,1)
         end
 	end	
 	
@@ -420,13 +396,6 @@ end
         self:SetSoundState("vent1"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
 		end 	
     end
-	
-	local work = self:GetPackedBool("AnnPlay")
-    for k,v in ipairs(self.AnnouncerPositions) do
-	if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
-            self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
-		end
-	end		
 		
     self:SetSoundState("bbe", self:GetPackedBool("BBEWork") and 1 or 0, 1)
    

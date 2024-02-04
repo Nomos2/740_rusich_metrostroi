@@ -1,7 +1,11 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
 or Map:find("gm_metro_krl")
+or Map:find("gm_metro_kaluzh_line")
+or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
+or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then
@@ -435,7 +439,7 @@ ENT.ClientProps["Naddver_off_left"] = {
 --------------------------------------------------------------------------------
 -- Add doors
 --------------------------------------------------------------------------------
-local function GetDoorPosition(b,k,j)
+--[[local function GetDoorPosition(b,k,j)
 	if j == 0 
 	then return Vector(591.9-17.7 - 35.15*k     - 232.1*b,-67.5*(1-2*k),4)
 	else return Vector(592-17.7 - 35.0*(1-k) - 232.1*b,-66*(1-2*k),4)
@@ -459,7 +463,45 @@ for b=0,2 do
 			hide = 2,
 		}
 	end 
-end
+end]]
+
+ENT.ClientProps["door0x0"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(92.1,60.7,4),
+	ang = Angle(0,-90,0),
+	hide = 2
+}
+ENT.ClientProps["door1x0"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(323.5,60.7,4),
+	ang = Angle(0,-90,0),
+	hide = 2
+}
+ENT.ClientProps["door2x0"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(556,60.7,4),
+	ang = Angle(0,-90,0),
+	hide = 2
+}
+
+ENT.ClientProps["door0x1"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(92.1,-60.7,4),
+	ang = Angle(0,90,0),
+	hide = 2
+}
+ENT.ClientProps["door1x1"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(323.5,-60.7,4),
+	ang = Angle(0,90,0),
+	hide = 2
+}
+ENT.ClientProps["door2x1"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(556,-60.7,4),
+	ang = Angle(0,90,0),
+	hide = 2
+}
 
 
 local yventpos = {
@@ -582,9 +624,7 @@ function ENT:ReInitBogeySounds(bogey)
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
-	
-	end
-	
+end
 if MotorType==2 then		
     for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     table.insert(bogey.EngineSNDConfig,{"ted1_740" ,08,00,16,  1})--40
@@ -654,9 +694,7 @@ if MotorType==2 then
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
-
 end	
-
 if MotorType==3 then
  for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end	
 	table.insert(bogey.EngineSNDConfig,{"ted1_720" ,08,00,16,1*0.4})
@@ -722,8 +760,7 @@ if MotorType==3 then
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
-	end
-	
+end
 if MotorType==4 then
 for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
 	table.insert(bogey.EngineSNDConfig,{"ted1_740" ,08,00,16,1*1})
@@ -970,6 +1007,75 @@ function ENT:Think()
 	end	
 end	
 
+--Регистрация тележки
+self.RearBogey = self:GetNW2Entity("RearBogey")	
+local RB = self.RearBogey
+
+--Взято из cl_init тележки.
+local c_gui
+if IsValid(c_gui) then c_gui:Close() end
+
+local function addButton(parent,stext,state,scolor,btext,benabled,callback)
+    --local a = v[1]
+    local panel = vgui.Create("DPanel")
+    panel:Dock( TOP )
+    panel:DockMargin( 5, 0, 5, 5 )
+    panel:DockPadding( 5, 5, 5, 5 )
+    if benabled then
+        local button = vgui.Create("DButton",panel)
+        button:Dock(RIGHT)
+        button:SetText(Metrostroi.GetPhrase(btext))
+        button:DockPadding( 5, 5, 5, 5 )
+        button:SizeToContents()
+        button:SetContentAlignment(5)
+        button:SetEnabled(benabled)
+        button.DoClick = callback
+    end
+
+    --DrawCutText(panel,Metrostroi.GetPhrase("Workshop.Warning"),false,"DermaDefaultBold")
+    vgui.MetrostroiDrawCutText(panel,Metrostroi.GetPhrase(stext),false,"DermaDefaultBold")
+    vgui.MetrostroiDrawCutText(panel,Metrostroi.GetPhrase(state),scolor,"DermaDefaultBold")
+
+    panel:InvalidateLayout( true )
+    panel:SizeToChildren(true,true )
+    parent:AddItem(panel)
+end
+
+function RB:DrawGUI(tbl)
+    if IsValid(c_gui) then  c_gui:Close() end
+     local c_gui = vgui.Create("DFrame")
+        c_gui:SetDeleteOnClose(true)
+        c_gui:SetTitle(Metrostroi.GetPhrase("Common.Bogey.Title"))
+        c_gui:SetSize(0, 0)
+        c_gui:SetDraggable(true)
+        c_gui:SetSizable(false)
+        c_gui:MakePopup()
+    local scrollPanel = vgui.Create( "DScrollPanel", c_gui )
+    if tbl.havepb then
+        addButton(scrollPanel,"Common.Bogey.ParkingBrakeState",tbl.pbdisabled and "Common.Bogey.PBDisabled" or "Common.Bogey.PBEnabled", Color(0,150,0),tbl.pbdisabled and "Common.Bogey.PBEnable" or "Common.Bogey.PBDisable",tbl.access,function(button)
+            net.Start("metrostroi-bogey-menu")
+                net.WriteEntity(self)
+                net.WriteUInt(1,8)
+            net.SendToServer()
+            c_gui:Close()
+        end)
+    end
+
+    scrollPanel:Dock( FILL )
+    scrollPanel:InvalidateLayout( true )
+    scrollPanel:SizeToChildren(false,true)
+    local spPefromLayout = scrollPanel.PerformLayout
+    function scrollPanel:PerformLayout()
+        spPefromLayout(self)
+        if not self.First then self.First = true return end
+        local x,y = scrollPanel:ChildrenSize()
+        if self.Centered then return end
+        self.Centered = true
+        c_gui:SetSize(512,math.min(350,y)+35)
+        c_gui:Center()
+    end
+end
+
 for k=0,3 do
     self.ClientProps["TrainNumberR"..k] = {
         model = "models/metrostroi_train/common/bort_numbers.mdl",
@@ -1061,9 +1167,9 @@ end
 	--Анимация дверей.
 	if not self.DoorStates then self.DoorStates = {} end
     if not self.DoorLoopStates then self.DoorLoopStates = {} end
-    for b=0,2 do
-        for k=0,1 do
-            local st = k==1 and "DoorL" or "DoorR"
+    for b=0,3 do
+        for k=0,2 do
+            local st = k==1 and "DoorR" or "DoorL"
             local doorstate = self:GetPackedBool(st)
             local id,sid = st..(b+1),"door"..b.."x"..k
             local state = self:GetPackedRatio(id)
@@ -1086,10 +1192,10 @@ end
                 self.DoorLoopStates[id] = math.Clamp((self.DoorLoopStates[id] or 0) - 6*self.DeltaTime,0,1)
             end
             self:SetSoundState(sid.."r",self.DoorLoopStates[id],0.9+self.DoorLoopStates[id]*0.1)			
-            local n_l = "door"..b.."x"..k.."a"
-            local n_r = "door"..b.."x"..k.."b"						
-            self:Animate(n_l,state,0,1,15,1)--0.8 + (-0.2+0.4*math.random()),0)
-            self:Animate(n_r,state,0,1,15,1)--0.8 + (-0.2+0.4*math.random()),0)	
+            local n_l = "door"..b.."x"..k--.."a"
+			local n_r = "door"..b.."x"..k.."b"								
+            self:Animate(n_r,state,0,1,15,1)		
+			self:Animate(n_l,state,0,1,15,1)
         end
 	end
 	
@@ -1180,7 +1286,7 @@ end
     local work = self:GetPackedBool("AnnPlay")
     for k,v in ipairs(self.AnnouncerPositions) do
         if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
-            self.Sounds["announcer"..k]:SetVolume(work and (v[3] or 1)  or 0.7)
+            self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
         end
     end
 end

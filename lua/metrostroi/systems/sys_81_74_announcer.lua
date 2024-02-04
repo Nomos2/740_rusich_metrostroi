@@ -140,11 +140,10 @@ if SERVER then
         end
     end
 else
-    net.Receive("metrostroi_announcer", function(len, pl)
-        local train = net.ReadEntity()
-        if not IsValid(train) or not train.RenderClientEnts then return end
-        local snd = net.ReadString()
-
+    net.Receive("metrostroi_announcer", function(len, pl) 
+        local train = net.ReadEntity()	--голова
+	    if not IsValid(train) or not train.RenderClientEnts then return end			
+		local snd = net.ReadString()			
         if train.AnnouncerPositions then
             for k, v in ipairs(train.AnnouncerPositions) do
                 train:PlayOnceFromPos("announcer" .. k, snd, v[3] or 1, 1, v[2] or 400, 1e9, v[1])
@@ -152,6 +151,17 @@ else
         else
             train:PlayOnceFromPos("announcer", snd, 1, 1, 600, 1e9, Vector(0, 0, 0))
         end
+			
+		train1 = train:GetNW2Entity("gmod_subway_kuzov")	--задняя секция 		
+		if not IsValid(train1) then return end	
+	    if train1.AnnouncerPositions then
+            for k, v in ipairs(train1.AnnouncerPositions) do
+                train1:PlayOnceFromPos("announcer" .. k, snd, v[3] or 1, 1, v[2] or 400, 1e9, v[1])
+            end
+        else
+            train1:PlayOnceFromPos("announcer", snd, 1, 1, 600, 1e9, Vector(0, 0, 0))
+        end
+	
     end)
 
     function TRAIN_SYSTEM:ClientInitialize()

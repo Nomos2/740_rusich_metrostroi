@@ -1,7 +1,11 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
 or Map:find("gm_metro_krl")
+or Map:find("gm_metro_kaluzh_line")
+or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
+or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then
@@ -18,6 +22,8 @@ function ENT:Initialize()
     self:SetModel("models/metrostroi_train/81-740/body/81-740_4_rear.mdl")
     self.BaseClass.Initialize(self)	
     self:SetPos(self:GetPos() + Vector(0,0,0))	
+	
+    self.TrainEntities = {}	
 	
     self.NormalMass = 24000
 	
@@ -138,13 +144,14 @@ end
 function ENT:Think()	
 	self:SetPackedBool("RearDoor",self.RearDoor)
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
-	local train = self.HeadTrain
+	local train = self.HeadTrain    
+	if not IsValid(self.HeadTrain) then self:Remove() return end	
 	local Panel = train.Panel	
     self.WireIOSystems = {}
     self.Systems = {}
     self.TrainEntities = {}
     self.TrainWires = {}
-	local retVal = train.BaseClass.Think(self)		
+	local retVal = train.BaseClass.Think(self)	
     if not IsValid(train) then return end		
     local power = train.Electric.Battery80V > 62
     self:SetPackedBool("Vent2Work",train.Electric.Vent2>0)	
@@ -205,6 +212,17 @@ function ENT:Think()
 	
     return retVal		 
 end	
+
+function ENT:OnRemove()
+    -- Remove all linked objects
+    constraint.RemoveAll(self)
+    if self.TrainEntities then
+        for k,v in pairs(self.TrainEntities) do
+            SafeRemoveEntity(v)
+        end
+    end
+    if IsValid(self.HeadTrain) then self.HeadTrain:Remove() end
+end
 
 function ENT:OnButtonPress(button,ply)
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")

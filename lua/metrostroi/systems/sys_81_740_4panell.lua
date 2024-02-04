@@ -40,8 +40,8 @@ function TRAIN_SYSTEM:Initialize()
     self.Train:LoadSystem("EmergencyBrake","Relay","Switch",{bass=true})
     self.Train:LoadSystem("DoorRight","Relay","Switch",{bass=true})
     self.Train:LoadSystem("HornB","Relay","Switch",{bass=true})
-
     self.Train:LoadSystem("DoorClose","Relay","Switch",{bass=true})
+	
     self.Train:LoadSystem("AttentionMessage","Relay","Switch",{bass=true})
     self.Train:LoadSystem("Attention","Relay","Switch",{bass=true})
     self.Train:LoadSystem("AttentionBrake","Relay","Switch",{bass=true})

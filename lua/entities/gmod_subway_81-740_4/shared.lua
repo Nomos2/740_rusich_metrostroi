@@ -1,7 +1,11 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
+or Map:find("gm_metro_kaluzh_line")
+or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
+or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then 
@@ -435,13 +439,10 @@ end
 ENT.AnnouncerPositions = {}
 ENT.AnnouncerPositions = {
     {Vector(450-9,-34,55),50,0.4},
-	{Vector(118-9,-34,55),50,0.4},
-    {Vector(158-9,34,55),50,0.4},
-    {Vector(495-9,34,55),50,0.4},
-    {Vector(580-9,34,55),50,0.4},	
-    --{Vector(-140-9,0,55),50,0.4},	-- костыль под информатор.	
-    --{Vector(-360-9,0,55),50,0.4}, -- костыль под информатор.
-    --{Vector(-590-9,0,55),50,0.4},	-- костыль под информатор.
+	{Vector(118-9,-34,55),50,0.2},
+    {Vector(158-9,34,55),50,0.2},
+    {Vector(495-9,34,55),50,0.2},
+    {Vector(580-9,34,55),50,0.2},
 }
 ENT.Cameras = {
     {Vector(770-159-9,36,42),Angle(0,180,0),"Train.740.CameraCond"},

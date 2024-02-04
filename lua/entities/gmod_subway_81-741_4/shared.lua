@@ -1,7 +1,11 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
 or Map:find("gm_metro_krl")
+or Map:find("gm_metro_kaluzh_line")
+or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
+or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then
@@ -191,15 +195,12 @@ end
 
 ENT.AnnouncerPositions = {}
 ENT.AnnouncerPositions = {
-	{Vector(85-17,-34,55),50,0.4},
-	{Vector(324-17,-34,55),50,0.4},
-	{Vector(550-17,-34,55),50,0.4},
-	{Vector(600-17,34,55),50,0.4},
-	{Vector(362-17,34,55),50,0.4},
-	{Vector(136-17,34,55),50,0.4},
-	{Vector(-120-17,0,55),50,0.4},	--Костыль под информатор.
-	{Vector(-360-17,0,55),50,0.4},	--Костыль под информатор.
-	{Vector(-570-17,0,55),50,0.4},	--Костыль под информатор.	
+	{Vector(85-17,-34,55),50,0.2},
+	{Vector(324-17,-34,55),50,0.2},
+	{Vector(550-17,-34,55),50,0.2},
+	{Vector(600-17,34,55),50,0.2},
+	{Vector(362-17,34,55),50,0.2},
+	{Vector(136-17,34,55),50,0.2},
 }
 -- Setup door positions
 ENT.LeftDoorPositions = {}

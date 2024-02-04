@@ -1,7 +1,11 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
 or Map:find("gm_metro_krl")
+or Map:find("gm_metro_kaluzh_line")
+or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
+or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then
@@ -115,14 +119,18 @@ function ENT:InitializeSounds()
         end	
 	end
 end
+
+function ENT:InitializeSystems()
+    train:LoadSystem("Announcer","81_74_Announcer", "AnnouncementsASNP")
+end
 ENT.AnnouncerPositions = {}
 ENT.AnnouncerPositions = {
-    {Vector(190,-34,55),250,2},
-	--{Vector(-38,-34,55),50,0.1},
-    --{Vector(-275,-34,55),50,0.1},
-    --{Vector(-228,34,55),50,0.1},
-    --{Vector(3,34,55),250,0.1},
-    --{Vector(235,34,55),250,0.1},
+    {Vector(190,-34,55),250,0.2},
+	{Vector(-38,-34,55),50,0.2},
+    {Vector(-275,-34,55),50,0.2},
+    {Vector(-228,34,55),50,0.2},
+    {Vector(3,34,55),250,0.2},
+    {Vector(235,34,55),250,0.2},
 }
 -- Setup door positions
 ENT.LeftDoorPositions = {}

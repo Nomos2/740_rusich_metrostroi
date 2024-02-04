@@ -1,7 +1,11 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
+or Map:find("gm_metro_kaluzh_line")
+or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
+or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then
@@ -51,9 +55,9 @@ function ENT:Initialize()
         self.FrontCouple = self:CreateCouple(Vector(608-17,0,-60),Angle(0,0,0),true,"740")		
         self.RearCouple = self:CreateCouple(Vector(-612-17,0,-60),Angle(0,-180,0),false,"740")
 		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
-		local opt = Vector(67,0,0)
+		local opt = Vector(64.99,0,0)
 		self.FrontCouple.CouplingPointOffset = opt		
-		self.RearCouple.CouplingPointOffset = opt			
+		self.RearCouple.CouplingPointOffset = opt
 		
 		self.FrontCouple.m_tblToolsAllowed = { "none" }	
 		self.RearCouple.m_tblToolsAllowed = { "none" }	

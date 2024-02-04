@@ -1,7 +1,11 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
+or Map:find("gm_metro_kaluzh_line")
+or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
+or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then 
@@ -96,9 +100,9 @@ function ENT:Initialize()
 		self.RearBogey.m_tblToolsAllowed = { "none" }
 		self:SetNW2Entity("RearCouple",self.RearCouple)	
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)  
-		local opt = Vector(80,0,0)
+		local opt = Vector(70,0,0)
 		self.FrontCouple.CouplingPointOffset = opt		
-		self.RearCouple.CouplingPointOffset = opt	   		
+		self.RearCouple.CouplingPointOffset = Vector(82,0,0)	   		
 		
 timer.Simple(0.1, function()			
         if not IsValid(self) then return end
@@ -138,7 +142,7 @@ function Bogey:PhysicsCollide(data,physobj)
 			end
 		end
 	end
-end	]]	
+end	]]
 --					
     -- Initialize key mapping
     self.KeyMap = {
@@ -451,7 +455,7 @@ function ENT:UpdateLampsColors()
 	end
 end
 
-function ENT:RerailChange(ent, bool)
+function Metrostroi:RerailChange(ent, bool)
     if not IsValid(ent) then return end
     if bool then
         timer.Remove("metrostroi_rerailer_solid_reset_"..ent:EntIndex())    
@@ -483,10 +487,9 @@ function ENT:CreatePricep(pos)
 	self.MiddleBogey:SetNWInt("MotorSoundType",2)
 	self.MiddleBogey:SetNWInt("Async",true)
 	self.MiddleBogey:SetNWBool("DisableEngines",true)			
-	self.MiddleBogey.DisableSound = 1	
-	self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
+	self.MiddleBogey.DisableSound = 1
 	self.RearCouple:GetPhysicsObject():SetMass(5000)
-	self.MiddleBogey.m_tblToolsAllowed = { "none" }
+	--self.MiddleBogey.m_tblToolsAllowed = { "none" }
     self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)	
     self.MiddleBogey:GetPhysicsObject():SetMass(5000)
 
@@ -497,7 +500,8 @@ function ENT:CreatePricep(pos)
 		
 	constraint.RemoveConstraints(self.RearCouple, "AdvBallsocket")	
 	constraint.RemoveConstraints(self.MiddleBogey, "AdvBallsocket")	
-	constraint.RemoveConstraints(ent, "AdvBallsocket")	       
+	constraint.RemoveConstraints(ent, "AdvBallsocket")
+	
 
 	constraint.Axis(
 		self.RearBogey,		
@@ -767,9 +771,9 @@ function ENT:CreatePricep(pos)
 		)		
 	end
 	
-    self:RerailChange(self.FrontBogey, true)
-    self:RerailChange(self.MiddleBogey, true)
-    self:RerailChange(self.RearBogey, true)		
+    Metrostroi:RerailChange(self.FrontBogey, true)
+    Metrostroi:RerailChange(self.MiddleBogey, true)
+    Metrostroi:RerailChange(self.RearBogey, true)		
 
 	--Метод mirror 				
     ent.HeadTrain = self 
@@ -827,7 +831,7 @@ function ENT:Think()
     --print((80-self.Engines.Speed))
     self:SetPackedBool("Headlights1Enabled",Panel.Headlights1 > 0)
     self:SetPackedBool("Headlights2Enabled",Panel.Headlights2 > 0)
-    local headlights = Panel.Headlights1*0.5+self.Panel.Headlights2*0.5	
+    local headlights = Panel.Headlights1*0.5+Panel.Headlights2*0.5	
     local redlights = Panel.RedLights>0
     self:SetPackedBool("RedLights",redlights)
 		

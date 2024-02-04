@@ -1,7 +1,11 @@
 ﻿local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
+or Map:find("gm_metro_kaluzh_line")
+or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
+or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then 
@@ -1147,7 +1151,7 @@ ENT.ButtonMap["CabinDoorL"] = {
     buttons = {
         {ID = "CabinDoorLeft",x=0,y=0,w=900,h=2000, tooltip="", model = {
             var="CabinDoorLeft",sndid="door_cab_l",
-            sndvol = 0.1, snd = function(_,val) return val == 1 and "door_cab_open" or val == 2 and "door_cab_roll" or val == 0 and "door_cab_close" end,
+            sndvol = 0.7, snd = function(_,val) return val == 1 and "door_cab_open" or val == 2 and "door_cab_roll" or val == 0 and "door_cab_close" end,
             sndmin = 90, sndmax = 1e3, sndang = Angle(0,0,0),
         }},
     }
@@ -1161,7 +1165,7 @@ ENT.ButtonMap["CabinDoorL2"] = {
     buttons = {
         {ID = "CabinDoorLeft",x=0,y=0,w=900,h=2000, tooltip="", model = {
             var="CabinDoorLeft",sndid="door_cab_l",
-            sndvol = 0.1, snd = function(_,val) return val == 1 and "door_cab_open" or val == 2 and "door_cab_roll" or val == 0 and "door_cab_close" end,
+            sndvol = 0.7, snd = function(_,val) return val == 1 and "door_cab_open" or val == 2 and "door_cab_roll" or val == 0 and "door_cab_close" end,
             sndmin = 90, sndmax = 1e3, sndang = Angle(0,0,0),
         }},
     }
@@ -1175,7 +1179,7 @@ ENT.ButtonMap["CabinDoorR"] = {
     buttons = {
         {ID = "CabinDoorRight",x=0,y=0,w=900,h=2000, tooltip="", model = {
             var="CabinDoorRight",sndid="door_cab_r",
-            sndvol = 0.1, snd = function(_,val) return val == 1 and "door_cab_open" or val == 2 and "door_cab_roll" or val == 0 and "door_cab_close" end,
+            sndvol = 0.7, snd = function(_,val) return val == 1 and "door_cab_open" or val == 2 and "door_cab_roll" or val == 0 and "door_cab_close" end,
             sndmin = 90, sndmax = 1e3, sndang = Angle(0,0,0),
         }},
     }
@@ -1189,7 +1193,7 @@ ENT.ButtonMap["CabinDoorR2"] = {
     buttons = {
         {ID = "CabinDoorRight",x=0,y=0,w=900,h=2000, tooltip="", model = {
             var="CabinDoorRight",sndid="door_cab_r",
-            sndvol = 0.1, snd = function(_,val) return val == 1 and "door_cab_open" or val == 2 and "door_cab_roll" or val == 0 and "door_cab_close" end,
+            sndvol = 0.7, snd = function(_,val) return val == 1 and "door_cab_open" or val == 2 and "door_cab_roll" or val == 0 and "door_cab_close" end,
             sndmin = 90, sndmax = 1e3, sndang = Angle(0,0,0),
         }},
     }
@@ -1499,14 +1503,14 @@ ENT.ClientProps["bucik_old"] = {
 }
 ENT.ClientProps["door_cab_r"] = {
 	model = "models/metrostroi_train/81-740/cabine/cabin_right.mdl",
-	pos = Vector(766-159.8-9, -65.9,0),
-	ang = Angle(0,90,0.55),
+	pos = Vector(765-159.75-9, -61.9,13.1),
+	ang = Angle(0,-90,0.25),
 	scale = 1.001,		
 	hide = 1,
 }
 ENT.ClientProps["door_cab_l"] = {
 	model = "models/metrostroi_train/81-740/cabine/cabin_left.mdl",
-	pos = Vector(765-159.45-9, 62.9, 0),
+	pos = Vector(765-159.45-9, 63.5, 13.1),
 	ang = Angle(0,-90,0.25),
 	scale = 1.01,
 	hide = 1,
@@ -1602,7 +1606,7 @@ ENT.ClientProps["Gerb_msk_right1"] = {
 
 ENT.ClientProps["Naddver_off"] = {
 	model = "models/metrostroi_train/81-740/salon/naddverka_off.mdl",
-	pos = Vector(314.75-15-9,37.38,58.1),
+	pos = Vector(314.55-15-9,37.58,58.1),
 	ang = Angle(0,0,0),
 	scale = 1,	
 	nohide = true,
@@ -1631,6 +1635,31 @@ ENT.ButtonMap["Password"] = {
         {ID = "Password",x=0,y=0,w=50,h=25	,tooltip="",},
     }
 }
+ENT.ClientProps["door0x0"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(127.1,61.5,4),
+	ang = Angle(0,-90,0),
+	hide = 2
+}
+ENT.ClientProps["door1x0"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(466.1,61.5,4),
+	ang = Angle(0,-90,0),
+	hide = 2
+}
+
+ENT.ClientProps["door0x1"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(127,-60.5,4),
+	ang = Angle(0,90,0),
+	hide = 2
+}
+ENT.ClientProps["door1x1"] = {
+	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
+	pos = Vector(466,-60.5,4),
+	ang = Angle(0,90,0),
+	hide = 2
+}
 
 local yventpos = {
     414.5+0*117-159-28,
@@ -1655,6 +1684,7 @@ ENT.ButtonMap["Vityaz"] = {
     scale = 0.0125,    
 	hide=0.5,
 }
+
 
  ENT.Lights = {
     [1] = { "headlight",	Vector(690-15-9,0,-35), Angle(0,0,0), Color(216,161,92), farz=5144,brightness = 4, hfov=105,vfov=105, texture = "models/metrostroi_train/equipment/headlight",shadows = 1,headlight=true}, --Фары 
@@ -1721,32 +1751,6 @@ end
 local Cpos = {
     0,0.24,0.5,0.55,0.6,1
 }
-
-local function GetDoorPosition(n,G,j)
-	if j == 0 		--Правые двери			--Левые двери
-	then return Vector(651.5-15-9  - 35.0*G     -  338.8*n-144, -67.5*(1-2*G), 4.3)
-	else return Vector(651.5-15-9  - 35.0*(1-G) -  338.8*n-144, -66*(1-2*G), 4.25)
-	end
-end 
-
-for n=0,1 do
-    for G=0,1 do
-        ENT.ClientProps["door"..n.."x"..G.."a"] = {
-			model = "models/metrostroi_train/81-740/body/81-740_leftdoor2.mdl",
-			pos = GetDoorPosition(n,G,0),
-			ang = Angle(0,90 +180*G,0),
-			scale = 1.001,			
-			hide = 2,
-		}
-		ENT.ClientProps["door"..n.."x"..G.."b"] = {
-			model = "models/metrostroi_train/81-740/body/81-740_leftdoor1.mdl",
-			pos = GetDoorPosition(n,G,1),
-			ang = Angle(0,90 +180*G,0),
-			scale = 1.001,			
-			hide = 2,				
-		}
-    end
-end
 
 if Metrostroi.Version >= 1537278077 then
 function ENT:ReInitBogeySounds(bogey)
@@ -2217,6 +2221,75 @@ function ENT:Think()
 	end	
 end
 
+--Регистрация тележки
+self.RearBogey = self:GetNW2Entity("RearBogey")	
+local RB = self.RearBogey
+
+--Взято из cl_init тележки.
+local c_gui
+if IsValid(c_gui) then c_gui:Close() end
+
+local function addButton(parent,stext,state,scolor,btext,benabled,callback)
+    --local a = v[1]
+    local panel = vgui.Create("DPanel")
+    panel:Dock( TOP )
+    panel:DockMargin( 5, 0, 5, 5 )
+    panel:DockPadding( 5, 5, 5, 5 )
+    if benabled then
+        local button = vgui.Create("DButton",panel)
+        button:Dock(RIGHT)
+        button:SetText(Metrostroi.GetPhrase(btext))
+        button:DockPadding( 5, 5, 5, 5 )
+        button:SizeToContents()
+        button:SetContentAlignment(5)
+        button:SetEnabled(benabled)
+        button.DoClick = callback
+    end
+
+    --DrawCutText(panel,Metrostroi.GetPhrase("Workshop.Warning"),false,"DermaDefaultBold")
+    vgui.MetrostroiDrawCutText(panel,Metrostroi.GetPhrase(stext),false,"DermaDefaultBold")
+    vgui.MetrostroiDrawCutText(panel,Metrostroi.GetPhrase(state),scolor,"DermaDefaultBold")
+
+    panel:InvalidateLayout( true )
+    panel:SizeToChildren(true,true )
+    parent:AddItem(panel)
+end
+
+function RB:DrawGUI(tbl)
+    if IsValid(c_gui) then  c_gui:Close() end
+     local c_gui = vgui.Create("DFrame")
+        c_gui:SetDeleteOnClose(true)
+        c_gui:SetTitle(Metrostroi.GetPhrase("Common.Bogey.Title"))
+        c_gui:SetSize(0, 0)
+        c_gui:SetDraggable(true)
+        c_gui:SetSizable(false)
+        c_gui:MakePopup()
+    local scrollPanel = vgui.Create( "DScrollPanel", c_gui )
+    if tbl.havepb then
+        addButton(scrollPanel,"Common.Bogey.ParkingBrakeState",tbl.pbdisabled and "Common.Bogey.PBDisabled" or "Common.Bogey.PBEnabled", Color(0,150,0),tbl.pbdisabled and "Common.Bogey.PBEnable" or "Common.Bogey.PBDisable",tbl.access,function(button)
+            net.Start("metrostroi-bogey-menu")
+                net.WriteEntity(self)
+                net.WriteUInt(1,8)
+            net.SendToServer()
+            c_gui:Close()
+        end)
+    end
+
+    scrollPanel:Dock( FILL )
+    scrollPanel:InvalidateLayout( true )
+    scrollPanel:SizeToChildren(false,true)
+    local spPefromLayout = scrollPanel.PerformLayout
+    function scrollPanel:PerformLayout()
+        spPefromLayout(self)
+        if not self.First then self.First = true return end
+        local x,y = scrollPanel:ChildrenSize()
+        if self.Centered then return end
+        self.Centered = true
+        c_gui:SetSize(512,math.min(350,y)+35)
+        c_gui:Center()
+    end
+end
+
 for k=0,3 do
     self.ClientProps["TrainNumberR"..k] = {
         model = "models/metrostroi_train/common/bort_numbers.mdl",
@@ -2263,7 +2336,7 @@ for k=0,3 do
 			self.RedLightBroken4 = self:GetNW2Bool("RedLightBroken4",false)	
 			end
 		end
-end
+	end
 	 self:SetLightPower(3,self.Door5 and self:GetPackedBool("AppLights"),self:GetPackedBool("AppLights") and 1 or 0)
     --ANIMS
     self:Animate("brake_line", self:GetPackedRatio("BL"), 0, 0.753,  256,2)
@@ -2443,9 +2516,9 @@ end
 	--Анимация дверей.
 	if not self.DoorStates then self.DoorStates = {} end
     if not self.DoorLoopStates then self.DoorLoopStates = {} end
-    for n=0,2 do
+    for n=0,1 do
         for G=0,1 do
-            local st = G==1 and "DoorL" or "DoorR"
+            local st = G==1 and "DoorR" or "DoorL"
             local doorstate = self:GetPackedBool(st)
             local id,sid = st..(n+1),"door"..n.."x"..G
             local state = self:GetPackedRatio(id)
@@ -2468,13 +2541,12 @@ end
                 self.DoorLoopStates[id] = math.Clamp((self.DoorLoopStates[id] or 0) - 6*self.DeltaTime,0,1)
             end
             self:SetSoundState(sid.."r",self.DoorLoopStates[id],0.9+self.DoorLoopStates[id]*0.1)	
-            local n_l = "door"..n.."x"..G.."a"
-            local n_r = "door"..n.."x"..G.."b"				
-            self:Animate(n_l,state,0,1,15,1)--0.8 + (-0.2+0.4*math.random()),0)
-            self:Animate(n_r,state,0,1,15,1)--0.8 + (-0.2+0.4*math.random()),0)								
+            local n_l = "door"..n.."x"..G--.."a"
+			local n_r = "door"..n.."x"..G.."b"			
+            self:Animate(n_l,state,0,1,10,1)
+            self:Animate(n_r,state,0,1,10,1)								
         end
 	end
-	
 	
     local door_m = self:GetPackedBool("PassengerDoor")
     local door_l = self:GetPackedBool("CabinDoorLeft")
@@ -2489,18 +2561,18 @@ end
         self:PlayOnce("PassengerDoor","bass" ,door1s and 1 or 0)
     end]]
 
-    local door_cab_l = self:Animate("door_cab_l",door_l	/*self:GetPackedBool(169)*/ and 0.99/*self.Door3 or 0.89)*/ or 0,0,1, 4, 1)
-    local door_cab_r = self:Animate("door_cab_r",door_r	/*self:GetPackedBool(169)*/ and 0.99/*(self.Door4 or 0.99)*/ or 0,0,1, 4, 1)
-    local door_cab_o = self:Animate("door_cab_o",door_o and 1 or -0.05,0,0.3, 8, 0.05) 			--self:Animate("door_cab_r",door_r and 1 or -0.1,0,0.25, 2, 0.5)
+    local door_cab_l = self:Animate("door_cab_l",door_l	and 0.85 or 0,0,1, 3, 1)
+    local door_cab_r = self:Animate("door_cab_r",door_r	and 0.85 or 0,0,1, 3, 1)
+    --local door_cab_o = self:Animate("door_cab_o",door_o and 1 or -0.05,0,0.3, 8, 0.05)
 	
-    local door2s = door_cab_l > 0.05 and door_cab_l and 2 or (door_cab_l == 1.95 and 2 or door_l and 1 or 0)
+    local door2s = door_cab_l > 0.05 and door_cab_l and 2 or (door_cab_l == 0.9 and 2 or door_l and 1 or 0)
     if self.Door2 ~= door2s or self.DoorCL ~= door_l then
         self.DoorCL = door_l
         self.Door2 = door2s
         self:PlayOnce("CabinDoorLeft","bass",door2s)
     end
     
-    local door3s = door_cab_r > 0.05 and door_cab_r and 2 or (door_cab_r == 1.95 and 2 or door_r and 1 or 0)
+    local door3s = door_cab_r > 0.05 and door_cab_r and 2 or (door_cab_r == 0.9 and 2 or door_r and 1 or 0)
     if self.Door3 ~= door3s or self.DoorCR ~= door_r then
         self.DoorCR = door_r
         self.Door3 = door3s
@@ -2636,12 +2708,28 @@ end
 		
     self:SetSoundState("ONIX", tunstreet*math.Clamp((state)/0.26+0.2,0,1)*strength, 1)--+math.Clamp(state,0,1)*0.1)
     self:SetSoundState("chopper_onix", tunstreet*self:GetPackedRatio("chopper"), 1)
+
+		self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
+		local train1 = self.HeadTrain1 
+		if not IsValid(train1) then return end	
+		
+		train1.HeadTrain = self 
+		train1:SetNW2Entity("HeadTrain", self)		
+
     local work = self:GetPackedBool("AnnPlay")
     for k,v in ipairs(self.AnnouncerPositions) do
 	if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
             self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
 		end 
 	end	
+	
+    local work = train1:GetPackedBool("AnnPlay")
+    for k,v in ipairs(train1.AnnouncerPositions) do
+	if train1.Sounds["announcer"..k] and IsValid(train1.Sounds["announcer"..k]) then
+            train1.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
+		end 
+	end		
+	
 end
 
 function ENT:Draw()
