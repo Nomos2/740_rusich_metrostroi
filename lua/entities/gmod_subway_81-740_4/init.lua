@@ -626,8 +626,8 @@ function ENT:CreatePricep(pos)
 		)
 	else
 	
-	local xmin = -1.7
-	local xmax = 1.7
+	local xmin = -2
+	local xmax = 2
 	
 	local ymin = xmin
 	local ymax = xmax
@@ -644,11 +644,11 @@ function ENT:CreatePricep(pos)
 			pos,	
 			0, --forcelimit
 			0, --torquelimit
-			-2, --xmin
-			-2, --ymin
+			xmin, --xmin
+			ymin, --ymin
 			zmin, --zmin
-			2, --xmax
-			2, --ymax
+			xmax, --xmax
+			ymax, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
@@ -667,11 +667,11 @@ function ENT:CreatePricep(pos)
 			pos,
 			0, --forcelimit
 			0, --torquelimit
-			-2, --xmin
-			-2, --ymin
+			xmin, --xmin
+			ymin, --ymin
 			zmin, --zmin
-			2, --xmax
-			2, --ymax
+			xmax, --xmax
+			ymax, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
@@ -690,11 +690,11 @@ function ENT:CreatePricep(pos)
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
-			-2, --xmin
-			-2, --ymin
+			xmin, --xmin
+			ymin, --ymin
 			zmin, --zmin
-			2, --xmax
-			2, --ymax
+			xmax, --xmax
+			ymax, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
@@ -712,11 +712,11 @@ function ENT:CreatePricep(pos)
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
-			-2, --xmin
-			-2, --ymin
+			xmin, --xmin
+			ymin, --ymin
 			zmin, --zmin
-			2, --xmax
-			2, --ymax
+			xmax, --xmax
+			ymax, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
