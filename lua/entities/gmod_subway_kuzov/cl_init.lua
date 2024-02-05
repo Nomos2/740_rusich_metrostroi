@@ -182,38 +182,38 @@ end
 
 ENT.ClientProps["door0x0"] = {
 	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
-	pos = Vector(213.1,60.5,4),
+	pos = Vector(213.1,60.5,4.5),
 	ang = Angle(0,-90,0),
 	hide = 2
 }
 ENT.ClientProps["door1x0"] = {
 	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
-	pos = Vector(-18.5,60.5,4),
+	pos = Vector(-18.5,60.5,4.5),
 	ang = Angle(0,-90,0),
 	hide = 2
 }
 ENT.ClientProps["door2x0"] = {
 	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
-	pos = Vector(-251.5,60.5,4),
+	pos = Vector(-251.5,60.5,4.5),
 	ang = Angle(0,-90,0),
 	hide = 2
 }
 
 ENT.ClientProps["door0x1"] = {
 	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
-	pos = Vector(213.1,-60.6,4),
+	pos = Vector(213,-60.6,4.5),
 	ang = Angle(0,90,0),
 	hide = 2
 }
 ENT.ClientProps["door1x1"] = {
 	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
-	pos = Vector(-18.5,-60.6,4),
+	pos = Vector(-18.5,-60.6,4.5),
 	ang = Angle(0,90,0),
 	hide = 2
 }
 ENT.ClientProps["door2x1"] = {
 	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
-	pos = Vector(-251.5,-60.6,4),
+	pos = Vector(-251.5,-60.6,4.5),
 	ang = Angle(0,90,0),
 	hide = 2
 }

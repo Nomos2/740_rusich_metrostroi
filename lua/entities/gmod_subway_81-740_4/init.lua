@@ -634,88 +634,44 @@ function ENT:CreatePricep(pos)
 	
 	local zmin = -35
 	local zmax = 35
-	
-	constraint.AdvBallsocket(
-			self.MiddleBogey,
+		
+		constraint.AdvBallsocket(
+			self.MiddleBogey,	
 			self,
 			0, --bone
 			0, --bone
-			Vector(0,0,50),
-			pos,		
+			Vector(0,0,-10),
+			pos,	
 			0, --forcelimit
 			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
+			-2, --xmin
+			-2, --ymin
 			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
+			2, --xmax
+			2, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true
-		)
-		constraint.AdvBallsocket(	
-			self.MiddleBogey,
-			self,
-			0, --bone
-			0, --bone
-			Vector(0,0,20),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true
+			true	
 		)		
-		constraint.AdvBallsocket(	
-			self.MiddleBogey,
+		
+		constraint.AdvBallsocket(
+			self.MiddleBogey,	
 			self,
 			0, --bone
 			0, --bone
-			Vector(0,0,-5),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true
-		)		
-
-		constraint.AdvBallsocket(	
-			self.MiddleBogey,			
-			ent,
-			0, --bone
-			0, --bone,		
 			Vector(0,0,40),
-			pos,		
+			pos,
 			0, --forcelimit
 			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
+			-2, --xmin
+			-2, --ymin
 			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
+			2, --xmax
+			2, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
@@ -723,43 +679,44 @@ function ENT:CreatePricep(pos)
 			0, --rotonly
 			1,--nocollide
 			true	
-		)
-		constraint.AdvBallsocket(
-			self.MiddleBogey,			
-			ent,
-			0, --bone
-			0, --bone,		
-			Vector(0,0,20),
-			pos,	
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true	
-		)
-		constraint.AdvBallsocket(
+		)			
+		
+		constraint.AdvBallsocket(	
 			self.MiddleBogey,			
 			ent,
 			0, --bone
 			0, --bone,		
 			Vector(0,0,-5),
-			pos,	
+			pos,		
 			0, --forcelimit
 			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
+			-2, --xmin
+			-2, --ymin
 			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
+			2, --xmax
+			2, --ymax
+			zmax, --zmax
+			0, --xfric
+			0, --yfric
+			0, --zfric
+			0, --rotonly
+			1,--nocollide
+			true	
+		)
+		constraint.AdvBallsocket(	
+			self.MiddleBogey,			
+			ent,
+			0, --bone
+			0, --bone,		
+			Vector(0,0,25),
+			pos,		
+			0, --forcelimit
+			0, --torquelimit
+			-2, --xmin
+			-2, --ymin
+			zmin, --zmin
+			2, --xmax
+			2, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
