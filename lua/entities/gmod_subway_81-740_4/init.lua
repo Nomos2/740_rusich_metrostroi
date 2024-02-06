@@ -42,7 +42,6 @@ ENT.SyncTable = {
 	"CAMS5","CAMS6","CAMS7","CAMS8","CAMS9","CAMS10",
     "PB",   "GV",	"EmergencyBrakeValve","stopkran",
 }
---
 
 function ENT:Initialize()
     -- Set model and initialize
@@ -80,9 +79,9 @@ function ENT:Initialize()
 	self.LightSensor = self:AddLightSensor(Vector(627-9,0,-125),Angle(0,90,0))
 	
 	self.ASSensor = self:AddLightSensor(Vector(515-9,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
-	
+
     -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740PER")	
+        self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740PER")
 		self.FrontBogey.PneumaticPow = 0.7		
         self.RearBogey  = self:CreateBogey(Vector(-532-25,0,-80),Angle(0,0,0),false,"740NOTR") --110 0 -80 
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)			
@@ -110,8 +109,13 @@ function ENT:Initialize()
 		self.Pricep = self:CreatePricep(Vector(-356-9,0,0))--вагон	
 		local opt65 = Vector(65,0,0)	
 		self.RearCouple.CouplingPointOffset = opt65
-		self.FrontCouple.CouplingPointOffset = opt65			
-	end)      	
+		self.FrontCouple.CouplingPointOffset = opt65
+	end)
+
+--	timer.Simple(1, function()
+--		self:ReplaceWeelsSound()	
+--	end)
+	
 
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)
@@ -122,29 +126,7 @@ function ENT:Initialize()
 	
 	self:SetNW2Entity("FrontBogey",self.FrontBogey)
 	self:SetNW2Entity("RearBogey",self.RearBogey)
-	
---[[local Bogey = self:GetNW2Entity("gmod_train_bogey")	 Не работает.
-if not IsValid(Bogey) then return end	
-	
-function Bogey:PhysicsCollide(data,physobj)
-	-- Generate junction sounds
-	if data.HitEntity and data.HitEntity:IsValid() and data.HitEntity:GetClass() == "prop_door_rotating" then
-		self.LastJunctionTime = self.LastJunctionTime or CurTime()
-		local dt = CurTime() - self.LastJunctionTime
-
-		if dt > 3.5 then
-			local speed = self:GetVelocity():Length() * 0.06858
-			if speed > 10 then
-				self.LastJunctionTime = CurTime()
-
-				local pitch_var = math.random(90,110)
-				local pitch = pitch_var*math.max(0.8,math.min(1.3,speed/40))
-				self:EmitSound("subway_trains/rusich/bogey/junct_"..math.random(2,3)..".wav",100,pitch )
-			end
-		end
-	end
-end	]]
---					
+			
     -- Initialize key mapping
     self.KeyMap = {
         [KEY_W] = "PanelKVUp",
@@ -456,6 +438,48 @@ function ENT:UpdateLampsColors()
 	end
 end
 
+--[[
+function ENT:ReplaceWeelsSound()
+	if IsValid(self.FrontBogey) and IsValid(self.RearBogey) and IsValid(self.FrontBogey.Wheels) and IsValid(self.RearBogey.Wheels) then
+		local FrontBogeyWheels,RearBogeyWheels = self.FrontBogey.Wheels.PhysicsCollide,self.RearBogey.Wheels.PhysicsCollide
+		FrontBogeyWheels = function(data,physobj)
+			if data.HitEntity and data.HitEntity:IsValid() and data.HitEntity:GetClass() == "prop_door_rotating" then
+				FrontBogeyWheels.LastJunctionTime = FrontBogeyWheels.LastJunctionTime or CurTime()
+				local dt = CurTime() - FrontBogeyWheels.LastJunctionTime
+	
+				if dt > 3.5 then
+					local speed = FrontBogeyWheels:GetVelocity():Length() * 0.06858
+					if speed > 10 then
+						FrontBogeyWheels.LastJunctionTime = CurTime()
+	
+						local pitch_var = math.random(90,110)
+						local pitch = pitch_var*math.max(0.8,math.min(1.3,speed/40))
+						FrontBogeyWheels:EmitSound("subway_trains/740_4/bogey/junct_"..math.random(2,3)..".wav",100,pitch )
+					end
+				end
+			end
+		end
+		RearBogeyWheels = function(data,physobj)
+			if data.HitEntity and data.HitEntity:IsValid() and data.HitEntity:GetClass() == "prop_door_rotating" then
+				RearBogeyWheels.LastJunctionTime = RearBogeyWheels.LastJunctionTime or CurTime()
+				local dt = CurTime() - RearBogeyWheels.LastJunctionTime
+	
+				if dt > 3.5 then
+					local speed = RearBogeyWheels:GetVelocity():Length() * 0.06858
+					if speed > 10 then
+						RearBogeyWheels.LastJunctionTime = CurTime()
+	
+						local pitch_var = math.random(90,110)
+						local pitch = pitch_var*math.max(0.8,math.min(1.3,speed/40))
+						RearBogeyWheels:EmitSound("subway_trains/740_4/bogey/junct_"..math.random(2,3)..".wav",100,pitch )
+					end
+				end
+			end
+		end
+	end
+end
+--]]
+
 function Metrostroi:RerailChange(ent, bool)
     if not IsValid(ent) then return end
     if bool then
@@ -582,7 +606,7 @@ function ENT:CreatePricep(pos)
 			true	
 		)
 		
-	constraint.AdvBallsocket(
+		constraint.AdvBallsocket(
 			self.MiddleBogey,
 			ent,
 			0, --bone
@@ -626,14 +650,14 @@ function ENT:CreatePricep(pos)
 		)
 	else
 	
-	local xmin = -2
-	local xmax = 2
-	
-	local ymin = xmin
-	local ymax = xmax
-	
-	local zmin = -35
-	local zmax = 35
+		local xmin = -2
+		local xmax = 2
+		
+		local ymin = xmin
+		local ymax = xmax
+		
+		local zmin = -35
+		local zmax = 35
 		
 		constraint.AdvBallsocket(
 			self.MiddleBogey,	
@@ -738,7 +762,7 @@ function ENT:CreatePricep(pos)
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
 	ent.KeyMap = {}	
-	
+
 	return ent
 end			
 ---------------------------------------------------------------------------
@@ -747,7 +771,6 @@ function ENT:Think()
     local power = self.Electric.Battery80V > 62
     local powerPPZ = (power and self.SF1.Value > 0) or self.Electric.ReservePower > 0
 	local Panel = self.Panel
-	
     local state = math.abs(self.AsyncInverter.InverterFrequency/(11+self.AsyncInverter.State*5))--(10+8*math.Clamp((self.AsyncInverter.State-0.4)/0.4,0,1)))
     self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+self.AsyncInverter.State/1),0,1)*math.Clamp(self.Speed/6,0,1))
     self:SetPackedRatio("asyncstate", math.Clamp(self.AsyncInverter.State/0.2*math.abs(self.AsyncInverter.Current)/100,0,1))
