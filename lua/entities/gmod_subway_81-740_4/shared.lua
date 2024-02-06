@@ -128,9 +128,6 @@ function ENT:InitializeSounds()
 	
 	self.SoundNames["ring_cams"] = "subway_trains/740_4/rings/ring_cam.wav"
 	self.SoundPositions["ring_cams"] = {100,1e9,Vector(803-159-9,25.6,-26.3),0.45}
-	
-    self.SoundNames["compressor_pn"] = "subway_trains/740_4/compressor/compressor_psh.wav"
-    self.SoundPositions["compressor_pn"] = {485,1e9,Vector(-134,-40,-66),0.2} --FIXME: Pos	
 
 	local j = math.random (1,3)
 	local r = math.random (1,2)	 

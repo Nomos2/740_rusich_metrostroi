@@ -105,13 +105,13 @@ function ENT:Initialize()
 		self.FrontCouple.CouplingPointOffset = opt		 
 		self.RearCouple.CouplingPointOffset = Vector(85,0,0)	   		
 		
-timer.Simple(0.1, function()			
+	timer.Simple(0.1, function()			
         if not IsValid(self) then return end
 		self.Pricep = self:CreatePricep(Vector(-356-9,0,0))--вагон	
 		local opt65 = Vector(65,0,0)	
 		self.RearCouple.CouplingPointOffset = opt65
 		self.FrontCouple.CouplingPointOffset = opt65			
-end)      	
+	end)      	
 
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)
@@ -737,7 +737,9 @@ function ENT:CreatePricep(pos)
 	
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
-	ent.KeyMap = {}			
+	ent.KeyMap = {}	
+	
+	return ent
 end			
 ---------------------------------------------------------------------------
 function ENT:Think()
