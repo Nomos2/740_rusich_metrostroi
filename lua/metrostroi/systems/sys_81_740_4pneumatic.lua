@@ -476,10 +476,10 @@ function TRAIN_SYSTEM:Think(dT)
     self.Compressor = Train.BUV.BBE and Train.Electric.BVKA_KM1 > 0--Train.KK.Value * ((not Train.Electric or Train.Electric.Power750V > 550) and 1 or 0)
     self.CompressorOver = self.CompressorOver or 0
     if self.Compressor then
-        self.CompressorOver = self.CompressorOver + math.random(0.0215,0.0235)*dT
+        self.CompressorOver = self.CompressorOver + math.random(0.0215,0.0235)*dT --
         if self.CompressorOver >= 1 then --Train.SF54.Value > 0.5 and self.CompressorOver >= 1 then
             self.CompressorOver = 0
-            Train:PlayOnce("compressor_pn","cabin",1,1)
+            Train.Pricep:PlayOnce("compressor_pn","cabin",1,1)
         end
     end
     local Ratio = 29/400

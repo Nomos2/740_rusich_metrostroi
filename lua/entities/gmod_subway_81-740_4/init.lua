@@ -105,13 +105,13 @@ function ENT:Initialize()
 		self.FrontCouple.CouplingPointOffset = opt		 
 		self.RearCouple.CouplingPointOffset = Vector(85,0,0)	   		
 		
-timer.Simple(0.1, function()			
+	timer.Simple(0.1, function()			
         if not IsValid(self) then return end
 		self.Pricep = self:CreatePricep(Vector(-356-9,0,0))--вагон	
 		local opt65 = Vector(65,0,0)	
 		self.RearCouple.CouplingPointOffset = opt65
 		self.FrontCouple.CouplingPointOffset = opt65			
-end)      	
+	end)      	
 
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)
@@ -123,27 +123,9 @@ end)
 	self:SetNW2Entity("FrontBogey",self.FrontBogey)
 	self:SetNW2Entity("RearBogey",self.RearBogey)
 	
---[[local Bogey = self:GetNW2Entity("gmod_train_bogey")	 Не работает.
-if not IsValid(Bogey) then return end	
-	
-function Bogey:PhysicsCollide(data,physobj)
-	-- Generate junction sounds
-	if data.HitEntity and data.HitEntity:IsValid() and data.HitEntity:GetClass() == "prop_door_rotating" then
-		self.LastJunctionTime = self.LastJunctionTime or CurTime()
-		local dt = CurTime() - self.LastJunctionTime
-
-		if dt > 3.5 then
-			local speed = self:GetVelocity():Length() * 0.06858
-			if speed > 10 then
-				self.LastJunctionTime = CurTime()
-
-				local pitch_var = math.random(90,110)
-				local pitch = pitch_var*math.max(0.8,math.min(1.3,speed/40))
-				self:EmitSound("subway_trains/rusich/bogey/junct_"..math.random(2,3)..".wav",100,pitch )
-			end
-		end
-	end
-end	]]
+	--[[timer.Simple(3, function()
+		self:ReplaceWheelsSound()	
+	end)]]	
 --					
     -- Initialize key mapping
     self.KeyMap = {
@@ -456,6 +438,46 @@ function ENT:UpdateLampsColors()
 	end
 end
 
+--[[function ENT:ReplaceWheelsSound()
+	if IsValid(self.FrontBogey) and IsValid(self.RearBogey) and IsValid(self.FrontBogey.Wheels) and IsValid(self.RearBogey.Wheels) then
+		local FrontBogeyWheels,RearBogeyWheels = self.FrontBogey.Wheels.PhysicsCollide,self.RearBogey.Wheels.PhysicsCollide
+		FrontBogeyWheels = function(data,physobj)
+			if data.HitEntity and data.HitEntity:IsValid() and data.HitEntity:GetClass() == "prop_door_rotating" then
+				FrontBogeyWheels.LastJunctionTime = FrontBogeyWheels.LastJunctionTime or CurTime()
+				local dt = CurTime() - FrontBogeyWheels.LastJunctionTime
+	
+				if dt > 3.5 then
+					local speed = FrontBogeyWheels:GetVelocity():Length() * 0.06858
+					if speed > 10 then
+						FrontBogeyWheels.LastJunctionTime = CurTime()
+	
+						local pitch_var = math.random(90,110)
+						local pitch = pitch_var*math.max(0.8,math.min(1.3,speed/40))
+						FrontBogeyWheels:EmitSound("subway_trains/740_4/bogey/junct_"..math.random(2,3)..".wav",100,pitch )
+					end
+				end
+			end
+		end
+		RearBogeyWheels = function(data,physobj)
+			if data.HitEntity and data.HitEntity:IsValid() and data.HitEntity:GetClass() == "prop_door_rotating" then
+				RearBogeyWheels.LastJunctionTime = RearBogeyWheels.LastJunctionTime or CurTime()
+				local dt = CurTime() - RearBogeyWheels.LastJunctionTime
+	
+				if dt > 3.5 then
+					local speed = RearBogeyWheels:GetVelocity():Length() * 0.06858
+					if speed > 10 then
+						RearBogeyWheels.LastJunctionTime = CurTime()
+	
+						local pitch_var = math.random(90,110)
+						local pitch = pitch_var*math.max(0.8,math.min(1.3,speed/40))
+						RearBogeyWheels:EmitSound("subway_trains/740_4/bogey/junct_"..math.random(2,3)..".wav",100,pitch )
+					end
+				end
+			end
+		end
+	end
+end]] --Попытка замены звуков тележек от Димастерса.
+
 function Metrostroi:RerailChange(ent, bool)
     if not IsValid(ent) then return end
     if bool then
@@ -738,6 +760,9 @@ function ENT:CreatePricep(pos)
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
 	ent.KeyMap = {}			
+	
+	return ent
+	
 end			
 ---------------------------------------------------------------------------
 function ENT:Think()

@@ -21,9 +21,7 @@ ENT.SyncTable = {"RearBrakeLineIsolation","RearTrainLineIsolation"}
 function ENT:Initialize()
     self:SetModel("models/metrostroi_train/81-740/body/81-740_4_rear.mdl")
     self.BaseClass.Initialize(self)	
-    self:SetPos(self:GetPos() + Vector(0,0,0))	
-	
-    self.TrainEntities = {}	
+    self:SetPos(self:GetPos() + Vector(0,0,0))
 	
     self.NormalMass = 24000
 	
@@ -166,8 +164,6 @@ function ENT:Think()
     --self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+train.AsyncInverter.State/1),0,1)*math.Clamp(train.Speed/6,0,1))
     --self:SetPackedRatio("asyncstate", math.Clamp(train.AsyncInverter.State/0.2*math.abs(train.AsyncInverter.Current)/100,0,1))
     --self:SetPackedRatio("chopper", math.Clamp(train.Electric.Chopper>0 and train.Electric.IChopped/100 or 0,0,1))		
-	
-    if self.AnnouncementToLeaveWagon ~= train.AnnouncementToLeaveWagon then self.AnnouncementToLeaveWagon = train.AnnouncementToLeaveWagon end
 	 
       self:SetPackedBool("DoorL",train.DoorLeft)
       self:SetPackedBool("DoorR",train.DoorRight)    

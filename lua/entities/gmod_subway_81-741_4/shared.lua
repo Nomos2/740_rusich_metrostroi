@@ -99,9 +99,6 @@ function ENT:InitializeSounds()
         self.SoundPositions["vent1"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
     end
 
-    self.SoundNames["compressor_pn"] = "subway_trains/740_4/compressor/compressor_psh.wav"
-    self.SoundPositions["compressor_pn"] = {485,1e9,Vector(-134,-40,-66),0.2} --FIXME: Pos	
-
 	local rol = math.random (1,2)
 	local j = math.random (1,3)
     self.SoundNames["release_front"] = {loop=true,"subway_trains/740_4/new/pneumo_release_"..j..".wav"}
@@ -161,17 +158,15 @@ function ENT:InitializeSounds()
   	self.SoundNames["door_cab_open"] = "subway_trains/740_4/doors/torec/door_torec_open.mp3"
     self.SoundNames["door_cab_close"] = "subway_trains/740_4/doors/torec/door_torec_close.mp3"	
 
-	local loop = math.random (1,2)
-	local start = math.random (1,2)		
+	local zvuk = math.random (1,2)	
 	local closed = math.random (1,3)	
-	local open = math.random (1,2)	
     for i=0,2 do	
 	for k=0,1 do	
-            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop"..loop..".wav",loop=true}
+            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop"..zvuk..".wav",loop=true}
             self.SoundPositions["door"..i.."x"..k.."r"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_open_start"..start..".wav"}
+            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_open_start"..zvuk..".wav"}
             self.SoundPositions["door"..i.."x"..k.."s"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..open..".wav"}
+            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..zvuk..".wav"}
             self.SoundPositions["door"..i.."x"..k.."o"] = {200,1e9,GetDoorPosition(i,k),1}
             self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/740_4/doors/door_close_end"..closed..".wav"}
             self.SoundPositions["door"..i.."x"..k.."c"] = {200,1e9,GetDoorPosition(i,k),0.5}

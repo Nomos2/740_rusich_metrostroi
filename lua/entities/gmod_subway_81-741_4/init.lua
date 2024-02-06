@@ -520,6 +520,8 @@ function ENT:CreatePricep(pos)
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
 	ent.KeyMap = {}			
+	
+	return ent	
 end
 --
 --Основное

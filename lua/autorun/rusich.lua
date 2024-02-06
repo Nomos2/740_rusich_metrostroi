@@ -1,6 +1,6 @@
 vedro740 = vedro740 or {} --check 81-740 addon availability by other addons
 
-if Metrostroi.Version >= 1623941696 then
+if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Metrostroi Project') then
 	if SERVER then
 		timer.Simple(1,function()	
 		local models = {
@@ -89,20 +89,13 @@ if Metrostroi.Version >= 1623941696 then
 --custom bogey and couple
 timer.Simple(0,function()
 	if not Metrostroi then return end
-	
-	local models = {
-		["models/metrostroi_train/81-740/body/81-740_4_defualt_mos_front.mdl"] = true,
-		["models/metrostroi_train/81-740/body/81-740_4_rear_reference.mdl"] = true,
-		
-		["models/metrostroi_train/81-741/body/81-741_4_defualt_mos_front.mdl"] = true,
-		["models/metrostroi_train/81-741/body/81-741_4_rear_reference.mdl"] = true,
-		
-		["models/metrostroi_train/81-740/bogey/metro_bogey_740.mdl"] = true,
-		["models/metrostroi_train/81-740/bogey/metro_bogey_garm.mdl"] = true, 
+		local models = {
+		["models/metrostroi_train/81-740/body/81-740_4_front.mdl"] = true,
+		["models/metrostroi_train/81-740/body/81-740_4_rear.mdl"] = true,
+
+		["models/metrostroi_train/81-740/bogey/metro_bogey_740"] = true,	
+		["models/metrostroi_train/81-740/bogey/metro_bogey_garm.mdl"] = true,
 		["models/metrostroi_train/81-740/bogey/metro_bogey_notr.mdl"] = true,
-		
-		["models/metrostroi_train/81-740/bogey/metro_couple_740.mdl"] = true,
-		
 	}
 	
 	if SERVER then

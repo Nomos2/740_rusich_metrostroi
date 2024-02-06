@@ -289,7 +289,7 @@ end
 	train.HeadTrain = self 
 	train:SetNW2Entity("HeadTrain", self)	
 	
-if self.RBLICache ~= self:GetNW2Bool("RBLI") then
+	if self.RBLICache ~= self:GetNW2Bool("RBLI") then
         self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 200, 1e9, Vector(50,0,-40))
         self.RBLICache = self:GetNW2Bool("RBLI")
     end
@@ -299,10 +299,10 @@ if self.RBLICache ~= self:GetNW2Bool("RBLI") then
         self.RTLICache = self:GetNW2Bool("RTLI")
     end
 	
+	local animation = math.random (5,12)	
+	local animation1 = math.random (0.5,1)		
 for avar = 1,2 do
 	if not IsValid(train) then return end
-	local animation = math.random (5,12)	
-	local animation1 = math.random (0.5,1)	
     local colV = self:GetNW2Vector("Lamp7404"..avar)
     local col = Color(colV.x,colV.y,colV.z)	
 	self:ShowHideSmooth("lamps_salon_on_rear_avar"..avar,train:Animate("LampsEmer",train:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,animation1,animation,false),col)  

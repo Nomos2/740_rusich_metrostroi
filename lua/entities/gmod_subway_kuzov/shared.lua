@@ -84,8 +84,8 @@ function ENT:InitializeSounds()
     self.SoundNames["compressor"] = {loop=58,"subway_trains/740_4/compressor/compressor_start.wav","subway_trains/740_4/compressor/compressor_loop.wav","subway_trains/740_4/compressor/compressor_end.wav"}
     self.SoundPositions["compressor"] = {300,1e9,Vector(-18,-40,-66),0.4}	
 	
-	self.SoundNames["compressor_pn"] = {loop=false,"subway_trains/740_4/compressor/compressor_psh.wav"}
-    self.SoundPositions["compressor_pn"] = {485,1e9,Vector(-18,-40,-66),0.5} --FIXME: Pos
+	self.SoundNames["compressor_pn"] = "subway_trains/740_4/compressor/compressor_psh.wav"
+    self.SoundPositions["compressor_pn"] = {485,1e9,Vector(-18,-40,-66),0.5}
 	
     for i=1,4 do
         self.SoundNames["vent"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop.wav"}
@@ -105,17 +105,15 @@ function ENT:InitializeSounds()
     self.SoundNames["release_rear"] = {loop=true,"subway_trains/740_4/new/pneumo_release_"..j..".wav"}
     self.SoundPositions["release_rear"] = {1200,1e9,Vector(600-144,0,-70),0.4}		
 
-	local loop = math.random (1,2)
-	local start = math.random (1,2)		
+	local zvuk = math.random (1,2)	
 	local closed = math.random (1,3)	
-	local open = math.random (1,2)	
     for i=0,2 do	
 	for k=0,1 do	
-            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop"..loop..".wav",loop=true}
+            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop"..zvuk..".wav",loop=true}
             self.SoundPositions["door"..i.."x"..k.."r"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_open_start"..start..".wav"}
+            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_open_start"..zvuk..".wav"}
             self.SoundPositions["door"..i.."x"..k.."s"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..open..".wav"}
+            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..zvuk..".wav"}
             self.SoundPositions["door"..i.."x"..k.."o"] = {200,1e9,GetDoorPosition(i,k),1}
             self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/740_4/doors/door_close_end"..closed..".wav"}
             self.SoundPositions["door"..i.."x"..k.."c"] = {200,1e9,GetDoorPosition(i,k),0.5}
@@ -125,12 +123,12 @@ end
 
 ENT.AnnouncerPositions = {}
 ENT.AnnouncerPositions = {
-    {Vector(190,-34,55),250,0.2},
+    {Vector(190,-34,55),50,0.2},
 	{Vector(-38,-34,55),50,0.2},
     {Vector(-275,-34,55),50,0.2},
     {Vector(-228,34,55),50,0.2},
-    {Vector(3,34,55),250,0.2},
-    {Vector(235,34,55),250,0.2},
+    {Vector(3,34,55),50,0.2},
+    {Vector(235,34,55),50,0.2},
 }
 -- Setup door positions
 ENT.LeftDoorPositions = {}
