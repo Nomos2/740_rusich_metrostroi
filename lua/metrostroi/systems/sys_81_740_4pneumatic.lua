@@ -87,15 +87,10 @@ function TRAIN_SYSTEM:Initialize()
         self.LeftDoorSpeed = {0,0,0,0,0,0}
         self.RightDoorSpeed = {0,0,0,0,0,0}
         local start = math.Rand(0.4,0.7)
-        self.DoorSpeedMain = math.Rand(start,math.Rand(start+0.1,start+0.3))
+        self.DoorSpeedMain = math.Rand(1.5,2.2)
         for i=1,#self.LeftDoorSpeed do
-            if math.random() > 0.7 then
-                self.LeftDoorSpeed[i] = math.Rand(self.DoorSpeedMain-0.1,self.DoorSpeedMain+0.4)
-                self.RightDoorSpeed[i] = math.Rand(self.DoorSpeedMain-0.1,self.DoorSpeedMain+0.4)
-            else
-                self.LeftDoorSpeed[i] = math.Rand(self.DoorSpeedMain-0.15,self.DoorSpeedMain+0.2)
-                self.RightDoorSpeed[i] = math.Rand(self.DoorSpeedMain-0.15,self.DoorSpeedMain+0.2)
-            end
+            self.LeftDoorSpeed[i] = math.Rand(self.DoorSpeedMain-0.2,self.DoorSpeedMain+0.2)
+            self.RightDoorSpeed[i] = math.Rand(self.DoorSpeedMain-0.2,self.DoorSpeedMain+0.2)
         end
     end
     self.PlayOpen = 1e9

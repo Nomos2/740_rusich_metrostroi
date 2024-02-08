@@ -77,20 +77,19 @@ function ENT:TrainSpawnerUpdate()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
     if not IsValid(train) then return end		
-	local ahahaha =  math.random (1,5)
-	for i = 1,12 do
-		self:SetNW2Int("DoorsAnim"..i,math.random(ahahaha,15))
+	for i = 1,6 do
+		self:SetNW2Int("DoorsAnim"..i,math.random(5,15))
 	end
 	
 		local sp = math.random (-6,-15)		
 		local sp1 = math.random (10,17)			
 		--скорость дверей
 		for k,v in pairs(train.Pneumatic.LeftDoorSpeed) do
-			train.Pneumatic.LeftDoorSpeed[k] = -3.5 + math.random(sp,sp1) / 12
+			train.Pneumatic.LeftDoorSpeed[k] = -3.5 + math.random(sp,sp1) / 6
 		end
 		
 		for k,v in pairs(train.Pneumatic.RightDoorSpeed) do
-			train.Pneumatic.RightDoorSpeed[k] = -3.5 + math.random(sp,sp1) / 12	
+			train.Pneumatic.RightDoorSpeed[k] = -3.5 + math.random(sp,sp1) / 6	
 		end	
 
     self:UpdateLampsColors()

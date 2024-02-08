@@ -319,18 +319,18 @@ function ENT:TriggerLightSensor(coil,plate)
 end
 
 function ENT:TrainSpawnerUpdate()
-	for i = 1,8 do
+	for i = 1,4 do
 		self:SetNW2Int("DoorsAnim"..i,math.random(5,15))
 	end
 		local sp = math.random (-6,-15)		
 		local sp1 = math.random (10,17)			
 		--скорость дверей
 		for k,v in pairs(self.Pneumatic.LeftDoorSpeed) do
-			self.Pneumatic.LeftDoorSpeed[k] = -15.1 + math.random(-sp,sp1) / 8
+			self.Pneumatic.LeftDoorSpeed[k] = -15.1 + math.random(-sp,sp1) / 4
 		end
 		
 		for k,v in pairs(self.Pneumatic.RightDoorSpeed) do
-			self.Pneumatic.RightDoorSpeed[k] = -15.1 + math.random(-sp,sp1) / 8
+			self.Pneumatic.RightDoorSpeed[k] = -15.1 + math.random(-sp,sp1) / 4
 		end	
 
 	--рандом поломанных фар	
@@ -499,7 +499,7 @@ function ENT:CreatePricep(pos)
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 
 	table.insert(self.TrainEntities,ent)      
-    table.insert(ent.TrainEntities,self)	
+    table.insert(ent.TrainEntities,self)
 	
 	self.MiddleBogey = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),true,"740G")--тележка  ---160,0,-75 -410,0,-75	
 	self:SetNW2Entity("MiddleBogey",self.MiddleBogey)	
@@ -510,18 +510,7 @@ function ENT:CreatePricep(pos)
 	self.MiddleBogey:SetNWBool("DisableEngines",true)			
 	self.MiddleBogey.DisableSound = 1
 	self.MiddleBogey.m_tblToolsAllowed = { "none" }
-    self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)	
-    self.MiddleBogey:GetPhysicsObject():SetMass(5000)
-
-	constraint.NoCollide(self.MiddleBogey,ent,0,0)
-	constraint.NoCollide(self,ent,0,0)		
-	constraint.NoCollide(ent,self.MiddleBogey,0,0)
-	constraint.NoCollide(self.MiddleBogey,self,0,0)	
-		
-	constraint.RemoveConstraints(self.RearCouple, "AdvBallsocket")	
-	constraint.RemoveConstraints(self.MiddleBogey, "AdvBallsocket")	
-	constraint.RemoveConstraints(ent, "AdvBallsocket")
-	
+    self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)
 
 	constraint.Axis(
 		self.RearBogey,		
@@ -708,7 +697,7 @@ function ENT:CreatePricep(pos)
 			ent,
 			0, --bone
 			0, --bone,		
-			Vector(0,0,-5),
+			Vector(0,0,-10),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -730,7 +719,7 @@ function ENT:CreatePricep(pos)
 			ent,
 			0, --bone
 			0, --bone,		
-			Vector(0,0,25),
+			Vector(0,0,30),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit

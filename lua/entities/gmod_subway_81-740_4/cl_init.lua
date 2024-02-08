@@ -1696,7 +1696,7 @@ function ENT:Initialize()
 
     self.BaseClass.Initialize(self)
 	self.DoorsAnims = {}
-	for i = 1,8 do
+	for i = 1,4 do
 		self.DoorsAnims[i] = self:GetNW2Int("DoorsAnim"..i,15)
 	end
 
@@ -2222,75 +2222,6 @@ function ENT:Think()
 	end	
 end
 
---Регистрация тележки
-self.RearBogey = self:GetNW2Entity("RearBogey")	
-local RB = self.RearBogey
-
---Взято из cl_init тележки.
-local c_gui
-if IsValid(c_gui) then c_gui:Close() end
-
-local function addButton(parent,stext,state,scolor,btext,benabled,callback)
-    --local a = v[1]
-    local panel = vgui.Create("DPanel")
-    panel:Dock( TOP )
-    panel:DockMargin( 5, 0, 5, 5 )
-    panel:DockPadding( 5, 5, 5, 5 )
-    if benabled then
-        local button = vgui.Create("DButton",panel)
-        button:Dock(RIGHT)
-        button:SetText(Metrostroi.GetPhrase(btext))
-        button:DockPadding( 5, 5, 5, 5 )
-        button:SizeToContents()
-        button:SetContentAlignment(5)
-        button:SetEnabled(benabled)
-        button.DoClick = callback
-    end
-
-    --DrawCutText(panel,Metrostroi.GetPhrase("Workshop.Warning"),false,"DermaDefaultBold")
-    vgui.MetrostroiDrawCutText(panel,Metrostroi.GetPhrase(stext),false,"DermaDefaultBold")
-    vgui.MetrostroiDrawCutText(panel,Metrostroi.GetPhrase(state),scolor,"DermaDefaultBold")
-
-    panel:InvalidateLayout( true )
-    panel:SizeToChildren(true,true )
-    parent:AddItem(panel)
-end
-
-function RB:DrawGUI(tbl)
-    if IsValid(c_gui) then  c_gui:Close() end
-     local c_gui = vgui.Create("DFrame")
-        c_gui:SetDeleteOnClose(true)
-        c_gui:SetTitle(Metrostroi.GetPhrase("Common.Bogey.Title"))
-        c_gui:SetSize(0, 0)
-        c_gui:SetDraggable(true)
-        c_gui:SetSizable(false)
-        c_gui:MakePopup()
-    local scrollPanel = vgui.Create( "DScrollPanel", c_gui )
-    if tbl.havepb then
-        addButton(scrollPanel,"Common.Bogey.ParkingBrakeState",tbl.pbdisabled and "Common.Bogey.PBDisabled" or "Common.Bogey.PBEnabled", Color(0,150,0),tbl.pbdisabled and "Common.Bogey.PBEnable" or "Common.Bogey.PBDisable",tbl.access,function(button)
-            net.Start("metrostroi-bogey-menu")
-                net.WriteEntity(self)
-                net.WriteUInt(1,8)
-            net.SendToServer()
-            c_gui:Close()
-        end)
-    end
-
-    scrollPanel:Dock( FILL )
-    scrollPanel:InvalidateLayout( true )
-    scrollPanel:SizeToChildren(false,true)
-    local spPefromLayout = scrollPanel.PerformLayout
-    function scrollPanel:PerformLayout()
-        spPefromLayout(self)
-        if not self.First then self.First = true return end
-        local x,y = scrollPanel:ChildrenSize()
-        if self.Centered then return end
-        self.Centered = true
-        c_gui:SetSize(512,math.min(350,y)+35)
-        c_gui:Center()
-    end
-end
-
 for k=0,3 do
     self.ClientProps["TrainNumberR"..k] = {
         model = "models/metrostroi_train/common/bort_numbers.mdl",
@@ -2710,12 +2641,12 @@ end
     self:SetSoundState("ONIX", tunstreet*math.Clamp((state)/0.26+0.2,0,1)*strength, 1)--+math.Clamp(state,0,1)*0.1)
     self:SetSoundState("chopper_onix", tunstreet*self:GetPackedRatio("chopper"), 1)
 
-		self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-		local train1 = self.HeadTrain1 
-		if not IsValid(train1) then return end	
+	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
+	local train1 = self.HeadTrain1 
+	if not IsValid(train1) then return end	
 		
-		train1.HeadTrain = self 
-		train1:SetNW2Entity("HeadTrain", self)		
+	train1.HeadTrain = self 
+	train1:SetNW2Entity("HeadTrain", self)		
 
     local work = self:GetPackedBool("AnnPlay")
     for k,v in ipairs(self.AnnouncerPositions) do
@@ -2723,14 +2654,6 @@ end
             self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
 		end 
 	end	
-	
-    local work = train1:GetPackedBool("AnnPlay")
-    for k,v in ipairs(train1.AnnouncerPositions) do
-	if train1.Sounds["announcer"..k] and IsValid(train1.Sounds["announcer"..k]) then
-            train1.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
-		end 
-	end		
-	
 end
 
 function ENT:Draw()

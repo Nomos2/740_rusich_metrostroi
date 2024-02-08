@@ -39,6 +39,14 @@ local function GetDoorPosition(n,G)	--Правые двери			--Левые д�
 	return Vector(652.5-15-9  - 35.0*G     -  338.8*n, -67.5*(1-2*G), 4.3)
 end
 
+-- Setup door positions
+ENT.LeftDoorPositions = {}
+ENT.RightDoorPositions = {}
+for i=0,1 do
+    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,1))
+    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
+end
+
 local yventpos = {
     414.5+0*117-144-28,
 	414.5+2*117+5-144,
@@ -450,13 +458,6 @@ ENT.Cameras = {
     {Vector(840-159-9,0,-20),Angle(60,0,0),"Train.Common.CouplerCamera"},
     {Vector(800-157-9,-9),Angle(90-46,0,0),"Train.740.BUCIK"},	
 }
--- Setup door positions
-ENT.LeftDoorPositions = {}
-ENT.RightDoorPositions = {}
-for i=0,2 do
-    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,1))
-    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
-end
 ---------------------------------------------------
 -- Defined train information
 -- Types of wagon(for wagon limit system):

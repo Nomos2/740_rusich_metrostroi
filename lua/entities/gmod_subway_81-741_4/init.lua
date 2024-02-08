@@ -179,7 +179,7 @@ function ENT:TrainSpawnerUpdate()
     self:UpdateLampsColors()	
 	
 local ahahaha =  math.random (1,5)
-	for i = 1,12 do
+	for i = 1,6 do
 		self:SetNW2Int("DoorsAnim"..i,math.random(ahahaha,15))
 	end
 	
@@ -187,11 +187,11 @@ local ahahaha =  math.random (1,5)
 		local sp1 = math.random (10,17)			
 		--скорость дверей
 		for k,v in pairs(self.Pneumatic.LeftDoorSpeed) do
-			self.Pneumatic.LeftDoorSpeed[k] = -5.5 + math.random(-sp,sp1) / 12
+			self.Pneumatic.LeftDoorSpeed[k] = -5.5 + math.random(-sp,sp1) / 6
 		end
 		
 		for k,v in pairs(self.Pneumatic.RightDoorSpeed) do
-			self.Pneumatic.RightDoorSpeed[k] = -15.5 + math.random(-sp,sp1) / 12
+			self.Pneumatic.RightDoorSpeed[k] = -15.5 + math.random(-sp,sp1) / 6
 		end	
 	
 end	
@@ -271,17 +271,7 @@ function ENT:CreatePricep(pos)
 	self.MiddleBogey:SetNWBool("DisableEngines",true)			
 	self.MiddleBogey.DisableSound = 1	
 	self.MiddleBogey.m_tblToolsAllowed = { "none" }
-    self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)	
-    self.MiddleBogey:GetPhysicsObject():SetMass(5000)
-	
-	constraint.NoCollide(self.MiddleBogey,ent,0,0)
-	constraint.NoCollide(self,ent,0,0)	
-	constraint.NoCollide(ent,self.MiddleBogey,0,0)
-	constraint.NoCollide(self.MiddleBogey,self,0,0)		
-
-	constraint.RemoveConstraints(self.RearCouple, "AdvBallsocket")	
-	constraint.RemoveConstraints(self.MiddleBogey, "AdvBallsocket")	
-	constraint.RemoveConstraints(ent, "AdvBallsocket")	
+    self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)
 	
 	constraint.Axis(
 		self.RearBogey,		
