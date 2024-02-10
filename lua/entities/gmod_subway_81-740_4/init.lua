@@ -494,7 +494,7 @@ function ENT:CreatePricep(pos)
 	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())	
-	ent:DrawShadow(false)				
+	ent:DrawShadow(false)
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 
@@ -511,7 +511,7 @@ function ENT:CreatePricep(pos)
 	self.MiddleBogey.DisableSound = 1
 	self.MiddleBogey.m_tblToolsAllowed = { "none" }
     self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)
-
+	
 	constraint.Axis(
 		self.RearBogey,		
 		ent,
@@ -559,82 +559,46 @@ function ENT:CreatePricep(pos)
 	Map:find("gm_metro_mosldl") or	
 	Map:find("gm_metro_nsk_line") or		
 	Map:find("gm_metro_jar_imagine_line") or	
-	Map:find("gm_smr_1987") then		
+	Map:find("gm_smr_1987") then	
 	
-	local xmin = 0
+	self.MiddleBogey:SetSolid(SOLID_VPHYSICS)
+
+	constraint.Axis(
+		self.MiddleBogey,
+		self,
+		0,
+		0,
+        Vector(0,0,5),
+		Vector(0,0,5),
+        0,
+		0,
+		0,
+		1,
+		Vector(0,0,1),
+	false)  	
+	
+	constraint.Axis(
+		self.MiddleBogey,
+		ent,
+		0,
+		0,
+        Vector(0,0,0),
+		Vector(0,0,0),
+        0,
+		0,
+		0,
+		1,
+		Vector(0,0,1),
+	false)  
+	
+	--[[local xmin = 0
 	local xmax = 0
 	
 	local ymin = xmin
 	local ymax = xmax
 	
 	local zmin = -10
-	local zmax = 10		
-	
-		constraint.AdvBallsocket(
-			self.MiddleBogey,	
-			self,
-			0, --bone
-			0, --bone
-			Vector(0,0,-30),
-			Vector(-305,0,0),		
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true	
-		)
-		
-	constraint.AdvBallsocket(
-			self.MiddleBogey,
-			ent,
-			0, --bone
-			0, --bone		
-			Vector(0,0,30),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			-2, --xmin
-			-2, --ymin
-			zmin, --zmin
-			2, --xmax
-			2, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1--nocollide
-		)
-		constraint.AdvBallsocket(
-			self.MiddleBogey,	
-			ent,
-			0, --bone
-			0, --bone		
-			Vector(0,0,-30),
-			pos,	
-			0, --forcelimit
-			0, --torquelimit
-			-2, --xmin
-			-2, --ymin
-			zmin, --zmin
-			2, --xmax
-			2, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1--nocollide
-		)
+	local zmax = 10]]	--На всякий случай оставлю.	
 	else
 	
 	local xmin = -2
@@ -655,11 +619,11 @@ function ENT:CreatePricep(pos)
 			pos,	
 			0, --forcelimit
 			0, --torquelimit
-			xmin, --xmin
+			0, --xmin
 			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
+			0, --zmin
+			0, --xmax
+			0, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
@@ -697,7 +661,7 @@ function ENT:CreatePricep(pos)
 			ent,
 			0, --bone
 			0, --bone,		
-			Vector(0,0,-10),
+			Vector(0,0,-5),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
@@ -719,7 +683,7 @@ function ENT:CreatePricep(pos)
 			ent,
 			0, --bone
 			0, --bone,		
-			Vector(0,0,30),
+			Vector(0,0,25),
 			pos,		
 			0, --forcelimit
 			0, --torquelimit
