@@ -1,8 +1,8 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
-or Map:find("gm_metro_kaluzh_line")
-or Map:find("gm_metro_kaluzhkaya_line")
+--or Map:find("gm_metro_kaluzh_line")
+--or Map:find("gm_metro_kaluzhkaya_line")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
@@ -42,7 +42,6 @@ ENT.SyncTable = {
 	"CAMS5","CAMS6","CAMS7","CAMS8","CAMS9","CAMS10",
     "PB",   "GV",	"EmergencyBrakeValve","stopkran",
 }
---
 
 function ENT:Initialize()
     -- Set model and initialize
@@ -57,7 +56,6 @@ function ENT:Initialize()
     self.DriverSeat = self:CreateSeat("driver",Vector(775-159-9,19,-27))
     self.InstructorsSeat = self:CreateSeat("instructor",Vector(586-15-9,-40,-30),Angle(0,90,0),"models/nova/jeep_seat.mdl")
     self.InstructorsSeat2 = self:CreateSeat("instructor",Vector(767-159-9,45,-35),Angle(0,75,0),"models/vehicles/prisoner_pod_inner.mdl") 
-    --self.InstructorsSeat3 = self:CreateSeat("instructor",Vector(760-144,0,-40),Angle(0,90,0),"models/vehicles/prisoner_pod_inner.mdl")
     self.InstructorsSeat4 = self:CreateSeat("instructor",Vector(787-159-9,-25,-40),Angle(0,115,0),"models/vehicles/prisoner_pod_inner.mdl")	
 
     --Hide seats
@@ -83,13 +81,11 @@ function ENT:Initialize()
 	
     -- Create bogeys
         self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740PER")	
-		self.FrontBogey.PneumaticPow = 0.7		
         self.RearBogey  = self:CreateBogey(Vector(-532-25,0,-80),Angle(0,0,0),false,"740NOTR") --110 0 -80 
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)			
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)
-        self.RearBogey.DisableContacts = true	
-		self.RearBogey.PneumaticPow = 0.7		
+        self.RearBogey.DisableContacts = true		
         self.FrontCouple = self:CreateCouple(Vector(627-9,0,-60),Angle(0,0,0),true,"740")
         self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")
 		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)				
@@ -111,7 +107,12 @@ function ENT:Initialize()
 		local opt65 = Vector(65,0,0)	
 		self.RearCouple.CouplingPointOffset = opt65
 		self.FrontCouple.CouplingPointOffset = opt65			
-	end)      	
+	end)   
+
+	--[[timer.Simple(1, function()
+		self:ReplaceWheelsSound()	
+	end)]]	
+--			   	
 
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)
@@ -122,11 +123,7 @@ function ENT:Initialize()
 	
 	self:SetNW2Entity("FrontBogey",self.FrontBogey)
 	self:SetNW2Entity("RearBogey",self.RearBogey)
-	
-	--[[timer.Simple(3, function()
-		self:ReplaceWheelsSound()	
-	end)]]	
---					
+			
     -- Initialize key mapping
     self.KeyMap = {
         [KEY_W] = "PanelKVUp",
@@ -503,17 +500,26 @@ function ENT:CreatePricep(pos)
 	
 	self.MiddleBogey = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),true,"740G")--тележка  ---160,0,-75 -410,0,-75	
 	self:SetNW2Entity("MiddleBogey",self.MiddleBogey)	
+	self.MiddleBogey = self:GetNW2Entity("MiddleBogey")	
+	local MB = self.MiddleBogey 
+	if not IsValid(MB) then return end		
     local rand = math.random()*0.05
-    self.MiddleBogey:SetNWFloat("SqualPitch",1.45+rand)
-	self.MiddleBogey:SetNWInt("MotorSoundType",2)
-	self.MiddleBogey:SetNWInt("Async",true)
-	self.MiddleBogey:SetNWBool("DisableEngines",true)			
-	self.MiddleBogey.DisableSound = 1
-	self.MiddleBogey.m_tblToolsAllowed = { "none" }
-    self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)
+	MB:SetNWFloat("SqualPitch",1.45+rand)
+	MB:SetNWInt("MotorSoundType",2)
+	MB:SetNWInt("Async",true)
+	MB:SetNWBool("DisableEngines",true)			
+	MB.DisableSound = 1
+	MB.m_tblToolsAllowed = { "none" }
+    MB:PhysicsInit(SOLID_VPHYSICS)	
+    constraint.NoCollide( ent, MB, 0 ,0)	
+	
+	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
+	local FB = self.FrontBogey 	
+	self.RearBogey = self:GetNW2Entity("RearBogey")	
+	local RB = self.RearBogey	
 	
 	constraint.Axis(
-		self.RearBogey,		
+		RB,		
 		ent,
 		0,
 		0,
@@ -561,10 +567,10 @@ function ENT:CreatePricep(pos)
 	Map:find("gm_metro_jar_imagine_line") or	
 	Map:find("gm_smr_1987") then	
 	
-	self.MiddleBogey:SetSolid(SOLID_VPHYSICS)
+	MB:SetSolid(SOLID_VPHYSICS)
 
 	constraint.Axis(
-		self.MiddleBogey,
+		MB,
 		self,
 		0,
 		0,
@@ -578,7 +584,7 @@ function ENT:CreatePricep(pos)
 	false)  	
 	
 	constraint.Axis(
-		self.MiddleBogey,
+		MB,
 		ent,
 		0,
 		0,
@@ -611,34 +617,34 @@ function ENT:CreatePricep(pos)
 	local zmax = 35
 		
 		constraint.AdvBallsocket(
-			self.MiddleBogey,	
+			MB,	
 			self,
 			0, --bone
 			0, --bone
-			Vector(0,0,-10),
+			Vector(0,0,40),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit
-			0, --xmin
+			xmin, --xmin
 			ymin, --ymin
-			0, --zmin
-			0, --xmax
-			0, --ymax
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)		
 		
 		constraint.AdvBallsocket(
-			self.MiddleBogey,	
+			MB,	
 			self,
 			0, --bone
 			0, --bone
-			Vector(0,0,40),
+			Vector(0,0,-5),
 			pos,
 			0, --forcelimit
 			0, --torquelimit
@@ -653,11 +659,33 @@ function ENT:CreatePricep(pos)
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)			
 		
 		constraint.AdvBallsocket(	
-			self.MiddleBogey,			
+			MB,			
+			ent,
+			0, --bone
+			0, --bone,		
+			Vector(0,0,40),
+			pos,		
+			0, --forcelimit
+			0, --torquelimit
+			xmin, --xmin
+			ymin, --ymin
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
+			zmax, --zmax
+			0, --xfric
+			0, --yfric
+			0, --zfric
+			0, --rotonly
+			1,--nocollide
+			false	
+		)
+		constraint.AdvBallsocket(	
+			MB,			
 			ent,
 			0, --bone
 			0, --bone,		
@@ -676,35 +704,13 @@ function ENT:CreatePricep(pos)
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
-		)
-		constraint.AdvBallsocket(	
-			self.MiddleBogey,			
-			ent,
-			0, --bone
-			0, --bone,		
-			Vector(0,0,25),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true	
+			false	
 		)		
 	end
 	
-    Metrostroi:RerailChange(self.FrontBogey, true)
-    Metrostroi:RerailChange(self.MiddleBogey, true)
-    Metrostroi:RerailChange(self.RearBogey, true)		
+    Metrostroi:RerailChange(FB, true)
+    Metrostroi:RerailChange(MB, true)
+    Metrostroi:RerailChange(RB, true)		
 
 	--Метод mirror 				
     ent.HeadTrain = self 
@@ -715,15 +721,13 @@ function ENT:CreatePricep(pos)
 	ent.KeyMap = {}			
 	
 	return ent
-	
 end			
 ---------------------------------------------------------------------------
 function ENT:Think()
     local retVal = self.BaseClass.Think(self)
     local power = self.Electric.Battery80V > 62
     local powerPPZ = (power and self.SF1.Value > 0) or self.Electric.ReservePower > 0
-	local Panel = self.Panel
-	
+	local Panel = self.Panel	
     local state = math.abs(self.AsyncInverter.InverterFrequency/(11+self.AsyncInverter.State*5))--(10+8*math.Clamp((self.AsyncInverter.State-0.4)/0.4,0,1)))
     self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+self.AsyncInverter.State/1),0,1)*math.Clamp(self.Speed/6,0,1))
     self:SetPackedRatio("asyncstate", math.Clamp(self.AsyncInverter.State/0.2*math.abs(self.AsyncInverter.Current)/100,0,1))
@@ -779,9 +783,6 @@ function ENT:Think()
     self:SetLightPower(4,not self.HeadLightBroken[1] and Panel.RedLights>0,1)
     self:SetLightPower(5,not self.HeadLightBroken[4] and Panel.RedLights>0,1)
     self:SetLightPower(6,not self.HeadLightBroken[2] and Panel.RedLights>0,1)
-	--self:SetLightPower(20,cablights)
-	--self:SetLightPower(21,cablights)
-	--self:SetLightPower(22,cablights)
     local cablight = Panel.CabLights
     self:SetLightPower(10,cablight > 0 ,cablight)
     self:SetPackedBool("CabinEnabledEmer", cablight > 0)
@@ -907,12 +908,11 @@ end
 
 function ENT:OnCouple(train,isfront)   	
     if isfront and self.FrontAutoCouple then
-        self.FrontBrakeLineIsolation:TriggerInput("Open",1.0)
-        self.FrontTrainLineIsolation:TriggerInput("Open",1.0)
+        self.FrontBrakeLineIsolation:TriggerInput("Open",1)
+        self.FrontTrainLineIsolation:TriggerInput("Open",1)
         self.FrontAutoCouple = false
     elseif not isfront and self.RearAutoCouple then
-        self.RearBrakeLineIsolation:TriggerInput("Open",1.0)
-        self.RearTrainLineIsolation:TriggerInput("Open",1.0)
+        self.Pricep:IsolationsOpen()
         self.RearAutoCouple = false
     end
     self.BaseClass.OnCouple(self,train,isfront)

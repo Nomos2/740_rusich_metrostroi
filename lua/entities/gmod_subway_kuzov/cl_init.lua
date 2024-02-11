@@ -1,8 +1,8 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
 or Map:find("gm_metro_krl")
-or Map:find("gm_metro_kaluzh_line")
-or Map:find("gm_metro_kaluzhkaya_line")
+--or Map:find("gm_metro_kaluzh_line")
+--or Map:find("gm_metro_kaluzhkaya_line")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
@@ -116,9 +116,9 @@ ENT.ButtonMap["RearPneumatic"] = {
     hideseat=0.2,
     hide=true,
 	screenHide = true,
-	
+
     buttons = {
-		{ID = "RearTrainLineIsolationToggle",x=500, y=0, w=400, h=100, tooltip=""},
+		{ID = "RearTrainLineIsolationToggle",x=500, y=0, w=400, h=100,tooltip=""},
 		{ID = "RearBrakeLineIsolationToggle",x=0, y=0, w=400, h=100,tooltip=""},
     }
 }	
@@ -135,8 +135,8 @@ ENT.ClientProps["RearBrake"] = {
 	hide = 2,	
 }
 
---ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,2,1,50,1e3,Angle(-90,0,0)}}
---ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,2,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
 
 ENT.ButtonMap["Tickers_rear"] = {
 	pos = Vector(286.2,27,65.85), --446 -- 14 -- -0,5
@@ -226,8 +226,6 @@ local yventpos = {
 
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
-	self.RBLICache = false
-	self.RTLICache = false
 	self.DoorsAnims = {}
 	for i = 1,6 do
 		self.DoorsAnims[i] = self:GetNW2Int("DoorsAnim"..i,15)
@@ -358,45 +356,37 @@ end
 	train.HeadTrain = self 
 	train:SetNW2Entity("HeadTrain", self)	
 	
-	if self.RBLICache ~= self:GetNW2Bool("RBLI") then
-        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 200, 1e9, Vector(50,0,-40))
-        self.RBLICache = self:GetNW2Bool("RBLI")
-    end
-
-    if self.RTLICache ~= self:GetNW2Bool("RTLI") then
-        self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 200, 1e9, Vector(50,0,-40)) 
-        self.RTLICache = self:GetNW2Bool("RTLI")
-    end
-	
 	local animation = math.random (5,12)	
-	local animation1 = math.random (0.5,1)		
-for avar = 1,2 do
-	if not IsValid(train) then return end
-    local colV = self:GetNW2Vector("Lamp7404"..avar)
-    local col = Color(colV.x,colV.y,colV.z)	
-	self:ShowHideSmooth("lamps_salon_on_rear_avar"..avar,train:Animate("LampsEmer",train:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,animation1,animation,false),col)  
-end	
+	local animation1 = math.random (0.5,1)
+	for avar = 1,2 do
+		if not IsValid(train) then return end	
+		local colV = self:GetNW2Vector("Lamp7404"..avar)
+		local col = Color(colV.x,colV.y,colV.z)	
+		self:ShowHideSmooth("lamps_salon_on_rear_avar"..avar,train:Animate("LampsEmer",train:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,animation1,animation,false),col)  
+	end	
 
     local state = self:GetPackedBool("CompressorWork")
     self:SetSoundState("compressor",state and 1.0 or 0,1)
 
-for i = 1,11 do	
-	if not IsValid(train) then return end	
-    local colV = self:GetNW2Vector("Lamp7404"..i)
-    local col = Color(colV.x,colV.y,colV.z)	   
-	self:ShowHideSmooth("lamps_salon_on_rear"..i-1,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
-    self:ShowHideSmooth("lamps_salon_on_rear1"..i,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
-end
+	for i = 1,11 do	
+		if not IsValid(train) then return end	
+		local colV = self:GetNW2Vector("Lamp7404"..i)
+		local col = Color(colV.x,colV.y,colV.z)	   
+		self:ShowHideSmooth("lamps_salon_on_rear"..i-1,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
+		self:ShowHideSmooth("lamps_salon_on_rear1"..i,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
+	end
 	
 	local ZavodTable = train:GetNW2Int("ZavodTable",1)	
     if not IsValid(train) then return end		
     self:ShowHide("Zavod_table_soch",ZavodTable==2)	
     self:ShowHide("Zavod_table_sochl_torec",ZavodTable==2)
 	
+	local dT = train.DeltaTime		
 	--Анимация дверей.
 	if not self.DoorStates then self.DoorStates = {} end
     if not self.DoorLoopStates then self.DoorLoopStates = {} end
-    if not IsValid(train) then return end		
+    if not IsValid(train) then return end
+	local dT = train.DeltaTime		
     for b=0,3 do
         for k=0,2 do
             local st = k==1 and "DoorR" or "DoorL"
@@ -429,8 +419,7 @@ end
         end
 	end	
 	
-    if not IsValid(train) then return end	
-	local dT = train.DeltaTime		
+    if not IsValid(train) then return end		
     train.RearLeak = math.Clamp(train.RearLeak + 10*(-train:GetPackedRatio("RearLeak")-train.RearLeak)*dT,0,1)	
     self:SetSoundState("rear_isolation",train.RearLeak,0.9+0.2*train.RearLeak)	
 
@@ -496,7 +485,6 @@ function ENT:Draw()
 end  
 
 function ENT:OnButtonPressed(button)
-
 end
 function ENT:OnPlay(soundid,location,range,pitch)
     if location == "stop" then

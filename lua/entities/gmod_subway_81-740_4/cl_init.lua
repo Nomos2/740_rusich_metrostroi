@@ -1,8 +1,8 @@
 ﻿local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
-or Map:find("gm_metro_kaluzh_line")
-or Map:find("gm_metro_kaluzhkaya_line")
+--or Map:find("gm_metro_kaluzh_line")
+--or Map:find("gm_metro_kaluzhkaya_line")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
@@ -2639,14 +2639,7 @@ end
     local strength = self:GetPackedRatio("asyncstate")*(1-math.Clamp((speed-23)/23,0,1))*0.5
 		
     self:SetSoundState("ONIX", tunstreet*math.Clamp((state)/0.26+0.2,0,1)*strength, 1)--+math.Clamp(state,0,1)*0.1)
-    self:SetSoundState("chopper_onix", tunstreet*self:GetPackedRatio("chopper"), 1)
-
-	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end	
-		
-	train1.HeadTrain = self 
-	train1:SetNW2Entity("HeadTrain", self)		
+    self:SetSoundState("chopper_onix", tunstreet*self:GetPackedRatio("chopper"), 1)	
 
     local work = self:GetPackedBool("AnnPlay")
     for k,v in ipairs(self.AnnouncerPositions) do

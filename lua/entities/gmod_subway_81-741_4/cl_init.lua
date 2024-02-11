@@ -1,8 +1,8 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
 or Map:find("gm_metro_krl")
-or Map:find("gm_metro_kaluzh_line")
-or Map:find("gm_metro_kaluzhkaya_line")
+--or Map:find("gm_metro_kaluzh_line")
+--or Map:find("gm_metro_kaluzhkaya_line")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
@@ -19,15 +19,6 @@ ENT.ButtonMap = {}
 ENT.AutoAnims = {}
 ENT.ClientSounds = {}
 ENT.ClientPropsInitialized = false
-
---[[ENT.ClientProps["test_prop"] = {
-	model = "models/props_junk/metalbucket01a.mdl",
-	pos = Vector(85,-34,55),
-	ang = Angle(0,0,0),
-	scale = 0.5,	
-	nohide = true,
-}]]
-
 
 ENT.ButtonMap["PVZ"] = {
     pos = Vector(654-17.7,52,-12), --446 -- 14 -- -0,5
@@ -436,34 +427,6 @@ ENT.ClientProps["Naddver_off_left"] = {
 	scale = 1,
 	hide = 2, 	
 }
---------------------------------------------------------------------------------
--- Add doors
---------------------------------------------------------------------------------
---[[local function GetDoorPosition(b,k,j)
-	if j == 0 
-	then return Vector(591.9-17.7 - 35.15*k     - 232.1*b,-67.5*(1-2*k),4)
-	else return Vector(592-17.7 - 35.0*(1-k) - 232.1*b,-66*(1-2*k),4)
-	end
-end
-
-for b=0,2 do
-	for k=0,1 do
-		ENT.ClientProps["door"..b.."x"..k.."a"] = {
-			model =  "models/metrostroi_train/81-740/body/81-740_leftdoor2.mdl",
-			pos = GetDoorPosition(b,k,0),
-			ang = Angle(0,90 +180*k,0),   
-			scale = 1.001,				
-			hide = 2,
-		}
-		ENT.ClientProps["door"..b.."x"..k.."b"] = {
-			model =  "models/metrostroi_train/81-740/body/81-740_leftdoor1.mdl",
-			pos = GetDoorPosition(b,k,1),
-			ang = Angle(0,90 +180*k,0),   
-			scale = 1.001,				
-			hide = 2,
-		}
-	end 
-end]]
 
 ENT.ClientProps["door0x0"] = {
 	model = "models/metrostroi_train/81-740/body/door_pass.mdl",

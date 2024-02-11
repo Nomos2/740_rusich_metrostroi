@@ -1,8 +1,8 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
-or Map:find("gm_metro_kaluzh_line")
-or Map:find("gm_metro_kaluzhkaya_line")
+--or Map:find("gm_metro_kaluzh_line")
+--or Map:find("gm_metro_kaluzhkaya_line")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
@@ -44,14 +44,12 @@ function ENT:Initialize()
 	self.DriverSeat.m_tblToolsAllowed = { "none" }		
 
  -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 505,0,-80),Angle(0,180,0),true,"740PER")
-		self.FrontBogey.PneumaticPow = 0.7			
-        self.RearBogey  = self:CreateBogey(Vector(-540,0,-80),Angle(0,0,0),false,"740NOTR") --110 0 -80  
+        self.FrontBogey = self:CreateBogey(Vector( 505,0,-80),Angle(0,180,0),true,"740PER")		
+        self.RearBogey  = self:CreateBogey(Vector(-540,0,-80),Angle(0,0,0),false,"740NOTR")
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)	
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)		
-	    self.RearBogey.DisableContacts = true	
-		self.RearBogey.PneumaticPow = 0.7			
+	    self.RearBogey.DisableContacts = true		
         self.FrontCouple = self:CreateCouple(Vector(608-17,0,-60),Angle(0,0,0),true,"740")		
         self.RearCouple = self:CreateCouple(Vector(-612-17,0,-60),Angle(0,-180,0),false,"740")
 		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
@@ -197,7 +195,7 @@ local ahahaha =  math.random (1,5)
 end	
 
 function ENT:UpdateLampsColors()
-    local lCol,lCount = Vector(),40
+    local lCol,lCount = Vector(),20
 	local mr = math.random
     local rand = mr() > 0.8 and 1 or mr(0.95,0.99)
 	local rnd1,rnd2,col = 0.7+mr()*0.3,mr()
@@ -255,33 +253,41 @@ function ENT:CreatePricep(pos)
 	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())	
-	ent:DrawShadow(false)				
-	ent:SetSolid(SOLID_VPHYSICS)		
+	ent:DrawShadow(false)	
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 	
 	table.insert(self.TrainEntities,ent)
     table.insert(ent.TrainEntities,self)	
 
-	self.MiddleBogey = self:CreateBogey(Vector(-18,0,-80),Angle(0,0,0),true,"740G")--тележка  ---160,0,-75 -410,0,-75	
+	self.MiddleBogey = self:CreateBogey(Vector(-18,0,-80),Angle(0,0,0),true,"740G")--тележка
 	self:SetNW2Entity("MiddleBogey",self.MiddleBogey)	
-    local rand = math.random()*0.05	
-	self.MiddleBogey:SetNWFloat("SqualPitch",1.45+rand) 		
-	self.MiddleBogey:SetNWInt("MotorSoundType",2)
-	self.MiddleBogey:SetNWInt("Async",true)
-	self.MiddleBogey:SetNWBool("DisableEngines",true)			
-	self.MiddleBogey.DisableSound = 1	
-	self.MiddleBogey.m_tblToolsAllowed = { "none" }
-    self.MiddleBogey:PhysicsInit(SOLID_VPHYSICS)
+	self.MiddleBogey = self:GetNW2Entity("MiddleBogey")	
+	local MB = self.MiddleBogey 
+	if not IsValid(MB) then return end		
+    local rand = math.random()*0.05
+	MB:SetNWFloat("SqualPitch",1.45+rand)
+	MB:SetNWInt("MotorSoundType",2)
+	MB:SetNWInt("Async",true)
+	MB:SetNWBool("DisableEngines",true)			
+	MB.DisableSound = 1
+	MB.m_tblToolsAllowed = { "none" }
+    MB:PhysicsInit(SOLID_VPHYSICS)	
+    constraint.NoCollide( ent, MB, 0 ,0)	
+	
+	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
+	local FB = self.FrontBogey 	
+	self.RearBogey = self:GetNW2Entity("RearBogey")	
+	local RB = self.RearBogey	
 	
 	constraint.Axis(
-		self.RearBogey,		
+		RB,		
 		ent,
 		0,
 		0,
 		Vector(0,0,0),
 		Vector(0,0,0),
-		0,
+        0,
 		0,
 		0,
 		0,
@@ -308,7 +314,7 @@ function ENT:CreatePricep(pos)
         1, --zfric
         0, --rotonly
         1 --nocollide
-    )
+    ) 	
 	
 	local Map = game.GetMap():lower() or ""    	
 	if Map:find("gm_mustox_neocrimson_line") or
@@ -323,10 +329,10 @@ function ENT:CreatePricep(pos)
 	Map:find("gm_metro_jar_imagine_line") or	
 	Map:find("gm_smr_1987") then	
 	
-	self.MiddleBogey:SetSolid(SOLID_VPHYSICS)
+	MB:SetSolid(SOLID_VPHYSICS)
 
 	constraint.Axis(
-		self.MiddleBogey,
+		MB,
 		self,
 		0,
 		0,
@@ -340,7 +346,7 @@ function ENT:CreatePricep(pos)
 	false)  	
 	
 	constraint.Axis(
-		self.MiddleBogey,
+		MB,
 		ent,
 		0,
 		0,
@@ -372,35 +378,35 @@ function ENT:CreatePricep(pos)
 	local zmin = -35
 	local zmax = 35
 		
-				constraint.AdvBallsocket(
-			self.MiddleBogey,	
+		constraint.AdvBallsocket(
+			MB,	
 			self,
 			0, --bone
 			0, --bone
-			Vector(0,0,-10),
+			Vector(0,0,40),
 			pos,	
 			0, --forcelimit
 			0, --torquelimit
-			0, --xmin
+			xmin, --xmin
 			ymin, --ymin
-			0, --zmin
-			0, --xmax
-			0, --ymax
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
 			zmax, --zmax
 			0, --xfric
 			0, --yfric
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)		
 		
 		constraint.AdvBallsocket(
-			self.MiddleBogey,	
+			MB,	
 			self,
 			0, --bone
 			0, --bone
-			Vector(0,0,40),
+			Vector(0,0,-5),
 			pos,
 			0, --forcelimit
 			0, --torquelimit
@@ -415,11 +421,33 @@ function ENT:CreatePricep(pos)
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
+			false	
 		)			
 		
 		constraint.AdvBallsocket(	
-			self.MiddleBogey,			
+			MB,			
+			ent,
+			0, --bone
+			0, --bone,		
+			Vector(0,0,40),
+			pos,		
+			0, --forcelimit
+			0, --torquelimit
+			xmin, --xmin
+			ymin, --ymin
+			zmin, --zmin
+			xmax, --xmax
+			ymax, --ymax
+			zmax, --zmax
+			0, --xfric
+			0, --yfric
+			0, --zfric
+			0, --rotonly
+			1,--nocollide
+			false	
+		)
+		constraint.AdvBallsocket(	
+			MB,			
 			ent,
 			0, --bone
 			0, --bone,		
@@ -438,35 +466,13 @@ function ENT:CreatePricep(pos)
 			0, --zfric
 			0, --rotonly
 			1,--nocollide
-			true	
-		)
-		constraint.AdvBallsocket(	
-			self.MiddleBogey,			
-			ent,
-			0, --bone
-			0, --bone,		
-			Vector(0,0,25),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			true	
+			false	
 		)		
 	end
 	
-    Metrostroi:RerailChange(self.FrontBogey, true)
-    Metrostroi:RerailChange(self.MiddleBogey, true)
-    Metrostroi:RerailChange(self.RearBogey, true)		
+    Metrostroi:RerailChange(FB, true)
+    Metrostroi:RerailChange(MB, true)
+    Metrostroi:RerailChange(RB, true)		
 
 	--Метод mirror 				
     ent.HeadTrain = self 
@@ -509,16 +515,13 @@ function ENT:Think()
         end
     end		
 	
-    --свет в салоне
     local passlight = power and (self.BUV.MainLights and 1 or self.SFV20.Value > 0.5 and 0.4) or 0		
 	
 	self:SetLightPower(15,passlight > 0, passlight and mul/40)
 	self:SetLightPower(16,passlight > 0.5, passlight and mul/40)
 	self:SetLightPower(17,passlight > 0, passlight and mul/40)
-		
-    -- получение всяких значений
+	
     self:SetPackedRatio("Speed", self.Speed)
-    self:SetPackedBool("CompressorWork",self.Pneumatic.Compressor)
     self:SetPackedBool("Vent2Work",self.Electric.Vent2>0)
     self:SetPackedBool("BBEWork",power and self.BUV.BBE > 0)
 	self:SetPackedBool("PVZ_otsek",self.PVZ_otsek)
@@ -591,8 +594,7 @@ function ENT:OnCouple(train,isfront)
         self.FrontTrainLineIsolation:TriggerInput("Open",1.0)
         self.FrontAutoCouple = false
     elseif not isfront and self.RearAutoCouple then
-        self.RearBrakeLineIsolation:TriggerInput("Open",1.0)
-        self.RearTrainLineIsolation:TriggerInput("Open",1.0)
+        self.Pricep:IsolationsOpen()
         self.RearAutoCouple = false
     end
     self.BaseClass.OnCouple(self,train,isfront)

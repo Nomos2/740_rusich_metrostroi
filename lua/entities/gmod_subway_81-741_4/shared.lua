@@ -1,8 +1,8 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk") 
 or Map:find("gm_metro_krl")
-or Map:find("gm_metro_kaluzh_line")
-or Map:find("gm_metro_kaluzhkaya_line")
+--or Map:find("gm_metro_kaluzh_line")
+--or Map:find("gm_metro_kaluzhkaya_line")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
@@ -42,6 +42,13 @@ local yventpos = {
 	414.5+2*117+5-144,
 	414.5+4*117+0.5-144,
 }
+-- Setup door positions
+ENT.LeftDoorPositions = {}
+ENT.RightDoorPositions = {}
+for i=0,3 do
+    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,1))
+    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
+end
 
 function ENT:InitializeSounds()
     self.BaseClass.InitializeSounds(self)
@@ -158,15 +165,15 @@ function ENT:InitializeSounds()
   	self.SoundNames["door_cab_open"] = "subway_trains/740_4/doors/torec/door_torec_open.mp3"
     self.SoundNames["door_cab_close"] = "subway_trains/740_4/doors/torec/door_torec_close.mp3"	
 
-	local zvuk = math.random (1,2)	
+	local snd = math.random (1,2)	
 	local closed = math.random (1,3)	
     for i=0,2 do	
 	for k=0,1 do	
-            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop"..zvuk..".wav",loop=true}
+            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop"..snd..".wav",loop=true}
             self.SoundPositions["door"..i.."x"..k.."r"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_open_start"..zvuk..".wav"}
+            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_open_start"..snd..".wav"}
             self.SoundPositions["door"..i.."x"..k.."s"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..zvuk..".wav"}
+            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..snd..".wav"}
             self.SoundPositions["door"..i.."x"..k.."o"] = {200,1e9,GetDoorPosition(i,k),1}
             self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/740_4/doors/door_close_end"..closed..".wav"}
             self.SoundPositions["door"..i.."x"..k.."c"] = {200,1e9,GetDoorPosition(i,k),0.5}
@@ -197,13 +204,6 @@ ENT.AnnouncerPositions = {
 	{Vector(362-17,34,55),50,0.2},
 	{Vector(136-17,34,55),50,0.2},
 }
--- Setup door positions
-ENT.LeftDoorPositions = {}
-ENT.RightDoorPositions = {}
-for i=0,3 do
-    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,1))
-    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
-end
 ---------------------------------------------------
 -- Defined train information
 -- Types of wagon(for wagon limit system):

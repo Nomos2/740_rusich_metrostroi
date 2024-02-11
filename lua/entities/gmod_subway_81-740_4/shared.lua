@@ -1,8 +1,8 @@
 local Map = game.GetMap():lower() or ""
 if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
-or Map:find("gm_metro_kaluzh_line")
-or Map:find("gm_metro_kaluzhkaya_line")
+--or Map:find("gm_metro_kaluzh_line")
+--or Map:find("gm_metro_kaluzhkaya_line")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
@@ -251,16 +251,7 @@ function ENT:InitializeSounds()
     self.SoundPositions["KV_0_-1"] = self.SoundPositions["KV_-3_-2"]
     self.SoundPositions["KV_-1_-2"] = self.SoundPositions["KV_-3_-2"]
     self.SoundPositions["KV_-2_-3"] = self.SoundPositions["KV_-3_-2"]
-
-    --[[self.SoundNames["kro_in"] = {
-        "subway_trains/717/kru/kru_insert1.mp3",
-        "subway_trains/717/kru/kru_insert2.mp3"
-    }
-    self.SoundNames["kro_out"] = {
-        "subway_trains/717/kru/kru_eject1.mp3",
-        "subway_trains/717/kru/kru_eject2.mp3",
-        "subway_trains/717/kru/kru_eject3.mp3",
-    }]]
+	
     self.SoundNames["kro_-1_0"] = {"subway_trains/740_4/switches/tumbler/revers_b-n.mp3"}
     self.SoundNames["kro_0_1"] = {"subway_trains/740_4/switches/tumbler/revers_n-f.mp3"}
     self.SoundNames["kro_1_0"] = {"subway_trains/740_4/switches/tumbler/revers_f-n.mp3"}
@@ -371,16 +362,16 @@ function ENT:InitializeSounds()
     self.SoundPositions["gv_f"] = {80,1e9,Vector(126.4-159-9,50,-60-23.5),0.8}
     self.SoundPositions["gv_b"] = {80,1e9,Vector(126.4-159-9,50,-60-23.5),0.8}
 	
-	local zvuk = math.random (1,2)
+	local snd = math.random (1,2)
 	local closed = math.random (1,3)	
     for i=0,2 do	
     for i=0,1 do
         for k=0,1 do
-            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop"..zvuk..".wav",loop=true}
+            self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop"..snd..".wav",loop=true}
             self.SoundPositions["door"..i.."x"..k.."r"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_open_start"..zvuk..".wav"}
+            self.SoundNames["door"..i.."x"..k.."s"] = {"subway_trains/740_4/doors/door_open_start"..snd..".wav"}
             self.SoundPositions["door"..i.."x"..k.."s"] = {200,1e9,GetDoorPosition(i,k),1}
-            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..zvuk..".wav"}
+            self.SoundNames["door"..i.."x"..k.."o"] = {"subway_trains/740_4/doors/door_open_end"..snd..".wav"}
             self.SoundPositions["door"..i.."x"..k.."o"] = {200,1e9,GetDoorPosition(i,k),1}
             self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/740_4/doors/door_close_end"..closed..".wav"}
             self.SoundPositions["door"..i.."x"..k.."c"] = {200,1e9,GetDoorPosition(i,k),0.5}
