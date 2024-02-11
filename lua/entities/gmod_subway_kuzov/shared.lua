@@ -140,4 +140,9 @@ for i=0,3 do
     table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
 end
 
+function ENT:InitializeSystems()
+	self:LoadSystem("RearBrakeLineIsolation","Relay","Switch", { normally_closed = true, bass = true})
+	self:LoadSystem("RearTrainLineIsolation","Relay","Switch", { normally_closed = true, bass = true})
+end
+
 ENT.SubwayTrain = nil

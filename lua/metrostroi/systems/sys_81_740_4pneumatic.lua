@@ -46,9 +46,7 @@ function TRAIN_SYSTEM:Initialize()
     self.SD3 = false
     -- Isolation valves
     self.Train:LoadSystem("FrontBrakeLineIsolation","Relay","Switch", { normally_closed = true, bass = true})
-    self.Train:LoadSystem("RearBrakeLineIsolation","Relay","Switch", { normally_closed = true, bass = true})
     self.Train:LoadSystem("FrontTrainLineIsolation","Relay","Switch", { normally_closed = true, bass = true})
-    self.Train:LoadSystem("RearTrainLineIsolation","Relay","Switch", { normally_closed = true, bass = true})
 
     -- Brake cylinder atmospheric valve open
     self.BrakeCylinderValve = 0
@@ -187,9 +185,9 @@ end
 -------------------------------------------------------------------------------
 function TRAIN_SYSTEM:UpdatePressures(Train,dT)
     local frontBrakeOpen = Train.FrontBrakeLineIsolation.Value == 0
-    local rearBrakeOpen = Train.RearBrakeLineIsolation.Value == 0
+    local rearBrakeOpen = Train.Pricep and Train.Pricep.RearBrakeLineIsolation.Value == 0
     local frontTrainOpen = Train.FrontTrainLineIsolation.Value == 0
-    local rearTrainOpen = Train.RearTrainLineIsolation.Value == 0
+    local rearTrainOpen = Train.Pricep and Train.Pricep.RearTrainLineIsolation.Value == 0
 
     local Ft = IsValid(Train.FrontTrain) and Train.FrontTrain
     local Rt = IsValid(Train.RearTrain) and Train.RearTrain
@@ -209,8 +207,8 @@ function TRAIN_SYSTEM:UpdatePressures(Train,dT)
             frontBrakeLeak = frontBrakeOpen and Ft.FrontBrakeLineIsolation.Value==1 and 0.08
             frontTrainLeak = frontTrainOpen and Ft.FrontTrainLineIsolation.Value==1 and 0.08
         else -- Rear to nose
-            frontBrakeLeak = frontBrakeOpen and Ft.RearBrakeLineIsolation.Value==1 and 0.08
-            frontTrainLeak = frontTrainOpen and Ft.RearTrainLineIsolation.Value==1 and 0.08
+            frontBrakeLeak = frontBrakeOpen and Ft.Pricep.RearBrakeLineIsolation.Value==1 and 0.08
+            frontTrainLeak = frontTrainOpen and Ft.Pricep.RearTrainLineIsolation.Value==1 and 0.08
         end
     else
         frontBrakeLeak = frontBrakeOpen and 0.7
@@ -221,8 +219,8 @@ function TRAIN_SYSTEM:UpdatePressures(Train,dT)
             rearBrakeLeak = rearBrakeOpen and Rt.FrontBrakeLineIsolation.Value==1 and 0.08
             rearTrainLeak = rearTrainOpen and Rt.FrontTrainLineIsolation.Value==1 and 0.08
         else -- Rear to nose
-            rearBrakeLeak = rearBrakeOpen and Rt.RearBrakeLineIsolation.Value==1 and 0.08
-            rearTrainLeak = rearTrainOpen and Rt.RearTrainLineIsolation.Value==1 and 0.08
+            rearBrakeLeak = rearBrakeOpen and Rt.Pricep.RearBrakeLineIsolation.Value==1 and 0.08
+            rearTrainLeak = rearTrainOpen and Rt.Pricep.RearTrainLineIsolation.Value==1 and 0.08
         end
     else
         rearBrakeLeak = rearBrakeOpen and 0.7
@@ -502,9 +500,9 @@ function TRAIN_SYSTEM:Think(dT)
     ----------------------------------------------------------------------------
     -- FIXME
     Train:SetNW2Bool("FbI",Train.FrontBrakeLineIsolation.Value ~= 0)
-    Train:SetNW2Bool("RbI",Train.RearBrakeLineIsolation.Value ~= 0)
+    Train:SetNW2Bool("RbI",Train.Pricep and Train.Pricep.RearBrakeLineIsolation.Value ~= 0)
     Train:SetNW2Bool("FtI",Train.FrontTrainLineIsolation.Value ~= 0)
-    Train:SetNW2Bool("RtI",Train.RearTrainLineIsolation.Value ~= 0)
+    Train:SetNW2Bool("RtI",Train.Pricep and Train.Pricep.RearTrainLineIsolation.Value ~= 0)
     Train:SetNW2Bool("AD",Train.K31.Value == 0)
 
     self.Timer = self.Timer or CurTime()

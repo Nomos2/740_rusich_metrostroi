@@ -528,6 +528,7 @@ ENT.Spawner = {
 	{},
 	{"SpawnMode","Spawner.Common.SpawnMode","List",{"Spawner.Common.SpawnMode.Full","Spawner.Common.SpawnMode.Deadlock","Spawner.Common.SpawnMode.NightDeadlock","Spawner.Common.SpawnMode.Depot"},nil,function(ent,val,rot,i,wagnum,rclk)	
         if rclk then return end
+		print(ent)
         if ent._SpawnerStarted~=val then
             ent.Battery:TriggerInput("Set",val<=2 and 1 or 0)
             if ent.SF1  then

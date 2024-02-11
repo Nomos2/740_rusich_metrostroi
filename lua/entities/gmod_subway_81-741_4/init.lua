@@ -519,7 +519,9 @@ function ENT:CreatePricep(pos)
 	
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
-	ent.KeyMap = {}			
+	ent.KeyMap = {}		
+	
+	return ent
 end
 --
 --Основное
@@ -634,8 +636,7 @@ function ENT:OnCouple(train,isfront)
         self.FrontTrainLineIsolation:TriggerInput("Open",1.0)
         self.FrontAutoCouple = false
     elseif not isfront and self.RearAutoCouple then
-        self.RearBrakeLineIsolation:TriggerInput("Open",1.0)
-        self.RearTrainLineIsolation:TriggerInput("Open",1.0)
+        self.Pricep:IsolationsOpen()
         self.RearAutoCouple = false
     end
     self.BaseClass.OnCouple(self,train,isfront)

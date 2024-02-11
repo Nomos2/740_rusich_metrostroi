@@ -118,7 +118,7 @@ ENT.ButtonMap["RearPneumatic"] = {
 	screenHide = true,
 	
     buttons = {
-		{ID = "RearTrainLineIsolationToggle",x=500, y=0, w=400, h=100, tooltip=""},
+		{ID = "RearTrainLineIsolationToggle",x=500, y=0, w=400, h=100,tooltip=""},
 		{ID = "RearBrakeLineIsolationToggle",x=0, y=0, w=400, h=100,tooltip=""},
     }
 }	
@@ -135,8 +135,8 @@ ENT.ClientProps["RearBrake"] = {
 	hide = 2,	
 }
 
---ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,2,1,50,1e3,Angle(-90,0,0)}}
---ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,2,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["RearBrakeLineIsolation"] = {{"RearBrake",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
+ENT.ClientSounds["RearTrainLineIsolation"] = {{"RearTrain",function() return "disconnect_valve" end,1,1,50,1e3,Angle(-90,0,0)}}
 
 ENT.ButtonMap["Tickers_rear"] = {
 	pos = Vector(286.2,27,65.85), --446 -- 14 -- -0,5
@@ -271,17 +271,17 @@ function ENT:Think()
 	train.HeadTrain = self 
 	train:SetNW2Entity("HeadTrain", self)	
 	
-for k=0,3 do
-self.ClientProps["TrainNumberL"..k] = {
-        model = "models/metrostroi_train/common/bort_numbers.mdl",
-        pos = Vector(-310+k*6.6-4*6.6/2, 63.4, 18),
-        ang = Angle(0,180,-3.29),
-        hide = 1,
-        callback = function(self)
-            train.WagonNumber = false 
-		end,
-    } 
-end
+	for k=0,3 do
+	self.ClientProps["TrainNumberL"..k] = {
+	        model = "models/metrostroi_train/common/bort_numbers.mdl",
+	        pos = Vector(-310+k*6.6-4*6.6/2, 63.4, 18),
+	        ang = Angle(0,180,-3.29),
+	        hide = 1,
+	        callback = function(self)
+	            train.WagonNumber = false 
+			end,
+	    } 
+	end
     self.HeadTrain = self:GetNW2Entity("HeadTrain")	
     local train = self.HeadTrain 
     if not IsValid(train) then return end		
@@ -289,35 +289,35 @@ end
 	train.HeadTrain = self 
 	train:SetNW2Entity("HeadTrain", self)	
 	
-if self.RBLICache ~= self:GetNW2Bool("RBLI") then
-    self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 200, 1e9, Vector(50,0,-40))
-    self.RBLICache = self:GetNW2Bool("RBLI")
-end
+--	if self.RBLICache ~= self:GetNW2Bool("RBLI") then
+--	    self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 200, 1e9, Vector(-340,25,-40))
+--	    self.RBLICache = self:GetNW2Bool("RBLI")
+--	end
 
-if self.RTLICache ~= self:GetNW2Bool("RTLI") then
-    self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 200, 1e9, Vector(50,0,-40)) 
-    self.RTLICache = self:GetNW2Bool("RTLI")
-end
+--	if self.RTLICache ~= self:GetNW2Bool("RTLI") then
+--	    self:PlayOnceFromPos("disconnect_valve","subway_trains/common/switches/pneumo_disconnect_switch.mp3", 2, 1, 200, 1e9, Vector(-340,-25,-40)) 
+--	    self.RTLICache = self:GetNW2Bool("RTLI")
+--	end
 	
-local animation = math.random (5,12)	
-local animation1 = math.random (0.5,1)	
-for avar = 1,2 do
-	if not IsValid(train) then return end
-    local colV = self:GetNW2Vector("Lamp7404"..avar)
-    local col = Color(colV.x,colV.y,colV.z)	
-	self:ShowHideSmooth("lamps_salon_on_rear_avar"..avar,train:Animate("LampsEmer",train:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,animation1,animation,false),col)  
-end	
+	local animation = math.random (5,12)
+	local animation1 = math.random (0.5,1)
+	for avar = 1,2 do
+		if not IsValid(train) then return end
+	    local colV = self:GetNW2Vector("Lamp7404"..avar)
+	    local col = Color(colV.x,colV.y,colV.z)	
+		self:ShowHideSmooth("lamps_salon_on_rear_avar"..avar,train:Animate("LampsEmer",train:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,animation1,animation,false),col)  
+	end	
 
     local state = self:GetPackedBool("CompressorWork")
     self:SetSoundState("compressor",state and 1.0 or 0,1)
 
-for i = 1,11 do	
-	if not IsValid(train) then return end	
-    local colV = self:GetNW2Vector("Lamp7404"..i)
-    local col = Color(colV.x,colV.y,colV.z)	   
-	self:ShowHideSmooth("lamps_salon_on_rear"..i-1,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
-    self:ShowHideSmooth("lamps_salon_on_rear1"..i,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
-end
+	for i = 1,11 do	
+		if not IsValid(train) then return end	
+	    local colV = self:GetNW2Vector("Lamp7404"..i)
+	    local col = Color(colV.x,colV.y,colV.z)	   
+		self:ShowHideSmooth("lamps_salon_on_rear"..i-1,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
+	    self:ShowHideSmooth("lamps_salon_on_rear1"..i,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
+	end
 	
 	local ZavodTable = train:GetNW2Int("ZavodTable",1)	
     if not IsValid(train) then return end		
@@ -419,7 +419,6 @@ function ENT:Draw()
 end  
 
 function ENT:OnButtonPressed(button)
-
 end
 function ENT:OnPlay(soundid,location,range,pitch)
     if location == "stop" then

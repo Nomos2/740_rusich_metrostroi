@@ -20,10 +20,11 @@ ENT.SyncTable = {"RearBrakeLineIsolation","RearTrainLineIsolation"}
  
 function ENT:Initialize()
     self:SetModel("models/metrostroi_train/81-740/body/81-740_4_rear.mdl")
-    self.BaseClass.Initialize(self)	
-    self:SetPos(self:GetPos() + Vector(0,0,0))	
+	self.NoTrain = false 
+    self.BaseClass.Initialize(self)
+--	self:SetPos(self:GetPos() + Vector(0,0,0))	
 	
-    self.TrainEntities = {}	
+--	self.TrainEntities = {}	
 	
     self.NormalMass = 24000
 	
@@ -142,32 +143,34 @@ function ENT:UpdateLampsColors()
 end
 	
 function ENT:Think()	
-	self:SetPackedBool("RearDoor",self.RearDoor)
-	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
+	self.HeadTrain = self:GetNW2Entity("HeadTrain")
 	local train = self.HeadTrain    
-	if not IsValid(self.HeadTrain) then self:Remove() return end	
+	if not IsValid(self.HeadTrain) then self:Remove() return end
+	local retVal = self.BaseClass.Think(self)
+
+	if not self.HeadTrain.RearBrakeLineIsolation then
+		self.HeadTrain.RearBrakeLineIsolation = self.RearBrakeLineIsolation
+	end
+	if not self.HeadTrain.RearTrainLineIsolation then
+		self.HeadTrain.RearTrainLineIsolation = self.RearTrainLineIsolation
+	end
 	local Panel = train.Panel	
-    self.WireIOSystems = {}
-    self.Systems = {}
-    self.TrainEntities = {}
-    self.TrainWires = {}
-	local retVal = train.BaseClass.Think(self)	
-    if not IsValid(train) then return end		
+	self:SetPackedBool("RearDoor",self.RearDoor)
     local power = train.Electric.Battery80V > 62
     self:SetPackedBool("Vent2Work",train.Electric.Vent2>0)	
     self:SetPackedBool("BBEWork",power and train.BUV.BBE > 0)
     self:SetPackedBool("CompressorWork",train.Pneumatic.Compressor) 
     self:SetPackedBool("AnnPlay",Panel.AnnouncerPlaying > 0)
 
-	self:SetNW2Bool("RBLI",train.RearBrakeLineIsolation.Value > 0)
-	self:SetNW2Bool("RTLI",train.RearTrainLineIsolation.Value > 0)
+--	print(self.RearBrakeLineIsolation.Value)
+
+--	self:SetNW2Bool("RBLI",train.RearBrakeLineIsolation.Value > 0)
+--	self:SetNW2Bool("RTLI",train.RearTrainLineIsolation.Value > 0)
 	
     --local state = math.abs(train.AsyncInverter.InverterFrequency/(11+train.AsyncInverter.State*5))--(10+8*math.Clamp((self.AsyncInverter.State-0.4)/0.4,0,1)))
     --self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+train.AsyncInverter.State/1),0,1)*math.Clamp(train.Speed/6,0,1))
     --self:SetPackedRatio("asyncstate", math.Clamp(train.AsyncInverter.State/0.2*math.abs(train.AsyncInverter.Current)/100,0,1))
     --self:SetPackedRatio("chopper", math.Clamp(train.Electric.Chopper>0 and train.Electric.IChopped/100 or 0,0,1))		
-	
-    if self.AnnouncementToLeaveWagon ~= train.AnnouncementToLeaveWagon then self.AnnouncementToLeaveWagon = train.AnnouncementToLeaveWagon end
 	 
       self:SetPackedBool("DoorL",train.DoorLeft)
       self:SetPackedBool("DoorR",train.DoorRight)    
@@ -224,13 +227,26 @@ function ENT:OnRemove()
     if IsValid(self.HeadTrain) then self.HeadTrain:Remove() end
 end
 
+function ENT:IsolationsOpen()
+	self.RearBrakeLineIsolation:TriggerInput("Toggle",1)
+	self.RearTrainLineIsolation:TriggerInput("Toggle",1)
+	timer.Simple(1,function()
+		self.RearBrakeLineIsolation:TriggerInput("Open",1)
+		self.RearTrainLineIsolation:TriggerInput("Open",1)
+	end)
+end
+
 function ENT:OnButtonPress(button,ply)
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")
 	local train = self.HeadTrain
-    if not IsValid(train) then return end	
+    if not IsValid(train) then return end
     if button == "RearDoor" and (self.RearDoor or not train.BUV.BlockTorec) then self.RearDoor = not self.RearDoor end
-	if button == "RearBrakeLineIsolationToggle" then train.RearBrakeLineIsolation:TriggerInput("Toggle",1) end
-	if button == "RearTrainLineIsolationToggle" then train.RearTrainLineIsolation:TriggerInput("Toggle",1) end
+	if button == "RearBrakeLineIsolationToggle" then
+		self:PlayOnce("RearBrakeLineIsolation","bass",1)
+	end
+	if button == "RearTrainLineIsolationToggle" then
+		self:PlayOnce("RearTrainLineIsolation","bass",1)
+	end
 end	
 function ENT:OnButtonRelease(button)
 end

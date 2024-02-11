@@ -46,7 +46,7 @@ ENT.SyncTable = {
 function ENT:Initialize()
     -- Set model and initialize
 	--print(self:GetNW2String("Texture"))		
-	self:SetModel("models/metrostroi_train/81-740/body/81-740_4_front.mdl")	
+	self:SetModel("models/metrostroi_train/81-740/body/81-740_4_front.mdl")
     self.BaseClass.Initialize(self)
     self:SetPos(self:GetPos() + Vector(0,0,140))
 	
@@ -101,7 +101,7 @@ function ENT:Initialize()
 		self:SetNW2Entity("RearCouple",self.RearCouple)	
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)  
 		local opt = Vector(70,0,0)
-		self.FrontCouple.CouplingPointOffset = opt		 
+		self.FrontCouple.CouplingPointOffset = opt
 		self.RearCouple.CouplingPointOffset = Vector(85,0,0)	   		
 		
 	timer.Simple(0.1, function()			
@@ -954,12 +954,11 @@ end
 
 function ENT:OnCouple(train,isfront)   	
     if isfront and self.FrontAutoCouple then
-        self.FrontBrakeLineIsolation:TriggerInput("Open",1.0)
-        self.FrontTrainLineIsolation:TriggerInput("Open",1.0)
+        self.FrontBrakeLineIsolation:TriggerInput("Open",1)
+        self.FrontTrainLineIsolation:TriggerInput("Open",1)
         self.FrontAutoCouple = false
     elseif not isfront and self.RearAutoCouple then
-        self.RearBrakeLineIsolation:TriggerInput("Open",1.0)
-        self.RearTrainLineIsolation:TriggerInput("Open",1.0)
+        self.Pricep:IsolationsOpen()
         self.RearAutoCouple = false
     end
     self.BaseClass.OnCouple(self,train,isfront)
