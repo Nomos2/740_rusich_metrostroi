@@ -274,6 +274,7 @@ function ENT:CreatePricep(pos)
 	MB.m_tblToolsAllowed = { "none" }
     MB:PhysicsInit(SOLID_VPHYSICS)	
     constraint.NoCollide( ent, MB, 0 ,0)	
+    constraint.NoCollide(ent,self,0,0)	
 	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
 	local FB = self.FrontBogey 	
