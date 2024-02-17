@@ -1,14 +1,16 @@
 local Map = game.GetMap():lower() or ""
-if(Map:find("gm_metro_minsk") 
+if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
 --or Map:find("gm_metro_kaluzh_line")
 --or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_metro_demixovo")
+or Map:find("gm_metrostroi_demixovo")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
-or Map:find("gm_metropbl")) then
+or Map:find("gm_metropbl")) then 
 	return
 end
 
@@ -23,6 +25,7 @@ function ENT:Initialize()
 	self.NoTrain = false 
     self.BaseClass.Initialize(self)
     self.NormalMass = 24000
+	self:SetUseType(SIMPLE_USE)	
 	
     self.PassengerSeat = self:CreateSeat("passenger",Vector(-135,-40,-25),Angle(0,90,0),"models/nova/airboat_seat.mdl")
     self.PassengerSeat2 = self:CreateSeat("passenger",Vector(-135,40,-25),Angle(0,270,0),"models/nova/airboat_seat.mdl")  
@@ -140,14 +143,14 @@ end
 function ENT:Think()	
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")
 	local train = self.HeadTrain    
-	if not IsValid(self.HeadTrain) then return end
+	if not IsValid(train) then return end
 	local retVal = self.BaseClass.Think(self)
 
 	if not self.HeadTrain.RearBrakeLineIsolation then
-		self.HeadTrain.RearBrakeLineIsolation = self.RearBrakeLineIsolation
+		train.RearBrakeLineIsolation = self.RearBrakeLineIsolation
 	end
 	if not self.HeadTrain.RearTrainLineIsolation then
-		self.HeadTrain.RearTrainLineIsolation = self.RearTrainLineIsolation
+		train.RearTrainLineIsolation = self.RearTrainLineIsolation
 	end
 	local Panel = train.Panel	
 	self:SetPackedBool("RearDoor",self.RearDoor)

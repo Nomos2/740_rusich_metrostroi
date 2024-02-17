@@ -1,14 +1,16 @@
 local Map = game.GetMap():lower() or ""
-if(Map:find("gm_metro_minsk") 
+if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
 --or Map:find("gm_metro_kaluzh_line")
 --or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_metro_demixovo")
+or Map:find("gm_metrostroi_demixovo")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
-or Map:find("gm_metropbl")) then
+or Map:find("gm_metropbl")) then 
 	return
 end
 
@@ -81,11 +83,11 @@ ENT.ClientProps["door_cab_t"] = {
 ENT.ButtonMap["RearDoor"] = {
     pos = Vector(-332,-15,55), ---334.8,14.5,9
     ang = Angle(0,90,90),
-    width = 642,
-    height = 2000,
+    width = 582,
+    height = 1900,
     scale = 0.1/2, 	
     buttons = {
-        {ID = "RearDoor",x=0,y=0,w=642,h=2000,"", model = {
+        {ID = "RearDoor",x=0,y=0,w=582,h=1900,"", model = {
             var="RearDoor",sndid="door_cab_t",
             sndvol = 1, snd = function(val) return val and "cab_door_open" or "cab_door_close" end,
             sndmin = 90, sndmax = 1e3, sndang = Angle(-90,0,0),
@@ -95,11 +97,11 @@ ENT.ButtonMap["RearDoor"] = {
 ENT.ButtonMap["RearDoor_front"] = {
     pos = Vector(-337,15,55), ---334.8,14.5,9
     ang = Angle(0,-90,90),
-    width = 642,
-    height = 2000,
+    width = 582,
+    height = 1900,
     scale = 0.1/2, 	
     buttons = {
-        {ID = "RearDoor",x=0,y=0,w=642,h=2000,"", model = {
+        {ID = "RearDoor",x=0,y=0,w=582,h=1900,"", model = {
             var="RearDoor_front",sndid="door_cab_t",
             sndvol = 1, snd = function(val) return val and "cab_door_open" or "cab_door_close" end,
             sndmin = 90, sndmax = 1e3, sndang = Angle(-90,0,0),

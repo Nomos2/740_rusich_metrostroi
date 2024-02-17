@@ -1,14 +1,16 @@
 local Map = game.GetMap():lower() or ""
-if(Map:find("gm_metro_minsk") 
+if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
 --or Map:find("gm_metro_kaluzh_line")
 --or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_metro_demixovo")
+or Map:find("gm_metrostroi_demixovo")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
-or Map:find("gm_metropbl")) then
+or Map:find("gm_metropbl")) then 
 	return
 end
 
@@ -74,12 +76,12 @@ end
 ENT.ButtonMap["Battery"] = {
     pos = Vector(650-17.7,18.11,-5), --446 -- 14 -- -0,5
     ang = Angle(0,0,90),
-    width = 30,
-    height = 30,
+    width = 60,
+    height = 60,
     scale = 0.0625,
 
     buttons = {
-        {ID = "BatteryToggle",x=0, y=0, w=30,h=30   , tooltip = "", model = {
+        {ID = "BatteryToggle",x=0, y=0, w=60,h=60   , tooltip = "", model = {
             model = "models/metrostroi_train/81-717/battery_enabler.mdl",
             var="Battery",speed=0.5,vmin=1,vmax=0.8,
             sndvol = 0.8, snd = function(val) return val and "pak_on" or "pak_off" end,
@@ -91,11 +93,11 @@ ENT.ButtonMap["Battery"] = {
 ENT.ButtonMap["FrontDoor"] = {
     pos = Vector(654-17.7,15,55), ---334.8,14.5,9
     ang = Angle(0,-90,90),
-    width = 642,
-    height = 2000,
+    width = 582,
+    height = 1900,
     scale = 0.1/2,
     buttons = {
-        {ID = "FrontDoor",x=0,y=0,w=642,h=2000, tooltip="", model = {
+        {ID = "FrontDoor",x=0,y=0,w=582,h=1900, tooltip="", model = {
             var="FrontDoor",sndid="door_cab_f",
             sndvol = 1, snd = function(val) return val and "door_cab_open" or "door_cab_close" end,	 
             sndmin = 90, sndmax = 1e3, sndang = Angle(-90,180,0),
@@ -105,11 +107,11 @@ ENT.ButtonMap["FrontDoor"] = {
 ENT.ButtonMap["FrontDoor_rear"] = {
     pos = Vector(659-17.7,-15,55), ---334.8,14.5,9
     ang = Angle(0,90,90),
-    width = 642,
-    height = 2000,
+    width = 582,
+    height = 1900,
     scale = 0.1/2,
     buttons = {
-        {ID = "FrontDoor",x=0,y=0,w=642,h=2000, tooltip="", model = {
+        {ID = "FrontDoor",x=0,y=0,w=582,h=2000, tooltip="", model = {
             var="FrontDoor_rear",sndid="door_cab_f",
             sndvol = 1, snd = function(val) return val and "door_cab_open" or "door_cab_close" end,	 
             sndmin = 90, sndmax = 1e3, sndang = Angle(-90,180,0),
@@ -171,7 +173,7 @@ ENT.ClientProps["door_cab_f"] = {
 }
 ENT.ClientProps["krepezh"] = {
     model = "models/metrostroi_train/81-740/body/krepezh.mdl",
-    pos = Vector(257.6-17.7,0,-74.6),
+    pos = Vector(259-17.7,0,-74.6),
     ang = Angle(0,0,0),
     nohide = true,
 }

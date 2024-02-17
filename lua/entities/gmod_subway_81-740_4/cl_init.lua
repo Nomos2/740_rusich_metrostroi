@@ -3,6 +3,8 @@ if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
 --or Map:find("gm_metro_kaluzh_line")
 --or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_metro_demixovo")
+or Map:find("gm_metrostroi_demixovo")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
@@ -2491,10 +2493,10 @@ end
     if self.Door1 ~= door1s then
         self.Door1 = door1s
         self:PlayOnce("PassengerDoor","bass" ,door1s and 1 or 0)
-    end]]
-
-    local door_cab_l = self:Animate("door_cab_l",door_l	and 0.85 or 0,0,1, 3, 1)
-    local door_cab_r = self:Animate("door_cab_r",door_r	and 0.85 or 0,0,1, 3, 1)
+    end]]	
+	
+    local door_cab_l = self:Animate("door_cab_l",door_l and 0.99 or 0,0,1, 1.95, 1)
+    local door_cab_r = self:Animate("door_cab_r",door_r	and 0.99 or 0,0,1, 1.95, 1)
     --local door_cab_o = self:Animate("door_cab_o",door_o and 1 or -0.05,0,0.3, 8, 0.05)
 	
     local door2s = door_cab_l > 0.05 and door_cab_l and 2 or (door_cab_l == 0.9 and 2 or door_l and 1 or 0)

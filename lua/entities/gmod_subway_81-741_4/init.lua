@@ -3,12 +3,14 @@ if(Map:find("gm_metro_minsk")
 or Map:find("gm_metro_krl")
 --or Map:find("gm_metro_kaluzh_line")
 --or Map:find("gm_metro_kaluzhkaya_line")
+or Map:find("gm_metro_demixovo")
+or Map:find("gm_metrostroi_demixovo")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
-or Map:find("gm_metropbl")) then
+or Map:find("gm_metropbl")) then 
 	return
 end
 
@@ -251,11 +253,23 @@ function ENT:CreatePricep(pos)
     if not IsValid(ent) then return end	
 	ent:SetPos(self:LocalToWorld(pos))
 	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
+	ent.NoPhysics = self.NoPhysics		
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())	
-	ent:DrawShadow(false)	
+	ent:DrawShadow(false)
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end	
+    ent.SpawnPos = pos
+    ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
+    ent.Joints = {}
+    ent.JointPositions = {}	
+	
+    local index=1
+    local x = self:WorldToLocal(ent:LocalToWorld(pos)).x
+    for i,v in ipairs(self.JointPositions) do
+        if v>pos.x then index=i+1 else break end
+    end
+    table.insert(self.JointPositions,index,x)
 	
 	table.insert(self.TrainEntities,ent)
     table.insert(ent.TrainEntities,self)	
@@ -272,7 +286,7 @@ function ENT:CreatePricep(pos)
 	MB:SetNWBool("DisableEngines",true)			
 	MB.DisableSound = 1
 	MB.m_tblToolsAllowed = { "none" }
-    MB:PhysicsInit(SOLID_VPHYSICS)	
+	MB:SetSolid(SOLID_VPHYSICS)	
     constraint.NoCollide( ent, MB, 0 ,0)	
     constraint.NoCollide(ent,self,0,0)	
 	
@@ -300,7 +314,7 @@ function ENT:CreatePricep(pos)
         self.RearCouple,
         0, --bone
         0, --bone
-        self.RearCouple.SpawnPos-pos,
+        Vector(-281,0,-60),
         Vector(0,0,0),
         1, --forcelimit
         1, --torquelimit
@@ -315,7 +329,7 @@ function ENT:CreatePricep(pos)
         1, --zfric
         0, --rotonly
         1 --nocollide
-    ) 	
+    ) 		
 	
 	local Map = game.GetMap():lower() or ""    	
 	if Map:find("gm_mustox_neocrimson_line") or
@@ -330,22 +344,6 @@ function ENT:CreatePricep(pos)
 	Map:find("gm_metro_jar_imagine_line") or	
 	Map:find("gm_smr_1987") then	
 	
-	MB:SetSolid(SOLID_VPHYSICS)
-
-	constraint.Axis(
-		MB,
-		self,
-		0,
-		0,
-        Vector(0,0,5),
-		Vector(0,0,5),
-        0,
-		0,
-		0,
-		1,
-		Vector(0,0,1),
-	false)  	
-	
 	constraint.Axis(
 		MB,
 		ent,
@@ -358,17 +356,9 @@ function ENT:CreatePricep(pos)
 		0,
 		1,
 		Vector(0,0,1),
-	false)  
+	false) 
 	
-	--[[local xmin = 0
-	local xmax = 0
-	
-	local ymin = xmin
-	local ymax = xmax
-	
-	local zmin = -10
-	local zmax = 10]]	--На всякий случай оставлю.	
-	else
+	else	
 	
 	local xmin = -2
 	local xmax = 2
@@ -377,99 +367,52 @@ function ENT:CreatePricep(pos)
 	local ymax = xmax
 	
 	local zmin = -35
-	local zmax = 35
-		
-		constraint.AdvBallsocket(
-			MB,	
-			self,
-			0, --bone
-			0, --bone
-			Vector(0,0,40),
-			pos,	
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			false	
-		)		
-		
-		constraint.AdvBallsocket(
-			MB,	
-			self,
-			0, --bone
-			0, --bone
-			Vector(0,0,-5),
-			pos,
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			false	
-		)			
-		
-		constraint.AdvBallsocket(	
-			MB,			
-			ent,
-			0, --bone
-			0, --bone,		
-			Vector(0,0,40),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			false	
-		)
-		constraint.AdvBallsocket(	
-			MB,			
-			ent,
-			0, --bone
-			0, --bone,		
-			Vector(0,0,-5),
-			pos,		
-			0, --forcelimit
-			0, --torquelimit
-			xmin, --xmin
-			ymin, --ymin
-			zmin, --zmin
-			xmax, --xmax
-			ymax, --ymax
-			zmax, --zmax
-			0, --xfric
-			0, --yfric
-			0, --zfric
-			0, --rotonly
-			1,--nocollide
-			false	
-		)		
-	end
+	local zmax = 35	
+	
+        constraint.AdvBallsocket(
+            MB,		
+            ent,
+            0, --bone
+            0, --bone
+            Vector(0,0,25),
+            pos,
+            0, --forcelimit
+            0, --torquelimit
+            -2, --xmin
+            -2, --ymin
+            -15, --zmin
+            2, --xmax
+            2, --ymax
+            15, --zmax
+            0, --xfric
+            0, --yfric
+            1, --zfric
+            0, --rotonly
+            1 --nocollide
+        )
+        constraint.AdvBallsocket(
+            MB,		
+            ent,
+            0, --bone
+            0, --bone
+            Vector(0,0,-5),
+            pos,
+            0, --forcelimit
+            0, --torquelimit
+            -2, --xmin
+            -2, --ymin
+            -15, --zmin
+            2, --xmax
+            2, --ymax
+            15, --zmax
+            0, --xfric
+            0, --yfric
+            1, --zfric
+            0, --rotonly
+            1 --nocollide
+        )
+	end	
+	
 	
     Metrostroi:RerailChange(FB, true)
     Metrostroi:RerailChange(MB, true)
@@ -483,7 +426,7 @@ function ENT:CreatePricep(pos)
 	ent.KeyBuffer = {}
 	ent.KeyMap = {}			
 	
-	return ent	
+	return ent
 end
 --
 --Основное
