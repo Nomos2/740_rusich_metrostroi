@@ -101,7 +101,7 @@ function ENT:InitializeSounds()
     self.SoundNames["chopper_onix"]   = {"subway_trains/740_4/chopper.wav",loop = true}
     self.SoundPositions["chopper_onix"] = {200,1e9,Vector(144-15,0,0),2}	
     self.SoundNames["ONIX"]   = {"subway_trains/740_4/inverter.wav", loop = true}
-    self.SoundPositions["ONIX"] = {400,1e9,Vector(344-15,0,0),1.5}	
+    self.SoundPositions["ONIX"] = {400,1e9,Vector(344-15,0,0),2}	
 	
     for i=1,4 do
         self.SoundNames["vent"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop.wav"}
@@ -240,30 +240,32 @@ function ENT:InitializeSounds()
     self.SoundNames["KV_-1_-2"] = "subway_trains/740_4/controller/t1_t2.mp3"
     self.SoundNames["KV_-2_-3"] = "subway_trains/740_4/controller/t2_t3.mp3"
     self.SoundPositions["KV_-3_-2"] = {80,1e9,Vector(830.8-159-9,25.3,-10)}
-    self.SoundPositions["KV_-2_-1"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_-1_0"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_0_1"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_1_2"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_2_3"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_3_4"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_4_3"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_3_2"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_2_1"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_1_0"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_0_-1"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_-1_-2"] = self.SoundPositions["KV_-3_-2"]
-    self.SoundPositions["KV_-2_-3"] = self.SoundPositions["KV_-3_-2"]
+	local KV_2 = self.SoundPositions["KV_-3_-2"]
+    self.SoundPositions["KV_-2_-1"] = KV_2
+    self.SoundPositions["KV_-1_0"] = KV_2
+    self.SoundPositions["KV_0_1"] = KV_2
+    self.SoundPositions["KV_1_2"] = KV_2
+    self.SoundPositions["KV_2_3"] = KV_2
+    self.SoundPositions["KV_3_4"] = KV_2
+    self.SoundPositions["KV_4_3"] = KV_2
+    self.SoundPositions["KV_3_2"] = KV_2
+    self.SoundPositions["KV_2_1"] = KV_2
+    self.SoundPositions["KV_1_0"] = KV_2
+    self.SoundPositions["KV_0_-1"] = KV_2
+    self.SoundPositions["KV_-1_-2"] = KV_2
+    self.SoundPositions["KV_-2_-3"] = KV_2
 	
     self.SoundNames["kro_-1_0"] = {"subway_trains/740_4/switches/tumbler/revers_b-n.mp3"}
     self.SoundNames["kro_0_1"] = {"subway_trains/740_4/switches/tumbler/revers_n-f.mp3"}
     self.SoundNames["kro_1_0"] = {"subway_trains/740_4/switches/tumbler/revers_f-n.mp3"}
     self.SoundNames["kro_0_-1"] = {"subway_trains/740_4/switches/tumbler/revers_b-n.mp3"}
     self.SoundPositions["kro_in"] = {80,1e9,Vector(813.4-159-9,53.3,-21.1)}
-    self.SoundPositions["kro_out"] = self.SoundPositions["kro_in"]
-    self.SoundPositions["kro_-1_0"] = self.SoundPositions["kro_in"]
-    self.SoundPositions["kro_0_1"] = self.SoundPositions["kro_in"]
-    self.SoundPositions["kro_1_0"] = self.SoundPositions["kro_in"]
-    self.SoundPositions["kro_0_-1"] = self.SoundPositions["kro_in"]
+	local KRO = self.SoundPositions["kro_in"] 
+    self.SoundPositions["kro_out"] = KRO
+    self.SoundPositions["kro_-1_0"] = KRO
+    self.SoundPositions["kro_0_1"] = KRO
+    self.SoundPositions["kro_1_0"] = KRO
+    self.SoundPositions["kro_0_-1"] = KRO
 
     self.SoundNames["krr_in"] = self.SoundNames["kro_in"]
     self.SoundNames["krr_out"] = self.SoundNames["kro_out"]
@@ -272,11 +274,12 @@ function ENT:InitializeSounds()
     self.SoundNames["krr_1_0"] = self.SoundNames["kro_1_0"]
     self.SoundNames["krr_0_-1"] = self.SoundNames["kro_0_-1"]
     self.SoundPositions["krr_in"] = {80,1e9,Vector(810.4-159-9,53.9,-17.3)}
-    self.SoundPositions["krr_out"] = self.SoundPositions["krr_in"]
-    self.SoundPositions["krr_-1_0"] = self.SoundPositions["krr_in"]
-    self.SoundPositions["krr_0_1"] = self.SoundPositions["krr_in"]
-    self.SoundPositions["krr_1_0"] = self.SoundPositions["krr_in"]
-    self.SoundPositions["krr_0_-1"] = self.SoundPositions["krr_in"]
+	local KRR = self.SoundPositions["krr_in"] 	
+    self.SoundPositions["krr_out"] = KRR
+    self.SoundPositions["krr_-1_0"] = KRR
+    self.SoundPositions["krr_0_1"] = KRR
+    self.SoundPositions["krr_1_0"] = KRR
+    self.SoundPositions["krr_0_-1"] = KRR
 
     self.SoundNames["switch_batt_on"] = {"subway_trains/740_4/switches/tumbler/batt_on.mp3","subway_trains/740_4/switches/tumbler/batt_on2.mp3"}
     self.SoundNames["switch_batt_off"] = {"subway_trains/740_4/switches/tumbler/batt_off.mp3","subway_trains/740_4/switches/tumbler/batt_off2.mp3"}
@@ -441,12 +444,12 @@ ENT.AnnouncerPositions = {
     {Vector(580-9,34,55),50,0.2},
 }
 ENT.Cameras = {
-    {Vector(770-159-9,36,42),Angle(0,180,0),"Train.740.CameraCond"},
+    {Vector(770-179-9,36,42),Angle(0,180,0),"Train.740.CameraCond"},
     {Vector(750-159-9,36,26),Angle(0,180,0),"Train.740.CameraPPZ"},
-    {Vector(800-159-9,36,2),Angle(0,180,0),"Train.740.CameraPV"},
+    {Vector(800-159-10,33,8),Angle(0,180,0),"Train.740.CameraPV"},
     {Vector(815-159-9,-42,-4),Angle(50,0,0),"Train.Common.ASNP"},
     {Vector(800-159-9,-9,8),Angle(90-46,0,0),"Train.740.CameraVityaz"},
-    {Vector(777-159-9,-35,-30),Angle(40,90,0),"Train.740.CameraKRMH"},
+    {Vector(777-139-9,-35,-30),Angle(40,90,0),"Train.740.CameraKRMH"},
     {Vector(717-159-9,36,25),Angle(0,180,0),"Train.740.CameraPVZ"},
     {Vector(840-159-9,0,-20),Angle(60,0,0),"Train.Common.CouplerCamera"},
     {Vector(800-157-9,-9),Angle(90-46,0,0),"Train.740.BUCIK"},	
@@ -508,7 +511,7 @@ ENT.Spawner = {
 			end
 		end
 	end,
-    WagNumTable = {1,2,3,4,5},	
+    WagNumTable = {2,3,4,5},	
 	
 	{"Announcer","Spawner.740.Announcer","List",Announcer},	
 	{},
