@@ -99,7 +99,7 @@ function ENT:InitializeSounds()
     self.SoundNames["chopper_onix"]   = {"subway_trains/740_4/chopper.wav",loop = true}
     self.SoundPositions["chopper_onix"] = {200,1e9,Vector(144-17,0,0),2}	
     self.SoundNames["ONIX"]   = {"subway_trains/740_4/inverter.wav", loop = true}
-    self.SoundPositions["ONIX"] = {400,1e9,Vector(344-17,0,0),2}	
+    self.SoundPositions["ONIX"] = {400,1e9,Vector(344-17,0,0),1.5}	
 	
     for i=1,4 do
         self.SoundNames["vent"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop.wav"}

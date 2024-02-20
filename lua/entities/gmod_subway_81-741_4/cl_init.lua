@@ -111,7 +111,7 @@ ENT.ButtonMap["FrontDoor_rear"] = {
     height = 1900,
     scale = 0.1/2,
     buttons = {
-        {ID = "FrontDoor",x=0,y=0,w=582,h=2000, tooltip="", model = {
+        {ID = "FrontDoor",x=0,y=0,w=582,h=1900, tooltip="", model = {
             var="FrontDoor_rear",sndid="door_cab_f",
             sndvol = 1, snd = function(val) return val and "door_cab_open" or "door_cab_close" end,	 
             sndmin = 90, sndmax = 1e3, sndang = Angle(-90,180,0),

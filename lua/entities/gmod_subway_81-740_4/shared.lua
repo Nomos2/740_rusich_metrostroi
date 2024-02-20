@@ -392,8 +392,8 @@ end
 
     self.SoundNames["igla_on"]  = "subway_trains/common/other/igla/igla_on1.mp3"
     self.SoundNames["igla_off"] = "subway_trains/common/other/igla/igla_off2.mp3"
-    self.SoundNames["igla_start1"]  = "subway_trains/common/other/igla/igla2_start1.mp3"
-    self.SoundNames["igla_start2"]  = "subway_trains/common/other/igla/igla2_start2.mp3"
+    self.SoundNames["igla_start1"]  = "subway_trains/common/other/igla/igla_start.mp3"
+    self.SoundNames["igla_start2"]  = "subway_trains/common/other/igla/igla_start2.mp3"
     self.SoundPositions["igla_on"] = {50,1e9,Vector(780-155-9,42.3,45.71),0.2}
     self.SoundPositions["igla_off"] = {50,1e9,Vector(780-155-9,42.3,45.71),0.2}
     self.SoundPositions["igla_start1"] = {50,1e9,Vector(780-155-9,42.3,45.71),0.2}

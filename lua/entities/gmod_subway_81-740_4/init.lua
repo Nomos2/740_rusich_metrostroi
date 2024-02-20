@@ -814,11 +814,11 @@ function ENT:Think()
         if math.abs(self:GetAngles().pitch) > 4 then
             add = math.min((math.abs(self:GetAngles().pitch)-4)/2,1)
         end
-        self.FrontBogey.MotorForce = (41000+5000*(A < 0 and 1 or 0))*add --35300
+        self.FrontBogey.MotorForce = (40000+5000*(A < 0 and 1 or 0))*add --35300
         self.FrontBogey.Reversed = (self:ReadTrainWire(13) > 0.5)--<
         --self.FrontBogey.Reversed = self.KMR2.Value > 0
         --self.FrontBogey.DisableSound = 1
-        self.RearBogey.MotorForce  = (41000+5000*(A < 0 and 1 or 0))*add --35300
+        self.RearBogey.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
         self.RearBogey.Reversed = (self:ReadTrainWire(12) > 0.5)-->
         --self.RearBogey.Reversed = self.KMR1.Value > 0
         --self.RearBogey.DisableSound = 1
