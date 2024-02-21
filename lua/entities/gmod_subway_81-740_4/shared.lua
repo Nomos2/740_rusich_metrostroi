@@ -286,7 +286,7 @@ function ENT:InitializeSounds()
 
     self.SoundNames["switch_batt"] = {"subway_trains/740_4/switches/tumbler/batt_on.mp3","subway_trains/740_4/switches/tumbler/batt_on2.mp3","subway_trains/740_4/switches/tumbler/batt_off.mp3","subway_trains/740_4/switches/tumbler/batt_off2.mp3"}
 
-    self.SoundNames["switch_pvz_on"] = {"subway_trains/720/switches/switchb_on.mp3","subway_trains/720/switches/switchp_on.mp3"}
+    --[[self.SoundNames["switch_pvz_on"] = {"subway_trains/720/switches/switchb_on.mp3","subway_trains/720/switches/switchp_on.mp3"}
     self.SoundNames["switch_pvz_off"] = {"subway_trains/720/switches/switchb_off.mp3","subway_trains/720/switches/switchp_off.mp3"}
 
     self.SoundNames["switch_on"] = {"subway_trains/720/switches/switchp_on.mp3","subway_trains/720/switches/switchp_on2.mp3","subway_trains/720/switches/switchp_on3.mp3"}
@@ -308,7 +308,9 @@ function ENT:InitializeSounds()
     self.SoundNames["button_square_release"] = "subway_trains/720/switches/butts_release.mp3"
 
     self.SoundNames["button_square_on"] = {"subway_trains/720/switches/butts_on.mp3","subway_trains/720/switches/butts_on2.mp3"}
-    self.SoundNames["button_square_off"] = {"subway_trains/720/switches/butts_off.mp3","subway_trains/720/switches/butts_off2.mp3"}
+    self.SoundNames["button_square_off"] = {"subway_trains/720/switches/butts_off.mp3","subway_trains/720/switches/butts_off2.mp3"}]]
+
+    --Эти кнопки не годятся! Нужно некоторые кнопки отдельно делать.
 
     self.SoundNames["door_cab_open"] = {"subway_trains/740_4/doors/cab/door_cab_open.mp3","subway_trains/740_4/doors/cab/door_cab_open2.mp3"}
     self.SoundNames["door_cab_close"] = {"subway_trains/740_4/doors/cab/door_cab_close.mp3","subway_trains/740_4/doors/cab/door_cab_close2.mp3"}
@@ -390,16 +392,16 @@ end
     self.SoundNames["batt_on"] = "subway_trains/720/batt_on.mp3"
     self.SoundPositions["batt_on"] = {400,1e9,Vector(816.4-159-9,50,-60-23.5),0.23}
 
-    self.SoundNames["igla_on"]  = "subway_trains/common/other/igla/igla_on1.mp3"
-    self.SoundNames["igla_off"] = "subway_trains/common/other/igla/igla_off2.mp3"
-    self.SoundNames["igla_start1"]  = "subway_trains/common/other/igla/igla_start.mp3"
-    self.SoundNames["igla_start2"]  = "subway_trains/common/other/igla/igla_start2.mp3"
+    self.SoundNames["igla_on"]  = "subway_trains/740_4/new/igla/igla_on1.mp3"
+    self.SoundNames["igla_off"] = "subway_trains/740_4/new/igla/igla_off2.mp3"
+    self.SoundNames["igla_start1"]  = "subway_trains/740_4/new/igla/igla_start.mp3"
+    self.SoundNames["igla_start2"]  = "subway_trains/740_4/new/igla/igla_start2.mp3"
     self.SoundPositions["igla_on"] = {50,1e9,Vector(780-155-9,42.3,45.71),0.2}
     self.SoundPositions["igla_off"] = {50,1e9,Vector(780-155-9,42.3,45.71),0.2}
     self.SoundPositions["igla_start1"] = {50,1e9,Vector(780-155-9,42.3,45.71),0.2}
     self.SoundPositions["igla_start2"] = {50,1e9,Vector(780-155-9,42.3,45.71),0.2}
 
-    self.SoundNames["emer_brake"] = {loop=true,"subway_trains/common/pneumatic/autostop_loop.wav"}
+    self.SoundNames["emer_brake"] = {loop=true,"subway_trains/740_4/new/autostop_loop.wav"}
     self.SoundPositions["emer_brake"] = {90,1e9,Vector(780-159-9,-45,-75),0.85}
 end
  

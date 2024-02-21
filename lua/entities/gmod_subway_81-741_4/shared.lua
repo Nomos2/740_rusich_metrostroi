@@ -99,7 +99,7 @@ function ENT:InitializeSounds()
     self.SoundNames["chopper_onix"]   = {"subway_trains/740_4/chopper.wav",loop = true}
     self.SoundPositions["chopper_onix"] = {200,1e9,Vector(144-17,0,0),2}	
     self.SoundNames["ONIX"]   = {"subway_trains/740_4/inverter.wav", loop = true}
-    self.SoundPositions["ONIX"] = {400,1e9,Vector(344-17,0,0),1.5}	
+    self.SoundPositions["ONIX"] = {400,1e9,Vector(344-17,0,0),2}	
 	
     for i=1,4 do
         self.SoundNames["vent"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop.wav"}
@@ -112,7 +112,7 @@ function ENT:InitializeSounds()
 	local j = math.random (1,3)
     self.SoundNames["release_front"] = {loop=true,"subway_trains/740_4/new/pneumo_release_"..j..".wav"}
     self.SoundPositions["release_front"] = {485,1e9,Vector(-53-17,0,-70),0.25}
-    self.SoundNames["parking_brake"] = {loop=true,"subway_trains/common/pneumatic/autostop_loop.wav"}
+    self.SoundNames["parking_brake"] = {loop=true,"subway_trains/740_4/new/autostop_loop.wav"}
     self.SoundPositions["parking_brake"] = {400,1e9,Vector(-13+144-17,0,-70),0.95}
     self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
     self.SoundNames["front_isolation"] = {loop=true,"subway_trains/common/pneumatic/isolation_leak.wav"}
@@ -161,8 +161,8 @@ function ENT:InitializeSounds()
     self.SoundNames["gv_b"] = {"subway_trains/740_4/new/bru/bru_on-off.mp3","subway_trains/740_4/new/bru/bru_on-off2.mp3"}
     self.SoundPositions["gv_f"] = {80,1e9,Vector(-126.4-17,50,-60-23.5),0.8}
     self.SoundPositions["gv_b"] = {80,1e9,Vector(-126.4-17,50,-60-23.5),0.8}
-    self.SoundNames["pak_on"] = "subway_trains/717/switches/rc_on.mp3"
-    self.SoundNames["pak_off"] = "subway_trains/717/switches/rc_off.mp3"
+    self.SoundNames["pak_on"] = "subway_trains/740_4/new/rc_on.mp3"
+    self.SoundNames["pak_off"] = "subway_trains/740_4/new/rc_off.mp3"
 	
   	self.SoundNames["door_cab_open"] = "subway_trains/740_4/doors/torec/door_torec_open.mp3"
     self.SoundNames["door_cab_close"] = "subway_trains/740_4/doors/torec/door_torec_close.mp3"	
