@@ -60,42 +60,12 @@ end
 
 function ENT:InitializeSounds()
     self.BaseClass.InitializeSounds(self)
-	--for i = 1,10 do
-		--local id3 = Format("b3tunnel_%d",i)	
-		--local id3 = Format("b3tunnel_%d",i)	
-		
-		--self.SoundNames[id3.."a"] = "subway_trains/bogey/st"..i.."a.wav"
-		--self.SoundNames[id3.."b"] = "subway_trains/bogey/st"..i.."b.wav"
-		--self.SoundPositions[id3.."a"] = {700,1e9,Vector(-456+144,0,-74),1}
-		--self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]		
-		
-		--self.SoundNames[id3.."a"] = "subway_trains/bogey/st"..i.."a.wav"
-		--self.SoundNames[id3.."b"] = "subway_trains/bogey/st"..i.."b.wav"
-		--self.SoundPositions[id3.."a"] = {700,1e9,Vector(-532,0,-74.5),1}
-		--self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]		
-	--end
-	--for i = 1,14 do
-		--local id3 = Format("b3street_%d",i)		
-		--local id3 = Format("b3street_%d",i)	
-
-		--self.SoundNames[id3.."a"] = "subway_trains/bogey/wheels/street_"..i.."a.mp3"
-		--self.SoundNames[id3.."b"] = "subway_trains/bogey/wheels/street_"..i.."b.mp3"
-		--self.SoundPositions[id3.."a"] = {700,1e9,Vector(-456+144,0,-74),1.5}
-		--self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]	
-		
-		--self.SoundNames[id3.."a"] = "subway_trains/bogey/wheels/street_"..i.."a.mp3"
-		--self.SoundNames[id3.."b"] = "subway_trains/bogey/wheels/street_"..i.."b.mp3"
-		--self.SoundPositions[id3.."a"] = {700,1e9,Vector(-532,0,-74.5),1.5}
-		--self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]		
-	--end --Не работает код.
-	
     self.SoundNames["rear_isolation"] = {loop=true,"subway_trains/common/pneumatic/isolation_leak.wav"}
     self.SoundPositions["rear_isolation"] = {300,1e9,Vector(-456+144, 0,-63),1}
     self.SoundNames["compressor"] = {loop=58,"subway_trains/740_4/compressor/compressor_start.wav","subway_trains/740_4/compressor/compressor_loop.wav","subway_trains/740_4/compressor/compressor_end.wav"}
-    self.SoundPositions["compressor"] = {300,1e9,Vector(-18,-40,-66),0.4}	
-	
+    self.SoundPositions["compressor"] = {300,1e9,Vector(-18,-40,-66),0.4}
 	self.SoundNames["compressor_pn"] = "subway_trains/740_4/compressor/compressor_psh.wav"
-    self.SoundPositions["compressor_pn"] = {485,1e9,Vector(-18,-40,-66),0.5}
+    self.SoundPositions["compressor_pn"] = {485,1e9,Vector(-18,-40,-66),0.4}
 	
     for i=1,4 do
         self.SoundNames["vent"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop.wav"}
@@ -105,6 +75,8 @@ function ENT:InitializeSounds()
     end		
 	
     self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
+    self.SoundNames["RearBrakeLineIsolation"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
+    self.SoundNames["RearTrainLineIsolation"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"	
 	
     self.SoundNames["bbe"]   = {"subway_trains/740_4/bbe.wav",loop = true}
     self.SoundPositions["bbe"] = {800,1e9,Vector(50,0,-40),0.5}			

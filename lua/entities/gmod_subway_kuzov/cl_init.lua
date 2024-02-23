@@ -272,8 +272,8 @@ function ENT:Think()
 	train:SetNW2Entity("HeadTrain", self)	
 	
 --Регистрация тележки
-train.RearBogey = train:GetNW2Entity("RearBogey")	
-local RB = train.RearBogey
+train.PricepBogey = train:GetNW2Entity("PricepBogey")	
+local RB = train.PricepBogey
 
 --Взято из cl_init тележки.
 local c_gui

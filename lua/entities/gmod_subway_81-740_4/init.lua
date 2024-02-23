@@ -18,6 +18,7 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 include("shared.lua")
 
+ENT.BogeyDistance = 650 -- Needed for gm trainspawner
 ENT.SyncTable = {
     "EnableBVEmer","Ticker","KAH","ALS","ALSk","FDepot","PassScheme","EnableBV","DisableBV","Ring","R_Program2","R_Announcer","R_Line","R_Emer","R_Program1",
     "DoorSelectL","DoorSelectR","DoorBlock","TPT","RTE","ABSD",
@@ -83,12 +84,11 @@ function ENT:Initialize()
 	
     -- Create bogeys
         self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740PER")	
-        self.RearBogey  = self:CreateBogey(Vector(-532-25,0,-80),Angle(0,0,0),false,"740NOTR") --110 0 -80 
-		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)			
+        self.RearBogey  = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),false,"740G") --110 0 -80  -532-25,0,-80
+		self.RearBogey:SetSolid(SOLID_VPHYSICS)		
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
-		self.RearBogey:SetNWInt("MotorSoundType",2)
-        self.RearBogey.DisableContacts = true		
-        self.FrontCouple = self:CreateCouple(Vector(627-9,0,-60),Angle(0,0,0),true,"740")
+		self.RearBogey:SetNWInt("MotorSoundType",2)			
+        self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
         self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")
 		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)				
 		self.RearCouple:GetPhysicsObject():SetMass(5000)
@@ -97,34 +97,32 @@ function ENT:Initialize()
 		self.RearCouple.m_tblToolsAllowed = { "none" }	
 		self.FrontBogey.m_tblToolsAllowed = { "none" }	
 		self.RearBogey.m_tblToolsAllowed = { "none" }
+		self:SetNW2Entity("FrontBogey",self.FrontBogey)
+		self:SetNW2Entity("RearBogey",self.RearBogey)	
 		self:SetNW2Entity("RearCouple",self.RearCouple)	
-		self:SetNW2Entity("FrontCouple",self.FrontCouple)  
+		self:SetNW2Entity("FrontCouple",self.FrontCouple) 
 		local opt = Vector(70,0,0)
 		self.FrontCouple.CouplingPointOffset = opt		 
-		self.RearCouple.CouplingPointOffset = Vector(85,0,0)	   		
+		self.RearCouple.CouplingPointOffset = Vector(85,0,0)   		
 		
 	timer.Simple(0.1, function()			
         if not IsValid(self) then return end
-		self.Pricep = self:CreatePricep(Vector(-356-9,0,0))--вагон	
+		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон	
 		local opt65 = Vector(65,0,0)	
 		self.RearCouple.CouplingPointOffset = opt65
 		self.FrontCouple.CouplingPointOffset = opt65			
-	end)   
-
+	end)
 	--[[timer.Simple(1, function()
 		self:ReplaceWheelsSound()	
-	end)]]	
---			   	
-
+	end)]]--	
 	self.FrontBogey:SetNWBool("Async",true)
-    self.RearBogey:SetNWBool("Async",true)
+    self.RearBogey:SetNWBool("Async",true)	
+	
 	self.FrontCouple.EKKDisconnected = true
+
     local rand = math.random()*0.05
     self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
-    self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)
-	
-	self:SetNW2Entity("FrontBogey",self.FrontBogey)
-	self:SetNW2Entity("RearBogey",self.RearBogey)
+    self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)	
 			
     -- Initialize key mapping
     self.KeyMap = {
@@ -489,44 +487,31 @@ end
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")		
     if not IsValid(ent) then return end
-	ent:SetPos(self:LocalToWorld(pos))
+	ent:SetPos(self:LocalToWorld(Vector(-356-9,0,0)))
 	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent.NoPhysics = self.NoPhysics		
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())	
 	ent:DrawShadow(false)
-	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end	
-    ent.SpawnPos = pos
-    ent.SpawnAng = ang	
+	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
-    ent.Joints = {}
-    ent.JointPositions = {}	
 	
-    local index=1
-    local x = self:WorldToLocal(ent:LocalToWorld(pos)).x
-    for i,v in ipairs(self.JointPositions) do
-        if v>pos.x then index=i+1 else break end
-    end
-    table.insert(self.JointPositions,index,x)	
-	
-
 	table.insert(self.TrainEntities,ent)      
     table.insert(ent.TrainEntities,self)
 	
-	self.MiddleBogey = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),true,"740G")--тележка  ---160,0,-75 -410,0,-75	
-	self:SetNW2Entity("MiddleBogey",self.MiddleBogey)	
-	self.MiddleBogey = self:GetNW2Entity("MiddleBogey")	
-	local MB = self.MiddleBogey 
-	if not IsValid(MB) then return end		
+	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-80),Angle(0,0,0),true,"740NOTR")--тележка  ---160,0,-75 -410,0,-75 -15-25.5,0,-80	
+	self:SetNW2Entity("PricepBogey",self.PricepBogey)
+	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
+	local PB = self.PricepBogey 
+	if not IsValid(PB) then return end		
     local rand = math.random()*0.05
-	MB:SetNWFloat("SqualPitch",1.45+rand)
-	MB:SetNWInt("MotorSoundType",2)
-	MB:SetNWInt("Async",true)
-	MB:SetNWBool("DisableEngines",true)			
-	MB.DisableSound = 1
-	MB.m_tblToolsAllowed = { "none" }
-	MB:SetSolid(SOLID_VPHYSICS)		
-    constraint.NoCollide( ent, MB, 0 ,0)	
+	PB:SetNWFloat("SqualPitch",1.45+rand)
+	PB:SetNWInt("MotorSoundType",2)
+	PB:SetNWInt("Async",true)
+	--PB:SetNWBool("DisableEngines",true)
+	PB.m_tblToolsAllowed = { "none" }
+	PB:PhysicsInit(SOLID_VPHYSICS)    
+	PB.DisableContacts = true
     constraint.NoCollide(ent,self,0,0)	
 	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
@@ -535,7 +520,7 @@ function ENT:CreatePricep(pos,ang)
 	local RB = self.RearBogey	
 	
 	constraint.Axis(
-		RB,		
+		PB,		
 		ent,
 		0,
 		0,
@@ -545,8 +530,8 @@ function ENT:CreatePricep(pos,ang)
 		0,
 		0,
 		0,
-		Vector(0,0,-1)
-		)
+		Vector(0,0,-1),
+	false)
 	--Сцепка, крепление к вагону.
 	constraint.AdvBallsocket(
 		ent,
@@ -567,8 +552,8 @@ function ENT:CreatePricep(pos,ang)
         0.1, --yfric
         1, --zfric
         0, --rotonly
-        1 --nocollide
-    ) 		
+        1, --nocollide
+	false) 		
 	
 	local Map = game.GetMap():lower() or ""    	
 	if Map:find("gm_mustox_neocrimson_line") or
@@ -584,7 +569,7 @@ function ENT:CreatePricep(pos,ang)
 	Map:find("gm_smr_1987") then	
 	
 	constraint.Axis(
-		MB,
+		RB,
 		ent,
 		0,
 		0,
@@ -599,62 +584,66 @@ function ENT:CreatePricep(pos,ang)
 	
 	else	
 	
-	local xmin = -2
-	local xmax = 2
+	local xmin = -25
+	local xmax = 15
 	
-	local ymin = xmin
-	local ymax = xmax
+	local ymin = -15
+	local ymax = 25
 	
-	local zmin = -35
-	local zmax = 35	
-	
-        constraint.AdvBallsocket(
-            MB,		
-            ent,
-            0, --bone
-            0, --bone
-            Vector(0,0,25),
-            pos,
-            0, --forcelimit
-            0, --torquelimit
-            -2, --xmin
-            -2, --ymin
-            -15, --zmin
-            2, --xmax
-            2, --ymax
-            15, --zmax
-            0, --xfric
-            0, --yfric
-            1, --zfric
-            0, --rotonly
-            1 --nocollide
-        )
-        constraint.AdvBallsocket(
-            MB,		
-            ent,
-            0, --bone
-            0, --bone
-            Vector(0,0,-5),
-            pos,
-            0, --forcelimit
-            0, --torquelimit
-            -2, --xmin
-            -2, --ymin
-            -15, --zmin
-            2, --xmax
-            2, --ymax
-            15, --zmax
-            0, --xfric
-            0, --yfric
-            1, --zfric
-            0, --rotonly
-            1 --nocollide
-        )
-	end	
-	
+	local zmin = -25
+	local zmax = 25		
+	constraint.AdvBallsocket( 
+		RB,
+		ent,
+		0, 
+		0, 
+		Vector(0,0,60),
+		Vector(nil), 
+		0, 
+		0, 
+		
+        xmin, --xmin
+        ymin, --ymin
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	)
+	constraint.AdvBallsocket( 
+		RB,
+		ent,
+		0, 
+		0, 
+		Vector(0,0,30),
+		Vector(nil), 
+		0, 
+		0, 
+		
+        xmin, --xmin
+        ymin, --ymin
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	)	
+	end
 	
     Metrostroi:RerailChange(FB, true)
-    Metrostroi:RerailChange(MB, true)
+    Metrostroi:RerailChange(PB, true)
     Metrostroi:RerailChange(RB, true)		
 
 	--Метод mirror 				
@@ -666,7 +655,7 @@ function ENT:CreatePricep(pos,ang)
 	ent.KeyMap = {}			
 	
 	return ent
-end			
+end
 ---------------------------------------------------------------------------
 function ENT:Think()
     local retVal = self.BaseClass.Think(self)
@@ -806,7 +795,9 @@ function ENT:Think()
 
     self.AsyncInverter:TriggerInput("Speed", self.Speed)
 	
-   if IsValid(self.FrontBogey) and IsValid(self.RearBogey) and IsValid(self.MiddleBogey) and not self.IgnoreEngine then
+	local fB,rB,pB = self.FrontBogey,self.RearBogey,self.PricepBogey	
+	
+   if IsValid(self.FrontBogey) and IsValid(self.RearBogey) and IsValid(self.PricepBogey) and not self.IgnoreEngine then
 
         local A = self.AsyncInverter.Torque
 		--print(A)
@@ -818,8 +809,8 @@ function ENT:Think()
         self.FrontBogey.Reversed = (self:ReadTrainWire(13) > 0.5)--<
         --self.FrontBogey.Reversed = self.KMR2.Value > 0
         --self.FrontBogey.DisableSound = 1
-        self.RearBogey.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
-        self.RearBogey.Reversed = (self:ReadTrainWire(12) > 0.5)-->
+        self.PricepBogey.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
+        self.PricepBogey.Reversed = (self:ReadTrainWire(12) > 0.5)-->
         --self.RearBogey.Reversed = self.KMR1.Value > 0
         --self.RearBogey.DisableSound = 1
 
@@ -828,7 +819,7 @@ function ENT:Think()
         if math.abs(A) > 0.4 then P = math.abs(A) end
         if math.abs(A) < 0.05 then P = 0 end
         if self.Speed < 10 then P = P*(1.0 + 0.6*(10.0-self.Speed)/10.0) end
-        self.RearBogey.MotorPower  = P*0.5*((A > 0) and 1 or -1)
+        self.PricepBogey.MotorPower  = P*0.5*((A > 0) and 1 or -1)
         self.FrontBogey.MotorPower = P*0.5*((A > 0) and 1 or -1)
 
         -- Apply brakes
@@ -836,16 +827,18 @@ function ENT:Think()
         self.FrontBogey.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
         self.FrontBogey.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
         self.FrontBogey.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
-        self.FrontBogey.DisableContacts = self.BUV.Pant
-		self.MiddleBogey.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
-        self.MiddleBogey.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
-        self.MiddleBogey.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
-        self.MiddleBogey.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
-        self.MiddleBogey.DisableContacts = self.BUV.Pant			
+        self.FrontBogey.DisableContacts = self.BUV.Pant or fB.DisableContactsManual	
+		
 		self.RearBogey.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
-        self.RearBogey.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
-        self.RearBogey.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
-	    self.RearBogey.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)	
+        self.RearBogey.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
+        self.RearBogey.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
+        self.RearBogey.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
+        self.RearBogey.DisableContacts = self.BUV.Pant or rB.DisableContactsManual		
+		
+		self.PricepBogey.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
+        self.PricepBogey.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
+        self.PricepBogey.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
+	    self.PricepBogey.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)	
 
     end
     return retVal

@@ -191,7 +191,7 @@ function TRAIN_SYSTEM:UpdatePressures(Train,dT)
 
     local Ft = IsValid(Train.FrontTrain) and Train.FrontTrain
     local Rt = IsValid(Train.RearTrain) and Train.RearTrain
-    local Fc, Rc = Train.FrontCouple or Train.FrontBogey, Train.RearCouple or Train.MiddleBogey
+    local Fc, Rc = Train.FrontCouple or Train.FrontBogey, Train.RearCouple or Train.RearBogey
     local Fb,Rb
     if IsValid(Fc) and Fc.DepotPneumo then Fb = Fc.DepotPneumo end
     if IsValid(Rc) and Rc.DepotPneumo then Rb = Rc.DepotPneumo end
