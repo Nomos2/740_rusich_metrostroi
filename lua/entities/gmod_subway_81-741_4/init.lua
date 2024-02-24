@@ -53,17 +53,17 @@ function ENT:Initialize()
 		self.RearBogey:SetNWInt("MotorSoundType",2)			
         self.FrontCouple = self:CreateCouple(Vector(608-17,0,-60),Angle(0,0,0),true,"740")		
         self.RearCouple = self:CreateCouple(Vector(-612-17,0,-60),Angle(0,-180,0),false,"740")
-		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
-		self.RearCouple:GetPhysicsObject():SetMass(5000)
+        self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
+        self.RearCouple:SetMoveType(MOVETYPE_VPHYSICS)
+        self.RearCouple:SetSolid(SOLID_VPHYSICS)
+		self.RearCouple:GetPhysicsObject():SetMass(5000)	
 		
 		self.FrontCouple.m_tblToolsAllowed = { "none" }	
 		self.RearCouple.m_tblToolsAllowed = { "none" }	
 		self.FrontBogey.m_tblToolsAllowed = { "none" }	
 		self.RearBogey.m_tblToolsAllowed = { "none" }		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
-		self:SetNW2Entity("RearBogey",self.RearBogey)	
-		self:SetNW2Entity("RearCouple",self.RearCouple)	
-		self:SetNW2Entity("FrontCouple",self.FrontCouple) 
+		self:SetNW2Entity("RearBogey",self.RearBogey)
 		local opt = Vector(71,0,0)
 		self.FrontCouple.CouplingPointOffset = opt		
 		self.RearCouple.CouplingPointOffset = opt - Vector(1,0,0) 		
@@ -252,7 +252,6 @@ function ENT:CreatePricep(pos,ang)
     if not IsValid(ent) then return end	
 	ent:SetPos(self:LocalToWorld(Vector(-343,0,0)))
 	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
-	ent.NoPhysics = self.NoPhysics		
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())	
 	ent:DrawShadow(false)
@@ -271,11 +270,12 @@ function ENT:CreatePricep(pos,ang)
 	PB:SetNWFloat("SqualPitch",1.45+rand)
 	PB:SetNWInt("MotorSoundType",2)
 	PB:SetNWInt("Async",true)
-	--PB:SetNWBool("DisableEngines",true)
 	PB.m_tblToolsAllowed = { "none" }
 	PB:PhysicsInit(SOLID_VPHYSICS)    
 	PB.DisableContacts = true
     constraint.NoCollide(ent,self,0,0)	
+	
+    constraint.RemoveConstraints(self.RearBogey, "Axis")	
 	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
 	local FB = self.FrontBogey 	
@@ -347,20 +347,26 @@ function ENT:CreatePricep(pos,ang)
 	
 	else	
 	
-	local xmin = -25
-	local xmax = 15
+    RB:SetSolid(SOLID_VPHYSICS)		
 	
-	local ymin = -15
-	local ymax = 25
+	local xmin = -2
+	local xmax = 2
 	
-	local zmin = -25
-	local zmax = 25		
+	local ymin = xmin
+	local ymax = xmax
+	
+	local zmin = -45
+	local zmax = 45	
+
+	local kio = Vector(-30,0,60)
+	local kio1 = Vector(-30,0,-40)
+	
 	constraint.AdvBallsocket( 
 		RB,
-		ent,
+		self,
 		0, 
 		0, 
-		Vector(0,0,60),
+		RB.SpawnPos - kio,
 		Vector(nil), 
 		0, 
 		0, 
@@ -378,13 +384,13 @@ function ENT:CreatePricep(pos,ang)
 		0, --rotonly
 		1,--nocollide
 		false		
-	)
+	) 	
 	constraint.AdvBallsocket( 
 		RB,
-		ent,
+		self,
 		0, 
 		0, 
-		Vector(0,0,30),
+		RB.SpawnPos - kio1,
 		Vector(nil), 
 		0, 
 		0, 
@@ -402,7 +408,56 @@ function ENT:CreatePricep(pos,ang)
 		0, --rotonly
 		1,--nocollide
 		false		
-	)	
+	) 		
+	
+	constraint.AdvBallsocket( 
+		RB,
+		ent,
+		0, 
+		0, 
+		RB.SpawnPos - kio,
+		Vector(nil), 
+		0, 
+		0, 
+		
+        xmin, --xmin
+        ymin, --ymin
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	) 	
+	constraint.AdvBallsocket( 
+		RB,
+		ent,
+		0, 
+		0, 
+		RB.SpawnPos - kio1,
+		Vector(nil), 
+		0, 
+		0, 
+		
+        xmin, --xmin
+        ymin, --ymin
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	) 	
 	end
 	
     Metrostroi:RerailChange(FB, true)
@@ -420,7 +475,6 @@ function ENT:CreatePricep(pos,ang)
 	return ent
 end
 --
---Основное
 function ENT:Think()	
     local retVal = self.BaseClass.Think(self)
     local power = self.Electric.Battery80V > 62 --Батарея

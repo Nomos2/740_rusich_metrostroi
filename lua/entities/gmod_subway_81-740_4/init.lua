@@ -47,13 +47,12 @@ ENT.SyncTable = {
 }
 
 function ENT:Initialize()
-    -- Set model and initialize
-	--print(self:GetNW2String("Texture"))		
+    -- Set model and initialize		
 	self:SetModel("models/metrostroi_train/81-740/body/81-740_4_front.mdl")	
     self.BaseClass.Initialize(self)
     self:SetPos(self:GetPos() + Vector(0,0,140))
 	
-    self.NormalMass = 24000--20000
+    self.NormalMass = 24000
 
     -- Create seat entities
     self.DriverSeat = self:CreateSeat("driver",Vector(775-159-9,19,-27))
@@ -79,28 +78,27 @@ function ENT:Initialize()
 	self.InstructorsSeat4.m_tblToolsAllowed = { "none" }		
 	
 	self.LightSensor = self:AddLightSensor(Vector(627-9,0,-125),Angle(0,90,0))
-	
 	self.ASSensor = self:AddLightSensor(Vector(515-9,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
 	
     -- Create bogeys
         self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740PER")	
         self.RearBogey  = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),false,"740G") --110 0 -80  -532-25,0,-80
-		self.RearBogey:SetSolid(SOLID_VPHYSICS)		
+		self.RearBogey:SetSolid(SOLID_VPHYSICS)
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)			
         self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
         self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")
-		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)				
-		self.RearCouple:GetPhysicsObject():SetMass(5000)
+        self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
+        self.RearCouple:SetMoveType(MOVETYPE_VPHYSICS)
+        self.RearCouple:SetSolid(SOLID_VPHYSICS)
+		self.RearCouple:GetPhysicsObject():SetMass(5000)		
 		
 		self.FrontCouple.m_tblToolsAllowed = { "none" }
 		self.RearCouple.m_tblToolsAllowed = { "none" }	
 		self.FrontBogey.m_tblToolsAllowed = { "none" }	
 		self.RearBogey.m_tblToolsAllowed = { "none" }
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
-		self:SetNW2Entity("RearBogey",self.RearBogey)	
-		self:SetNW2Entity("RearCouple",self.RearCouple)	
-		self:SetNW2Entity("FrontCouple",self.FrontCouple) 
+		self:SetNW2Entity("RearBogey",self.RearBogey)
 		local opt = Vector(70,0,0)
 		self.FrontCouple.CouplingPointOffset = opt		 
 		self.RearCouple.CouplingPointOffset = Vector(85,0,0)   		
@@ -112,9 +110,7 @@ function ENT:Initialize()
 		self.RearCouple.CouplingPointOffset = opt65
 		self.FrontCouple.CouplingPointOffset = opt65			
 	end)
-	--[[timer.Simple(1, function()
-		self:ReplaceWheelsSound()	
-	end)]]--	
+	
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)	
 	
@@ -311,7 +307,6 @@ function ENT:NonSupportTrigger()
     self.Plombs.ALSk = nil
 end
 function ENT:TriggerLightSensor(coil,plate)
-	--self.Prost_Kos:TriggerSensor(coil,plate)
 	self.Prost_Kos:Think()
 end
 
@@ -488,8 +483,7 @@ function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")		
     if not IsValid(ent) then return end
 	ent:SetPos(self:LocalToWorld(Vector(-356-9,0,0)))
-	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
-	ent.NoPhysics = self.NoPhysics		
+	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))	
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())	
 	ent:DrawShadow(false)
@@ -497,7 +491,7 @@ function ENT:CreatePricep(pos,ang)
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 	
 	table.insert(self.TrainEntities,ent)      
-    table.insert(ent.TrainEntities,self)
+    table.insert(ent.TrainEntities,self)	
 	
 	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-80),Angle(0,0,0),true,"740NOTR")--тележка  ---160,0,-75 -410,0,-75 -15-25.5,0,-80	
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
@@ -508,11 +502,12 @@ function ENT:CreatePricep(pos,ang)
 	PB:SetNWFloat("SqualPitch",1.45+rand)
 	PB:SetNWInt("MotorSoundType",2)
 	PB:SetNWInt("Async",true)
-	--PB:SetNWBool("DisableEngines",true)
 	PB.m_tblToolsAllowed = { "none" }
 	PB:PhysicsInit(SOLID_VPHYSICS)    
 	PB.DisableContacts = true
     constraint.NoCollide(ent,self,0,0)	
+	
+    constraint.RemoveConstraints(self.RearBogey, "Axis")	
 	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
 	local FB = self.FrontBogey 	
@@ -584,20 +579,26 @@ function ENT:CreatePricep(pos,ang)
 	
 	else	
 	
-	local xmin = -25
-	local xmax = 15
+    RB:SetSolid(SOLID_VPHYSICS)		
 	
-	local ymin = -15
-	local ymax = 25
+	local xmin = -2
+	local xmax = 2
 	
-	local zmin = -25
-	local zmax = 25		
+	local ymin = xmin
+	local ymax = xmax
+	
+	local zmin = -45
+	local zmax = 45	
+
+	local kio = Vector(-30,0,60)
+	local kio1 = Vector(-30,0,-40)
+	
 	constraint.AdvBallsocket( 
 		RB,
-		ent,
+		self,
 		0, 
 		0, 
-		Vector(0,0,60),
+		RB.SpawnPos - kio,
 		Vector(nil), 
 		0, 
 		0, 
@@ -615,13 +616,13 @@ function ENT:CreatePricep(pos,ang)
 		0, --rotonly
 		1,--nocollide
 		false		
-	)
+	) 	
 	constraint.AdvBallsocket( 
 		RB,
-		ent,
+		self,
 		0, 
 		0, 
-		Vector(0,0,30),
+		RB.SpawnPos - kio1,
 		Vector(nil), 
 		0, 
 		0, 
@@ -639,7 +640,56 @@ function ENT:CreatePricep(pos,ang)
 		0, --rotonly
 		1,--nocollide
 		false		
-	)	
+	) 		
+	
+	constraint.AdvBallsocket( 
+		RB,
+		ent,
+		0, 
+		0, 
+		RB.SpawnPos - kio,
+		Vector(nil), 
+		0, 
+		0, 
+		
+        xmin, --xmin
+        ymin, --ymin
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	) 	
+	constraint.AdvBallsocket( 
+		RB,
+		ent,
+		0, 
+		0, 
+		RB.SpawnPos - kio1,
+		Vector(nil), 
+		0, 
+		0, 
+		
+        xmin, --xmin
+        ymin, --ymin
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	) 	
 	end
 	
     Metrostroi:RerailChange(FB, true)
@@ -844,7 +894,7 @@ function ENT:Think()
     return retVal
 end
 
-function ENT:OnCouple(train,isfront)   	
+function ENT:OnCouple(train,isfront)
     if isfront and self.FrontAutoCouple then
         self.FrontBrakeLineIsolation:TriggerInput("Open",1)
         self.FrontTrainLineIsolation:TriggerInput("Open",1)

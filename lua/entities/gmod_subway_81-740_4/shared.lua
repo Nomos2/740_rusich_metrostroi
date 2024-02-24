@@ -454,7 +454,7 @@ ENT.Cameras = {
     {Vector(777-139-9,-35,-30),Angle(40,90,0),"Train.740.CameraKRMH"},
     {Vector(717-159-9,36,25),Angle(0,180,0),"Train.740.CameraPVZ"},
     {Vector(840-159-9,0,-20),Angle(60,0,0),"Train.Common.CouplerCamera"},
-    {Vector(800-157-9,-9),Angle(90-46,0,0),"Train.740.BUCIK"},	
+    {Vector(800-157-9,-9),Angle(90-46,0,0),"Train.740.BUCIK"},
 }
 ---------------------------------------------------
 -- Defined train information
