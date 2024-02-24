@@ -336,7 +336,7 @@ ENT.ClientProps["lamps_salon_off"] = {
 }
 ENT.ClientProps["handrails_offside_front"] = {
     model = "models/metrostroi_train/81-740/body/740_body_additional.mdl",
-    pos = Vector(300.2-17.7,-10,-80),
+    pos = Vector(300-17,-10,-80),
     ang = Angle(0,0.2,0),
     nohide = true,
 }
