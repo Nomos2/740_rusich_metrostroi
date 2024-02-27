@@ -5,10 +5,14 @@ or Map:find("gm_metro_krl")
 --or Map:find("gm_metro_kaluzhkaya_line")
 or Map:find("gm_metro_demixovo")
 or Map:find("gm_metrostroi_demixovo")
-or Map:find("gm_moscow_line_7")
+
+or Map:find("gm_moscow_line_7") --параша от таракана
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
+or Map:find("kahovskya_line11a")
+or Map:find("varshavskoe1")
 or Map:find("gm_metrostroi_practice_d")
+
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then 
 	return

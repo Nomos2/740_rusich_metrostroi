@@ -8,11 +8,13 @@ or Map:find("gm_metrostroi_demixovo")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
+or Map:find("kahovskya_line11a")
+or Map:find("varshavskoe1")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then 
 	return
-end
+end 
 
 include("shared.lua")
 --------------------------------------------------------------------------------
@@ -181,7 +183,7 @@ ENT.ClientProps["krepezh"] = {
 ----Аварийка
 ENT.ClientProps["lamps_salon_on_avar_front1"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(522.4-17.7,-0.2,-74.5),
+    pos = Vector(522.4-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }
@@ -195,67 +197,67 @@ ENT.ClientProps["lamps_salon_on_avar_front2"] = {
 
 ENT.ClientProps["lamps_salon_on_front_left1"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(34.4-17.7,-0.2,-74.5),
+    pos = Vector(34.4-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["lamps_salon_on_front_left2"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(88.4-17.7,-0.2,-74.5),
+    pos = Vector(88.4-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["lamps_salon_on_front_left3"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(144.4-17.7,-0.2,-74.5),
+    pos = Vector(144.4-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["lamps_salon_on_front_left4"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(197-17.7,-0.2,-74.5),
+    pos = Vector(197-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["lamps_salon_on_front_left5"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(251-17.7,-0.2,-74.5),
+    pos = Vector(251-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["lamps_salon_on_front_left6"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(305-17.7,-0.2,-74.5),
+    pos = Vector(305-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["lamps_salon_on_front_left7"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(359-17.7,-0.2,-74.5),
+    pos = Vector(359-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["lamps_salon_on_front_left8"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(413-17.7,-0.2,-74.5),
+    pos = Vector(413-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["lamps_salon_on_front_left9"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(467-17.7,-0.2,-74.5),
+    pos = Vector(467-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["lamps_salon_on_front_left10"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(522.4-17.7,-0.2,-74.5),
+    pos = Vector(522.4-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["lamps_salon_on_front_left11"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(576.4-17.7,-0.2,-74.5),
+    pos = Vector(576.4-17.7,-0.21,-74.5),
     ang = Angle(0,0,0),
 	hide = 2,
 }

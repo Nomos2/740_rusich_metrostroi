@@ -8,11 +8,13 @@ or Map:find("gm_metrostroi_demixovo")
 or Map:find("gm_moscow_line_7")
 or Map:find("gm_bolshya_kolsewya_line")
 or Map:find("gm_bolshua_kolsevya_line")
+or Map:find("kahovskya_line11a")
+or Map:find("varshavskoe1")
 or Map:find("gm_metrostroi_practice_d")
 or Map:find("gm_metronvl")
 or Map:find("gm_metropbl")) then 
 	return
-end
+end 
 
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
@@ -63,19 +65,19 @@ function ENT:Initialize()
     --Hide seats
     self.DriverSeat:SetRenderMode(RENDERMODE_TRANSALPHA)
 	self.DriverSeat:SetColor(Color(0,0,0,0))
-	self.DriverSeat.m_tblToolsAllowed = { "none" }		
+	self.DriverSeat.m_tblToolsAllowed = {"none"}		
 	
     self.InstructorsSeat:SetRenderMode(RENDERMODE_TRANSALPHA)
     self.InstructorsSeat:SetColor(Color(0,0,0,0))
-	self.InstructorsSeat.m_tblToolsAllowed = { "none" }	
+	self.InstructorsSeat.m_tblToolsAllowed = {"none"}	
 	
     self.InstructorsSeat2:SetRenderMode(RENDERMODE_TRANSALPHA)
     self.InstructorsSeat2:SetColor(Color(0,0,0,0))
-	self.InstructorsSeat2.m_tblToolsAllowed = { "none" }	
+	self.InstructorsSeat2.m_tblToolsAllowed = {"none"}	
 	
     self.InstructorsSeat4:SetRenderMode(RENDERMODE_TRANSALPHA)
     self.InstructorsSeat4:SetColor(Color(0,0,0,0))
-	self.InstructorsSeat4.m_tblToolsAllowed = { "none" }		
+	self.InstructorsSeat4.m_tblToolsAllowed = {"none"}		
 	
 	self.LightSensor = self:AddLightSensor(Vector(627-9,0,-125),Angle(0,90,0))
 	self.ASSensor = self:AddLightSensor(Vector(515-9,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
@@ -83,7 +85,7 @@ function ENT:Initialize()
     -- Create bogeys
         self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740PER")	
         self.RearBogey  = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),false,"740G") --110 0 -80  -532-25,0,-80
-		self.RearBogey:SetSolid(SOLID_VPHYSICS)
+        self.RearBogey:SetMoveType(MOVETYPE_VPHYSICS)	
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)			
         self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
@@ -93,10 +95,10 @@ function ENT:Initialize()
         self.RearCouple:SetSolid(SOLID_VPHYSICS)
 		self.RearCouple:GetPhysicsObject():SetMass(5000)		
 		
-		self.FrontCouple.m_tblToolsAllowed = { "none" }
-		self.RearCouple.m_tblToolsAllowed = { "none" }	
-		self.FrontBogey.m_tblToolsAllowed = { "none" }	
-		self.RearBogey.m_tblToolsAllowed = { "none" }
+		self.FrontCouple.m_tblToolsAllowed = {"none"}
+		self.RearCouple.m_tblToolsAllowed = {"none"}	
+		self.FrontBogey.m_tblToolsAllowed = {"none"}	
+		self.RearBogey.m_tblToolsAllowed = {"none"}
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
 		local opt = Vector(70,0,0)
@@ -502,17 +504,14 @@ function ENT:CreatePricep(pos,ang)
 	PB:SetNWFloat("SqualPitch",1.45+rand)
 	PB:SetNWInt("MotorSoundType",2)
 	PB:SetNWInt("Async",true)
-	PB.m_tblToolsAllowed = { "none" }
+	PB.m_tblToolsAllowed = {"none"}
 	PB:PhysicsInit(SOLID_VPHYSICS)    
 	PB.DisableContacts = true
     constraint.NoCollide(ent,self,0,0)	
-	
-    constraint.RemoveConstraints(self.RearBogey, "Axis")	
-	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
 	local FB = self.FrontBogey 	
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
-	local RB = self.RearBogey	
+	local RB = self.RearBogey
 	
 	constraint.Axis(
 		PB,		
@@ -577,37 +576,28 @@ function ENT:CreatePricep(pos,ang)
 		Vector(0,0,1),
 	false) 
 	
-	else	
-	
-    RB:SetSolid(SOLID_VPHYSICS)		
-	
-	local xmin = -2
-	local xmax = 2
-	
-	local ymin = xmin
-	local ymax = xmax
+	else
 	
 	local zmin = -45
-	local zmax = 45	
-
-	local kio = Vector(-30,0,60)
-	local kio1 = Vector(-30,0,-40)
+	local zmax = 45
 	
-	constraint.AdvBallsocket( 
+   RB:SetSolid(SOLID_VPHYSICS)
+	
+  constraint.AdvBallsocket( 
 		RB,
 		self,
 		0, 
 		0, 
-		RB.SpawnPos - kio,
-		Vector(nil), 
+		Vector(0,0,25),
+		pos, 
 		0, 
 		0, 
 		
-        xmin, --xmin
-        ymin, --ymin
+        -5, --xmin
+        -5, --ymin
         zmin, --zmin
-        xmax, --xmax
-        ymax, --ymax
+        5, --xmax
+        5, --ymax
         zmax, --zmax
 		
 		0, --xfric
@@ -616,22 +606,22 @@ function ENT:CreatePricep(pos,ang)
 		0, --rotonly
 		1,--nocollide
 		false		
-	) 	
+	) 
 	constraint.AdvBallsocket( 
 		RB,
 		self,
 		0, 
 		0, 
-		RB.SpawnPos - kio1,
-		Vector(nil), 
+		Vector(0,0,-40),
+		pos, 
 		0, 
 		0, 
 		
-        xmin, --xmin
-        ymin, --ymin
+        -5, --xmin
+        -5, --ymin
         zmin, --zmin
-        xmax, --xmax
-        ymax, --ymax
+        5, --xmax
+        5, --ymax
         zmax, --zmax
 		
 		0, --xfric
@@ -643,20 +633,20 @@ function ENT:CreatePricep(pos,ang)
 	) 		
 	
 	constraint.AdvBallsocket( 
-		RB,
 		ent,
+		RB,
 		0, 
 		0, 
-		RB.SpawnPos - kio,
-		Vector(nil), 
+		Vector(310,0,20),
+		pos, 
 		0, 
 		0, 
 		
-        xmin, --xmin
-        ymin, --ymin
+        -2, --xmin
+        -2, --ymin
         zmin, --zmin
-        xmax, --xmax
-        ymax, --ymax
+        2, --xmax
+        2, --ymax
         zmax, --zmax
 		
 		0, --xfric
@@ -665,22 +655,22 @@ function ENT:CreatePricep(pos,ang)
 		0, --rotonly
 		1,--nocollide
 		false		
-	) 	
+	) 
 	constraint.AdvBallsocket( 
-		RB,
 		ent,
+		RB,
 		0, 
 		0, 
-		RB.SpawnPos - kio1,
-		Vector(nil), 
+		Vector(310,0,-40),
+		pos, 
 		0, 
 		0, 
 		
-        xmin, --xmin
-        ymin, --ymin
+        -2, --xmin
+        -2, --ymin 
         zmin, --zmin
-        xmax, --xmax
-        ymax, --ymax
+        2, --xmax
+        2, --ymax
         zmax, --zmax
 		
 		0, --xfric
