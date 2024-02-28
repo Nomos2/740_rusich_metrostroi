@@ -143,6 +143,7 @@ function ENT:InitializeSounds()
 
 	local j = math.random (1,3)
 	local r = math.random (1,2)	 
+	local tmb = math.random (1,4)	 	
     self.SoundNames["release_front"] = {loop=true,"subway_trains/740_4/new/pneumo_release_"..j..".wav"}
     self.SoundPositions["release_front"] = {1200,1e9,Vector(0-159-9,0,-70),0.4}
     self.SoundNames["release_middle"] = {loop=true,"subway_trains/740_4/new/pneumo_release_"..j..".wav"}
@@ -167,20 +168,10 @@ function ENT:InitializeSounds()
     }
 	
     self.SoundNames["switch2_on"] = {
-        "subway_trains/740_4/switches/tumbler/va21_on1.mp3",
-        "subway_trains/740_4/switches/tumbler/va21_on2.mp3",
-        "subway_trains/740_4/switches/tumbler/va21_on3.mp3",
-        "subway_trains/740_4/switches/tumbler/va21_on4.mp3",
-        "subway_trains/740_4/switches/tumbler/va21_on5.mp3",
-        "subway_trains/740_4/switches/tumbler/va21_on6.mp3",	
+        "subway_trains/740_4/switches/tumbler/va21_on"..tmb..".mp3",
     }
     self.SoundNames["switch2_off"] = {
-        "subway_trains/740_4/switches/tumbler/va21_off1.mp3",
-        "subway_trains/740_4/switches/tumbler/va21_off2.mp3",
-        "subway_trains/740_4/switches/tumbler/va21_off3.mp3",
-        "subway_trains/740_4/switches/tumbler/va21_off4.mp3",
-        "subway_trains/740_4/switches/tumbler/va21_off5.mp3",
-        "subway_trains/740_4/switches/tumbler/va21_off6.mp3",		
+        "subway_trains/740_4/switches/tumbler/va21_off"..tmb..".mp3",	
     }	
 	
     self.SoundNames["switch_ppz_on_new"] = {
@@ -285,6 +276,10 @@ function ENT:InitializeSounds()
 
     self.SoundNames["switch_batt_on"] = {"subway_trains/740_4/switches/tumbler/batt_on.mp3","subway_trains/740_4/switches/tumbler/batt_on2.mp3"}
     self.SoundNames["switch_batt_off"] = {"subway_trains/740_4/switches/tumbler/batt_off.mp3","subway_trains/740_4/switches/tumbler/batt_off2.mp3"}
+    self.SoundNames["desh_on"] = "subway_trains/740_4/switches/tumbler/dezh_16.mp3"
+    self.SoundNames["desh_off"] = "subway_trains/740_4/switches/tumbler/dezh_26.mp3"
+    self.SoundNames["button_new_press"] = "subway_trains/740_4/switches/button/vospr_message_press"..j..".mp3"
+    self.SoundNames["button_new_release"] = "subway_trains/740_4/switches/button/vospr_message_release.mp3"
 
     self.SoundNames["switch_batt"] = {"subway_trains/740_4/switches/tumbler/batt_on.mp3","subway_trains/740_4/switches/tumbler/batt_on2.mp3","subway_trains/740_4/switches/tumbler/batt_off.mp3","subway_trains/740_4/switches/tumbler/batt_off2.mp3"}
 
@@ -294,14 +289,32 @@ function ENT:InitializeSounds()
     self.SoundNames["switch_on"] = {"subway_trains/720/switches/switchp_on.mp3","subway_trains/720/switches/switchp_on2.mp3","subway_trains/720/switches/switchp_on3.mp3"}
     self.SoundNames["switch_off"] = {"subway_trains/720/switches/switchp_off.mp3","subway_trains/720/switches/switchp_off2.mp3","subway_trains/720/switches/switchp_off3.mp3"}
 
-    --[[self.SoundNames["button_vityaz1_press"] = {"subway_trains/720/switches/buttv_press.mp3","subway_trains/720/switches/buttv_press2.mp3","subway_trains/720/switches/buttv_press3.mp3"}
-    self.SoundNames["button_vityaz1_release"] = {"subway_trains/720/switches/buttv_release.mp3","subway_trains/720/switches/buttv_release2.mp3","subway_trains/720/switches/buttv_release3.mp3"}
-    self.SoundNames["button_vityaz2_press"] = {"subway_trains/720/switches/buttv_press4.mp3","subway_trains/720/switches/buttv_press5.mp3","subway_trains/720/switches/buttv_press6.mp3"}
-    self.SoundNames["button_vityaz2_release"] = {"subway_trains/720/switches/buttv_release4.mp3","subway_trains/720/switches/buttv_release5.mp3","subway_trains/720/switches/buttv_release6.mp3"}
-    self.SoundNames["button_vityaz3_press"] = {"subway_trains/720/switches/buttv_press.mp3","subway_trains/720/switches/buttv_press3.mp3","subway_trains/720/switches/buttv_press7.mp3","subway_trains/720/switches/buttv_press8.mp3"}
-    self.SoundNames["button_vityaz3_release"] = {"subway_trains/720/switches/buttv_release.mp3","subway_trains/720/switches/buttv_release3.mp3","subway_trains/720/switches/buttv_release7.mp3","subway_trains/720/switches/buttv_release8.mp3"}
-    self.SoundNames["button_vityaz4_press"] = {"subway_trains/720/switches/buttv3_press.mp3","subway_trains/720/switches/buttv_press2.mp3","subway_trains/720/switches/buttv_press.mp3","subway_trains/720/switches/buttv_press8.mp3"}
-    self.SoundNames["button_vityaz4_release"] = {"subway_trains/720/switches/buttv4_release.mp3","subway_trains/720/switches/buttv_release5.mp3","subway_trains/720/switches/buttv_release7.mp3","subway_trains/720/switches/buttv_release6.mp3"}]]
+	
+	
+    self.SoundNames["button_vityaz7401_press"] = "subway_trains/740_4/switches/button/vityaz_button_1_press.mp3"
+    self.SoundNames["button_vityaz7401_release"] = "subway_trains/740_4/switches/button/vityaz_button_1_release.mp3"
+	
+    self.SoundNames["button_vityaz7402_press"] = "subway_trains/740_4/switches/button/vityaz_button_2_press.mp3"
+    self.SoundNames["button_vityaz7402_release"] = "subway_trains/740_4/switches/button/vityaz_button_2_release.mp3"
+	
+    self.SoundNames["button_vityaz7403_press"] = "subway_trains/740_4/switches/button/vityaz_button_3_press.mp3"
+    self.SoundNames["button_vityaz7403_release"] = "subway_trains/740_4/switches/button/vityaz_button_3_release.mp3"
+	
+    self.SoundNames["button_vityaz7404_press"] = "subway_trains/740_4/switches/button/vityaz_button_4_press.mp3"
+    self.SoundNames["button_vityaz7404_release"] = "subway_trains/740_4/switches/button/vityaz_button_4_release.mp3"
+	
+	self.SoundNames["button_vityaz7405_press"] = "subway_trains/740_4/switches/button/vityaz_button_5_press.mp3"
+    self.SoundNames["button_vityaz7405_release"] = "subway_trains/740_4/switches/button/vityaz_button_5_release.mp3"
+	
+	self.SoundNames["button_vityaz7406_press"] = "subway_trains/740_4/switches/button/vityaz_button_6_press.mp3"
+    self.SoundNames["button_vityaz7406_release"] = "subway_trains/740_4/switches/button/vityaz_button_6_release.mp3"
+	
+	self.SoundNames["button_vityaz7407_press"] = "subway_trains/740_4/switches/button/vityaz_button_7_press.mp3"
+    self.SoundNames["button_vityaz7407_release"] = "subway_trains/740_4/switches/button/vityaz_button_7_release.mp3"
+	
+	self.SoundNames["button_vityaz7408_press"] = "subway_trains/740_4/switches/button/vityaz_button_8_press.mp3"
+    self.SoundNames["button_vityaz7408_release"] = "subway_trains/740_4/switches/button/vityaz_button_8_release.mp3"
+	
 
     self.SoundNames["button_press"] = {"subway_trains/720/switches/butt_press.mp3","subway_trains/720/switches/butt_press2.mp3","subway_trains/720/switches/butt_press3.mp3"}
     self.SoundNames["button_release"] = {"subway_trains/720/switches/butt_release.mp3","subway_trains/720/switches/butt_release2.mp3","subway_trains/720/switches/butt_release3.mp3"}
@@ -311,8 +324,6 @@ function ENT:InitializeSounds()
 
     self.SoundNames["button_square_on"] = {"subway_trains/720/switches/butts_on.mp3","subway_trains/720/switches/butts_on2.mp3"}
     self.SoundNames["button_square_off"] = {"subway_trains/720/switches/butts_off.mp3","subway_trains/720/switches/butts_off2.mp3"}
-
-    --Эти кнопки не годятся! Нужно некоторые кнопки отдельно делать.
 
     self.SoundNames["door_cab_open"] = {"subway_trains/740_4/doors/cab/door_cab_open.mp3","subway_trains/740_4/doors/cab/door_cab_open2.mp3"}
     self.SoundNames["door_cab_close"] = {"subway_trains/740_4/doors/cab/door_cab_close.mp3","subway_trains/740_4/doors/cab/door_cab_close2.mp3"}

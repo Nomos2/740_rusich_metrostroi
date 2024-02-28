@@ -127,12 +127,12 @@ ENT.ButtonMap["PUU"] = {
             sndvol = 0.3, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "R_Program2Set",x=579.63+36.5*0, y=30.5, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_yellow.mdl",z=1.85,--blue
+            model = "models/metrostroi_train/81-722/button_yellow.mdl",z=1.85,
             var="R_Program2",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.3, snd = function(val) return val and "button_square_press" or "button_square_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "R_AnnouncerToggle",x=576.63+36.5*2.75, y=30.5, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_blue.mdl",z=2.5,--blue
+            model = "models/metrostroi_train/81-722/button_blue.mdl",z=2.5,
           --  lamp = {model = "models/metrostroi_train/81-720/buttons/l1.mdl",var="R_AnnouncerLamp",anim=true, color=Color(50,150,200)},
             var="R_Announcer",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.3, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
@@ -162,7 +162,7 @@ ENT.ButtonMap["PUU"] = {
             sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 	*/	
-		{ID = "EmergencyCompressorSet",x=576.63+36.5*1.05, y=90, radius=15, tooltip = "",model = { --566.63+36.5*1
+		{ID = "EmergencyCompressorSet",x=576.63+36.5*1.05, y=90, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_white.mdl", z=1.85,
             var="EmergencyCompressor",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
@@ -263,7 +263,6 @@ ENT.ClientProps["lamps_salon_on_avar2"] = {
     color = Color(245,238,223),		
 }
 --Аварийка
-
 
 ENT.ClientProps["lamps_salon_on1"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
@@ -401,7 +400,7 @@ ENT.ClientProps["wiper"] = { --дворник от 760
 }
 
 ENT.ButtonMap["ALSPANELLAMPS"] = { -- дополнительные лампы АЛС 
-	pos = Vector(812-159-9,17.2,-0.01), --446 -- 14 -- -0,5
+	pos = Vector(812-159-9,17.2,-0.01),
 	ang = Angle(0,-90,40),
 	width = 75,
 	height = 50,
@@ -463,7 +462,6 @@ ENT.ButtonMap["PUL"] = {
         {ID = "DoorLeftSet",x=70, y=197, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_white.mdl",z=-5.3,
 			lamp = {model ="models/metrostroi_train/81-722/lamp_black.mdl", var ="DoorLeftLamp",anim=true},
-				--models/metrostroi_train/81-720/button_circle1.mdl
             var="DoorLeft",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
@@ -472,7 +470,7 @@ ENT.ButtonMap["PUL"] = {
 ENT.ButtonMap["PUR"] = {
     pos = Vector(806.5-159-9,13.5,-3.3), --446 -- 14 -- -0,5
     ang = Angle(0,-90,22),
-    width = 220,
+    width = 210,
     height = 210,
     scale = 0.0450,
     hideseat=0.2,
@@ -493,12 +491,12 @@ ENT.ButtonMap["PUR"] = {
         {ID = "EmerBrakeAddSet",x=65.5, y=55, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_black.mdl",z=-5.1,  --models/metrostroi_train/81-720/buttons/b2.mdl
             var="EmerBrakeAdd",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.3, snd = function(val) return val and "button_square_press" or "button_square_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_new_press" or "button_new_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "EmerBrakeReleaseSet",x=106, y=55, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_white.mdl",z=-5.1,   --models/metrostroi_train/81-720/buttons/b5.mdl
             var="EmerBrakeRelease",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.3, snd = function(val) return val and "button_square_press" or "button_square_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_new_press" or "button_new_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "EmerBrakeToggle",x=149, y=55, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_black.mdl",z=-5.1,        --b6
@@ -509,7 +507,7 @@ ENT.ButtonMap["PUR"] = {
         {ID = "EmergencyBrakeToggle",x=188, y=55, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/tumbler2.mdl",z=-10, ang=180,
             var="EmergencyBrake",speed=12, vmin=0, vmax=1,
-            sndvol = 0.5, snd = function(val) return val and "switch_on" or "switch_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "switchbl_on" or "switchbl_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "DoorCloseToggle",x=21, y=119, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_green.mdl",z=-5.1, --models/metrostroi_train/81-720/buttons/b5.mdl
@@ -520,22 +518,22 @@ ENT.ButtonMap["PUR"] = {
         {ID = "AttentionMessageSet",x=65, y=119, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_yellow.mdl",z=-5.1,
             var="AttentionMessage",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.3, snd = function(val) return val and "button_square_press" or "button_square_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.6, snd = function(val) return val and "button_new_press" or "button_new_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "AttentionSet",x=105, y=119, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_red.mdl",z=-5.1,
             var="Attention",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.3, snd = function(val) return val and "button_square_press" or "button_square_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_new_press" or "button_new_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "AttentionBrakeSet",x=148, y=119, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_red.mdl",z=-5.1,  --models/metrostroi_train/81-720/buttons/b6.mdl
             var="AttentionBrake",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.3, snd = function(val) return val and "button_square_press" or "button_square_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_new_press" or "button_new_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "R_Program1Set",x=188, y=119, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_yellow.mdl",z=-5.1,--blue
             var="R_Program1",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.3, snd = function(val) return val and "button_square_press" or "button_square_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_new_press" or "button_new_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "HornBSet",x=25.5, y=191, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_yellow.mdl",z=-5,  --models/metrostroi_train/81-720/button_circle1.mdl
@@ -938,7 +936,7 @@ ENT.ButtonMap["BackDown"] = {
         {ID = "ALSFreqBlockToggle",x=334, y=294, radius=12, tooltip = "", model = {
             model = "models/metrostroi_train/81-720/rc_rotator1.mdl",z=4, ang=180, scale = 0.5,
             var="ALSFreqBlock",speed=12,min = 0.6, max = 0.9,
-            sndvol = 0.5, snd = function(val) return val and "switch_batt_on" or "switch_batt_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "desh_on" or "desh_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
     }
 }
@@ -954,14 +952,14 @@ ENT.ButtonMap["CraneCap2"] = {
             model = "models/metrostroi_train/81-710/ezh3_tumbler_t2.mdl",ang = 180,z=-6,
             var="ABSD",speed=16,
             plomb = {model = "models/metrostroi_train/81/plomb.mdl",ang=-90,x=-1,y=24,z=0,var="ABSDPl",ID="ABSDPl",},
-            sndvol = 1,snd = function(val) return val and "switchbl_on" or "switchbl_off" end,
+            sndvol = 1,snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,
             sndmin = 90,sndmax = 1e3,sndang = Angle(-90,0,0),
         }},	
         {ID = "RTEToggle",x=100, y=10, radius=12, tooltip = "nolang_РТЭ: Резервный тормоз экстренный", model = {
             model = "models/metrostroi_train/81-710/ezh3_tumbler_pp250.mdl",ang = 180,z=-6,
             var="RTE",speed=16,
             plomb = {model = "models/metrostroi_train/81/plomb.mdl",ang=-90,x=-1,y=24,z=0,var="RTEPl",ID="RTEPl",},
-            sndvol = 1,snd = function(val) return val and "switchbl_on" or "switchbl_off" end,
+            sndvol = 1,snd = function(val) return val and "switch_pvz_on" or "switch_pvz_off" end,
             sndmin = 90,sndmax = 1e3,sndang = Angle(-90,0,0),
         }},
     }
@@ -975,120 +973,122 @@ ENT.ButtonMap["VityazButtons"] = {
     hideseat=0.2,
     buttons = {
 		{ID = "VityazF4Set",x=1, y=-4, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f1.mdl",z=0, ang=0,var="VityazF1",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz3_press" or "button_vityaz3_release" end,sndmin = 40, --sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f1.mdl",scale=0,z=0, ang=0,var="VityazF4",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7402_press" or "button_vityaz7402_release" end,sndmin = 40, --sndmax = 1e3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazPVUSet",x=20, y=-4, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f1.mdl",z=0, ang=0,var="VityazF1",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz3_press" or "button_vityaz3_release" end,sndmin = 40, --sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f3.mdl",scale=0,z=0, ang=0,var="VityazPVU",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7404_press" or "button_vityaz7404_release" end,sndmin = 40, --sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "VityazVOSet",x=1, y=13, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f2.mdl",z=0, ang=0,var="VityazF2",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz2_press" or "button_vityaz2_release" end,sndmin = 40, --sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f1.mdl",scale=0,z=0, ang=0,var="VityazVO",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7404_press" or "button_vityaz7404_release" end,sndmin = 40, --sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "VityazCurrentSet",x=1, y=30, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f3.mdl",z=0, ang=0,var="VityazF3",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f3.mdl",scale=0,z=0, ang=0,var="VityazCurrent",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7405_press" or "button_vityaz7405_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazSOTSet",x=20, y=30, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f3.mdl",z=0, ang=0,var="VityazF3",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f3.mdl",scale=0,z=0, ang=0,var="VityazF3",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7406_press" or "button_vityaz7406_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "VityazF2Set",x=1, y=47, w=20,h=20, tooltip = "",model = {
-           -- model = "models/metrostroi_train/81-720/vyitaz/v_f4.mdl",z=0, ang=0,var="VityazF4",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz4_press" or "button_vityaz4_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f4.mdl",scale=0,z=0, ang=0,var="VityazF2",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7404_press" or "button_vityaz7404_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazNumSet",x=20, y=47, w=20,h=20, tooltip = "",model = {
-           -- model = "models/metrostroi_train/81-720/vyitaz/v_f4.mdl",z=0, ang=0,var="VityazF4",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz4_press" or "button_vityaz4_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f4.mdl",scale=0,z=0, ang=0,var="VityazNum",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7404_press" or "button_vityaz7404_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
+		
+        {ID = "Vityaz0Set",x=58, y=47, w=20,h=20, tooltip = "",model = {
+            model = "models/metrostroi_train/81-720/vyitaz/v_0.mdl",scale=0,z=0, ang=0, var="Vityaz0",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7401_press" or "button_vityaz7401_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        }},		
         {ID = "Vityaz1Set",x=40, y=-4, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_1.mdl",z=0, ang=0, var="Vityaz1",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_1.mdl",scale=0,z=0, ang=0, var="Vityaz1",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7402_press" or "button_vityaz7402_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        }},        
+		{ID = "Vityaz2Set",x=58, y=-4, w=20,h=20, tooltip = "",model = {
+            model ="models/metrostroi_train/81-720/vyitaz/v_2.mdl",scale=0,z=0, ang=0, var="Vityaz2",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7403_press" or "button_vityaz7403_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        }},        
+		{ID = "Vityaz3Set",x=76, y=-4, w=20,h=20, tooltip = "",model = {
+            model = "models/metrostroi_train/81-720/vyitaz/v_3.mdl",scale=0,z=0, ang=0, var="Vityaz3",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7404_press" or "button_vityaz7404_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "Vityaz4Set",x=40, y=13, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_4.mdl",z=0, ang=0, var="Vityaz4",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz2_press" or "button_vityaz2_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
-        {ID = "Vityaz7Set",x=40, y=30, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_7.mdl",z=0, ang=0, var="Vityaz7",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
-        {ID = "Vityaz2Set",x=58, y=-4, w=20,h=20, tooltip = "",model = {
-           -- model = "models/metrostroi_train/81-720/vyitaz/v_2.mdl",z=0, ang=0, var="Vityaz2",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz3_press" or "button_vityaz3_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
-		{ID = "VityazTSet",x=20, y=13, w=20,h=20, tooltip = "",model = {
-           -- model = "models/metrostroi_train/81-720/vyitaz/v_2.mdl",z=0, ang=0, var="Vityaz2",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz3_press" or "button_vityaz3_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_4.mdl",scale=0,z=0, ang=0, var="Vityaz4",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7405_press" or "button_vityaz7405_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "Vityaz5Set",x=58, y=13, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_5.mdl",z=0, ang=0, var="Vityaz5",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_5.mdl",scale=0,z=0, ang=0, var="Vityaz5",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7406_press" or "button_vityaz7406_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        }},	        
+		{ID = "Vityaz6Set",x=76, y=13, w=20,h=20, tooltip = "",model = {
+            model = "models/metrostroi_train/81-720/vyitaz/v_6.mdl",scale=0,z=0, ang=0, var="Vityaz6",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7407_press" or "button_vityaz7407_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        }},	
+        {ID = "Vityaz7Set",x=40, y=30, w=20,h=20, tooltip = "",model = {
+            model = "models/metrostroi_train/81-720/vyitaz/v_7.mdl",scale=0,z=0, ang=0, var="Vityaz7",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7408_press" or "button_vityaz7408_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        }},          
+		{ID = "Vityaz8Set",x=58, y=30, w=20,h=20, tooltip = "",model = {
+            model = "models/metrostroi_train/81-720/vyitaz/v_8.mdl",scale=0,z=0, ang=0, var="Vityaz8",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7408_press" or "button_vityaz7408_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        }},      
+		{ID = "Vityaz9Set",x=76, y=30, w=20,h=20, tooltip = "",model = {
+            model = "models/metrostroi_train/81-720/vyitaz/v_9.mdl",scale=0,z=0, ang=0, var="Vityaz9",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7408_press" or "button_vityaz7408_release" end,sndmin = 40, --sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
-        {ID = "Vityaz8Set",x=58, y=30, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_8.mdl",z=0, ang=0, var="Vityaz8",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz4_press" or "button_vityaz4_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
-        {ID = "Vityaz0Set",x=58, y=47, w=20,h=20, tooltip = "",model = {
-           -- model = "models/metrostroi_train/81-720/vyitaz/v_0.mdl",z=0, ang=0, var="Vityaz0",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz2_press" or "button_vityaz2_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
-        {ID = "Vityaz3Set",x=76, y=-4, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_3.mdl",z=0, ang=0, var="Vityaz3",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz3_press" or "button_vityaz3_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
-        {ID = "Vityaz6Set",x=76, y=13, w=20,h=20, tooltip = "",model = {
-           -- model = "models/metrostroi_train/81-720/vyitaz/v_6.mdl",z=0, ang=0, var="Vityaz6",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz4_press" or "button_vityaz4_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
-        {ID = "Vityaz9Set",x=76, y=30, w=20,h=20, tooltip = "",model = {
-           -- model = "models/metrostroi_train/81-720/vyitaz/v_9.mdl",z=0, ang=0, var="Vityaz9",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, --sndmax = 1e3/3, sndang = Angle(-90,0,0),
+		
+		{ID = "VityazTSet",x=20, y=13, w=20,h=20, tooltip = "",model = {
+            model = "models/metrostroi_train/81-720/vyitaz/v_2.mdl",scale=0,z=0, ang=0, var="VityazT",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7403_press" or "button_vityaz7403_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "VityazF5Set",x=40, y=47, w=20,h=20, tooltip = "",model = {
-          --  model = "models/metrostroi_train/81-720/vyitaz/v_f5.mdl",z=0, ang=0, var="VityazF5",speed=16,
-			sndvol = 1, snd = function(val) return val and "button_vityaz3_press" or "button_vityaz3_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f5.mdl",scale=0,z=0, ang=0, var="VityazF5",speed=16,
+			sndvol = 1, snd = function(val) return val and "button_vityaz7403_press" or "button_vityaz7403_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "VityazF6Set",x=96, y=-4, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f6.mdl",z=0, ang=0, var="VityazF6",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz2_press" or "button_vityaz2_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f6.mdl",scale=0,z=0, ang=0, var="VityazF6",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7402_press" or "button_vityaz7402_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "VityazF7Set",x=96, y=13, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f7.mdl",z=0, ang=0, var="VityazF7",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz4_press" or "button_vityaz4_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f7.mdl",scale=0,z=0, ang=0, var="VityazF7",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7404_press" or "button_vityaz7404_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazNextSet",x=96, y=30, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f7.mdl",z=0, ang=0, var="VityazF7",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz4_press" or "button_vityaz4_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f7.mdl",scale=0,z=0, ang=0, var="VityazNext",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7404_press" or "button_vityaz7404_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazBackSet",x=96, y=47, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",z=0, ang=0, var="VityazF8",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",scale=0,z=0, ang=0, var="VityazBack",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7401_press" or "button_vityaz7401_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "VityazF9Set",x=76, y=47, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f9.mdl",z=0, ang=0, var="VityazF9",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz2_press" or "button_vityaz2_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f9.mdl",scale=0,z=0, ang=0, var="VityazF9",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7402_press" or "button_vityaz7402_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazF8Set",x=80, y=68, w=35,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",z=0, ang=0, var="VityazF8",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",z=0,scale=0, ang=0, var="VityazF8",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7401_press" or "button_vityaz7401_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazUTVSet",x=1, y=68, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",z=0, ang=0, var="VityazF8",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",scale=0,z=0, ang=0, var="VityazUTV",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7401_press" or "button_vityaz7401_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazTV1Set",x=20, y=68, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",z=0, ang=0, var="VityazF8",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",scale=0,z=0, ang=0, var="VityazTV1",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7401_press" or "button_vityaz7401_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazTV2Set",x=40, y=68, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",z=0, ang=0, var="VityazF8",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",scale=0,z=0, ang=0, var="VityazTV2",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7401_press" or "button_vityaz7401_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazNothSet",x=60, y=68, w=20,h=20, tooltip = "",model = {
-            --model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",z=0, ang=0, var="VityazF8",speed=16,
-            sndvol = 1, snd = function(val) return val and "button_vityaz1_press" or "button_vityaz1_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            model = "models/metrostroi_train/81-720/vyitaz/v_f8.mdl",scale=0,z=0, ang=0, var="VityazNoth",speed=16,
+            sndvol = 1, snd = function(val) return val and "button_vityaz7401_press" or "button_vityaz7401_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
     }
 }
