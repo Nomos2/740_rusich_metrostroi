@@ -83,7 +83,7 @@ function ENT:Initialize()
 	self.ASSensor = self:AddLightSensor(Vector(515-9,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
 	
     -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740PER")	
+        self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740ALS")	
         self.RearBogey  = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),false,"740G") --110 0 -80  -532-25,0,-80
         self.RearBogey:SetMoveType(MOVETYPE_VPHYSICS)	
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
@@ -505,13 +505,17 @@ function ENT:CreatePricep(pos,ang)
 	PB:SetNWInt("MotorSoundType",2)
 	PB:SetNWInt("Async",true)
 	PB.m_tblToolsAllowed = {"none"}
-	PB:PhysicsInit(SOLID_VPHYSICS)    
+	PB:PhysicsInit(SOLID_VPHYSICS)  
+
+    constraint.RemoveConstraints(self.RearBogey, "Axis")	
+	
 	PB.DisableContacts = true
-    constraint.NoCollide(ent,self,0,0)	
+    constraint.NoCollide(ent,self,0,0)			
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
 	local FB = self.FrontBogey 	
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
 	local RB = self.RearBogey
+    constraint.NoCollide(ent,RB,0,0)	
 	
 	constraint.Axis(
 		PB,		
@@ -583,12 +587,12 @@ function ENT:CreatePricep(pos,ang)
 	
    RB:SetSolid(SOLID_VPHYSICS)
 	
-  constraint.AdvBallsocket( 
+   constraint.AdvBallsocket( 
 		RB,
 		self,
 		0, 
 		0, 
-		Vector(0,0,25),
+		Vector(0,0,15),
 		pos, 
 		0, 
 		0, 
@@ -612,7 +616,7 @@ function ENT:CreatePricep(pos,ang)
 		self,
 		0, 
 		0, 
-		Vector(0,0,-40),
+		Vector(0,0,-35),
 		pos, 
 		0, 
 		0, 
@@ -637,7 +641,7 @@ function ENT:CreatePricep(pos,ang)
 		RB,
 		0, 
 		0, 
-		Vector(310,0,20),
+		Vector(310,0,15),
 		pos, 
 		0, 
 		0, 
@@ -661,7 +665,7 @@ function ENT:CreatePricep(pos,ang)
 		RB,
 		0, 
 		0, 
-		Vector(310,0,-40),
+		Vector(310,0,-15),
 		pos, 
 		0, 
 		0, 

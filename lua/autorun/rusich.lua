@@ -15,23 +15,30 @@ if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Me
 			-- регистрируем тележки
 			local tbl = scripted_ents.Get("gmod_train_bogey")
 			if tbl then	
-				tbl.Types["740PER"] = { -- тележка
-					"models/metrostroi_train/81-740/bogey/metro_bogey_740.mdl",
-					Vector(0,0.0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
+				tbl.Types["740ALS"] = { -- тележка
+					"models/metrostroi_train/81-740/bogey/metro_bogey_740_als.mdl",
+					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
 					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
 				}
+				tbl.Types["740PER"] = { -- тележка
+					"models/metrostroi_train/81-740/bogey/metro_bogey_740.mdl",
+					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
+					Vector(0,-61,-14),Vector(0,61,-14),
+					nil,
+					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
+				}				
 				tbl.Types["740G"] = { -- тележка + гармошка
 					"models/metrostroi_train/81-740/bogey/metro_bogey_garm.mdl",
-					Vector(0,0.0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
+					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
 					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
 				}
 				tbl.Types["740NOTR"] = { -- немоторная тележка
 					"models/metrostroi_train/81-740/bogey/metro_bogey_notr.mdl",
-					Vector(0,0.0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
+					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
 					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
@@ -103,6 +110,13 @@ timer.Simple(0,function()
 			-- регистрируем тележки
 			local tbl = scripted_ents.Get("gmod_train_bogey")
 			if tbl then	
+				tbl.Types["740ALS"] = { -- тележка
+					"models/metrostroi_train/81-740/bogey/metro_bogey_740_als.mdl",
+					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
+					Vector(0,-61,-14),Vector(0,61,-14),
+					nil,
+					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
+				}			
 				tbl.Types["740PER"] = { -- тележка
 					"models/metrostroi_train/81-740/bogey/metro_bogey_740.mdl",
 					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
@@ -112,14 +126,14 @@ timer.Simple(0,function()
 				}
 				tbl.Types["740G"] = { -- тележка + гармошка
 					"models/metrostroi_train/81-740/bogey/metro_bogey_garm.mdl",
-					Vector(0,0.0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
+					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
 					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
 				}
 				tbl.Types["740NOTR"] = { -- немоторная тележка
 					"models/metrostroi_train/81-740/bogey/metro_bogey_notr.mdl",
-					Vector(0,0.0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
+					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
 					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),

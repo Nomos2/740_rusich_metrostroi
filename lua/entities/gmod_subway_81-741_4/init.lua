@@ -279,10 +279,13 @@ function ENT:CreatePricep(pos,ang)
 	
     constraint.RemoveConstraints(self.RearBogey, "Axis")	
 	
+	PB.DisableContacts = true
+    constraint.NoCollide(ent,self,0,0)			
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
 	local FB = self.FrontBogey 	
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
-	local RB = self.RearBogey	
+	local RB = self.RearBogey
+    constraint.NoCollide(ent,RB,0,0)	
 	
 	constraint.Axis(
 		PB,		
@@ -320,7 +323,7 @@ function ENT:CreatePricep(pos,ang)
         1, --nocollide
 	false) 		
 	
-		local Map = game.GetMap():lower() or ""    	
+	local Map = game.GetMap():lower() or ""    	
 	if Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
 	Map:find("gm_metro_kalinin") or	
@@ -354,12 +357,12 @@ function ENT:CreatePricep(pos,ang)
 	
    RB:SetSolid(SOLID_VPHYSICS)
 	
-  constraint.AdvBallsocket( 
+   constraint.AdvBallsocket( 
 		RB,
 		self,
 		0, 
 		0, 
-		Vector(0,0,25),
+		Vector(0,0,15),
 		pos, 
 		0, 
 		0, 
@@ -383,7 +386,7 @@ function ENT:CreatePricep(pos,ang)
 		self,
 		0, 
 		0, 
-		Vector(0,0,-40),
+		Vector(0,0,-35),
 		pos, 
 		0, 
 		0, 
@@ -408,7 +411,7 @@ function ENT:CreatePricep(pos,ang)
 		RB,
 		0, 
 		0, 
-		Vector(310,0,20),
+		Vector(310,0,15),
 		pos, 
 		0, 
 		0, 
@@ -432,7 +435,7 @@ function ENT:CreatePricep(pos,ang)
 		RB,
 		0, 
 		0, 
-		Vector(310,0,-40),
+		Vector(310,0,-15),
 		pos, 
 		0, 
 		0, 
