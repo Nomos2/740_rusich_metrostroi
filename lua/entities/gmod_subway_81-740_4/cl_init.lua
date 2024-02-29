@@ -135,7 +135,7 @@ ENT.ButtonMap["PUU"] = {
             model = "models/metrostroi_train/81-722/button_blue.mdl",z=2.5,
           --  lamp = {model = "models/metrostroi_train/81-720/buttons/l1.mdl",var="R_AnnouncerLamp",anim=true, color=Color(50,150,200)},
             var="R_Announcer",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.3, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_ann_on" or "button_ann_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "R_LineToggle",x=545, y=30.5, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_yellow.mdl",z=1.85,--blue
@@ -440,22 +440,22 @@ ENT.ButtonMap["PUL"] = {
 
     buttons = {
         {ID = "DoorSelectLToggle",x=13, y=65, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_white.mdl",z=-4.8,  --models/metrostroi_train/81-720/buttons/b4.mdl
+            model = "models/metrostroi_train/81-722/button_white.mdl",z=-4.8,
             lamp = {model = "models/metrostroi_train/81-722/lamp_black.mdl",var="DoorLeftLamp",anim=true},
             var="DoorSelectL",speed=8, vmin=0, vmax=0.6,
-            sndvol = 0.3, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_doorchg_on" or "button_doorchg_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "DoorSelectRToggle",x=70, y=65, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_white.mdl",z=-4.8,
             lamp = {model = "models/metrostroi_train/81-722/lamp_black.mdl",var="DoorRightLamp",anim=true},
             var="DoorSelectR",speed=8, vmin=0, vmax=0.6,
-            sndvol = 0.3, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_doorchg_on" or "button_doorchg_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "DoorBlockToggle",x=70, y=130, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_red.mdl",z=-6,  --models/metrostroi_train/81-720/buttons/b6.mdl
+            model = "models/metrostroi_train/81-722/button_red.mdl",z=-6,
 			lamp = {model = "models/metrostroi_train/81-722/lamp_red.mdl",var="DoorBlockLamp",anim=true},
             var="DoorBlock",speed=8, vmin=0, vmax=0.5,
-            sndvol = 0.3, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_door_on_osn" or "button_door_off_osn" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		/*
 */
@@ -463,7 +463,7 @@ ENT.ButtonMap["PUL"] = {
             model = "models/metrostroi_train/81-722/button_white.mdl",z=-5.3,
 			lamp = {model ="models/metrostroi_train/81-722/lamp_black.mdl", var ="DoorLeftLamp",anim=true},
             var="DoorLeft",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "button_doorchg_on" or "button_doorchg_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
     }
 }
@@ -489,12 +489,12 @@ ENT.ButtonMap["PUR"] = {
             sndvol = 0.3, snd = function(val) return val and "button_square_press" or "button_square_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "EmerBrakeAddSet",x=65.5, y=55, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_black.mdl",z=-5.1,  --models/metrostroi_train/81-720/buttons/b2.mdl
+            model = "models/metrostroi_train/81-722/button_black.mdl",z=-5.1,
             var="EmerBrakeAdd",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.3, snd = function(val) return val and "button_new_press" or "button_new_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "EmerBrakeReleaseSet",x=106, y=55, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_white.mdl",z=-5.1,   --models/metrostroi_train/81-720/buttons/b5.mdl
+            model = "models/metrostroi_train/81-722/button_white.mdl",z=-5.1,
             var="EmerBrakeRelease",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.3, snd = function(val) return val and "button_new_press" or "button_new_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
@@ -510,10 +510,10 @@ ENT.ButtonMap["PUR"] = {
             sndvol = 0.5, snd = function(val) return val and "switchbl_on" or "switchbl_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "DoorCloseToggle",x=21, y=119, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_green.mdl",z=-5.1, --models/metrostroi_train/81-720/buttons/b5.mdl
-            lamp = {model = "models/metrostroi_train/81-722/lamp_green.mdl",z=0.0,var="DoorCloseLamp",anim=true}, --models/metrostroi_train/81-720/buttons/l1.mdl ,anim=true,color=Color(80,255,100)
+            model = "models/metrostroi_train/81-722/button_green.mdl",z=-5.1,
+            lamp = {model = "models/metrostroi_train/81-722/lamp_green.mdl",z=0.0,var="DoorCloseLamp",anim=true},
             var="DoorClose",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.3, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_door_on_osn" or "button_door_off_osn" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "AttentionMessageSet",x=65, y=119, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_yellow.mdl",z=-5.1,
@@ -526,7 +526,7 @@ ENT.ButtonMap["PUR"] = {
             sndvol = 0.3, snd = function(val) return val and "button_new_press" or "button_new_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "AttentionBrakeSet",x=148, y=119, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_red.mdl",z=-5.1,  --models/metrostroi_train/81-720/buttons/b6.mdl
+            model = "models/metrostroi_train/81-722/button_red.mdl",z=-5.1,
             var="AttentionBrake",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.3, snd = function(val) return val and "button_new_press" or "button_new_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
@@ -536,12 +536,12 @@ ENT.ButtonMap["PUR"] = {
             sndvol = 0.3, snd = function(val) return val and "button_new_press" or "button_new_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "HornBSet",x=25.5, y=191, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_yellow.mdl",z=-5,  --models/metrostroi_train/81-720/button_circle1.mdl
+            model = "models/metrostroi_train/81-722/button_yellow.mdl",z=-5,
             var="HornB",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "DoorRightSet",x=110, y=191, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_white.mdl",z=-5,  --models/metrostroi_train/81-720/button_circle1.mdl
+            model = "models/metrostroi_train/81-722/button_white.mdl",z=-5,
 			lamp = {model = "models/metrostroi_train/81-722/lamp_black.mdl",var="DoorRightLamp",anim=true},
             var="DoorRight",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
@@ -557,10 +557,10 @@ ENT.ButtonMap["RV"] = {
 
     buttons = {
 	    {ID = "EmergencyDoorsToggle",x=30, y=15, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_green.mdl",z=-2.8,  --models/metrostroi_train/81-720/tumbler2.mdl
+            model = "models/metrostroi_train/81-722/button_green.mdl",z=-2.8,
 			lamp = {model ="models/metrostroi_train/81-722/lamp_green.mdl", var="EmergencyDoorsLamp", anim=true},
             var="EmergencyDoors",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.5, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "button_door_on_rez" or "button_door_off_rez" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "EmerX1Set",x=30, y=125, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_black.mdl",z=-3,
@@ -568,14 +568,14 @@ ENT.ButtonMap["RV"] = {
             sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "EmerX2Set",x=30, y=180, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-722/button_black.mdl",z=-3, --models/metrostroi_train/81-720/button_circle3.mdl
+            model = "models/metrostroi_train/81-722/button_black.mdl",z=-3,
             var="EmerX2",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "EmerCloseDoorsSet",x=30, y=70, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_black.mdl",z=-3,
             var="EmerCloseDoors",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "button_door_on" or "button_door_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
     }
 }
@@ -588,35 +588,35 @@ ENT.ButtonMap["CAMSButtons"] = {
 	hideseat=0.2,
 
     buttons = {
-        {ID = "CAMS7Set",x=39, y=26, w=20,h=20, tooltip = "",model = {
-            model = "models/metrostroi_train/81-740/cabine/pult/buttons/button_lmini.mdl",skin=3,z=0.7,
-			var="CAMS7",speed=10, vmin=0, vmax=0.5,
-			sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
-        {ID = "CAMS9Set",x=9, y=41, w=20,h=20, tooltip = "",model = { 
-            model = "models/metrostroi_train/81-740/cabine/pult/buttons/button_lmini.mdl",skin=3,z=0.9,
-			var="CAMS9",speed=10, vmin=0, vmax=0.5,
-			sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
-        {ID = "CAMS5Set",x=9, y=68, w=20,h=20, tooltip = "",model = { 
+       {ID = "CAMS5Set",x=9, y=68, w=20,h=20, tooltip = "",model = { 
             model = "models/metrostroi_train/81-740/cabine/pult/buttons/button_lmini.mdl",skin=3,z=0.7,
 			var="CAMS5",speed=10, vmin=0, vmax=0.5,
-			sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
-        {ID = "CAMS10Set",x=70, y=41, w=20,h=20, tooltip = "",model = { 
-            model = "models/metrostroi_train/81-740/cabine/pult/buttons/button_lmini.mdl",skin=3,z=0.7,
-			var="CAMS10",speed=10, vmin=0, vmax=0.5,
-			sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
+			sndvol = 0.5, snd = function(val) return val and "button_press_cam1" or "button_release_cam1" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        }},	
         {ID = "CAMS6Set",x=70, y=68, w=20,h=20, tooltip = "",model = {
             model = "models/metrostroi_train/81-740/cabine/pult/buttons/button_lmini.mdl",skin=3,z=0.7,
 			var="CAMS6",speed=10, vmin=0, vmax=0.5,
-			sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+			sndvol = 0.5, snd = function(val) return val and "button_press_cam2" or "button_release_cam2" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        }},		
+        {ID = "CAMS7Set",x=39, y=26, w=20,h=20, tooltip = "",model = {
+            model = "models/metrostroi_train/81-740/cabine/pult/buttons/button_lmini.mdl",skin=3,z=0.7,
+			var="CAMS7",speed=10, vmin=0, vmax=0.5,
+			sndvol = 0.5, snd = function(val) return val and "button_press_cam3" or "button_release_cam3" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "CAMS8Set",x=39, y=86, w=20,h=20, tooltip = "",model = {
             model = "models/metrostroi_train/81-740/cabine/pult/buttons/button_lmini.mdl",skin=3,z=0.7,
 			var="CAMS8",speed=10, vmin=0, vmax=0.5,
-			sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+			sndvol = 0.5, snd = function(val) return val and "button_press_cam1" or "button_release_cam1" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        }},		
+        {ID = "CAMS9Set",x=9, y=41, w=20,h=20, tooltip = "",model = { 
+            model = "models/metrostroi_train/81-740/cabine/pult/buttons/button_lmini.mdl",skin=3,z=0.9,
+			var="CAMS9",speed=10, vmin=0, vmax=0.5,
+			sndvol = 0.5, snd = function(val) return val and "button_press_cam2" or "button_release_cam2" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+        }},
+        {ID = "CAMS10Set",x=70, y=41, w=20,h=20, tooltip = "",model = { 
+            model = "models/metrostroi_train/81-740/cabine/pult/buttons/button_lmini.mdl",skin=3,z=0.7,
+			var="CAMS10",speed=10, vmin=0, vmax=0.5,
+			sndvol = 0.5, snd = function(val) return val and "button_press_cam3" or "button_release_cam3" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
     }
 }
@@ -989,7 +989,7 @@ ENT.ButtonMap["VityazButtons"] = {
             sndvol = 1, snd = function(val) return val and "button_vityaz7405_press" or "button_vityaz7405_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazSOTSet",x=20, y=30, w=20,h=20, tooltip = "",model = {
-            model = "models/metrostroi_train/81-720/vyitaz/v_f3.mdl",scale=0,z=0, ang=0,var="VityazF3",speed=16,
+            model = "models/metrostroi_train/81-720/vyitaz/v_f3.mdl",scale=0,z=0, ang=0,var="VityazSOT",speed=16,
             sndvol = 1, snd = function(val) return val and "button_vityaz7406_press" or "button_vityaz7406_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "VityazF2Set",x=1, y=47, w=20,h=20, tooltip = "",model = {

@@ -40,7 +40,7 @@ function ENT:GetStandingArea()
 end 
 
 local function GetDoorPosition(n,G)	--Правые двери			--Левые двери
-	return Vector(652.5-15-9  - 35.0*G     -  338.8*n, -67.5*(1-2*G), 4.3)
+	return Vector(651.5-15  - 35.0*(1-G) -  338.8*n-144, -66*(1-2*G), 4.25)
 end
 
 -- Setup door positions
@@ -186,8 +186,62 @@ function ENT:InitializeSounds()
         "subway_trains/740_4/switches/tumbler/tumbler_on3.mp3",
         "subway_trains/740_4/switches/tumbler/tumbler_on4.mp3",
     }
-    self.SoundNames["pneumo_disconnect_close"] = {"subway_trains/740_4/new/013_close1.mp3","subway_trains/740_4/new/013_close2.mp3","subway_trains/740_4/new/013_close3.mp3"}
-    self.SoundNames["pneumo_disconnect_open"] = {"subway_trains/740_4/new/013_open1.mp3","subway_trains/740_4/new/013_open2.mp3","subway_trains/740_4/new/013_open3.mp3","subway_trains/740_4/new/013_open4.mp3"}
+	self.SoundNames["button_ann_on"] = {
+        "subway_trains/740_4/switches/button/omiv_press.mp3",
+    }
+	self.SoundNames["button_ann_off"] = {
+        "subway_trains/740_4/switches/button/omiv_release.mp3",
+    }	
+
+	self.SoundNames["button_press_cam1"] = {
+        "subway_trains/740_4/switches/button/cam_button1_press"..r..".mp3"
+    }	
+	self.SoundNames["button_press_cam2"] = {
+        "subway_trains/740_4/switches/button/cam_button2_press"..r..".mp3"
+    }	
+	self.SoundNames["button_press_cam3"] = {
+        "subway_trains/740_4/switches/button/cam_button3_press"..r..".mp3"
+    }	
+	self.SoundNames["button_release_cam1"] = {
+        "subway_trains/740_4/switches/button/cam_button1_release"..r..".mp3"
+    }	
+	self.SoundNames["button_release_cam2"] = {
+        "subway_trains/740_4/switches/button/cam_button2_release"..r..".mp3"
+    }	
+	self.SoundNames["button_release_cam3"] = {
+        "subway_trains/740_4/switches/button/cam_button3_release"..r..".mp3"
+    }
+	
+	self.SoundNames["button_door_on"] = {
+        "subway_trains/740_4/switches/button/door_close_press"..j..".mp3"
+    }	
+	self.SoundNames["button_door_off"] = {
+        "subway_trains/740_4/switches/button/door_close_release"..j..".mp3"
+    }
+	
+	self.SoundNames["button_door_on_osn"] = {
+        "subway_trains/740_4/switches/button/door_close_osn.mp3"
+    }	
+	self.SoundNames["button_door_off_osn"] = {
+        "subway_trains/740_4/switches/button/door_open_osn.mp3"
+    }	
+
+	self.SoundNames["button_door_on_rez"] = {
+        "subway_trains/740_4/switches/button/door_power_press.mp3"
+    }	
+	self.SoundNames["button_door_off_rez"] = {
+        "subway_trains/740_4/switches/button/door_power_release.mp3"
+    }		
+
+	self.SoundNames["button_doorchg_on"] = {
+        "subway_trains/740_4/switches/button/door_change_press"..r..".mp3"
+    }
+	self.SoundNames["button_doorchg_off"] = {
+        "subway_trains/740_4/switches/button/door_change_release"..r..".mp3"
+    }		
+	
+    self.SoundNames["pneumo_disconnect_close"] = "subway_trains/740_4/new/013_close"..j..".mp3"
+    self.SoundNames["pneumo_disconnect_open"] = "subway_trains/740_4/new/013_open"..tmb..".mp3"
     self.SoundPositions["pneumo_disconnect_close"] = {800,1e9,Vector(795-159-9,40,-55),0.4}
     self.SoundPositions["pneumo_disconnect_open"] = {800,1e9,Vector(795-159-9,40,-55),0.4}
     self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"

@@ -493,10 +493,8 @@ function TRAIN_SYSTEM:Trigger(name,value)
     local tbl = Metrostroi.ASNPSetup[self.Train:GetNW2Int("Announcer",1)]
     if (name == "R_Program2" or name == "R_Program2H") and value and self.LineOut==0 then
         if self.State ~= 7 and tbl[self.Line] and tbl[self.Line].spec_last then
-            self:AnnQueue{"click1","buzz_start"}
             self:AnnQueue(-1)
             self:AnnQueue(tbl[self.Line].spec_last)
-            self:AnnQueue{"buzz_end","click2"}
         elseif self.State == 7 then
             local ltbl = Metrostroi.ASNPSetup[self.Train:GetNW2Int("Announcer",1)][self.Line]
             local last,lastst
@@ -510,15 +508,11 @@ function TRAIN_SYSTEM:Trigger(name,value)
                 end
             end
             if lastst and not ltbl[last].ignorelast then
-                self:AnnQueue{"click1","buzz_start"}
                 self:AnnQueue(-1)
                 self:AnnQueue(ltbl.spec_last)
-                self:AnnQueue{"buzz_end","click2"}
             else
                 self.StopMessage = not self.StopMessage
-                self:AnnQueue{"click1","buzz_start"}
                 self:AnnQueue(ltbl.spec_wait[self.StopMessage and 1 or 2])
-                self:AnnQueue{"buzz_end","click2"}
             end
         end
     end
@@ -669,9 +663,7 @@ function TRAIN_SYSTEM:Trigger(name,value)
         if name == "R_ASNPMenu" then
             if self.FirstStation ~= 0 then
                 if self.Path then
-                    self.Train.Announcer:Queue{"click1","buzz_start","announcer_ready",stbl[self.LastStation].arrlast[3],stbl[self.FirstStation].arrlast[3],"buzz_end","click2"}
                 else
-                    self.Train.Announcer:Queue{"click1","buzz_start","announcer_ready",stbl[self.FirstStation].arrlast[3],stbl[self.LastStation].arrlast[3],"buzz_end","click2"}
                 end
             end
             self.State = 7
