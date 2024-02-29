@@ -989,7 +989,7 @@ ENT.ButtonMap["VityazButtons"] = {
             sndvol = 1, snd = function(val) return val and "button_vityaz7405_press" or "button_vityaz7405_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
 		{ID = "VityazSOTSet",x=20, y=30, w=20,h=20, tooltip = "",model = {
-            model = "models/metrostroi_train/81-720/vyitaz/v_f3.mdl",scale=0,z=0, ang=0,var="VityazF3",speed=16,
+            model = "models/metrostroi_train/81-720/vyitaz/v_f3.mdl",scale=0,z=0, ang=0,var="VityazSOT",speed=16,
             sndvol = 1, snd = function(val) return val and "button_vityaz7406_press" or "button_vityaz7406_release" end,sndmin = 40, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "VityazF2Set",x=1, y=47, w=20,h=20, tooltip = "",model = {
