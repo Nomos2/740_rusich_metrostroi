@@ -349,6 +349,19 @@ function ENT:CreatePricep(pos,ang)
 		1,
 		Vector(0,0,1),
 	false) 
+	constraint.Axis(
+		RB,
+		self,
+		0,
+		0,
+        Vector(0,0,0),
+		Vector(0,0,0),
+        0,
+		0,
+		0,
+		1,
+		Vector(0,0,1),
+	false)		
 	
 	else
 	

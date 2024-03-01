@@ -84,7 +84,7 @@ function ENT:Initialize()
 	
     -- Create bogeys
         self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740ALS")	
-        self.RearBogey  = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),false,"740G") --110 0 -80  -532-25,0,-80
+        self.RearBogey  = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),false,"740G")
         self.RearBogey:SetMoveType(MOVETYPE_VPHYSICS)	
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)			
@@ -579,6 +579,19 @@ function ENT:CreatePricep(pos,ang)
 		1,
 		Vector(0,0,1),
 	false) 
+	constraint.Axis(
+		RB,
+		self,
+		0,
+		0,
+        Vector(0,0,0),
+		Vector(0,0,0),
+        0,
+		0,
+		0,
+		1,
+		Vector(0,0,1),
+	false)	
 	
 	else
 	
