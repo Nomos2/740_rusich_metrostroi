@@ -162,7 +162,7 @@ ENT.ClientProps["otsek_open"] = {
 }
 ENT.ClientProps["handrails"] = {
 	model = "models/metrostroi_train/81-740/salon/handrails/handrails_r.mdl",
-	pos = Vector(438.8-17.7,1,-75),-- -115.5, -1, -75
+	pos = Vector(438.8-17.7,1,-75),
 	ang = Angle(0,0,0),
 	hide = 1.2,
 }

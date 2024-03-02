@@ -577,7 +577,7 @@ function ENT:CreatePricep(pos,ang)
 		0,
 		0,
 		1,
-		Vector(0,0,1),
+		Vector(0,0,-1),
 	false) 
 	constraint.Axis(
 		RB,
@@ -590,7 +590,7 @@ function ENT:CreatePricep(pos,ang)
 		0,
 		0,
 		1,
-		Vector(0,0,1),
+		Vector(0,0,-1),
 	false)	
 	
 	else
@@ -854,7 +854,7 @@ function ENT:Think()
 	
 	local fB,rB,pB = self.FrontBogey,self.RearBogey,self.PricepBogey	
 	
-   if IsValid(self.FrontBogey) and IsValid(self.RearBogey) and IsValid(self.PricepBogey) and not self.IgnoreEngine then
+   if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
 
         local A = self.AsyncInverter.Torque
 		--print(A)
@@ -862,12 +862,12 @@ function ENT:Think()
         if math.abs(self:GetAngles().pitch) > 4 then
             add = math.min((math.abs(self:GetAngles().pitch)-4)/2,1)
         end
-        self.FrontBogey.MotorForce = (40000+5000*(A < 0 and 1 or 0))*add --35300
-        self.FrontBogey.Reversed = (self:ReadTrainWire(13) > 0.5)--<
+        fB.MotorForce = (40000+5000*(A < 0 and 1 or 0))*add --35300
+        fB.Reversed = (self:ReadTrainWire(13) > 0.5)--<
         --self.FrontBogey.Reversed = self.KMR2.Value > 0
         --self.FrontBogey.DisableSound = 1
-        self.PricepBogey.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
-        self.PricepBogey.Reversed = (self:ReadTrainWire(12) > 0.5)-->
+        pB.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
+        pB.Reversed = (self:ReadTrainWire(12) > 0.5)-->
         --self.RearBogey.Reversed = self.KMR1.Value > 0
         --self.RearBogey.DisableSound = 1
 
@@ -876,26 +876,26 @@ function ENT:Think()
         if math.abs(A) > 0.4 then P = math.abs(A) end
         if math.abs(A) < 0.05 then P = 0 end
         if self.Speed < 10 then P = P*(1.0 + 0.6*(10.0-self.Speed)/10.0) end
-        self.PricepBogey.MotorPower  = P*0.5*((A > 0) and 1 or -1)
-        self.FrontBogey.MotorPower = P*0.5*((A > 0) and 1 or -1)
+        pB.MotorPower  = P*0.5*((A > 0) and 1 or -1)
+        fB.MotorPower = P*0.5*((A > 0) and 1 or -1)
 
         -- Apply brakes
-        self.FrontBogey.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
-        self.FrontBogey.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
-        self.FrontBogey.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
-        self.FrontBogey.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
-        self.FrontBogey.DisableContacts = self.BUV.Pant or fB.DisableContactsManual	
+        fB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
+        fB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
+        fB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
+        fB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
+        fB.DisableContacts = self.BUV.Pant or fB.DisableContactsManual	
 		
-		self.RearBogey.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
-        self.RearBogey.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
-        self.RearBogey.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
-        self.RearBogey.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
-        self.RearBogey.DisableContacts = self.BUV.Pant or rB.DisableContactsManual		
+		rB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
+        rB.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
+        rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
+        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
+        rB.DisableContacts = self.BUV.Pant or rB.DisableContactsManual		
 		
-		self.PricepBogey.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
-        self.PricepBogey.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
-        self.PricepBogey.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
-	    self.PricepBogey.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)	
+		pB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
+        pB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
+        pB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
+	    pB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)	
 
     end
     return retVal
