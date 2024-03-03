@@ -544,7 +544,7 @@ ENT.ButtonMap["PUR"] = {
             model = "models/metrostroi_train/81-722/button_white.mdl",z=-5,
 			lamp = {model = "models/metrostroi_train/81-722/lamp_black.mdl",var="DoorRightLamp",anim=true},
             var="DoorRight",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.5, snd = function(val) return val and "button_press" or "button_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "button_doorchg_on" or "button_doorchg_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
     }
 }
@@ -1746,8 +1746,15 @@ function ENT:Initialize()
         self.VentVol[i] = 0
     end
 	
+	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
+	local train1 = self.HeadTrain1 
+	if not IsValid(train1) then return end	
+	
+	train1.HeadTrain = self 
+	train1:SetNW2Entity("HeadTrain", self)	
+	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
-	PricepBogey = self:GetNW2Entity("PricepBogey")	
+	PricepBogey = train1:GetNW2Entity("PricepBogey")	
 	self.RearBogey = self:GetNW2Entity("RearBogey")		
 	
 end	
@@ -2147,7 +2154,15 @@ else return end
 function ENT:Think()
     self.BaseClass.Think(self)
     if not self.RenderClientEnts or self.CreatingCSEnts then return end	
-	local PricepBogey = self:GetNW2Entity("PricepBogey")	
+	
+	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
+	local train1 = self.HeadTrain1 
+	if not IsValid(train1) then return end	
+	
+	train1.HeadTrain = self 
+	train1:SetNW2Entity("HeadTrain", self)		
+	
+	local PricepBogey = train1:GetNW2Entity("PricepBogey")	
 	local refresh = false--true		
 	
 	if self:GetNW2Int("MotorType")==1 then		

@@ -79,21 +79,23 @@ function ENT:Initialize()
     self.InstructorsSeat4:SetColor(Color(0,0,0,0))
 	self.InstructorsSeat4.m_tblToolsAllowed = {"none"}		
 	
+if not (Map:find("gm_mus_loopline"))	then
 	self.LightSensor = self:AddLightSensor(Vector(627-9,0,-125),Angle(0,90,0))
+end	
 	self.ASSensor = self:AddLightSensor(Vector(515-9,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
 	
     -- Create bogeys
         self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740ALS")	
         self.RearBogey  = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),false,"740G")
-        self.RearBogey:SetMoveType(MOVETYPE_VPHYSICS)	
+        self.RearBogey:SetSolid(SOLID_VPHYSICS)	
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)			
         self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
         self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")
-        self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
+		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
         self.RearCouple:SetMoveType(MOVETYPE_VPHYSICS)
         self.RearCouple:SetSolid(SOLID_VPHYSICS)
-		self.RearCouple:GetPhysicsObject():SetMass(5000)		
+		self.RearCouple:GetPhysicsObject():SetMass(10000)		
 		
 		self.FrontCouple.m_tblToolsAllowed = {"none"}
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
@@ -110,9 +112,9 @@ function ENT:Initialize()
 		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон	
 		local opt65 = Vector(65,0,0)	
 		self.RearCouple.CouplingPointOffset = opt65
-		self.FrontCouple.CouplingPointOffset = opt65			
+		self.FrontCouple.CouplingPointOffset = opt65
 	end)
-	
+		
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)	
 	
@@ -121,6 +123,7 @@ function ENT:Initialize()
     local rand = math.random()*0.05
     self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
     self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)	
+	self.RearBogey.DisableSound = 1 	
 			
     -- Initialize key mapping
     self.KeyMap = {
@@ -485,30 +488,26 @@ function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")		
     if not IsValid(ent) then return end
 	ent:SetPos(self:LocalToWorld(Vector(-356-9,0,0)))
-	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))	
+	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())	
-	ent:DrawShadow(false)
-	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
+	ent:DrawShadow(false)			
+	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 	
 	table.insert(self.TrainEntities,ent)      
     table.insert(ent.TrainEntities,self)	
 	
-	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-80),Angle(0,0,0),true,"740NOTR")--тележка  ---160,0,-75 -410,0,-75 -15-25.5,0,-80	
+	ent.PricepBogey = ent:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
 	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
-	local PB = self.PricepBogey 
+	local PB = ent.PricepBogey 
 	if not IsValid(PB) then return end		
     local rand = math.random()*0.05
 	PB:SetNWFloat("SqualPitch",1.45+rand)
 	PB:SetNWInt("MotorSoundType",2)
 	PB:SetNWInt("Async",true)
-	PB.m_tblToolsAllowed = {"none"}
-	PB:PhysicsInit(SOLID_VPHYSICS)  
-
-    constraint.RemoveConstraints(self.RearBogey, "Axis")	
-	
+	PB.m_tblToolsAllowed = {"none"}	
 	PB.DisableContacts = true
     constraint.NoCollide(ent,self,0,0)			
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
@@ -517,19 +516,6 @@ function ENT:CreatePricep(pos,ang)
 	local RB = self.RearBogey
     constraint.NoCollide(ent,RB,0,0)	
 	
-	constraint.Axis(
-		PB,		
-		ent,
-		0,
-		0,
-		Vector(0,0,0),
-		Vector(0,0,0),
-        0,
-		0,
-		0,
-		0,
-		Vector(0,0,-1),
-	false)
 	--Сцепка, крепление к вагону.
 	constraint.AdvBallsocket(
 		ent,
@@ -551,9 +537,8 @@ function ENT:CreatePricep(pos,ang)
         1, --zfric
         0, --rotonly
         1, --nocollide
-	false) 		
+	false)
 	
-	local Map = game.GetMap():lower() or ""    	
 	if Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
 	Map:find("gm_metro_kalinin") or	
@@ -576,91 +561,32 @@ function ENT:CreatePricep(pos,ang)
         0,
 		0,
 		0,
-		1,
+		0,
 		Vector(0,0,-1),
-	false) 
-	constraint.Axis(
-		RB,
-		self,
-		0,
-		0,
-        Vector(0,0,0),
-		Vector(0,0,0),
-        0,
-		0,
-		0,
-		1,
-		Vector(0,0,-1),
-	false)	
+	false)
 	
 	else
 	
 	local zmin = -45
 	local zmax = 45
 	
-   RB:SetSolid(SOLID_VPHYSICS)
+	local vct = Vector(0,0,60)
+	local vct1 = Vector(0,0,160)
+	
+   constraint.RemoveConstraints(self.RearBogey, "Axis")
 	
    constraint.AdvBallsocket( 
 		RB,
 		self,
 		0, 
 		0, 
-		Vector(0,0,15),
+		vct,
 		pos, 
 		0, 
 		0, 
 		
-        -5, --xmin
-        -5, --ymin
-        zmin, --zmin
-        5, --xmax
-        5, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	) 
-	constraint.AdvBallsocket( 
-		RB,
-		self,
-		0, 
-		0, 
-		Vector(0,0,-35),
-		pos, 
-		0, 
-		0, 
-		
-        -5, --xmin
-        -5, --ymin
-        zmin, --zmin
-        5, --xmax
-        5, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	) 		
-	
-	constraint.AdvBallsocket( 
-		ent,
-		RB,
-		0, 
-		0, 
-		Vector(310,0,15),
-		pos, 
-		0, 
-		0, 
-		
-        -2, --xmin
-        -2, --ymin
+        -2, --xmin 
+        -2, --ymin 
         zmin, --zmin
         2, --xmax
         2, --ymax
@@ -674,16 +600,65 @@ function ENT:CreatePricep(pos,ang)
 		false		
 	) 
 	constraint.AdvBallsocket( 
-		ent,
 		RB,
+		self,
 		0, 
 		0, 
-		Vector(310,0,-15),
+		vct1,
 		pos, 
 		0, 
 		0, 
 		
-        -2, --xmin
+        -2, --xmin 
+        -2, --ymin 
+        zmin, --zmin
+        2, --xmax
+        2, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	) 		
+	
+	constraint.AdvBallsocket( 
+		RB,
+		ent,
+		0, 
+		0, 
+		vct,
+		pos, 
+		0, 
+		0, 
+		
+        -2, --xmin 
+        -2, --ymin 
+        zmin, --zmin
+        2, --xmax
+        2, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	) 
+	constraint.AdvBallsocket( 
+		RB,
+		ent,
+		0, 
+		0, 
+		vct1,
+		pos, 
+		0, 
+		0, 
+		
+        -2, --xmin 
         -2, --ymin 
         zmin, --zmin
         2, --xmax
@@ -697,7 +672,7 @@ function ENT:CreatePricep(pos,ang)
 		1,--nocollide
 		false		
 	) 	
-	end
+	end	
 	
     Metrostroi:RerailChange(FB, true)
     Metrostroi:RerailChange(PB, true)
@@ -709,7 +684,7 @@ function ENT:CreatePricep(pos,ang)
 	
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
-	ent.KeyMap = {}			
+	ent.KeyMap = {}
 	
 	return ent
 end
@@ -852,7 +827,14 @@ function ENT:Think()
 
     self.AsyncInverter:TriggerInput("Speed", self.Speed)
 	
-	local fB,rB,pB = self.FrontBogey,self.RearBogey,self.PricepBogey	
+	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
+	local train1 = self.HeadTrain1 
+	if not IsValid(train1) then return end	
+	
+	train1.HeadTrain = self 
+	train1:SetNW2Entity("HeadTrain", self)
+	
+	local fB,rB,pB = self.FrontBogey,self.RearBogey,train1.PricepBogey	
 	
    if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
 
@@ -864,12 +846,8 @@ function ENT:Think()
         end
         fB.MotorForce = (40000+5000*(A < 0 and 1 or 0))*add --35300
         fB.Reversed = (self:ReadTrainWire(13) > 0.5)--<
-        --self.FrontBogey.Reversed = self.KMR2.Value > 0
-        --self.FrontBogey.DisableSound = 1
         pB.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
         pB.Reversed = (self:ReadTrainWire(12) > 0.5)-->
-        --self.RearBogey.Reversed = self.KMR1.Value > 0
-        --self.RearBogey.DisableSound = 1
 
         -- These corrections are required to beat source engine friction at very low values of motor power
         local P = math.max(0,0.04449 + 1.06879*math.abs(A) - 0.465729*A^2)

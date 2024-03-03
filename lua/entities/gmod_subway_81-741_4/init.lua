@@ -58,7 +58,7 @@ function ENT:Initialize()
         self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
         self.RearCouple:SetMoveType(MOVETYPE_VPHYSICS)
         self.RearCouple:SetSolid(SOLID_VPHYSICS)
-		self.RearCouple:GetPhysicsObject():SetMass(5000)	
+		self.RearCouple:GetPhysicsObject():SetMass(10000)	
 		
 		self.FrontCouple.m_tblToolsAllowed = {"none"}	
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
@@ -84,7 +84,7 @@ function ENT:Initialize()
     local rand = math.random()*0.05
     self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
     self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)
-	self.RearBogey.DisableSound = 1		
+	self.RearBogey.DisableSound = 1	
 	
     -- Initialize key mapping
     self.KeyMap = {
@@ -263,22 +263,16 @@ function ENT:CreatePricep(pos,ang)
 	table.insert(self.TrainEntities,ent)
     table.insert(ent.TrainEntities,self)	
 
-	self.PricepBogey = self:CreateBogey(Vector(-540,0,-80),Angle(0,0,0),true,"740NOTR")-- -18,0,-80
-	self:SetNW2Entity("PricepBogey",self.PricepBogey)	
+	ent.PricepBogey = ent:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
+	self:SetNW2Entity("PricepBogey",self.PricepBogey)
 	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
-	local PB = self.PricepBogey 
+	local PB = ent.PricepBogey 
 	if not IsValid(PB) then return end		
     local rand = math.random()*0.05
 	PB:SetNWFloat("SqualPitch",1.45+rand)
 	PB:SetNWInt("MotorSoundType",2)
 	PB:SetNWInt("Async",true)
-	PB.m_tblToolsAllowed = {"none"}
-	PB:PhysicsInit(SOLID_VPHYSICS)    
-	PB.DisableContacts = true
-    constraint.NoCollide(ent,self,0,0)	
-	
-    constraint.RemoveConstraints(self.RearBogey, "Axis")	
-	
+	PB.m_tblToolsAllowed = {"none"}	
 	PB.DisableContacts = true
     constraint.NoCollide(ent,self,0,0)			
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
@@ -287,19 +281,6 @@ function ENT:CreatePricep(pos,ang)
 	local RB = self.RearBogey
     constraint.NoCollide(ent,RB,0,0)	
 	
-	constraint.Axis(
-		PB,		
-		ent,
-		0,
-		0,
-		Vector(0,0,0),
-		Vector(0,0,0),
-        0,
-		0,
-		0,
-		0,
-		Vector(0,0,-1),
-	false)
 	--Сцепка, крепление к вагону.
 	constraint.AdvBallsocket(
 		ent,
@@ -321,9 +302,8 @@ function ENT:CreatePricep(pos,ang)
         1, --zfric
         0, --rotonly
         1, --nocollide
-	false) 		
+	false)
 	
-	local Map = game.GetMap():lower() or ""    	
 	if Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
 	Map:find("gm_metro_kalinin") or	
@@ -346,91 +326,32 @@ function ENT:CreatePricep(pos,ang)
         0,
 		0,
 		0,
-		1,
+		0,
 		Vector(0,0,-1),
-	false) 
-	constraint.Axis(
-		RB,
-		self,
-		0,
-		0,
-        Vector(0,0,0),
-		Vector(0,0,0),
-        0,
-		0,
-		0,
-		1,
-		Vector(0,0,-1),
-	false)		
+	false)
 	
 	else
 	
 	local zmin = -45
 	local zmax = 45
 	
-   RB:SetSolid(SOLID_VPHYSICS)
+	local vct = Vector(0,0,60)
+	local vct1 = Vector(0,0,160)
+	
+   constraint.RemoveConstraints(self.RearBogey, "Axis")
 	
    constraint.AdvBallsocket( 
 		RB,
 		self,
 		0, 
 		0, 
-		Vector(0,0,15),
+		vct,
 		pos, 
 		0, 
 		0, 
 		
-        -5, --xmin
-        -5, --ymin
-        zmin, --zmin
-        5, --xmax
-        5, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	) 
-	constraint.AdvBallsocket( 
-		RB,
-		self,
-		0, 
-		0, 
-		Vector(0,0,-35),
-		pos, 
-		0, 
-		0, 
-		
-        -5, --xmin
-        -5, --ymin
-        zmin, --zmin
-        5, --xmax
-        5, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	) 		
-	
-	constraint.AdvBallsocket( 
-		ent,
-		RB,
-		0, 
-		0, 
-		Vector(310,0,15),
-		pos, 
-		0, 
-		0, 
-		
-        -2, --xmin
-        -2, --ymin
+        -2, --xmin 
+        -2, --ymin 
         zmin, --zmin
         2, --xmax
         2, --ymax
@@ -444,16 +365,65 @@ function ENT:CreatePricep(pos,ang)
 		false		
 	) 
 	constraint.AdvBallsocket( 
-		ent,
 		RB,
+		self,
 		0, 
 		0, 
-		Vector(310,0,-15),
+		vct1,
 		pos, 
 		0, 
 		0, 
 		
-        -2, --xmin
+        -2, --xmin 
+        -2, --ymin 
+        zmin, --zmin
+        2, --xmax
+        2, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	) 		
+	
+	constraint.AdvBallsocket( 
+		RB,
+		ent,
+		0, 
+		0, 
+		vct,
+		pos, 
+		0, 
+		0, 
+		
+        -2, --xmin 
+        -2, --ymin 
+        zmin, --zmin
+        2, --xmax
+        2, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	) 
+	constraint.AdvBallsocket( 
+		RB,
+		ent,
+		0, 
+		0, 
+		vct1,
+		pos, 
+		0, 
+		0, 
+		
+        -2, --xmin 
         -2, --ymin 
         zmin, --zmin
         2, --xmax
@@ -538,7 +508,14 @@ function ENT:Think()
 	self:SetPackedRatio("SalonLighting",passlight)
     self.AsyncInverter:TriggerInput("Speed",self.Speed)
 	
-	local fB,rB,pB = self.FrontBogey,self.RearBogey,self.PricepBogey	
+	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
+	local train1 = self.HeadTrain1 
+	if not IsValid(train1) then return end	
+	
+	train1.HeadTrain = self 
+	train1:SetNW2Entity("HeadTrain", self)	
+	
+	local fB,rB,pB = self.FrontBogey,self.RearBogey,train1.PricepBogey	
        
    if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
 

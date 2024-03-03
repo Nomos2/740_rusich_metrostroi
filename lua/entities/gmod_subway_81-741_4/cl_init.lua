@@ -505,8 +505,15 @@ function ENT:Initialize()
     self.VentVol[i] = 0
     end
 	
+	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
+	local train1 = self.HeadTrain1 
+	if not IsValid(train1) then return end	
+	
+	train1.HeadTrain = self 
+	train1:SetNW2Entity("HeadTrain", self)		
+	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
-	PricepBogey = self:GetNW2Entity("PricepBogey")		
+	PricepBogey = train1:GetNW2Entity("PricepBogey")		
 	self.RearBogey = self:GetNW2Entity("RearBogey")
 end
 
@@ -897,7 +904,13 @@ end
 function ENT:Think()
     self.BaseClass.Think(self)
     if not self.RenderClientEnts or self.CreatingCSEnts then return end	
-	local PricepBogey = self:GetNW2Entity("PricepBogey")	
+	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
+	local train1 = self.HeadTrain1 
+	if not IsValid(train1) then return end	
+	
+	train1.HeadTrain = self 
+	train1:SetNW2Entity("HeadTrain", self)			
+	local PricepBogey = train1:GetNW2Entity("PricepBogey")	
 	local refresh = false--true		
 	
 	if self:GetNW2Int("MotorType")==1 then		
