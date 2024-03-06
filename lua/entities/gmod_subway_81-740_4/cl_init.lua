@@ -449,7 +449,7 @@ ENT.ButtonMap["PUL"] = {
             model = "models/metrostroi_train/81-722/button_white.mdl",z=-4.8,
             lamp = {model = "models/metrostroi_train/81-722/lamp_black.mdl",var="DoorRightLamp",anim=true},
             var="DoorSelectR",speed=8, vmin=0, vmax=0.6,
-            sndvol = 0.3, snd = function(val) return val and "button_doorchg_on" or "button_doorchg_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.3, snd = function(val) return val and "button_door_on" or "button_door_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "DoorBlockToggle",x=70, y=130, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_red.mdl",z=-6,
@@ -463,7 +463,7 @@ ENT.ButtonMap["PUL"] = {
             model = "models/metrostroi_train/81-722/button_white.mdl",z=-5.3,
 			lamp = {model ="models/metrostroi_train/81-722/lamp_black.mdl", var ="DoorLeftLamp",anim=true},
             var="DoorLeft",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.5, snd = function(val) return val and "button_doorchg_on" or "button_doorchg_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndvol = 0.5, snd = function(val) return val and "button_door_on" or "button_door_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
     }
 }

@@ -406,7 +406,6 @@ function TRAIN_SYSTEM:Play(dep,not_last)
             message = stbl.arr[path]
         end
     end
-    self:AnnQueue{"click1","buzz_start"}
     if lastst and not stbl.ignorelast then self:AnnQueue(-1) end
 
 
@@ -421,7 +420,6 @@ function TRAIN_SYSTEM:Play(dep,not_last)
             self:AnnQueue(ltbl.not_last)
         end
     end
-    self:AnnQueue{"buzz_end","click2"}
     self:UpdateBoards()
 end
 function TRAIN_SYSTEM:CANReceive(source,sourceid,target,targetid,textdata,numdata)
