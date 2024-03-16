@@ -27,7 +27,6 @@ function ENT:Initialize()
 	self.NoTrain = false 
     self.BaseClass.Initialize(self)
     self.NormalMass = 24000
-	self:SetUseType(SIMPLE_USE)	
 	
     self.PassengerSeat = self:CreateSeat("passenger",Vector(-135,-40,-25),Angle(0,90,0),"models/nova/airboat_seat.mdl")
     self.PassengerSeat2 = self:CreateSeat("passenger",Vector(-135,40,-25),Angle(0,270,0),"models/nova/airboat_seat.mdl")  
@@ -73,8 +72,134 @@ function ENT:Initialize()
         if math.random() > rand then self.Lamps.broken[i] = math.random() > 0.7 end
     end
 	
-    self:UpdateLampsColors()		
+    self:UpdateLampsColors()	
 	
+	timer.Simple(0.1, function()
+	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
+	local train = self.HeadTrain	
+    if not IsValid(train) then return end		
+	train.RearBogey = train:GetNW2Entity("RearBogey")	
+	local RB = train.RearBogey		
+    constraint.NoCollide(self,RB,0,0)
+	local RC = train.RearCouple
+	RC:PhysicsInit(SOLID_VPHYSICS)
+    --RC:SetSolid(SOLID_VPHYSICS)
+	RC:GetPhysicsObject():SetMass(5000)	
+
+	table.insert(train.TrainEntities,self)      
+    table.insert(self.TrainEntities,train)	
+
+	constraint.AdvBallsocket(
+	    self,
+        RC,
+        0, --bone
+        0, --bone
+        Vector(-281,0,-60),
+        Vector(0,0,0),
+		1, --forcelimit
+		1, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-15, --zmin
+		2, --xmax
+		2, --ymax
+		15, --zmax
+		0.1, --xfric
+		0.1, --yfric
+		1, --zfric
+		0, --rotonly
+		1, --nocollide
+	false)	
+	
+	if Map:find("gm_mustox_neocrimson_line") or
+	Map:find("gm_mus_neoorange") or
+	Map:find("gm_metro_kalinin") or	
+	Map:find("gm_metro_nekrasovskaya_line") or	
+	Map:find("gm_metro_pink_line_redux") or
+	Map:find("gm_jar_pll_redux") or
+	Map:find("gm_metro_crossline") or	
+	Map:find("gm_metro_mosldl") or	
+	Map:find("gm_metro_nsk_line") or		
+	Map:find("gm_metro_jar_imagine_line") or	
+	Map:find("gm_smr_1987") then
+	
+	constraint.Axis(
+		RB,
+		self,
+		0,
+		0,
+        Vector(0,0,0),
+		Vector(0,0,0),
+        0,
+		0,
+		0,
+		0,
+		Vector(0,0,-1),
+	false)
+	
+	else
+	
+	local xmin = -1.5
+	local xmax = 1.5
+	local ymin = -1.5
+	local ymax = 1.5				
+	local zmin = -25
+	local zmax = 25
+
+	local vct = Vector(0,0,20)
+	local vct1 = Vector(0,0,60)
+	
+	constraint.AdvBallsocket( 
+		RB,
+		self,
+		0, 
+		0, 
+		vct,
+		pos, 
+		0, 
+		0, 
+		
+        xmin, --xmin 
+        ymin, --ymin 
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		true		
+	) 
+	constraint.AdvBallsocket( 
+		RB,
+		self,
+		0, 
+		0, 
+		vct1,
+		pos, 
+		0, 
+		0, 
+		
+        xmin, --xmin 
+        ymin, --ymin 
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		true		
+	)
+	end
+	
+    end)
 end
 
 function ENT:TrainSpawnerUpdate()
@@ -97,6 +222,16 @@ function ENT:TrainSpawnerUpdate()
 		end	
 
     self:UpdateLampsColors()
+	
+end
+
+function Metrostroi:RerailChange(self, bool)
+    if not IsValid(self) then return end
+    if bool then
+        timer.Remove("metrostroi_rerailer_solid_reset_"..self:EntIndex())    
+    else
+        timer.Create("metrostroi_rerailer_solid_reset_"..self:EntIndex(),1e9,1,function() end)    
+    end
 end
 
 function ENT:UpdateLampsColors()
@@ -139,7 +274,7 @@ function ENT:UpdateLampsColors()
 		self:SetNW2Vector("Lamp7404"..i,col)
 		self.Lamps.broken[i] = math.random() > rand and math.random() > 0.7	
 		--PrintTable(self.Lamps.broken)	
-	end
+	end	
 end
 	
 function ENT:Think()	
@@ -148,10 +283,10 @@ function ENT:Think()
 	if not IsValid(train) then return end
 	local retVal = self.BaseClass.Think(self)
 
-	if not self.HeadTrain.RearBrakeLineIsolation then
+	if not train.RearBrakeLineIsolation then
 		train.RearBrakeLineIsolation = self.RearBrakeLineIsolation
 	end
-	if not self.HeadTrain.RearTrainLineIsolation then
+	if not train.RearTrainLineIsolation then
 		train.RearTrainLineIsolation = self.RearTrainLineIsolation
 	end
 	local Panel = train.Panel	

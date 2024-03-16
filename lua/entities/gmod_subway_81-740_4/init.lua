@@ -78,7 +78,7 @@ function ENT:Initialize()
     self.InstructorsSeat4:SetRenderMode(RENDERMODE_TRANSALPHA)
     self.InstructorsSeat4:SetColor(Color(0,0,0,0))
 	self.InstructorsSeat4.m_tblToolsAllowed = {"none"}		
-	
+	 
 if not (Map:find("gm_mus_loopline"))	then
 	self.LightSensor = self:AddLightSensor(Vector(627-9,0,-125),Angle(0,90,0))
 end	
@@ -87,15 +87,71 @@ end
     -- Create bogeys
         self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740ALS")	
         self.RearBogey  = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),false,"740G")
-        self.RearBogey:SetSolid(SOLID_VPHYSICS)	
+        self.RearBogey:SetSolid(SOLID_VPHYSICS)
+		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)	
+		
+		local xmin = -2
+		local xmax = 2
+		local ymin = -2
+		local ymax = 2				
+		local zmin = -25
+		local zmax = 25
+	
+		local vct = Vector(15-25,0,10)
+		local vct1 = Vector(15-25,0,60)
+	
+		constraint.AdvBallsocket( 
+		self.RearBogey,
+		self,
+		0, 
+		0, 
+		vct,
+		pos, 
+		0, 
+		0, 
+		
+        xmin, --xmin 
+        ymin, --ymin 
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	) 
+	constraint.AdvBallsocket( 
+		self.RearBogey,
+		self,
+		0, 
+		0, 
+		vct1,
+		pos, 
+		0, 
+		0, 
+		
+        xmin, --xmin 
+        ymin, --ymin 
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	)		
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)			
         self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
         self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")
-		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
-        self.RearCouple:SetMoveType(MOVETYPE_VPHYSICS)
-        self.RearCouple:SetSolid(SOLID_VPHYSICS)
-		self.RearCouple:GetPhysicsObject():SetMass(10000)		
 		
 		self.FrontCouple.m_tblToolsAllowed = {"none"}
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
@@ -493,10 +549,7 @@ function ENT:CreatePricep(pos,ang)
 	ent:SetOwner(self:GetOwner())	
 	ent:DrawShadow(false)			
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end	
-	self:SetNW2Entity("gmod_subway_kuzov",ent)
-	
-	table.insert(self.TrainEntities,ent)      
-    table.insert(ent.TrainEntities,self)	
+	self:SetNW2Entity("gmod_subway_kuzov",ent)	
 	
 	ent.PricepBogey = ent:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
@@ -514,30 +567,7 @@ function ENT:CreatePricep(pos,ang)
 	local FB = self.FrontBogey 	
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
 	local RB = self.RearBogey
-    constraint.NoCollide(ent,RB,0,0)	
-	
-	--Сцепка, крепление к вагону.
-	constraint.AdvBallsocket(
-		ent,
-        self.RearCouple,
-        0, --bone
-        0, --bone
-        Vector(-281,0,-60),
-        Vector(0,0,0),
-        1, --forcelimit
-        1, --torquelimit
-        -2, --xmin
-        -2, --ymin
-        -15, --zmin
-        2, --xmax
-        2, --ymax
-        15, --zmax
-        0.1, --xfric
-        0.1, --yfric
-        1, --zfric
-        0, --rotonly
-        1, --nocollide
-	false)
+    constraint.NoCollide(self,RB,0,0)
 	
 	if Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
@@ -548,12 +578,12 @@ function ENT:CreatePricep(pos,ang)
 	Map:find("gm_metro_crossline") or	
 	Map:find("gm_metro_mosldl") or	
 	Map:find("gm_metro_nsk_line") or		
-	Map:find("gm_metro_jar_imagine_line") or	
-	Map:find("gm_smr_1987") then	
+	Map:find("gm_metro_jar_imagine_line") or
+	Map:find("gm_smr_1987") then
 	
 	constraint.Axis(
 		RB,
-		ent,
+		self,
 		0,
 		0,
         Vector(0,0,0),
@@ -566,113 +596,7 @@ function ENT:CreatePricep(pos,ang)
 	false)
 	
 	else
-	
-	local zmin = -45
-	local zmax = 45
-	
-	local vct = Vector(0,0,60)
-	local vct1 = Vector(0,0,160)
-	
-   constraint.RemoveConstraints(self.RearBogey, "Axis")
-	
-   constraint.AdvBallsocket( 
-		RB,
-		self,
-		0, 
-		0, 
-		vct,
-		pos, 
-		0, 
-		0, 
-		
-        -2, --xmin 
-        -2, --ymin 
-        zmin, --zmin
-        2, --xmax
-        2, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	) 
-	constraint.AdvBallsocket( 
-		RB,
-		self,
-		0, 
-		0, 
-		vct1,
-		pos, 
-		0, 
-		0, 
-		
-        -2, --xmin 
-        -2, --ymin 
-        zmin, --zmin
-        2, --xmax
-        2, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	) 		
-	
-	constraint.AdvBallsocket( 
-		RB,
-		ent,
-		0, 
-		0, 
-		vct,
-		pos, 
-		0, 
-		0, 
-		
-        -2, --xmin 
-        -2, --ymin 
-        zmin, --zmin
-        2, --xmax
-        2, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	) 
-	constraint.AdvBallsocket( 
-		RB,
-		ent,
-		0, 
-		0, 
-		vct1,
-		pos, 
-		0, 
-		0, 
-		
-        -2, --xmin 
-        -2, --ymin 
-        zmin, --zmin
-        2, --xmax
-        2, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	) 	
-	end	
+	end
 	
     Metrostroi:RerailChange(FB, true)
     Metrostroi:RerailChange(PB, true)
@@ -829,10 +753,7 @@ function ENT:Think()
 	
 	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
 	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end	
-	
-	train1.HeadTrain = self 
-	train1:SetNW2Entity("HeadTrain", self)
+	if not IsValid(train1) then return end
 	
 	local fB,rB,pB = self.FrontBogey,self.RearBogey,train1.PricepBogey	
 	
