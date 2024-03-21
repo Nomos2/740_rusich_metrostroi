@@ -8,6 +8,5 @@
 Для установки этой версии необходимо отписаться от модели из Workshop (https://steamcommunity.com/sharedfiles/filedetails/?id=2374733400 (1 часть),(https://steamcommunity.com/sharedfiles/filedetails/?id=2546557583) (2 часть),
 в противном случае будут ошибки.
 
-Известные баги: 
-~~1) Периодически могут быть слеты тележек на пустом месте~~ (Частично исправлено [ad12369...](https://github.com/AntonBorisovich/740_rusich_metrostroi/commit/ad1236912476e03316fea029d82170d9ed11db67)).
-2) Некорректная позиция некоторых звуков.
+Известный баг: 
+1) Некорректная позиция некоторых звуков.
