@@ -97,7 +97,7 @@ end
 		local zmin = -25
 		local zmax = 25
 	
-		local vct = Vector(15-25,0,10)
+		local vct = Vector(15-25,0,20)
 		local vct1 = Vector(15-25,0,60)
 	
 		constraint.AdvBallsocket( 

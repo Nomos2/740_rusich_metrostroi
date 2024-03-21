@@ -26,7 +26,6 @@ function ENT:Initialize()
     self:SetModel("models/metrostroi_train/81-740/body/81-740_4_rear.mdl")
 	self.NoTrain = false 
     self.BaseClass.Initialize(self)
-    self.NormalMass = 24000
 	
     self.PassengerSeat = self:CreateSeat("passenger",Vector(-135,-40,-25),Angle(0,90,0),"models/nova/airboat_seat.mdl")
     self.PassengerSeat2 = self:CreateSeat("passenger",Vector(-135,40,-25),Angle(0,270,0),"models/nova/airboat_seat.mdl")  
@@ -89,6 +88,10 @@ function ENT:Initialize()
 	table.insert(train.TrainEntities,self)      
     table.insert(self.TrainEntities,train)	
 
+    if IsValid(self:GetPhysicsObject()) then
+        train.NormalMass = self:GetPhysicsObject():GetMass()
+    end	
+
 	constraint.AdvBallsocket(
 	    self,
         RC,
@@ -139,15 +142,15 @@ function ENT:Initialize()
 	
 	else
 	
-	local xmin = -1.5
-	local xmax = 1.5
-	local ymin = -1.5
-	local ymax = 1.5				
-	local zmin = -25
-	local zmax = 25
-
-	local vct = Vector(0,0,20)
-	local vct1 = Vector(0,0,60)
+		local xmin = -1.5
+		local xmax = 1.5
+		local ymin = -1.5
+		local ymax = 1.5				
+		local zmin = -15
+		local zmax = 15
+	
+		local vct = Vector(15-25,0,20)
+		local vct1 = Vector(15-25,0,60)
 	
 	constraint.AdvBallsocket( 
 		RB,
