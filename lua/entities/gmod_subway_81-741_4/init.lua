@@ -60,8 +60,8 @@ function ENT:Initialize()
 		local zmin = -25
 		local zmax = 25
 	
-		local vct = Vector(15-25,0,60)
-		local vct1 = Vector(15-25,0,120)
+		local vct = Vector(15-25,0,80)
+		local vct1 = Vector(15-25,0,140)
 	
 		constraint.AdvBallsocket( 
 		self.RearBogey,
@@ -115,10 +115,6 @@ function ENT:Initialize()
 		self.RearBogey:SetNWInt("MotorSoundType",2)			
         self.FrontCouple = self:CreateCouple(Vector(608-17,0,-60),Angle(0,0,0),true,"740")		
         self.RearCouple = self:CreateCouple(Vector(-612-17,0,-60),Angle(0,-180,0),false,"740")
-        self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
-        self.RearCouple:SetMoveType(MOVETYPE_VPHYSICS)
-        self.RearCouple:SetSolid(SOLID_VPHYSICS)
-		self.RearCouple:GetPhysicsObject():SetMass(10000)	
 		
 		self.FrontCouple.m_tblToolsAllowed = {"none"}	
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
@@ -293,44 +289,17 @@ function ENT:UpdateLampsColors()
 	end
 end
 
-function Metrostroi:RerailChange(ent, bool)
-    if not IsValid(ent) then return end
-    if bool then
-        timer.Remove("metrostroi_rerailer_solid_reset_"..ent:EntIndex())    
-    else
-        timer.Create("metrostroi_rerailer_solid_reset_"..ent:EntIndex(),1e9,1,function() end)    
-    end
-end
-
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")
-    if not IsValid(ent) then return end	
+    if not IsValid(ent) then return end
 	ent:SetPos(self:LocalToWorld(Vector(-343,0,0)))
 	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent:Spawn()
-	ent:SetOwner(self:GetOwner())	
+	ent:SetOwner(self:GetOwner())
 	ent:DrawShadow(false)
-	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end	
-	self:SetNW2Entity("gmod_subway_kuzov",ent)	
+	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
+	self:SetNW2Entity("gmod_subway_kuzov",ent)
 
-	ent.PricepBogey = ent:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
-	self:SetNW2Entity("PricepBogey",self.PricepBogey)
-	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
-	local PB = ent.PricepBogey 
-	if not IsValid(PB) then return end		
-    local rand = math.random()*0.05
-	PB:SetNWFloat("SqualPitch",1.45+rand)
-	PB:SetNWInt("MotorSoundType",2)
-	PB:SetNWInt("Async",true)
-	PB.m_tblToolsAllowed = {"none"}	
-	PB.DisableContacts = true
-    constraint.NoCollide(ent,self,0,0)			
-	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
-	local FB = self.FrontBogey 	
-	self.RearBogey = self:GetNW2Entity("RearBogey")	
-	local RB = self.RearBogey
-    constraint.NoCollide(self,RB,0,0)
-	
 	if Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
 	Map:find("gm_metro_kalinin") or	
@@ -358,11 +327,7 @@ function ENT:CreatePricep(pos,ang)
 	false)
 	
 	else
-	end
-	
-    Metrostroi:RerailChange(FB, true)
-    Metrostroi:RerailChange(PB, true)
-    Metrostroi:RerailChange(RB, true)		
+	end	
 
 	--Метод mirror 				
     ent.HeadTrain = self 

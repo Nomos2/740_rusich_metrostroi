@@ -391,11 +391,11 @@ function ENT:InitializeSounds()
     self.SoundNames["rolling_75"] = {loop=true,"subway_trains/740_4/bogey/rolling_75.wav"}
     self.SoundPositions["door_cab_roll"] = {485,1e9,Vector(516-159-9,0,0),0.5}
 	
-    self.SoundPositions["rolling_5"] = {485,1e9,Vector(520-25-9,0,0),0.6}	
-    self.SoundPositions["rolling_10"] = {485,1e9,Vector(520-25-9,0,0),0.7}
-    self.SoundPositions["rolling_30"] = {485,1e9,Vector(520-25-9,0,0),0.8}
-    self.SoundPositions["rolling_55"] = {485,1e9,Vector(520-25-9,0,0),0.9}
-    self.SoundPositions["rolling_75"] = {485,1e9,Vector(520-25-9,0,0),0.95}
+    self.SoundPositions["rolling_5"] = {485,1e9,Vector(520-25-9,0,0),0.4}	
+    self.SoundPositions["rolling_10"] = {485,1e9,Vector(520-25-9,0,0),0.5}
+    self.SoundPositions["rolling_30"] = {485,1e9,Vector(520-25-9,0,0),0.6}
+    self.SoundPositions["rolling_55"] = {485,1e9,Vector(520-25-9,0,0),0.7}
+    self.SoundPositions["rolling_75"] = {485,1e9,Vector(520-25-9,0,0),0.85}
     self.SoundNames["rolling_low"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_low.wav"}
     self.SoundNames["rolling_medium2"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_medium"..rol..".wav"}
     self.SoundNames["rolling_high2"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_high"..rol..".wav"}
@@ -403,11 +403,11 @@ function ENT:InitializeSounds()
     self.SoundPositions["rolling_medium2"] = {480,1e12,Vector(520-25-9,0,0),0.90*0.4}
     self.SoundPositions["rolling_high2"] = {480,1e12,Vector(520-25-9,0,0),1.00*0.4}
 	
-	self.SoundPositions["rolling_5_middle"] = {485,1e9,Vector(-15-16.5-9,0),0.6}
-    self.SoundPositions["rolling_10_middle"] = {485,1e9,Vector(-15-16.5-9,0),0.7}
-    self.SoundPositions["rolling_30_middle"] = {485,1e9,Vector(-15-16.5-9,0),0.8}
-    self.SoundPositions["rolling_55_middle"] = {485,1e9,Vector(-15-16.5-9,0),0.9}
-    self.SoundPositions["rolling_75_middle"] = {485,1e9,Vector(-15-16.5-9,0),0.95}
+	self.SoundPositions["rolling_5_middle"] = {485,1e9,Vector(-15-16.5-9,0),0.4}
+    self.SoundPositions["rolling_10_middle"] = {485,1e9,Vector(-15-16.5-9,0),0.5}
+    self.SoundPositions["rolling_30_middle"] = {485,1e9,Vector(-15-16.5-9,0),0.6}
+    self.SoundPositions["rolling_55_middle"] = {485,1e9,Vector(-15-16.5-9,0),0.7}
+    self.SoundPositions["rolling_75_middle"] = {485,1e9,Vector(-15-16.5-9,0),0.85}
     self.SoundNames["rolling_low_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_low.wav"}
     self.SoundNames["rolling_medium2_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_medium"..rol..".wav"}
     self.SoundNames["rolling_high2_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_high"..rol..".wav"}

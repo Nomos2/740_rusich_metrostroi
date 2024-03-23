@@ -81,9 +81,28 @@ function ENT:Initialize()
 	local RB = train.RearBogey		
     constraint.NoCollide(self,RB,0,0)
 	local RC = train.RearCouple
-	RC:PhysicsInit(SOLID_VPHYSICS)
-    --RC:SetSolid(SOLID_VPHYSICS)
-	RC:GetPhysicsObject():SetMass(5000)	
+    RC:PhysicsInit(SOLID_VPHYSICS)
+    RC:SetMoveType(MOVETYPE_VPHYSICS)
+    RC:SetSolid(SOLID_VPHYSICS)
+	RC:GetPhysicsObject():SetMass(5000)
+	
+	self.PricepBogey = self:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
+	self:SetNW2Entity("PricepBogey",self.PricepBogey)
+	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
+	local PB = self.PricepBogey 
+	if not IsValid(PB) then return end		
+    local rand = math.random()*0.05
+	PB:SetNWFloat("SqualPitch",1.45+rand)
+	PB:SetNWInt("MotorSoundType",2)
+	PB:SetNWInt("Async",true)
+	PB.m_tblToolsAllowed = {"none"}	
+	PB.DisableContacts = true
+    constraint.NoCollide(self,self,0,0)			
+	train.FrontBogey = train:GetNW2Entity("FrontBogey")	
+	local FB = train.FrontBogey 	
+	self.RearBogey = train:GetNW2Entity("RearBogey")	
+	local RB = train.RearBogey
+    constraint.NoCollide(train,RB,0,0)	
 
 	table.insert(train.TrainEntities,self)      
     table.insert(self.TrainEntities,train)	
@@ -149,8 +168,8 @@ function ENT:Initialize()
 		local zmin = -25
 		local zmax = 25
 	
-		local vct = Vector(15-25,0,60)
-		local vct1 = Vector(15-25,0,120)
+		local vct = Vector(-10,0,80)
+		local vct1 = Vector(-10,0,140)
 	
 	constraint.AdvBallsocket( 
 		RB,
@@ -226,15 +245,6 @@ function ENT:TrainSpawnerUpdate()
 
     self:UpdateLampsColors()
 	
-end
-
-function Metrostroi:RerailChange(self, bool)
-    if not IsValid(self) then return end
-    if bool then
-        timer.Remove("metrostroi_rerailer_solid_reset_"..self:EntIndex())    
-    else
-        timer.Create("metrostroi_rerailer_solid_reset_"..self:EntIndex(),1e9,1,function() end)    
-    end
 end
 
 function ENT:UpdateLampsColors()
