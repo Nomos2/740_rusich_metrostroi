@@ -53,15 +53,15 @@ function ENT:Initialize()
 		self.RearBogey:SetSolid(SOLID_VPHYSICS)
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)	
 		
-		local xmin = -1.5
-		local xmax = 1.5
-		local ymin = -1.5
-		local ymax = 1.5				
-		local zmin = -15
-		local zmax = 15
+		local xmin = -5
+		local xmax = 5
+		local ymin = -5
+		local ymax = 5				
+		local zmin = -25
+		local zmax = 25
 	
-		local vct = Vector(15-25,0,15)
-		local vct1 = Vector(15-25,0,60)
+		local vct = Vector(15-25,0,60)
+		local vct1 = Vector(15-25,0,120)
 	
 		constraint.AdvBallsocket( 
 		self.RearBogey,
