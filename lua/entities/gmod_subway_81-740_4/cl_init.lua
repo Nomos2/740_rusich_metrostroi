@@ -1752,7 +1752,9 @@ function ENT:Initialize()
 	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
 	PricepBogey = train1:GetNW2Entity("PricepBogey")	
-	self.RearBogey = self:GetNW2Entity("RearBogey")		
+	self.RearBogey = self:GetNW2Entity("RearBogey")	
+	self.FrontCouple = self:GetNW2Entity("FrontCouple")
+	self.RearCouple = self:GetNW2Entity("RearCouple")
 	
 end	
 	

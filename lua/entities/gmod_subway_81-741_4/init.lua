@@ -59,10 +59,13 @@ function ENT:Initialize()
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
 		self.FrontBogey.m_tblToolsAllowed = {"none"}	
 		self.RearBogey.m_tblToolsAllowed = {"none"}	
-		self.RearBogey:SetSolid(SOLID_VPHYSICS)			
+		self.RearBogey:SetSolid(SOLID_VPHYSICS)		
+		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
-		local opt = Vector(71,0,0)
+		self:SetNW2Entity("FrontCouple",self.FrontCouple)
+		self:SetNW2Entity("RearCouple",self.RearCouple)		
+		local opt = Vector(70,0,0)
 		self.FrontCouple.CouplingPointOffset = opt		
 		self.RearCouple.CouplingPointOffset = opt - Vector(1,0,0) 		
 	
@@ -237,6 +240,7 @@ function ENT:CreatePricep(pos,ang)
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())
 	ent:DrawShadow(false)
+    ent:SetPos(ent:GetPos() + Vector(0,0,0))	
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
@@ -271,19 +275,19 @@ function ENT:CreatePricep(pos,ang)
 	false)
 	
 	else
-	RB:PhysicsInit(SOLID_VPHYSICS)		
+	
 		local xmin = -5
 		local xmax = 5
 		local ymin = -5
 		local ymax = 5				
-		local zmin = -25
-		local zmax = 25
+		local zmin = -10
+		local zmax = 10
 	
-		local vct = Vector(15-25,0,80)
-		local vct1 = Vector(15-25,0,140)
+		local vct = Vector(-10,0,80)
+		local vct1 = Vector(-10,0,140)
 	
 		constraint.AdvBallsocket( 
-		self.RearBogey,
+		RB,
 		self,
 		0, 
 		0, 
@@ -307,7 +311,7 @@ function ENT:CreatePricep(pos,ang)
 		false		
 	) 
 	constraint.AdvBallsocket( 
-		self.RearBogey,
+		RB,
 		self,
 		0, 
 		0, 
@@ -399,10 +403,7 @@ function ENT:Think()
 	
 	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
 	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end	
-	
-	train1.HeadTrain = self 
-	train1:SetNW2Entity("HeadTrain", self)	
+	if not IsValid(train1) then return end
 	
 	local fB,rB,pB = self.FrontBogey,self.RearBogey,train1.PricepBogey	
        

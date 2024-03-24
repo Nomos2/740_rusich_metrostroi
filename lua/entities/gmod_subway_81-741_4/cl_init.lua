@@ -507,14 +507,13 @@ function ENT:Initialize()
 	
 	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
 	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end	
-	
-	train1.HeadTrain = self 
-	train1:SetNW2Entity("HeadTrain", self)		
+	if not IsValid(train1) then return end		
 	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
 	PricepBogey = train1:GetNW2Entity("PricepBogey")		
 	self.RearBogey = self:GetNW2Entity("RearBogey")
+	self.FrontCouple = self:GetNW2Entity("FrontCouple")
+	self.RearCouple = self:GetNW2Entity("RearCouple")	
 end
 
 function ENT:ReInitBogeySounds(bogey)

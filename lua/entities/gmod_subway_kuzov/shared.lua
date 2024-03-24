@@ -40,7 +40,7 @@ function ENT:PassengerCapacity()
     return 172
 end
 local function GetDoorPosition(n,G)			--	x						--	y        --	z
-	return Vector(-195.5 - -35.0*G - 232.1*n, -66*(1-2*G), 4.3)
+	return Vector(-195.5 - -35.0*G - 232.1*n, 66*(1-2*G), 4.3)
 end
 function ENT:GetStandingArea()    --смещение пассажиров
 	return Vector(270-15,-25,-47),Vector(-285,25,-46) 	
@@ -56,8 +56,8 @@ end
 ENT.LeftDoorPositions = {}
 ENT.RightDoorPositions = {}
 for i=0,3 do
-    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,1))
-    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
+    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,0))
+    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,1))
 end
 
 function ENT:InitializeSounds()

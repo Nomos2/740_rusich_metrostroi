@@ -38,7 +38,7 @@ function ENT:GetStandingArea()
     return Vector(530-17,-25,-47), Vector(50,25,-41)
 end
 local function GetDoorPosition(b,k)	--Правые двери			--Левые двери
-	return Vector(652.5-17  - 35.0*k     -  338.8*b, -67.5*(1-2*k), 4.3)
+	return Vector(652.5-17  - 35.0*k     -  338.8*b, 67.5*(1-2*k), 4.3)
 end
 
 local yventpos = {
@@ -50,8 +50,8 @@ local yventpos = {
 ENT.LeftDoorPositions = {}
 ENT.RightDoorPositions = {}
 for i=0,3 do
-    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,1))
-    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
+    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,0))
+    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,1))
 end
 
 function ENT:InitializeSounds()

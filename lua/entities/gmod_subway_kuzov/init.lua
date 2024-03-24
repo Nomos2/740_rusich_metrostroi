@@ -40,6 +40,17 @@ function ENT:Initialize()
     self.PassengerSeat4:SetRenderMode(RENDERMODE_NONE)
 	self.PassengerSeat4:SetColor(Color(0,0,0,0))
 	
+	self.PricepBogey = self:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
+	self:SetNW2Entity("PricepBogey",self.PricepBogey)
+	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
+	local PB = self.PricepBogey	
+    local rand = math.random()*0.05
+	PB:SetNWFloat("SqualPitch",1.45+rand)
+	PB:SetNWInt("MotorSoundType",2)
+	PB:SetNWInt("Async",true)
+	PB.m_tblToolsAllowed = {"none"}	
+	PB.DisableContacts = true		
+	
 	self.Lights = {
 		[14] = { "dynamiclight",    Vector( 220, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500 , fov=180,farz = 128 },
 		[15] = { "dynamiclight",    Vector( 10, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500 , fov=180,farz = 128 },
@@ -77,46 +88,22 @@ function ENT:Initialize()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
     if not IsValid(train) then return end		
-	train.RearBogey = train:GetNW2Entity("RearBogey")	
-	local RB = train.RearBogey		
-    constraint.NoCollide(self,RB,0,0)
-	local RC = train.RearCouple
-    RC:PhysicsInit(SOLID_VPHYSICS)
-    RC:SetMoveType(MOVETYPE_VPHYSICS)
-    RC:SetSolid(SOLID_VPHYSICS)
-	RC:GetPhysicsObject():SetMass(5000)
-	
-	self.PricepBogey = self:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
-	self:SetNW2Entity("PricepBogey",self.PricepBogey)
-	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
-	local PB = self.PricepBogey 
-	if not IsValid(PB) then return end		
-    local rand = math.random()*0.05
-	PB:SetNWFloat("SqualPitch",1.45+rand)
-	PB:SetNWInt("MotorSoundType",2)
-	PB:SetNWInt("Async",true)
-	PB.m_tblToolsAllowed = {"none"}	
-	PB.DisableContacts = true
-    constraint.NoCollide(self,self,0,0)			
+	train.RearBogey = train:GetNW2Entity("RearBogey")
+	train.RearCouple = train:GetNW2Entity("RearCouple")		
+	train.FrontCouple = train:GetNW2Entity("FrontCouple")		
 	train.FrontBogey = train:GetNW2Entity("FrontBogey")	
-	local FB = train.FrontBogey 	
-	self.RearBogey = train:GetNW2Entity("RearBogey")	
+	local FB = train.FrontBogey 				
 	local RB = train.RearBogey
-    constraint.NoCollide(train,RB,0,0)	
-
-	table.insert(train.TrainEntities,self)      
-    table.insert(self.TrainEntities,train)	
-
-    if IsValid(self:GetPhysicsObject()) then
-        train.NormalMass = self:GetPhysicsObject():GetMass()
-    end	
-
+	local RC = train.RearCouple
+	local FC = train.FrontCouple
+	RC:SetPos(RC:GetPos() + Vector(0,0,0))
+	RC:PhysicsInit(SOLID_VPHYSICS)	
 	constraint.AdvBallsocket(
 	    self,
         RC,
         0, --bone
         0, --bone
-        Vector(-281,0,-60),
+        Vector(-281,0,-50),
         Vector(0,0,0),
 		1, --forcelimit
 		1, --torquelimit
@@ -129,9 +116,27 @@ function ENT:Initialize()
 		0.1, --xfric
 		0.1, --yfric
 		1, --zfric
-		0, --rotonly
-		1, --nocollide
-	false)	
+		0 --rotonly
+	)    	
+	RC:GetPhysicsObject():SetMass(5000)
+    constraint.NoCollide(self,RB,0,0)	
+    constraint.NoCollide(self,train,0,0)	
+    constraint.NoCollide(train,RB,0,0)	
+
+	table.insert(train.TrainEntities,self)      
+    table.insert(self.TrainEntities,train)	
+
+    if IsValid(self:GetPhysicsObject()) then
+        train.NormalMass = self:GetPhysicsObject():GetMass()
+    end	
+	
+    if IsValid(PB:GetPhysicsObject()) then
+        FB.NormalMass = PB:GetPhysicsObject():GetMass()
+    end		
+	
+    if IsValid(FC:GetPhysicsObject()) then
+        RC.NormalMass = FC:GetPhysicsObject():GetMass()
+    end
 	
 	local Map = game.GetMap():lower() or ""	
 	if Map:find("gm_mustox_neocrimson_line") or
@@ -143,22 +148,33 @@ function ENT:Initialize()
 	Map:find("gm_metro_crossline") or	
 	Map:find("gm_metro_mosldl") or	
 	Map:find("gm_metro_nsk_line") or		
-	Map:find("gm_metro_jar_imagine_line") or	
+	Map:find("gm_metro_jar_imagine_line") or
 	Map:find("gm_smr_1987") then
 	
-	constraint.Axis(
+	constraint.AdvBallsocket( 
 		RB,
 		self,
-		0,
-		0,
-        Vector(0,0,0),
-		Vector(0,0,0),
-        0,
-		0,
-		0,
-		0,
-		Vector(0,0,-1),
-	false)
+		0, 
+		0, 
+		Vector(-10,0,0),
+		pos, 
+		0, 
+		0, 
+		
+        0, --xmin 
+        0, --ymin 
+        -90, --zmin
+        0, --xmax
+        0, --ymax
+        90, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	)
 	
 	else
 	
@@ -166,8 +182,8 @@ function ENT:Initialize()
 		local xmax = 5
 		local ymin = -5
 		local ymax = 5				
-		local zmin = -25
-		local zmax = 25
+		local zmin = -10
+		local zmax = 10
 	
 		local vct = Vector(-10,0,80)
 		local vct1 = Vector(-10,0,140)
@@ -221,7 +237,6 @@ function ENT:Initialize()
 		true		
 	)
 	end
-	
     end)
 end
 

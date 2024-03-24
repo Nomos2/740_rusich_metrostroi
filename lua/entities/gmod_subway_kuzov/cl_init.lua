@@ -234,7 +234,11 @@ function ENT:Initialize()
 	for i = 1,6 do
 		self.DoorsAnims[i] = self:GetNW2Int("DoorsAnim"..i,15)
 	end	
-	self:GetNW2Entity("HeadTrain").CompressorVol = 0	
+    self.HeadTrain = self:GetNW2Entity("HeadTrain")	
+    local train = self.HeadTrain 
+    if not IsValid(train) then return end
+	
+	train.CompressorVol = 0	
     self.PassengerEnts = {}
     self.PassengerEntsStucked = {}	
     self.PassengerPositions = {}	
@@ -251,7 +255,7 @@ function ENT:Initialize()
         "models/metrostroi/passengers/m4.mdl",
         "models/metrostroi/passengers/m5.mdl",
     }
-    self:GetNW2Entity("HeadTrain").PreviousCompressorState = false			
+    train.PreviousCompressorState = false			
 	
     self.VentRand = {}
     self.VentState = {}

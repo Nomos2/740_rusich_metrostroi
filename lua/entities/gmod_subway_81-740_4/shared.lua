@@ -40,15 +40,15 @@ function ENT:GetStandingArea()
 end 
 
 local function GetDoorPosition(n,G)	--Правые двери			--Левые двери
-	return Vector(651.5-15  - 35.0*(1-G) -  338.8*n-144, -66*(1-2*G), 4.25)
+	return Vector(651.5-15  - 35.0*(1-G) -  338.8*n-144, 66*(1-2*G), 4.25)
 end
 
 -- Setup door positions
 ENT.LeftDoorPositions = {}
 ENT.RightDoorPositions = {}
 for i=0,1 do
-    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,1))
-    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,0))
+    table.insert(ENT.LeftDoorPositions,GetDoorPosition(i,0))
+    table.insert(ENT.RightDoorPositions,GetDoorPosition(i,1))
 end
 
 local yventpos = {
@@ -438,7 +438,6 @@ function ENT:InitializeSounds()
 	
 	local snd = math.random (1,2)
 	local closed = math.random (1,3)	
-    for i=0,2 do	
     for i=0,1 do
         for k=0,1 do
             self.SoundNames["door"..i.."x"..k.."r"] = {"subway_trains/740_4/doors/door_loop"..snd..".wav",loop=true}
@@ -449,9 +448,8 @@ function ENT:InitializeSounds()
             self.SoundPositions["door"..i.."x"..k.."o"] = {200,1e9,GetDoorPosition(i,k),1}
             self.SoundNames["door"..i.."x"..k.."c"] = {"subway_trains/740_4/doors/door_close_end"..closed..".wav"}
             self.SoundPositions["door"..i.."x"..k.."c"] = {200,1e9,GetDoorPosition(i,k),0.5}
-	    end
-    end		
-end
+	    end	
+	end
 	-- ХВАТИТ БЛЯТЬ ПИЩАТЬ!!!
     --self.SoundNames["work_beep"] = {loop=true,"subway_trains/720/work_beep_loop.wavv"}
     --self.SoundPositions["work_beep"] = {65,1e9,Vector(816-144,23,10),0.03}
