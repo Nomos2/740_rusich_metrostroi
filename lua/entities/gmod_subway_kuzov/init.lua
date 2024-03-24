@@ -133,6 +133,7 @@ function ENT:Initialize()
 		1, --nocollide
 	false)	
 	
+	local Map = game.GetMap():lower() or ""	
 	if Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
 	Map:find("gm_metro_kalinin") or	

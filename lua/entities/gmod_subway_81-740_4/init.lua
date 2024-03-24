@@ -87,67 +87,6 @@ end
     -- Create bogeys
         self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740ALS")	
         self.RearBogey  = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),false,"740G")
-        self.RearBogey:SetSolid(SOLID_VPHYSICS)
-		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)	
-		
-		local xmin = -5
-		local xmax = 5
-		local ymin = -5
-		local ymax = 5				
-		local zmin = -25
-		local zmax = 25
-	
-		local vct = Vector(15-25,0,80)
-		local vct1 = Vector(15-25,0,140)
-	
-		constraint.AdvBallsocket( 
-		self.RearBogey,
-		self,
-		0, 
-		0, 
-		vct,
-		pos, 
-		0, 
-		0, 
-		
-        xmin, --xmin 
-        ymin, --ymin 
-        zmin, --zmin
-        xmax, --xmax
-        ymax, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	) 
-	constraint.AdvBallsocket( 
-		self.RearBogey,
-		self,
-		0, 
-		0, 
-		vct1,
-		pos, 
-		0, 
-		0, 
-		
-        xmin, --xmin 
-        ymin, --ymin 
-        zmin, --zmin
-        xmax, --xmax
-        ymax, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	)		
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)			
         self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
@@ -157,6 +96,7 @@ end
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
 		self.FrontBogey.m_tblToolsAllowed = {"none"}	
 		self.RearBogey.m_tblToolsAllowed = {"none"}
+		self.RearBogey:SetSolid(SOLID_VPHYSICS)		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
 		local opt = Vector(70,0,0)
@@ -541,7 +481,10 @@ function ENT:CreatePricep(pos,ang)
 	ent:DrawShadow(false)
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
+	self.RearBogey = self:GetNW2Entity("RearBogey")	
+	local RB = self.RearBogey
 	
+	local Map = game.GetMap():lower() or ""	
 	if Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
 	Map:find("gm_metro_kalinin") or	
@@ -569,6 +512,66 @@ function ENT:CreatePricep(pos,ang)
 	false)
 	
 	else
+	RB:PhysicsInit(SOLID_VPHYSICS)	
+		local xmin = -5
+		local xmax = 5
+		local ymin = -5
+		local ymax = 5				
+		local zmin = -25
+		local zmax = 25
+	
+		local vct = Vector(15-25,0,80)
+		local vct1 = Vector(15-25,0,140)
+	
+		constraint.AdvBallsocket( 
+		self.RearBogey,
+		self,
+		0, 
+		0, 
+		vct,
+		pos, 
+		0, 
+		0, 
+		
+        xmin, --xmin 
+        ymin, --ymin 
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	) 
+	constraint.AdvBallsocket( 
+		self.RearBogey,
+		self,
+		0, 
+		0, 
+		vct1,
+		pos, 
+		0, 
+		0, 
+		
+        xmin, --xmin 
+        ymin, --ymin 
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	)	
+	
 	end	
 
 	--Метод mirror 				

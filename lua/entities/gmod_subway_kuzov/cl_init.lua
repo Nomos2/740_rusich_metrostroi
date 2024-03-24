@@ -268,14 +268,11 @@ function ENT:Think()
     if not self.RenderClientEnts or self.CreatingCSEnts then return end 	
     self.HeadTrain = self:GetNW2Entity("HeadTrain")	
     local train = self.HeadTrain 
-    if not IsValid(train) then return end		
-	
-	train.HeadTrain = self 
-	train:SetNW2Entity("HeadTrain", self)	
+    if not IsValid(train) then return end
 	
 --Регистрация тележки
-train.PricepBogey = train:GetNW2Entity("PricepBogey")	
-local RB = train.PricepBogey
+self.PricepBogey = self:GetNW2Entity("PricepBogey")	
+local RB = self.PricepBogey
 
 --Взято из cl_init тележки.
 local c_gui
@@ -355,10 +352,7 @@ self.ClientProps["TrainNumberL"..k] = {
 end
     self.HeadTrain = self:GetNW2Entity("HeadTrain")	
     local train = self.HeadTrain 
-    if not IsValid(train) then return end		
-	
-	train.HeadTrain = self 
-	train:SetNW2Entity("HeadTrain", self)	
+    if not IsValid(train) then return end
 	
 	local animation = math.random (5,12)	
 	local animation1 = math.random (0.5,1)

@@ -1748,10 +1748,7 @@ function ENT:Initialize()
 	
 	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
 	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end	
-	
-	train1.HeadTrain = self 
-	train1:SetNW2Entity("HeadTrain", self)	
+	if not IsValid(train1) then return end
 	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
 	PricepBogey = train1:GetNW2Entity("PricepBogey")	
@@ -2157,10 +2154,7 @@ function ENT:Think()
 	
 	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
 	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end	
-	
-	train1.HeadTrain = self 
-	train1:SetNW2Entity("HeadTrain", self)		
+	if not IsValid(train1) then return end
 	
 	local PricepBogey = train1:GetNW2Entity("PricepBogey")	
 	local refresh = false--true		
@@ -2255,10 +2249,7 @@ end
 function self:UpdateWagonNumber()
 		self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
 		local train1 = self.HeadTrain1 
-		if not IsValid(train1) then return end	
-		
-		train1.HeadTrain = self 
-		train1:SetNW2Entity("HeadTrain", self)
+		if not IsValid(train1) then return end
 		
 for k=0,3 do
         --if i< count then			
@@ -2335,11 +2326,10 @@ for k=0,3 do
 	or Map:find("gm_metro_crossline_c4") 
 	or Map:find("gm_metro_crossline_m12") 
 	or Map:find("gm_metro_crossline_n3") 
-	or Map:find("gm_smr_1987") 
-	or Map:find("gm_jar_pll")
+	or Map:find("gm_smr_1987")
 	or Map:find("gm_metro_pink_line") 
 	or Map:find("gm_metro_surfacemetro")
-	or Map:find("gm_metro_sunnytown")	
+	or Map:find("gm_metro_sunnytown")
 	or Map:find("gm_metro_ruralline")
 	or Map:find("gm_metro_nsk_line")		
 	or Map:find("gm_line_2")	

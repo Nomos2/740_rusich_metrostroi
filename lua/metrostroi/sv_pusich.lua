@@ -12,5 +12,4 @@ for k,v in pairs(Metrostroi.Advanced.TrainClasses) do
             Metrostroi.Advanced.IsTrainClass[v] = nil
 		end	
 	end
-end)  	
-print ("ест")
+end)
