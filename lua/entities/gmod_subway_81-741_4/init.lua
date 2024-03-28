@@ -36,7 +36,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
     self:SetPos(self:GetPos() + Vector(0,0,140))	
 
-    self.NormalMass = 24000
+    self.NormalMass = 17000
 
     -- Create seat entities
 	self.DriverSeat = self:CreateSeat("instructor",Vector(610,11,-35),Angle(0,90,0),"models/vehicles/prisoner_pod_inner.mdl")
@@ -260,19 +260,30 @@ function ENT:CreatePricep(pos,ang)
 	Map:find("gm_metro_jar_imagine_line") or	
 	Map:find("gm_smr_1987") then	
 	
-	constraint.Axis(
+	constraint.AdvBallsocket( 
 		RB,
 		self,
-		0,
-		0,
-        Vector(0,0,0),
+		0, 
+		0, 
 		Vector(0,0,0),
-        0,
-		0,
-		0,
-		0,
-		Vector(0,0,-1),
-	false)
+		pos, 
+		0, 
+		0, 
+		
+        0, --xmin 
+        0, --ymin 
+        -90, --zmin
+        0, --xmax
+        0, --ymax
+        90, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		false		
+	)
 	
 	else
 	

@@ -96,7 +96,6 @@ function ENT:Initialize()
 	local RB = train.RearBogey
 	local RC = train.RearCouple
 	local FC = train.FrontCouple
-	RC:SetPos(RC:GetPos() + Vector(0,0,0))
 	RC:PhysicsInit(SOLID_VPHYSICS)	
 	constraint.AdvBallsocket(
 	    self,
@@ -135,10 +134,10 @@ function ENT:Initialize()
     end		
 	
     if IsValid(FC:GetPhysicsObject()) then
-        RC.NormalMass = FC:GetPhysicsObject():GetMass()
+        self.NormalMass = FC:GetPhysicsObject():GetMass()
     end
 	
-	local Map = game.GetMap():lower() or ""	
+	--[[local Map = game.GetMap():lower() or ""	
 	if Map:find("gm_mustox_neocrimson_line") or
 	Map:find("gm_mus_neoorange") or
 	Map:find("gm_metro_kalinin") or	
@@ -176,17 +175,18 @@ function ENT:Initialize()
 		false		
 	)
 	
-	else
+	else]]
 	
-		local xmin = -5
-		local xmax = 5
-		local ymin = -5
-		local ymax = 5				
+		local xmin = -3
+		local xmax = 3
+		local ymin = -3
+		local ymax = 3				
 		local zmin = -10
 		local zmax = 10
 	
-		local vct = Vector(-10,0,80)
-		local vct1 = Vector(-10,0,140)
+		local vct = Vector(-10,0,60)
+		local vct1 = Vector(-10,0,80)
+		local vct2 = Vector(-10,0,140)		
 	
 	constraint.AdvBallsocket( 
 		RB,
@@ -236,7 +236,31 @@ function ENT:Initialize()
 		1,--nocollide
 		true		
 	)
-	end
+	constraint.AdvBallsocket( 
+		RB,
+		self,
+		0, 
+		0, 
+		vct2,
+		pos, 
+		0, 
+		0, 
+		
+        xmin, --xmin 
+        ymin, --ymin 
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		true		
+	) 	
+	--end
     end)
 end
 
