@@ -127,15 +127,11 @@ function ENT:Initialize()
 
     if IsValid(self:GetPhysicsObject()) then
         train.NormalMass = self:GetPhysicsObject():GetMass()
-    end	
-	
-    if IsValid(PB:GetPhysicsObject()) then
-        FB.NormalMass = PB:GetPhysicsObject():GetMass()
-    end		
-	
-    if IsValid(FC:GetPhysicsObject()) then
-        self.NormalMass = FC:GetPhysicsObject():GetMass()
     end
+	
+    if IsValid(RB:GetPhysicsObject()) then
+        self.NormalMass = RB:GetPhysicsObject():GetMass()
+    end	
 	
 	--[[local Map = game.GetMap():lower() or ""	
 	if Map:find("gm_mustox_neocrimson_line") or
@@ -177,16 +173,16 @@ function ENT:Initialize()
 	
 	else]]
 	
-		local xmin = -3
-		local xmax = 3
-		local ymin = -3
-		local ymax = 3				
-		local zmin = -10
-		local zmax = 10
+		local xmin = -5
+		local xmax = 5
+		local ymin = -5
+		local ymax = 5				
+		local zmin = -45
+		local zmax = 45
 	
-		local vct = Vector(-10,0,60)
-		local vct1 = Vector(-10,0,80)
-		local vct2 = Vector(-10,0,140)		
+		local vct = Vector(-10,0,50)
+		local vct1 = Vector(-10,0,70)
+		local vct2 = Vector(-10,0,90)		
 	
 	constraint.AdvBallsocket( 
 		RB,

@@ -487,56 +487,23 @@ function ENT:CreatePricep(pos,ang)
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
 	local RB = self.RearBogey
+	self.FrontBogey = self:GetNW2Entity("RearBogey")	
+	local FB = self.FrontBogey	
 	
-	local Map = game.GetMap():lower() or ""	
-	if Map:find("gm_mustox_neocrimson_line") or
-	Map:find("gm_mus_neoorange") or
-	Map:find("gm_metro_kalinin") or	
-	Map:find("gm_metro_nekrasovskaya_line") or	
-	Map:find("gm_metro_pink_line_redux") or
-	Map:find("gm_jar_pll_redux") or
-	Map:find("gm_metro_crossline") or	
-	Map:find("gm_metro_mosldl") or	
-	Map:find("gm_metro_nsk_line") or		
-	Map:find("gm_metro_jar_imagine_line") or
-	Map:find("gm_smr_1987") then
+    if IsValid(RB:GetPhysicsObject()) then
+        self.NormalMass = RB:GetPhysicsObject():GetMass()
+    end
 	
-	constraint.AdvBallsocket( 
-		RB,
-		self,
-		0, 
-		0, 
-		Vector(0,0,0),
-		pos, 
-		0, 
-		0, 
-		
-        0, --xmin 
-        0, --ymin 
-        -90, --zmin
-        0, --xmax
-        0, --ymax
-        90, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	) 
+		local xmin = -1
+		local xmax = 1
+		local ymin = -1
+		local ymax = 1				
+		local zmin = -45
+		local zmax = 45
 	
-	else
-	
-		local xmin = -5
-		local xmax = 5
-		local ymin = -5
-		local ymax = 5				
-		local zmin = -10
-		local zmax = 10
-	
-		local vct = Vector(-10,0,80)
-		local vct1 = Vector(-10,0,140)
+		local vct = Vector(0,0,50)
+		local vct1 = Vector(0,0,70)
+		local vct2 = Vector(0,0,90)	
 	
 		constraint.AdvBallsocket( 
 		RB,
@@ -586,8 +553,30 @@ function ENT:CreatePricep(pos,ang)
 		1,--nocollide
 		false		
 	)	
-	
-	end	
+	constraint.AdvBallsocket( 
+		RB,
+		self,
+		0, 
+		0, 
+		vct2,
+		pos, 
+		0, 
+		0, 
+		
+        xmin, --xmin 
+        ymin, --ymin 
+        zmin, --zmin
+        xmax, --xmax
+        ymax, --ymax
+        zmax, --zmax
+		
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1,--nocollide
+		true		
+	)	
 
 	--Метод mirror 				
     ent.HeadTrain = self 
