@@ -65,9 +65,9 @@ function ENT:Initialize()
 		self:SetNW2Entity("RearBogey",self.RearBogey)
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)
 		self:SetNW2Entity("RearCouple",self.RearCouple)		
-		local opt = Vector(70,0,0)
+		local opt = Vector(72,0,0)
 		self.FrontCouple.CouplingPointOffset = opt		
-		self.RearCouple.CouplingPointOffset = opt - Vector(1,0,0) 		
+		self.RearCouple.CouplingPointOffset = opt + Vector(1,0,0) 		
 	
 	timer.Simple(0.1, function()	
         if not IsValid(self) then return end
@@ -244,22 +244,18 @@ function ENT:CreatePricep(pos,ang)
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
-	local RB = self.RearBogey	
+	local RB = self.RearBogey
 	
-	if IsValid(RB:GetPhysicsObject()) then
-        self.NormalMass = RB:GetPhysicsObject():GetMass()
-    end
-	
-		local xmin = -1
-		local xmax = 1
-		local ymin = -1
-		local ymax = 1				
+		local xmin = -5
+		local xmax = 5
+		local ymin = -5
+		local ymax = 5				
 		local zmin = -45
 		local zmax = 45
 	
-		local vct = Vector(0,0,50)
-		local vct1 = Vector(0,0,70)
-		local vct2 = Vector(0,0,90)	
+		local vct = Vector(-20,0,30)
+		local vct1 = Vector(-20,0,160)
+		local vct2 = Vector(-20,0,90)		
 	
 		constraint.AdvBallsocket( 
 		RB,

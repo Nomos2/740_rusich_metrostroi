@@ -90,7 +90,7 @@ end
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)			
         self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
-        self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")
+        self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")		
 		
 		self.FrontCouple.m_tblToolsAllowed = {"none"}
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
@@ -107,7 +107,7 @@ end
 		self.RearCouple.CouplingPointOffset = Vector(85,0,0)   		
 		
 	timer.Simple(0.1, function()			
-        if not IsValid(self) then return end
+        if not IsValid(self) then return end	
 		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон	
 		local opt65 = Vector(65,0,0)	
 		self.RearCouple.CouplingPointOffset = opt65
@@ -488,22 +488,22 @@ function ENT:CreatePricep(pos,ang)
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
 	local RB = self.RearBogey
 	self.FrontBogey = self:GetNW2Entity("RearBogey")	
-	local FB = self.FrontBogey	
+	local FB = self.FrontBogey
 	
-    if IsValid(RB:GetPhysicsObject()) then
-        self.NormalMass = RB:GetPhysicsObject():GetMass()
-    end
+    if self.RearCouple.NoPhysics then
+        ent:SetParent(RearBogey)
+    else	
 	
-		local xmin = -1
-		local xmax = 1
-		local ymin = -1
-		local ymax = 1				
+		local xmin = -5
+		local xmax = 5
+		local ymin = -5
+		local ymax = 5				
 		local zmin = -45
 		local zmax = 45
 	
-		local vct = Vector(0,0,50)
-		local vct1 = Vector(0,0,70)
-		local vct2 = Vector(0,0,90)	
+		local vct = Vector(-20,0,30)
+		local vct1 = Vector(-20,0,160)
+		local vct2 = Vector(-20,0,90)	
 	
 		constraint.AdvBallsocket( 
 		RB,
@@ -576,7 +576,7 @@ function ENT:CreatePricep(pos,ang)
 		0, --rotonly
 		1,--nocollide
 		true		
-	)	
+	)
 
 	--Метод mirror 				
     ent.HeadTrain = self 
@@ -585,6 +585,8 @@ function ENT:CreatePricep(pos,ang)
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
 	ent.KeyMap = {}
+
+	end
 	
 	return ent
 end	
