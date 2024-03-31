@@ -505,12 +505,8 @@ function ENT:Initialize()
     self.VentVol[i] = 0
     end
 	
-	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end		
-	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
-	PricepBogey = train1:GetNW2Entity("PricepBogey")		
+	PricepBogey = self:GetNW2Entity("PricepBogey")		
 	self.RearBogey = self:GetNW2Entity("RearBogey")
 	self.FrontCouple = self:GetNW2Entity("FrontCouple")
 	self.RearCouple = self:GetNW2Entity("RearCouple")	
@@ -903,11 +899,8 @@ end
 function ENT:Think()
     self.BaseClass.Think(self)
     if not self.RenderClientEnts or self.CreatingCSEnts then return end	
-	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end	
 	
-	local PricepBogey = train1:GetNW2Entity("PricepBogey")	
+	local PricepBogey = self:GetNW2Entity("PricepBogey")	
 	local refresh = false--true		
 	
 	if self:GetNW2Int("MotorType")==1 then		
@@ -1043,14 +1036,15 @@ end
     self:SetSoundState("release_front",math.Clamp(self.ReleasedPdT,0,1)^1.65,1.0)	
     self:SetSoundState("release_middle",math.Clamp(self.ReleasedPdT,0,1)^1.65,1.0)
 
+	local kr = self,train1	
 for avar = 1,2 do	
-    local colV = self:GetNW2Vector("Lamp7404"..avar)
+    local colV = kr:GetNW2Vector("Lamp7404"..avar)
     local col = Color(colV.x,colV.y,colV.z)		
     self:ShowHideSmooth("lamps_salon_on_avar_front"..avar,self:Animate("LampsEmer",self:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,1,5,false),col)	
 end	
 
 for i = 0,11 do	
-    local colV = self:GetNW2Vector("Lamp7404"..i)
+    local colV = kr:GetNW2Vector("Lamp7404"..i)
     local col = Color(colV.x,colV.y,colV.z)	
 	self:ShowHideSmooth("lamps_salon_on_front"..i,self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,1,5,false),col)
 	self:ShowHideSmooth("lamps_salon_on_front_left"..i,self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,1,5,false),col)

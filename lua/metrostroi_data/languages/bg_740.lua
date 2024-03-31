@@ -282,6 +282,7 @@ Common.740.Forw				= Движение напред
 Common.740.Back				= Движение назад
 
 Common.740.EmergencyBrakeValve				= Аварийна спирачка
+Common.740.teplovent 					= Вентилаторна печка (не работи)
 
 #gmod_subway_81-740_4
 #Buttons:
@@ -392,6 +393,7 @@ Entities.gmod_subway_81-740_4.Buttons.PUU.R_LineToggle                = @[Common
 Entities.gmod_subway_81-740_4.Buttons.PUU.R_EmerSet                   = @[Common.740.R_Emer]
 Entities.gmod_subway_81-740_4.Buttons.PUU.EmergencyControlsToggle     = @[Common.740.EmergencyControls]
 Entities.gmod_subway_81-740_4.Buttons.PUU.WiperToggle                 = @[Common.740.Wiper]
+Entities.gmod_subway_81-740_4.Buttons.PUU.teplovent                   = @[Common.740.teplovent]
 
 Entities.gmod_subway_81-740_4.Buttons.PUU.!VDop                       = @[Common.740.SpeedAccept1]
 Entities.gmod_subway_81-740_4.Buttons.PUU.!VDop2                      = @[Common.740.SpeedAccept]

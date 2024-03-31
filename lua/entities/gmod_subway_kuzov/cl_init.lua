@@ -275,8 +275,8 @@ function ENT:Think()
     if not IsValid(train) then return end
 	
 --Регистрация тележки
-self.PricepBogey = self:GetNW2Entity("PricepBogey")	
-local RB = self.PricepBogey
+train.PricepBogey = train:GetNW2Entity("PricepBogey")	
+local RB = train.PricepBogey
 
 --Взято из cl_init тележки.
 local c_gui
@@ -360,9 +360,11 @@ end
 	
 	local animation = math.random (5,12)	
 	local animation1 = math.random (0.5,1)
+	local kr = self,train
+	
 	for avar = 1,2 do
 		if not IsValid(train) then return end	
-		local colV = self:GetNW2Vector("Lamp7404"..avar)
+		local colV = kr:GetNW2Vector("Lamp7404"..avar)
 		local col = Color(colV.x,colV.y,colV.z)	
 		self:ShowHideSmooth("lamps_salon_on_rear_avar"..avar,train:Animate("LampsEmer",train:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,animation1,animation,false),col)  
 	end	
@@ -372,7 +374,7 @@ end
 
 	for i = 1,11 do	
 		if not IsValid(train) then return end	
-		local colV = self:GetNW2Vector("Lamp7404"..i)
+		local colV = kr:GetNW2Vector("Lamp7404"..i)
 		local col = Color(colV.x,colV.y,colV.z)	   
 		self:ShowHideSmooth("lamps_salon_on_rear"..i-1,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
 		self:ShowHideSmooth("lamps_salon_on_rear1"..i,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	

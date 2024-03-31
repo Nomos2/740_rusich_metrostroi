@@ -101,17 +101,18 @@ end
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)
-		self:SetNW2Entity("RearCouple",self.RearCouple)		
+		self:SetNW2Entity("RearCouple",self.RearCouple)	
+	
 		local opt = Vector(70,0,0)
 		self.FrontCouple.CouplingPointOffset = opt		 
 		self.RearCouple.CouplingPointOffset = Vector(85,0,0)   		
 		
-	timer.Simple(0.1, function()			
+	timer.Simple(0.01, function()			
         if not IsValid(self) then return end	
 		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон	
 		local opt65 = Vector(65,0,0)	
 		self.RearCouple.CouplingPointOffset = opt65
-		self.FrontCouple.CouplingPointOffset = opt65
+		self.FrontCouple.CouplingPointOffset = opt65		
 	end)
 		
 	self.FrontBogey:SetNWBool("Async",true)
@@ -392,6 +393,15 @@ function ENT:TrainSpawnerUpdate()
     self:UpdateLampsColors()
 end
 
+function Metrostroi:RerailChange(ent, bool)
+    if not IsValid(ent) then return end
+    if bool then
+        timer.Remove("metrostroi_rerailer_solid_reset_"..ent:EntIndex())    
+    else
+        timer.Create("metrostroi_rerailer_solid_reset_"..ent:EntIndex(),1e9,1,function() end)    
+    end
+end
+
 function ENT:UpdateLampsColors()
     local lCol,lCount = Vector(),0
 	local mr = math.random
@@ -482,28 +492,33 @@ function ENT:CreatePricep(pos,ang)
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())
 	ent:DrawShadow(false)
-    ent:SetPos(ent:GetPos() + Vector(0,0,0))
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
 	local RB = self.RearBogey
-	self.FrontBogey = self:GetNW2Entity("RearBogey")	
-	local FB = self.FrontBogey
 	
-    if self.RearCouple.NoPhysics then
-        ent:SetParent(RearBogey)
-    else	
+	self.PricepBogey = ent:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
+	self:SetNW2Entity("PricepBogey",self.PricepBogey)
+	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
+	local PB = self.PricepBogey	
+    local rand = math.random()*0.05
+	PB:SetNWFloat("SqualPitch",1.45+rand)
+	PB:SetNWInt("MotorSoundType",2)
+	PB:SetNWInt("Async",true)
+	PB.m_tblToolsAllowed = {"none"}	
+	PB.DisableContacts = true
 	
 		local xmin = -5
 		local xmax = 5
 		local ymin = -5
 		local ymax = 5				
-		local zmin = -45
-		local zmax = 45
+		local zmin = -25
+		local zmax = 25
 	
-		local vct = Vector(-20,0,30)
-		local vct1 = Vector(-20,0,160)
-		local vct2 = Vector(-20,0,90)	
+		local x1 = -20
+		local vct = Vector(x1,0,30)
+		local vct1 = Vector(x1,0,125)
+		local vct2 = Vector(x1,0,90)
 	
 		constraint.AdvBallsocket( 
 		RB,
@@ -577,6 +592,10 @@ function ENT:CreatePricep(pos,ang)
 		1,--nocollide
 		true		
 	)
+	
+	Metrostroi.RerailBogey(self.FrontBogey)                
+    Metrostroi.RerailBogey(self.RearBogey)
+    Metrostroi.RerailBogey(self.PricepBogey)
 
 	--Метод mirror 				
     ent.HeadTrain = self 
@@ -585,8 +604,6 @@ function ENT:CreatePricep(pos,ang)
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
 	ent.KeyMap = {}
-
-	end
 	
 	return ent
 end	
@@ -729,11 +746,7 @@ function ENT:Think()
 
     self.AsyncInverter:TriggerInput("Speed", self.Speed)
 	
-	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end
-	
-	local fB,rB,pB = self.FrontBogey,self.RearBogey,train1.PricepBogey	
+	local fB,rB,pB = self.FrontBogey,self.RearBogey,self.PricepBogey	
 	
    if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
 

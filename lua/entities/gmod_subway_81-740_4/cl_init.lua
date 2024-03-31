@@ -179,10 +179,10 @@ ENT.ButtonMap["PUU"] = {
             var="Wiper",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.5, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
-		{ID = "notused12345",x=531, y=95, radius=15, tooltip = "",model = {
+		{ID = "teplovent",x=531, y=95, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-720/rc_rotator1.mdl",z=3.85,ang = Angle (0,0,0),
 			scale = 0.4,
-            var="notused12345",speed=8, vmin=0, vmax=0.7,
+            var="teplovent",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.5, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
         {ID = "!VDop",x=269, y=69, w=107, h=6, tooltip = ""},
@@ -1746,12 +1746,8 @@ function ENT:Initialize()
         self.VentVol[i] = 0
     end
 	
-	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end
-	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
-	PricepBogey = train1:GetNW2Entity("PricepBogey")	
+	PricepBogey = self:GetNW2Entity("PricepBogey")	
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
 	self.FrontCouple = self:GetNW2Entity("FrontCouple")
 	self.RearCouple = self:GetNW2Entity("RearCouple")
@@ -2154,11 +2150,7 @@ function ENT:Think()
     self.BaseClass.Think(self)
     if not self.RenderClientEnts or self.CreatingCSEnts then return end	
 	
-	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end
-	
-	local PricepBogey = train1:GetNW2Entity("PricepBogey")	
+	local PricepBogey = self:GetNW2Entity("PricepBogey")	
 	local refresh = false--true		
 	
 	if self:GetNW2Int("MotorType")==1 then		
@@ -2346,18 +2338,15 @@ for k=0,3 do
 	
 	local animation = math.random (5,12)	
 	local animation1 = math.random (0.5,1)	
-	
-	--Головная часть	
+	local kr = self,train1	
 for avar = 1,2 do
-	--Головная часть
-    local colV = self:GetNW2Vector("Lamp7404"..avar)
+    local colV = kr:GetNW2Vector("Lamp7404"..avar)
     local col = Color(colV.x,colV.y,colV.z)	
 	self:ShowHideSmooth("lamps_salon_on_avar"..avar,self:Animate("LampsEmer",self:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,animation1,animation,false),col)  
 end
 
 for i = 1,10 do	
-	--Головная часть
-    local colV = self:GetNW2Vector("Lamp7404"..i)
+    local colV = kr:GetNW2Vector("Lamp7404"..i)
     local col = Color(colV.x,colV.y,colV.z)		
     self:ShowHideSmooth("lamps_salon_on"..i,self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)
     self:ShowHideSmooth("lamps_salon_on_fr"..i,self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	

@@ -40,17 +40,6 @@ function ENT:Initialize()
     self.PassengerSeat4:SetRenderMode(RENDERMODE_NONE)
 	self.PassengerSeat4:SetColor(Color(0,0,0,0))
 	
-	self.PricepBogey = self:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
-	self:SetNW2Entity("PricepBogey",self.PricepBogey)
-	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
-	local PB = self.PricepBogey	
-    local rand = math.random()*0.05
-	PB:SetNWFloat("SqualPitch",1.45+rand)
-	PB:SetNWInt("MotorSoundType",2)
-	PB:SetNWInt("Async",true)
-	PB.m_tblToolsAllowed = {"none"}	
-	PB.DisableContacts = true		
-	
 	self.Lights = {
 		[14] = { "dynamiclight",    Vector( 220, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500 , fov=180,farz = 128 },
 		[15] = { "dynamiclight",    Vector( 10, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500 , fov=180,farz = 128 },
@@ -117,10 +106,33 @@ function ENT:Initialize()
 		1, --zfric
 		0 --rotonly
 	)    	
-	RC:GetPhysicsObject():SetMass(5000)
+	RC:GetPhysicsObject():SetMass(2000)
     constraint.NoCollide(self,RB,0,0)	
     constraint.NoCollide(self,train,0,0)	
-    constraint.NoCollide(train,RB,0,0)	
+    constraint.NoCollide(train,RB,0,0)
+
+	FC:PhysicsInit(SOLID_VPHYSICS)	
+	constraint.AdvBallsocket(
+	    train,
+        FC,
+        0, --bone
+        0, --bone
+        Vector(611,0,-50),
+        Vector(0,0,0),
+		1, --forcelimit
+		1, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-15, --zmin
+		2, --xmax
+		2, --ymax
+		15, --zmax
+		0.1, --xfric
+		0.1, --yfric
+		1, --zfric
+		0 --rotonly
+	)    	
+	FC:GetPhysicsObject():SetMass(2000)	
 
 	table.insert(train.TrainEntities,self)      
     table.insert(self.TrainEntities,train)	
@@ -130,14 +142,7 @@ function ENT:Initialize()
     end
     if IsValid(RB:GetPhysicsObject()) then
         train.NormalMass = RB:GetPhysicsObject():GetMass()
-    end	
-    if IsValid(FC:GetPhysicsObject()) then
-        RC.NormalMass = FC:GetPhysicsObject():GetMass()
-    end		
-	
-    --[[if IsValid(RB:GetPhysicsObject()) then
-        self.NormalMass = RB:GetPhysicsObject():GetMass()
-    end]]	
+    end
 	
 	--[[local Map = game.GetMap():lower() or ""	
 	if Map:find("gm_mustox_neocrimson_line") or
@@ -183,12 +188,13 @@ function ENT:Initialize()
 		local xmax = 2
 		local ymin = -2
 		local ymax = 2				
-		local zmin = -45
-		local zmax = 45
+		local zmin = -25
+		local zmax = 25
 	
-		local vct = Vector(-10,0,30)
-		local vct1 = Vector(-10,0,160)
-		local vct2 = Vector(-10,0,90)		
+		local x2 = -10
+		local vct = Vector(x2,0,30)
+		local vct1 = Vector(x2,0,140)
+		local vct2 = Vector(x2,0,90)		
 	
 	constraint.AdvBallsocket( 
 		RB,

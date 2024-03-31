@@ -65,7 +65,7 @@ function ENT:Initialize()
 		self:SetNW2Entity("RearBogey",self.RearBogey)
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)
 		self:SetNW2Entity("RearCouple",self.RearCouple)		
-		local opt = Vector(72,0,0)
+		local opt = Vector(75,0,0)
 		self.FrontCouple.CouplingPointOffset = opt		
 		self.RearCouple.CouplingPointOffset = opt + Vector(1,0,0) 		
 	
@@ -240,22 +240,33 @@ function ENT:CreatePricep(pos,ang)
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())
 	ent:DrawShadow(false)
-    ent:SetPos(ent:GetPos() + Vector(0,0,0))	
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
 	local RB = self.RearBogey
 	
+	self.PricepBogey = ent:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
+	self:SetNW2Entity("PricepBogey",self.PricepBogey)
+	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
+	local PB = self.PricepBogey	
+    local rand = math.random()*0.05
+	PB:SetNWFloat("SqualPitch",1.45+rand)
+	PB:SetNWInt("MotorSoundType",2)
+	PB:SetNWInt("Async",true)
+	PB.m_tblToolsAllowed = {"none"}	
+	PB.DisableContacts = true
+	
 		local xmin = -5
 		local xmax = 5
 		local ymin = -5
 		local ymax = 5				
-		local zmin = -45
-		local zmax = 45
+		local zmin = -25
+		local zmax = 25
 	
-		local vct = Vector(-20,0,30)
-		local vct1 = Vector(-20,0,160)
-		local vct2 = Vector(-20,0,90)		
+		local x1 = -20	
+		local vct = Vector(x1,0,30)
+		local vct1 = Vector(x1,0,125)
+		local vct2 = Vector(x1,0,90)		
 	
 		constraint.AdvBallsocket( 
 		RB,
@@ -329,7 +340,6 @@ function ENT:CreatePricep(pos,ang)
 		1,--nocollide
 		true		
 	)
-
 	--Метод mirror 				
     ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)
@@ -395,11 +405,7 @@ function ENT:Think()
 	self:SetPackedRatio("SalonLighting",passlight)
     self.AsyncInverter:TriggerInput("Speed",self.Speed)
 	
-	self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-	local train1 = self.HeadTrain1 
-	if not IsValid(train1) then return end
-	
-	local fB,rB,pB = self.FrontBogey,self.RearBogey,train1.PricepBogey	
+	local fB,rB,pB = self.FrontBogey,self.RearBogey,self.PricepBogey	
        
    if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
 
