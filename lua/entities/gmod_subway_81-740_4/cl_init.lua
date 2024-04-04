@@ -2242,9 +2242,8 @@ end
 
 function self:UpdateWagonNumber()
 		self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
-		local train1 = self.HeadTrain1 
-		if not IsValid(train1) then return end
-		
+		local train1 = self.HeadTrain1
+		if not IsValid(train1) then return end			
 for k=0,3 do
         --if i< count then			
 			if self.WagonNumber then				
@@ -2253,7 +2252,8 @@ for k=0,3 do
             if IsValid(rightNum) then
 				rightNum:SetPos(self:LocalToWorld(Vector(705-k*6.6+4*6.6/2-159-9, -63.9, 14)))
                 rightNum:SetSkin(num)
-            end	
+            end
+
             local leftNum = train1.ClientEnts["TrainNumberL"..k]	
 	        local num = math.floor(self.WagonNumber%(10^(k+1))/10^k)										
             if IsValid(leftNum) then	

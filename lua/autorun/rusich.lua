@@ -1,17 +1,6 @@
-vedro740 = vedro740 or {} --check 81-740 addon availability by other addons
-
-if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Metrostroi Project') then
+if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Metrostroi Project') then --пояснение, на МСМП есть свой скрипт на замену звуков телеги, потому, в случае обнаружения этого сервера звуки не включаются.
 	if SERVER then
-		timer.Simple(1,function()	
-		local models = {
-		["models/metrostroi_train/81-740/body/81-740_4_front.mdl"] = true,
-		["models/metrostroi_train/81-740/body/81-740_4_rear.mdl"] = true,
-
-		["models/metrostroi_train/81-740/bogey/metro_bogey_740"] = true,	
-		["models/metrostroi_train/81-740/bogey/metro_bogey_garm.mdl"] = true,
-		["models/metrostroi_train/81-740/bogey/metro_bogey_notr.mdl"] = true,
-		
-	}		
+		timer.Simple(1,function()		
 			-- регистрируем тележки
 			local tbl = scripted_ents.Get("gmod_train_bogey")
 			if tbl then	
@@ -96,15 +85,6 @@ if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Me
 --custom bogey and couple
 timer.Simple(0,function()
 	if not Metrostroi then return end
-		local models = {
-		["models/metrostroi_train/81-740/body/81-740_4_front.mdl"] = true,
-		["models/metrostroi_train/81-740/body/81-740_4_rear.mdl"] = true,
-
-		["models/metrostroi_train/81-740/bogey/metro_bogey_740"] = true,	
-		["models/metrostroi_train/81-740/bogey/metro_bogey_garm.mdl"] = true,
-		["models/metrostroi_train/81-740/bogey/metro_bogey_notr.mdl"] = true,
-	}
-	
 	if SERVER then
 		timer.Simple(1,function()
 			-- регистрируем тележки
@@ -157,6 +137,6 @@ end
 
 --[[mezhvag --межвагонки будут переделаны
 hook.Add("Metrostroi.AddMezhvagToSpawner","81_740_stock",function(tab)
-	tab["gmod_subway_81-740_4_mvm"] = {nil,nil,0}
-	tab["gmod_subway_81-741_4_mvm"] = {nil,Vector(-340,0,-10),45}
+	tab["gmod_subway_81-740_4"] = {nil,nil,0}
+	tab["gmod_subway_81-741_4"] = {nil,Vector(-340,0,-10),45}
 end)]]

@@ -76,13 +76,14 @@ function ENT:Initialize()
 	timer.Simple(0.1, function()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
-    if not IsValid(train) then return end		
-	train.RearBogey = train:GetNW2Entity("RearBogey")
+    if not IsValid(train) then return end	
+	self.RearBogey = self:GetNW2Entity("RearBogey")
 	train.RearCouple = train:GetNW2Entity("RearCouple")		
 	train.FrontCouple = train:GetNW2Entity("FrontCouple")		
-	train.FrontBogey = train:GetNW2Entity("FrontBogey")	
+	self.FrontBogey = train:GetNW2Entity("FrontBogey")
+	train.PricepBogey = train:GetNW2Entity("PricepBogey")
+	local PB = train.PricepBogey		
 	local FB = train.FrontBogey 				
-	local RB = train.RearBogey
 	local RC = train.RearCouple
 	local FC = train.FrontCouple
 	RC:PhysicsInit(SOLID_VPHYSICS)	
@@ -106,10 +107,8 @@ function ENT:Initialize()
 		1, --zfric
 		0 --rotonly
 	)    	
-	RC:GetPhysicsObject():SetMass(2000)
-    constraint.NoCollide(self,RB,0,0)	
+	RC:GetPhysicsObject():SetMass(3000)
     constraint.NoCollide(self,train,0,0)	
-    constraint.NoCollide(train,RB,0,0)
 
 	FC:PhysicsInit(SOLID_VPHYSICS)	
 	constraint.AdvBallsocket(
@@ -130,145 +129,13 @@ function ENT:Initialize()
 		0.1, --xfric
 		0.1, --yfric
 		1, --zfric
-		0 --rotonly
+		0, --rotonly
+		1 --collide		
 	)    	
-	FC:GetPhysicsObject():SetMass(2000)	
+	FC:GetPhysicsObject():SetMass(3000)	
 
 	table.insert(train.TrainEntities,self)      
-    table.insert(self.TrainEntities,train)	
-
-    if IsValid(self:GetPhysicsObject()) then
-        train.NormalMass = self:GetPhysicsObject():GetMass()
-    end
-    if IsValid(RB:GetPhysicsObject()) then
-        train.NormalMass = RB:GetPhysicsObject():GetMass()
-    end
-	
-	--[[local Map = game.GetMap():lower() or ""	
-	if Map:find("gm_mustox_neocrimson_line") or
-	Map:find("gm_mus_neoorange") or
-	Map:find("gm_metro_kalinin") or	
-	Map:find("gm_metro_nekrasovskaya_line") or	
-	Map:find("gm_metro_pink_line_redux") or
-	Map:find("gm_jar_pll_redux") or
-	Map:find("gm_metro_crossline") or	
-	Map:find("gm_metro_mosldl") or	
-	Map:find("gm_metro_nsk_line") or		
-	Map:find("gm_metro_jar_imagine_line") or
-	Map:find("gm_smr_1987") then
-	
-	constraint.AdvBallsocket( 
-		RB,
-		self,
-		0, 
-		0, 
-		Vector(-10,0,0),
-		pos, 
-		0, 
-		0, 
-		
-        0, --xmin 
-        0, --ymin 
-        -90, --zmin
-        0, --xmax
-        0, --ymax
-        90, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		false		
-	)
-	
-	else]]
-	
-		local xmin = -2
-		local xmax = 2
-		local ymin = -2
-		local ymax = 2				
-		local zmin = -25
-		local zmax = 25
-	
-		local x2 = -10
-		local vct = Vector(x2,0,30)
-		local vct1 = Vector(x2,0,140)
-		local vct2 = Vector(x2,0,90)		
-	
-	constraint.AdvBallsocket( 
-		RB,
-		self,
-		0, 
-		0, 
-		vct,
-		pos, 
-		0, 
-		0, 
-		
-        xmin, --xmin 
-        ymin, --ymin 
-        zmin, --zmin
-        xmax, --xmax
-        ymax, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		1, --rotonly
-		1,--nocollide
-		true		
-	) 
-	constraint.AdvBallsocket( 
-		RB,
-		self,
-		0, 
-		0, 
-		vct1,
-		pos, 
-		0, 
-		0, 
-		
-        xmin, --xmin 
-        ymin, --ymin 
-        zmin, --zmin
-        xmax, --xmax
-        ymax, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		true		
-	)
-	constraint.AdvBallsocket( 
-		RB,
-		self,
-		0, 
-		0, 
-		vct2,
-		pos, 
-		0, 
-		0, 
-		
-        xmin, --xmin 
-        ymin, --ymin 
-        zmin, --zmin
-        xmax, --xmax
-        ymax, --ymax
-        zmax, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		true		
-	) 	
-	--end
+    table.insert(self.TrainEntities,train)
     end)
 end
 
@@ -291,7 +158,7 @@ function ENT:TrainSpawnerUpdate()
 			train.Pneumatic.RightDoorSpeed[k] = -3.5 + math.random(sp,sp1) / 6	
 		end	
 
-    self:UpdateLampsColors()
+    train:UpdateLampsColors()
 	
 end
 
