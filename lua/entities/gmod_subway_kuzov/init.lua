@@ -27,6 +27,8 @@ function ENT:Initialize()
 	self.NoTrain = false 
     self.BaseClass.Initialize(self)
 	
+    self.NormalMass = 17000	
+	
     self.PassengerSeat = self:CreateSeat("passenger",Vector(-135,-40,-25),Angle(0,90,0),"models/nova/airboat_seat.mdl")
     self.PassengerSeat2 = self:CreateSeat("passenger",Vector(-135,40,-25),Angle(0,270,0),"models/nova/airboat_seat.mdl")  
     self.PassengerSeat3 = self:CreateSeat("passenger",Vector(95,40,-25),Angle(0,270,0),"models/nova/airboat_seat.mdl") 
@@ -44,10 +46,7 @@ function ENT:Initialize()
 		[14] = { "dynamiclight",    Vector( 220, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500 , fov=180,farz = 128 },
 		[15] = { "dynamiclight",    Vector( 10, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500 , fov=180,farz = 128 },
         [16] = { "dynamiclight",    Vector( -260, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 250, fov=180,farz = 128 },
-    }	
-	
-    SetGlobalInt("metrostroi_train_count",Metrostroi.TrainCount(nil))
-    net.Start("MetrostroiTrainCount") net.Broadcast(nil)			
+    }		
 	
 	self.InteractionZones = {	
 		{
@@ -108,7 +107,7 @@ function ENT:Initialize()
 		1, --zfric
 		0 --rotonly
 	)    	
-	RC:GetPhysicsObject():SetMass(3000)
+	RC:GetPhysicsObject():SetMass(5000)
     constraint.NoCollide(self,train,0,0)
     constraint.NoCollide(self,RB.Wheels,0,0)
     constraint.NoCollide(train,RB.Wheels,0,0)		
@@ -136,22 +135,25 @@ function ENT:Initialize()
 		1, --zfric
 		0, --rotonly
 		1 --collide		
-	)    	
-	
+	) 	
+
+    if IsValid(FC:GetPhysicsObject()) then
+        RC.NormalMass = FC:GetPhysicsObject():GetMass()
+    end 	
     if IsValid(self:GetPhysicsObject()) then
-        train.NormalMass = self:GetPhysicsObject():GetMass()
+        RB.NormalMass = self:GetPhysicsObject():GetMass()
     end
-    if IsValid(PB:GetPhysicsObject()) then
-        train.NormalMass = PB:GetPhysicsObject():GetMass()
+    --[[if IsValid(PB:GetPhysicsObject()) then
+        self.NormalMass = PB:GetPhysicsObject():GetMass(15000)
     end	
     if IsValid(RB:GetPhysicsObject()) then
-        train.NormalMass = RB:GetPhysicsObject():GetMass()
+        PB.NormalMass = RB:GetPhysicsObject():GetMass()
     end	
     if IsValid(FB:GetPhysicsObject()) then
-        train.NormalMass = FB:GetPhysicsObject():GetMass()
-    end		
+        RB.NormalMass = FB:GetPhysicsObject():GetMass(15000)
+    end]]		
 	
-	FC:GetPhysicsObject():SetMass(3000)		
+	FC:GetPhysicsObject():SetMass(5000)		
 
 	table.insert(train.TrainEntities,self)      
     table.insert(self.TrainEntities,train)

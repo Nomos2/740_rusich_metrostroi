@@ -269,10 +269,10 @@ function ENT:CreatePricep(pos,ang)
         0, --torquelimit
         -0, --xmin
         -0, --ymin
-        -35, --zmin
+        -55, --zmin
         0, --xmax
         0, --ymax
-        35, --zmax
+        55, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -290,10 +290,10 @@ function ENT:CreatePricep(pos,ang)
         0, --torquelimit
         -0, --xmin
         -0, --ymin
-        -35, --zmin
+        -55, --zmin
         0, --xmax
         0, --ymax
-        35, --zmax
+        55, --zmax
         0, --xfric
         0, --yfric
         0, --zfric

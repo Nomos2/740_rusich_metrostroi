@@ -95,9 +95,9 @@ end
 		self.FrontCouple.m_tblToolsAllowed = {"none"}
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
 		self.FrontBogey.m_tblToolsAllowed = {"none"}	
-		self.RearBogey.m_tblToolsAllowed = {"none"}
+		--self.RearBogey.m_tblToolsAllowed = {"none"}
 		self.RearBogey:SetSolid(SOLID_VPHYSICS)		
-		--self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
+		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
 		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
@@ -492,8 +492,7 @@ function ENT:CreatePricep(pos,ang)
 	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())
-	ent:DrawShadow(false)
-	ent:SetUseType( SIMPLE_USE )	
+	ent:DrawShadow(false)	
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
@@ -512,19 +511,19 @@ function ENT:CreatePricep(pos,ang)
 	constraint.RemoveConstraints(self.RearBogey, "Axis")
     constraint.AdvBallsocket(
         self,
-        self.RearBogey,
+        RB,
         0, --bone
         0, --bone    
-        self.RearBogey.SpawnPos,
+        RB.SpawnPos,
 		pos,
         0, --forcelimit
         0, --torquelimit
         -0, --xmin
         -0, --ymin
-        -35, --zmin
+        -90, --zmin
         0, --xmax
         0, --ymax
-        35, --zmax
+        90, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -533,29 +532,29 @@ function ENT:CreatePricep(pos,ang)
     ) 	
     constraint.AdvBallsocket(
         ent,
-        self.RearBogey,
+        RB,
         0, --bone
         0, --bone    
-        self.RearBogey.SpawnPos+Vector(350,0,60),
+        RB.SpawnPos+Vector(320,0,60),
 		pos,
         0, --forcelimit
         0, --torquelimit
         -0, --xmin
         -0, --ymin
-        -35, --zmin
+        -90, --zmin
         0, --xmax
         0, --ymax
-        35, --zmax
+        90, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
-        0, --rotonly
+        1, --rotonly
         1 --nocollide
-    ) 
+    )
 	
-    if IsValid(PB:GetPhysicsObject()) then
-        self.NormalMass = PB:GetPhysicsObject():GetMass()
-    end		
+    --if IsValid(PB:GetPhysicsObject()) then
+        --self.NormalMass = PB:GetPhysicsObject():GetMass()
+    --end		
 	
 	Metrostroi.RerailBogey(self.FrontBogey)                
     Metrostroi.RerailBogey(self.RearBogey)
