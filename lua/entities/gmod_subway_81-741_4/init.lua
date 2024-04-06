@@ -240,35 +240,11 @@ function ENT:CreatePricep(pos,ang)
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())
 	ent:DrawShadow(false)
+	ent:SetUseType( SIMPLE_USE )	
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
 	local RB = self.RearBogey
-	
-	constraint.AdvBallsocket( 
-		self,
-		RB,
-		0, 
-		0, 
-        RB.SpawnPos,
-        pos, 
-		0, 
-		0, 
-		
-        -0, --xmin 
-        -0, --ymin 
-        -35, --zmin
-        0, --xmax
-        0, --ymax
-        35, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		true
-	)	
 	
 	self.PricepBogey = ent:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
@@ -280,36 +256,51 @@ function ENT:CreatePricep(pos,ang)
 	PB:SetNWInt("Async",true)
 	PB.m_tblToolsAllowed = {"none"}	
 	PB.DisableContacts = true
-	
-	constraint.AdvBallsocket( 
-		ent,
-		RB,
-		0, 
-		0, 
-        RB.SpawnPos-Vector(-340,0,0),    
-		pos, 
-		0, 
-		0, 
-		
-        -0, --xmin 
-        -0, --ymin 
+	constraint.RemoveConstraints(self.RearBogey, "Axis")
+	constraint.RemoveConstraints(self.RearBogey, "AdvBallsocket")	
+    constraint.AdvBallsocket(
+        self,
+        self.RearBogey,
+        0, --bone
+        0, --bone    
+        self.RearBogey.SpawnPos,
+		pos,
+        0, --forcelimit
+        0, --torquelimit
+        -0, --xmin
+        -0, --ymin
         -35, --zmin
         0, --xmax
         0, --ymax
         35, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		true		
-	)  	
+        0, --xfric
+        0, --yfric
+        0, --zfric
+        0, --rotonly
+        1 --nocollide
+    ) 	
+    constraint.AdvBallsocket(
+        ent,
+        self.RearBogey,
+        0, --bone
+        0, --bone    
+        self.RearBogey.SpawnPos+Vector(350,0,60),
+		pos,
+        0, --forcelimit
+        0, --torquelimit
+        -0, --xmin
+        -0, --ymin
+        -35, --zmin
+        0, --xmax
+        0, --ymax
+        35, --zmax
+        0, --xfric
+        0, --yfric
+        0, --zfric
+        0, --rotonly
+        1 --nocollide
+    )   	
 	
-	
-    if IsValid(ent:GetPhysicsObject()) then
-        self.NormalMass = ent:GetPhysicsObject():GetMass()
-    end	
     if IsValid(RB:GetPhysicsObject()) then
         self.NormalMass = RB:GetPhysicsObject():GetMass()
     end		

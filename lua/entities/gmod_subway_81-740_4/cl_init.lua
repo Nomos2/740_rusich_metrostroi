@@ -1768,7 +1768,7 @@ function ENT:ReInitBogeySounds(bogey)
     bogey.SoundNames = {}
     bogey.EngineSNDConfig = {}
     
-	if self:GetNW2Int("MotorType")==1 then		
+if self:GetNW2Int("MotorType")==1 then		
 	bogey.MotorSoundType = bogey:GetNWInt("MotorSoundType",1)
     for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     table.insert(bogey.EngineSNDConfig,{"ted1_740" ,08,00,16,  1})--40
@@ -1842,7 +1842,6 @@ function ENT:ReInitBogeySounds(bogey)
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
 end
-	
 if MotorType==2 then		
     for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     table.insert(bogey.EngineSNDConfig,{"ted1_740" ,08,00,16,  1})--40
@@ -2226,7 +2225,7 @@ function ENT:Think()
 	self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
 	end	
-end
+end	
 
 for k=0,3 do
     self.ClientProps["TrainNumberR"..k] = {
@@ -2272,6 +2271,7 @@ for k=0,3 do
 			end
 		end
 	end
+	
 	 self:SetLightPower(3,self.Door5 and self:GetPackedBool("AppLights"),self:GetPackedBool("AppLights") and 1 or 0)
     --ANIMS
     self:Animate("brake_line", self:GetPackedRatio("BL"), 0, 0.753,  256,2)
@@ -2282,8 +2282,8 @@ for k=0,3 do
     self:SetSoundState("ring_cams",self:GetPackedBool("CAMSRing",false) and 1.6 or 0,1)
 	
 	--Вольтаж
-    self:Animate("volt_hv",self:GetPackedRatio("HV"),1.0,0.722,94,4)
-    self:Animate("amp_i13",self:GetPackedRatio("I13"),1,0.722,92,2) --I13
+    self:Animate("volt_hv",self:GetPackedRatio("HV"),1.0,0.722,94,4,false)
+    self:Animate("amp_i13",self:GetPackedRatio("I13"),1,0.722,92,2,false) --I13
 
     self:Animate("controller", (self:GetPackedRatio("Controller")+4)/8, 0, 0.425,  2.5,false)
 
@@ -2316,11 +2316,7 @@ for k=0,3 do
     self:ShowHide("Zavod_table_front",ZavodTable==1)
 	
 	local Map = game.GetMap():lower() or ""	
-	local kek1 = Map:find("gm_metro_crossline_n4a") 
-	or Map:find("gm_metro_crossline_c4") 
-	or Map:find("gm_metro_crossline_m12") 
-	or Map:find("gm_metro_crossline_n3") 
-	or Map:find("gm_smr_1987")
+	local kek1 = Map:find("gm_smr_1987")
 	or Map:find("gm_metro_pink_line") 
 	or Map:find("gm_metro_surfacemetro")
 	or Map:find("gm_metro_sunnytown")

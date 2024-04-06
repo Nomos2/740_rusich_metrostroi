@@ -85,8 +85,8 @@ end
 	self.ASSensor = self:AddLightSensor(Vector(515-9,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
 	
     -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 520-25,0,-80),Angle(0,180,0),true,"740ALS")	
-        self.RearBogey  = self:CreateBogey(Vector(-15-25.5,0,-80),Angle(0,0,0),false,"740G")
+        self.FrontBogey = self:CreateBogey(Vector( 495,0,-80),Angle(0,180,0),true,"740ALS")	
+        self.RearBogey  = self:CreateBogey(Vector(-40.5,0,-80),Angle(0,0,0),false,"740G")
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)			
         self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
@@ -97,12 +97,12 @@ end
 		self.FrontBogey.m_tblToolsAllowed = {"none"}	
 		self.RearBogey.m_tblToolsAllowed = {"none"}
 		self.RearBogey:SetSolid(SOLID_VPHYSICS)		
-		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
+		--self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
 		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)
-		self:SetNW2Entity("RearCouple",self.RearCouple)	
+		self:SetNW2Entity("RearCouple",self.RearCouple)
 	
 		local opt = Vector(70,0,0)
 		self.FrontCouple.CouplingPointOffset = opt		 
@@ -493,35 +493,11 @@ function ENT:CreatePricep(pos,ang)
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())
 	ent:DrawShadow(false)
+	ent:SetUseType( SIMPLE_USE )	
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
 	local RB = self.RearBogey
-	
-	constraint.AdvBallsocket( 
-		self,
-		RB,
-		0, 
-		0, 
-        RB.SpawnPos,
-        pos, 
-		0, 
-		0, 
-		
-        -0, --xmin 
-        -0, --ymin 
-        -35, --zmin
-        0, --xmax
-        0, --ymax
-        35, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		true
-	)	
 	
 	self.PricepBogey = ent:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
@@ -532,39 +508,53 @@ function ENT:CreatePricep(pos,ang)
 	PB:SetNWInt("MotorSoundType",2)
 	PB:SetNWInt("Async",true)
 	PB.m_tblToolsAllowed = {"none"}	
-	PB.DisableContacts = true	
-	
-	constraint.AdvBallsocket( 
-		ent,
-		RB,
-		0, 
-		0, 
-        RB.SpawnPos-Vector(-340,0,0),    
-		pos, 
-		0, 
-		0, 
-		
-        -0, --xmin 
-        -0, --ymin 
+	PB.DisableContacts = true
+	constraint.RemoveConstraints(self.RearBogey, "Axis")
+    constraint.AdvBallsocket(
+        self,
+        self.RearBogey,
+        0, --bone
+        0, --bone    
+        self.RearBogey.SpawnPos,
+		pos,
+        0, --forcelimit
+        0, --torquelimit
+        -0, --xmin
+        -0, --ymin
         -35, --zmin
         0, --xmax
         0, --ymax
         35, --zmax
-		
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1,--nocollide
-		true		
-	)  	
+        0, --xfric
+        0, --yfric
+        0, --zfric
+        0, --rotonly
+        1 --nocollide
+    ) 	
+    constraint.AdvBallsocket(
+        ent,
+        self.RearBogey,
+        0, --bone
+        0, --bone    
+        self.RearBogey.SpawnPos+Vector(350,0,60),
+		pos,
+        0, --forcelimit
+        0, --torquelimit
+        -0, --xmin
+        -0, --ymin
+        -35, --zmin
+        0, --xmax
+        0, --ymax
+        35, --zmax
+        0, --xfric
+        0, --yfric
+        0, --zfric
+        0, --rotonly
+        1 --nocollide
+    ) 
 	
-	
-    if IsValid(ent:GetPhysicsObject()) then
-        self.NormalMass = ent:GetPhysicsObject():GetMass()
-    end	
-    if IsValid(RB:GetPhysicsObject()) then
-        self.NormalMass = RB:GetPhysicsObject():GetMass()
+    if IsValid(PB:GetPhysicsObject()) then
+        self.NormalMass = PB:GetPhysicsObject():GetMass()
     end		
 	
 	Metrostroi.RerailBogey(self.FrontBogey)                

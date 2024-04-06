@@ -46,6 +46,9 @@ function ENT:Initialize()
         [16] = { "dynamiclight",    Vector( -260, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 250, fov=180,farz = 128 },
     }	
 	
+    SetGlobalInt("metrostroi_train_count",Metrostroi.TrainCount(nil))
+    net.Start("MetrostroiTrainCount") net.Broadcast(nil)			
+	
 	self.InteractionZones = {	
 		{
 			ID = "RearBrakeLineIsolationToggle",
@@ -76,14 +79,12 @@ function ENT:Initialize()
 	timer.Simple(0.1, function()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
-    if not IsValid(train) then return end	
-	self.RearBogey = self:GetNW2Entity("RearBogey")
-	train.RearCouple = train:GetNW2Entity("RearCouple")		
-	train.FrontCouple = train:GetNW2Entity("FrontCouple")		
-	self.FrontBogey = train:GetNW2Entity("FrontBogey")
-	train.PricepBogey = train:GetNW2Entity("PricepBogey")
-	local PB = train.PricepBogey		
-	local FB = train.FrontBogey 				
+    if not IsValid(train) then return end
+	train:SetNW2Entity("FrontBogey.Wheels",train.FrontBogey.Wheels)	
+	train:SetNW2Entity("RearBogey.Wheels",train.RearBogey.Wheels)
+	local FB = train.FrontBogey	
+	local PB = train.PricepBogey	
+	local RB = train.RearBogey		
 	local RC = train.RearCouple
 	local FC = train.FrontCouple
 	RC:PhysicsInit(SOLID_VPHYSICS)	
@@ -108,7 +109,11 @@ function ENT:Initialize()
 		0 --rotonly
 	)    	
 	RC:GetPhysicsObject():SetMass(3000)
-    constraint.NoCollide(self,train,0,0)	
+    constraint.NoCollide(self,train,0,0)
+    constraint.NoCollide(self,RB.Wheels,0,0)
+    constraint.NoCollide(train,RB.Wheels,0,0)		
+    constraint.NoCollide(train,RB,0,0)	
+    constraint.NoCollide(self,RB,0,0)		
 
 	FC:PhysicsInit(SOLID_VPHYSICS)	
 	constraint.AdvBallsocket(
@@ -132,7 +137,21 @@ function ENT:Initialize()
 		0, --rotonly
 		1 --collide		
 	)    	
-	FC:GetPhysicsObject():SetMass(3000)	
+	
+    if IsValid(self:GetPhysicsObject()) then
+        train.NormalMass = self:GetPhysicsObject():GetMass()
+    end
+    if IsValid(PB:GetPhysicsObject()) then
+        train.NormalMass = PB:GetPhysicsObject():GetMass()
+    end	
+    if IsValid(RB:GetPhysicsObject()) then
+        train.NormalMass = RB:GetPhysicsObject():GetMass()
+    end	
+    if IsValid(FB:GetPhysicsObject()) then
+        train.NormalMass = FB:GetPhysicsObject():GetMass()
+    end		
+	
+	FC:GetPhysicsObject():SetMass(3000)		
 
 	table.insert(train.TrainEntities,self)      
     table.insert(self.TrainEntities,train)

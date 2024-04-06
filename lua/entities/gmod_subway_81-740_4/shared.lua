@@ -89,12 +89,12 @@ function ENT:InitializeSounds()
 		
 		self.SoundNames[id2.."a"] = "subway_trains/740_4/bogey/wheels/street/yakobs/street_"..i.."a.mp3"
 		self.SoundNames[id2.."b"] = "subway_trains/740_4/bogey/wheels/street/yakobs/street_"..i.."b.mp3"
-		self.SoundPositions[id2.."a"] = {700,1e9,Vector(-15-25.5,0,-80),1.5}
+		self.SoundPositions[id2.."a"] = {700,1e9,Vector(-40.5,0,-80),1.5}
 		self.SoundPositions[id2.."b"] = self.SoundPositions[id2.."a"]
 		
 		self.SoundNames[id3.."a"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."a.mp3"
 		self.SoundNames[id3.."b"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."b.mp3"
-		self.SoundPositions[id3.."a"] = {700,1e9,Vector(-532-25,0,-80),1.5}
+		self.SoundPositions[id3.."a"] = {700,1e9,Vector(-557,0,-80),1.5}
 		self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]		
 	end
 	
