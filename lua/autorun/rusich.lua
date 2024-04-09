@@ -1,6 +1,6 @@
 if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Metrostroi Project') then --пояснение, на МСМП есть свой скрипт на замену звуков телеги, потому, в случае обнаружения этого сервера звуки не включаются.
 	if SERVER then
-		timer.Simple(1,function()		
+		timer.Simple(1,function()
 			-- регистрируем тележки
 			local tbl = scripted_ents.Get("gmod_train_bogey")
 			if tbl then	
@@ -17,7 +17,7 @@ if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Me
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
 					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
-				}				
+				}
 				tbl.Types["740G"] = { -- тележка + гармошка
 					"models/metrostroi_train/81-740/bogey/metro_bogey_garm.mdl",
 					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
@@ -34,7 +34,7 @@ if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Me
 				}
 				scripted_ents.Register(tbl,"gmod_train_bogey") -- регистрируем
 			end
-			
+
 			-- регистрируем сцепку
 			local tbl = scripted_ents.Get("gmod_train_couple")
 			if tbl then
@@ -60,7 +60,7 @@ if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Me
     }
     
     if CLIENT then
-        timer.Simple(1, function()		
+        timer.Simple(1, function()
             local BogeyTbl = scripted_ents.GetStored("gmod_train_bogey").t
             
             BogeyTbl.SoundNames["ted1_740"]  = "subway_trains/740_4/engines/engine_8.wav"
@@ -96,7 +96,7 @@ timer.Simple(0,function()
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
 					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
-				}			
+				}
 				tbl.Types["740PER"] = { -- тележка
 					"models/metrostroi_train/81-740/bogey/metro_bogey_740.mdl",
 					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
@@ -120,15 +120,15 @@ timer.Simple(0,function()
 				}
 				scripted_ents.Register(tbl,"gmod_train_bogey") -- регистрируем
 			end
-			
-			-- регистрируем сцепку
+
+	-- регистрируем сцепку
 			local tbl = scripted_ents.Get("gmod_train_couple")
 			if tbl then
 				tbl.Types["740"] = { -- сцепка
 					"models/metrostroi_train/81-740/bogey/metro_couple_740.mdl",Vector(65,0,0),Vector(65.1,1,-4.9),Angle(0,-90,0)
 				}
 				scripted_ents.Register(tbl,"gmod_train_couple")	-- регистрируем
-				print("[Metrostroi 81-740] Inject sounds")				
+				print("[Metrostroi 81-740] Inject sounds")
 				end
 			end)	
 		end 	

@@ -506,7 +506,7 @@ function ENT:Initialize()
     end
 	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
-	PricepBogey = self:GetNW2Entity("PricepBogey")		
+	PricepBogey = self:GetNW2Entity("PricepBogey")
 	self.RearBogey = self:GetNW2Entity("RearBogey")
 	self.FrontCouple = self:GetNW2Entity("FrontCouple")
 	self.RearCouple = self:GetNW2Entity("RearCouple")	
@@ -521,7 +521,7 @@ function ENT:ReInitBogeySounds(bogey)
     bogey.SoundNames = {}
     bogey.EngineSNDConfig = {}
     
-	if self:GetNW2Int("MotorType")==1 then		
+	if self:GetNW2Int("MotorType")==1 then
 	bogey.MotorSoundType = bogey:GetNWInt("MotorSoundType",1)
     for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     table.insert(bogey.EngineSNDConfig,{"ted1_740" ,08,00,16,  1})--40
@@ -595,7 +595,7 @@ function ENT:ReInitBogeySounds(bogey)
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
 end
-if MotorType==2 then		
+if MotorType==2 then
     for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     table.insert(bogey.EngineSNDConfig,{"ted1_740" ,08,00,16,  1})--40
     table.insert(bogey.EngineSNDConfig,{"ted2_740" ,16,08-4,24,1})--35
@@ -797,10 +797,9 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
-	
-end		
+end
 if MotorType==5 then
-for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end		
+for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
 	table.insert(bogey.EngineSNDConfig,{"ted1_740" ,08,00,16,1*1})
 	table.insert(bogey.EngineSNDConfig,{"ted2_740" ,16,08-4,24,1*1})
 	table.insert(bogey.EngineSNDConfig,{"ted3_740" ,24,16-4,32,1*1})
@@ -868,7 +867,7 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/740_4/bogey/skrip1_"..skr..".wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/740_4/bogey/skrip2_"..skripit..".wav"
-		
+
     -- Remove old sounds
     if bogey.Sounds then
         for k,v in pairs(bogey.Sounds) do
@@ -901,9 +900,9 @@ function ENT:Think()
     if not self.RenderClientEnts or self.CreatingCSEnts then return end	
 	
 	local PricepBogey = self:GetNW2Entity("PricepBogey")	
-	local refresh = false--true		
+	local refresh = false--true
 	
-	if self:GetNW2Int("MotorType")==1 then		
+	if self:GetNW2Int("MotorType")==1 then
 	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V1/engine_8.wav" or self.FrontBogey.EngineSNDConfig and 
 	self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
@@ -918,7 +917,7 @@ function ENT:Think()
 	end		
 	end
 	
-	if self:GetNW2Int("MotorType")==2 then		
+	if self:GetNW2Int("MotorType")==2 then
 	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V4/engine_8.wav" or self.FrontBogey.EngineSNDConfig and 
 	self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
@@ -933,7 +932,7 @@ function ENT:Think()
 	end	
 	end
 	
-	if self:GetNW2Int("MotorType")==3 then		
+	if self:GetNW2Int("MotorType")==3 then
 	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_720"] ~= "subway_trains/bogey/engines/720/speed_8.wav"  or self.FrontBogey.EngineSNDConfig and 
 	self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 0.4) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
@@ -945,10 +944,10 @@ function ENT:Think()
 	if IsValid(self.RearBogey) and self.RearBogey.SoundNames and (self.RearBogey.SoundNames["ted1_720"] ~= "subway_trains/bogey/engines/720/speed_8.wav" or self.RearBogey.EngineSNDConfig and 
 	self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 0.4) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
-	end		
+	end
 	end
 	
-	if self:GetNW2Int("MotorType")==4 then		
+	if self:GetNW2Int("MotorType")==4 then
 	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V3/engine_8.wav" or self.FrontBogey.EngineSNDConfig and 
 	self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
@@ -963,11 +962,11 @@ function ENT:Think()
 	end	
 	end
 	
-	if self:GetNW2Int("MotorType")==5 then		
+	if self:GetNW2Int("MotorType")==5 then
 	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V2/engine_8.wav" or self.FrontBogey.EngineSNDConfig and 
 	self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
-	end		
+	end
 	if IsValid(PricepBogey) and PricepBogey.SoundNames and PricepBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V2/engine_8.wav" or PricepBogey.EngineSNDConfig and 
 	PricepBogey.EngineSNDConfig[1] and PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
 		self:ReInitBogeySounds(PricepBogey)
@@ -994,22 +993,22 @@ function self:UpdateWagonNumber()
 		self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	
 		local train1 = self.HeadTrain1 
 		if not IsValid(train1) then return end
-		
+
 for k=0,3 do
-        --if i< count then			
-			if self.WagonNumber then				
-            local rightNum = self.ClientEnts["TrainNumberR"..k]		
+        --if i< count then	
+			if self.WagonNumber then
+            local rightNum = self.ClientEnts["TrainNumberR"..k]
 	        local num = math.floor(self.WagonNumber%(10^(k+1))/10^k)
             if IsValid(rightNum) then
 				rightNum:SetPos(self:LocalToWorld(Vector(635-k*6.6+4*6.6/2-17.8,-63.35,18)))
                 rightNum:SetSkin(num)
             end	
             local leftNum = train1.ClientEnts["TrainNumberL"..k]	
-	        local num = math.floor(self.WagonNumber%(10^(k+1))/10^k)										
+	        local num = math.floor(self.WagonNumber%(10^(k+1))/10^k)
             if IsValid(leftNum) then	
                 leftNum:SetLocalPos(Vector(-310+k*6.6-4*6.6/2, 63.4, 18))
-                leftNum:SetSkin(num)		
-            end  								
+                leftNum:SetSkin(num)
+            end  		
 			end
 		end
 end
@@ -1039,7 +1038,7 @@ end
 	local kr = self,train1	
 for avar = 1,2 do	
     local colV = kr:GetNW2Vector("Lamp7404"..avar)
-    local col = Color(colV.x,colV.y,colV.z)		
+    local col = Color(colV.x,colV.y,colV.z)
     self:ShowHideSmooth("lamps_salon_on_avar_front"..avar,self:Animate("LampsEmer",self:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,1,5,false),col)	
 end	
 
@@ -1056,7 +1055,7 @@ end
     local PVZ_otsek = self:GetNW2Bool("PVZ_otsek")
     self:HidePanel("PVZ_otsek_close",not PVZ_otsek)
     self:HidePanel("PVZ_otsek_open", PVZ_otsek)	
-    self:HidePanel("PVZ",not PVZ_otsek)		
+    self:HidePanel("PVZ",not PVZ_otsek)
 	
     self:ShowHide("otsek",not PVZ_otsek)	
     self:ShowHide("otsek_open",PVZ_otsek)	
@@ -1076,12 +1075,12 @@ end
             --print(state,self.DoorStates[state])
             if (state ~= 1 and state ~= 0) ~= self.DoorStates[id] then
                 if doorstate and state < 1 or not doorstate and state > 0 then
-					if doorstate then self:PlayOnce(sid.."s","",1,math.Rand(0.9,1.3)) end--math.Rand(0.9,1.3))					
+					if doorstate then self:PlayOnce(sid.."s","",1,math.Rand(0.9,1.3)) end					
                 else
 					if state > 0 then
-                        self:PlayOnce(sid.."o","",1,math.Rand(0.9,1.3))					
+                        self:PlayOnce(sid.."o","",1,math.Rand(0.9,1.3))			
                     else
-                        self:PlayOnce(sid.."c","",1,math.Rand(0.9,1.3))						
+                        self:PlayOnce(sid.."c","",1,math.Rand(0.9,1.3))
                     end
                 end
                 self.DoorStates[id] = (state ~= 1 and state ~= 0)
@@ -1091,10 +1090,10 @@ end
             else
                 self.DoorLoopStates[id] = math.Clamp((self.DoorLoopStates[id] or 0) - 6*self.DeltaTime,0,1)
             end
-            self:SetSoundState(sid.."r",self.DoorLoopStates[id],0.9+self.DoorLoopStates[id]*0.1)			
+            self:SetSoundState(sid.."r",self.DoorLoopStates[id],0.9+self.DoorLoopStates[id]*0.1)	
             local n_l = "door"..b.."x"..k--.."a"
-			local n_r = "door"..b.."x"..k.."b"								
-            self:Animate(n_r,state,0,1,15,1)		
+			local n_r = "door"..b.."x"..k.."b"
+            self:Animate(n_r,state,0,1,15,1)
 			self:Animate(n_l,state,0,1,15,1)
         end
 	end
@@ -1126,14 +1125,14 @@ end
         self.VentState[i] = (self.VentState[i] + 10*((self.VentVol[i]/2)^3)*dT)%1
         local vol1 = math.max(0,self.VentVol[i]-1)
         local vol2 = math.max(0,(self.VentVol[i-1] or self.VentVol[i+1])-1)
-		
+
 		local VentSound = self:GetNW2Int("VentSound",1)	
 		if VentSound==1 then
         self:SetSoundState("vent"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
-		elseif		
+		elseif
 		VentSound==2 then
         self:SetSoundState("vent1"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
-		end				
+		end
     end	 
 	
     --local rol10 = math.Clamp(speed/5,0,1)*(1-math.Clamp((speed-50)/8,0,1))
@@ -1142,7 +1141,7 @@ end
     local rollings = math.max(self.TunnelCoeff*0.6,self.StreetCoeff)
     local tunstreet = (rollingi+rollings*0.2)
     local rol5 = math.Clamp(speed/5,0,1)*(1-math.Clamp((speed-10)/5,0,1))
-    local rol5p = Lerp((speed-5)/5,0.9,1.1)		
+    local rol5p = Lerp((speed-5)/5,0.9,1.1)
     local rol10 = math.Clamp(speed/12,0,1)*(1-math.Clamp((speed-20)/12,0,1))
     local rol10p = Lerp((speed-12)/12,0.9,1.1)
     local rol30 = math.Clamp((speed-20)/12,0,1)*(1-math.Clamp((speed-40)/12,0,1))
@@ -1179,9 +1178,9 @@ end
 	
     local state = self:GetPackedRatio("asynccurrent")--^1.5--RealTime()%2.5/2	
     local strength = self:GetPackedRatio("asyncstate")*(1-math.Clamp((speed-23)/23,0,1))*0.5
-		
+
     self:SetSoundState("ONIX", tunstreet*math.Clamp((state)/0.26+0.2,0,1)*strength, 1)--+math.Clamp(state,0,1)*0.1)
-    self:SetSoundState("chopper_onix", tunstreet*self:GetPackedRatio("chopper"), 1)			
+    self:SetSoundState("chopper_onix", tunstreet*self:GetPackedRatio("chopper"), 1)	
 
     local work = self:GetPackedBool("AnnPlay")
     for k,v in ipairs(self.AnnouncerPositions) do

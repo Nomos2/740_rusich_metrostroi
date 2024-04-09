@@ -107,7 +107,7 @@ function ENT:Initialize()
 		1, --zfric
 		0 --rotonly
 	)    	
-	RC:GetPhysicsObject():SetMass(5000)
+	RC:GetPhysicsObject():SetMass(3000)
     constraint.NoCollide(self,train,0,0)
     constraint.NoCollide(self,RB.Wheels,0,0)
     constraint.NoCollide(train,RB.Wheels,0,0)		
@@ -136,24 +136,15 @@ function ENT:Initialize()
 		0, --rotonly
 		1 --collide		
 	) 	
-
-    if IsValid(FC:GetPhysicsObject()) then
-        RC.NormalMass = FC:GetPhysicsObject():GetMass()
-    end 	
-    if IsValid(self:GetPhysicsObject()) then
-        RB.NormalMass = self:GetPhysicsObject():GetMass()
-    end
-    --[[if IsValid(PB:GetPhysicsObject()) then
-        self.NormalMass = PB:GetPhysicsObject():GetMass(15000)
-    end	
+	
     if IsValid(RB:GetPhysicsObject()) then
         PB.NormalMass = RB:GetPhysicsObject():GetMass()
-    end	
-    if IsValid(FB:GetPhysicsObject()) then
-        RB.NormalMass = FB:GetPhysicsObject():GetMass(15000)
-    end]]		
+    end
+    if IsValid(self:GetPhysicsObject()) then
+        train.NormalMass = self:GetPhysicsObject():GetMass()
+    end		
 	
-	FC:GetPhysicsObject():SetMass(5000)		
+	FC:GetPhysicsObject():SetMass(3000)		
 
 	table.insert(train.TrainEntities,self)      
     table.insert(self.TrainEntities,train)

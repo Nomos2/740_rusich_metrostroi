@@ -39,7 +39,7 @@ function ENT:GetStandingArea()
 	return Vector(520-15-9,-25,-47),Vector(15,25,-46)
 end 
 
-local function GetDoorPosition(n,G)	--Правые двери			--Левые двери
+local function GetDoorPosition(n,G)	--Правые двери	--Левые двери
 	return Vector(651.5-15  - 35.0*(1-G) -  338.8*n-144, 66*(1-2*G), 4.25)
 end
 
@@ -62,40 +62,40 @@ function ENT:InitializeSounds()
 	for i = 1,10 do
 		local id1 = Format("b1tunnel_%d",i)
 		local id2 = Format("b2tunnel_%d",i)
-		local id3 = Format("b3tunnel_%d",i)		
+		local id3 = Format("b3tunnel_%d",i)
 		self.SoundNames[id1.."a"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."a.wav"
 		self.SoundNames[id1.."b"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."b.wav"
 		self.SoundPositions[id1.."a"] = {700,1e9,Vector( 520-25,0,-80),1}
 		self.SoundPositions[id1.."b"] = self.SoundPositions[id1.."a"]
-		
+
 		self.SoundNames[id2.."a"] = "subway_trains/740_4/bogey/wheels/tunnel/yakobs/st"..i.."a.wav"
 		self.SoundNames[id2.."b"] = "subway_trains/740_4/bogey/wheels/tunnel/yakobs/st"..i.."b.wav"
 		self.SoundPositions[id2.."a"] = {700,1e9,Vector(-15-25.5,0,-80),1}
 		self.SoundPositions[id2.."b"] = self.SoundPositions[id2.."a"]
-		
+
 		self.SoundNames[id3.."a"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."a.wav"
 		self.SoundNames[id3.."b"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."b.wav"
 		self.SoundPositions[id3.."a"] = {700,1e9,Vector(-532-25,0,-80),1}
-		self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]		
+		self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]
 	end
 	for i = 1,14 do
 		local id1 = Format("b1street_%d",i)
 		local id2 = Format("b2street_%d",i)
-		local id3 = Format("b3street_%d",i)		
+		local id3 = Format("b3street_%d",i)
 		self.SoundNames[id1.."a"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."a.mp3"
 		self.SoundNames[id1.."b"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."b.mp3"
 		self.SoundPositions[id1.."a"] = {700,1e9,Vector(520-25,0,-80),1.5}
 		self.SoundPositions[id1.."b"] = self.SoundPositions[id1.."a"]
-		
+
 		self.SoundNames[id2.."a"] = "subway_trains/740_4/bogey/wheels/street/yakobs/street_"..i.."a.mp3"
 		self.SoundNames[id2.."b"] = "subway_trains/740_4/bogey/wheels/street/yakobs/street_"..i.."b.mp3"
 		self.SoundPositions[id2.."a"] = {700,1e9,Vector(-40.5,0,-80),1.5}
 		self.SoundPositions[id2.."b"] = self.SoundPositions[id2.."a"]
-		
+
 		self.SoundNames[id3.."a"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."a.mp3"
 		self.SoundNames[id3.."b"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."b.mp3"
 		self.SoundPositions[id3.."a"] = {700,1e9,Vector(-557,0,-80),1.5}
-		self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]		
+		self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]
 	end
 	
 	--Код id3 не работает в задней секции как надо, стуков нет. 
@@ -133,7 +133,7 @@ function ENT:InitializeSounds()
     self.SoundPositions["ring_new"] = {100,1e9,Vector(803-159-9,25.6,-26.3),0.45}	
 
     self.SoundNames["ring_1"] = {loop=0.0,"subway_trains/740_4/rings/ring_start3.wav","subway_trains/740_4/rings/ring_loop3.wav","subway_trains/740_4/rings/ring_end3.wav"}
-    self.SoundPositions["ring_1"] = {100,1e9,Vector(803-159-9,25.6,-26.3),0.45}		
+    self.SoundPositions["ring_1"] = {100,1e9,Vector(803-159-9,25.6,-26.3),0.45}
 	
 	self.SoundNames["ring_vityaz"] = "subway_trains/740_4/rings/ring_start1.wav"
 	self.SoundPositions["ring_vityaz"] = {100,1e9,Vector(803-159-9,25.6,-26.3),0.45}
@@ -231,14 +231,14 @@ function ENT:InitializeSounds()
     }	
 	self.SoundNames["button_door_off_rez"] = {
         "subway_trains/740_4/switches/button/door_power_release.mp3"
-    }		
+    }
 
 	self.SoundNames["button_doorchg_on"] = {
         "subway_trains/740_4/switches/button/door_change_press"..r..".mp3"
     }
 	self.SoundNames["button_doorchg_off"] = {
         "subway_trains/740_4/switches/button/door_change_release"..r..".mp3"
-    }		
+    }
 	
     self.SoundNames["pneumo_disconnect_close"] = "subway_trains/740_4/new/013_close"..j..".mp3"
     self.SoundNames["pneumo_disconnect_open"] = "subway_trains/740_4/new/013_open"..tmb..".mp3"
@@ -428,7 +428,7 @@ function ENT:InitializeSounds()
 		"subway_trains/740_4/new/km013/013_4-5.mp3",
 		"subway_trains/740_4/new/km013/013_5-4.mp3",
 		"subway_trains/740_4/new/km013/013_5-6.mp3",
-		"subway_trains/740_4/new/km013/013_6-5.mp3",			
+		"subway_trains/740_4/new/km013/013_6-5.mp3",	
 	}
 
     self.SoundNames["gv_f"] = {"subway_trains/740_4/new/bru/bru_off-on.mp3","subway_trains/740_4/new/bru/bru_off-on2.mp3","subway_trains/740_4/new/bru/bru_off-on3.mp3"}
@@ -552,15 +552,15 @@ ENT.Spawner = {
 	{"models/metrostroi_train/81-740/salon/salon.mdl",pos = Vector(-15-9,0,0), ang=Angle(0,0,0)},
 	{"models/metrostroi_train/81-740/salon/handrails/handrails.mdl",pos = Vector(370-165-9,-5,0), ang=Angle(0,0,0)},
 	{"models/metrostroi_train/81-740/cabine/Pult/pult.mdl",pos = Vector(465.4-159-9, 6, 0), ang=Angle(0,0,0)},	
-	{"models/metrostroi_train/81-740/salon/lamps/lamps_off.mdl", pos = Vector(-15-9,-0.2,0),ang = Angle(0,0,0)},		
+	{"models/metrostroi_train/81-740/salon/lamps/lamps_off.mdl", pos = Vector(-15-9,-0.2,0),ang = Angle(0,0,0)},
 	{"models/metrostroi_train/81-741/body/81-741_4_front.mdl",pos = Vector(-26.5-27,0,0), ang=Angle(0,-180,0)},
 	{"models/metrostroi_train/81-740/cabine/Pult/bucik.mdl",pos = Vector(465.4-159-9, 6, 0), ang=Angle(0,0,0)},
 	{"models/metrostroi_train/81-740/body/Garm.mdl",pos = Vector(330-15-9,0,-1.5), ang=Angle(0,0,0)},
 	{"models/metrostroi_train/81-740/salon/salon_rear.mdl",pos = Vector(-544-15-9, 0, 5.5), ang=Angle(0,180,0)},
-	{"models/metrostroi_train/81-741/salon/lamps/lamps_off.mdl",pos = Vector(-334.1-15-9, 0.1, -0.4), ang=Angle(0,0,0)},		
+	{"models/metrostroi_train/81-741/salon/lamps/lamps_off.mdl",pos = Vector(-334.1-15-9, 0.1, -0.4), ang=Angle(0,0,0)},
 	{"models/metrostroi_train/81-740/salon/handrails/handrails_r.mdl",pos = Vector(-463.5-9, -1, -75), ang = Angle(0,180,0)},
 	{"models/metrostroi_train/81-740/body/krepezh.mdl",pos = Vector(283-15-9,2,-74.6),ang = Angle(0,0,0)},
-	{"models/metrostroi_train/81-740/body/krepezh.mdl",pos = Vector(-270-5-9,1,-74.6),ang = Angle(0,-180,0)},		
+	{"models/metrostroi_train/81-740/body/krepezh.mdl",pos = Vector(-270-5-9,1,-74.6),ang = Angle(0,-180,0)},
     {"models/metrostroi_train/81-740/cabine/electric/paneltex.mdl",pos = Vector(735.5-159-9,50,50),ang = Angle(180,270,0)},	
 	},
 	interim = "gmod_subway_81-741_4", 
@@ -605,10 +605,10 @@ ENT.Spawner = {
                 _LastSpawner=CurTime()
                 ent.CabinDoorLeft = val==2 and first
                 ent.CabinDoorRight = val==2 and first
-				
+
 				timer.Simple(0,function()	
-				if not IsValid(ent) then return end				
-				ent:GetNW2Entity("gmod_subway_kuzov").RearDoor = val == 2			
+				if not IsValid(ent) then return end
+				ent:GetNW2Entity("gmod_subway_kuzov").RearDoor = val == 2	
 				end)
                 if val==1 then
 					timer.Simple(1,function()
@@ -629,19 +629,19 @@ ENT.Spawner = {
                 ent.SF13:TriggerInput("Set",val<=2 and 1 or 0)
                 ent.SF15:TriggerInput("Set",val<=2 and 1 or 0)
 			
-                _LastSpawner=CurTime()				
+                _LastSpawner=CurTime()
                 ent.CabinDoorLeft = val==4 and first
                 ent.CabinDoorRight = val==4 and first
 				timer.Simple(0,function()	
-				if not IsValid(ent) then return end					
+				if not IsValid(ent) then return end	
 				ent:GetNW2Entity("gmod_subway_kuzov").RearDoor = val == 4
-				end)				
+				end)
             else
                 ent.FrontDoor = val==4
 				timer.Simple(0,function()	
-				if not IsValid(ent) then return end					
+				if not IsValid(ent) then return end	
 				ent:GetNW2Entity("gmod_subway_kuzov").RearDoor = val == 4	
-				end)				
+				end)
             end
             ent.Pneumatic.RightDoorState = val==4 and {1,1,1,1} or {0,0,0,0}
             ent.Pneumatic.DoorRight = val==4

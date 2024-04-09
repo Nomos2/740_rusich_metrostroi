@@ -49,7 +49,7 @@ ENT.SyncTable = {
 }
 
 function ENT:Initialize()
-    -- Set model and initialize		
+    -- Set model and initialize
 	self:SetModel("models/metrostroi_train/81-740/body/81-740_4_front.mdl")	
     self.BaseClass.Initialize(self)
     self:SetPos(self:GetPos() + Vector(0,0,140))
@@ -65,7 +65,7 @@ function ENT:Initialize()
     --Hide seats
     self.DriverSeat:SetRenderMode(RENDERMODE_TRANSALPHA)
 	self.DriverSeat:SetColor(Color(0,0,0,0))
-	self.DriverSeat.m_tblToolsAllowed = {"none"}		
+	self.DriverSeat.m_tblToolsAllowed = {"none"}
 	
     self.InstructorsSeat:SetRenderMode(RENDERMODE_TRANSALPHA)
     self.InstructorsSeat:SetColor(Color(0,0,0,0))
@@ -77,7 +77,7 @@ function ENT:Initialize()
 	
     self.InstructorsSeat4:SetRenderMode(RENDERMODE_TRANSALPHA)
     self.InstructorsSeat4:SetColor(Color(0,0,0,0))
-	self.InstructorsSeat4.m_tblToolsAllowed = {"none"}		
+	self.InstructorsSeat4.m_tblToolsAllowed = {"none"}
 	 
 if not (Map:find("gm_mus_loopline"))	then
 	self.LightSensor = self:AddLightSensor(Vector(627-9,0,-125),Angle(0,90,0))
@@ -88,34 +88,33 @@ end
         self.FrontBogey = self:CreateBogey(Vector( 495,0,-80),Angle(0,180,0),true,"740ALS")	
         self.RearBogey  = self:CreateBogey(Vector(-40.5,0,-80),Angle(0,0,0),false,"740G")
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
-		self.RearBogey:SetNWInt("MotorSoundType",2)			
+		self.RearBogey:SetNWInt("MotorSoundType",2)	
         self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
-        self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")		
-		
+        self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")
+
 		self.FrontCouple.m_tblToolsAllowed = {"none"}
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
 		self.FrontBogey.m_tblToolsAllowed = {"none"}	
-		--self.RearBogey.m_tblToolsAllowed = {"none"}
-		self.RearBogey:SetSolid(SOLID_VPHYSICS)		
+		self.RearBogey.m_tblToolsAllowed = {"none"}
+		self.RearBogey:SetSolid(SOLID_VPHYSICS)
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
 		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)
 		self:SetNW2Entity("RearCouple",self.RearCouple)
-	
-		local opt = Vector(70,0,0)
-		self.FrontCouple.CouplingPointOffset = opt		 
-		self.RearCouple.CouplingPointOffset = Vector(85,0,0)   		
 		
-	timer.Simple(0.1, function()			
+		self.FrontCouple.CouplingPointOffset = Vector(70,0,0) 
+		self.RearCouple.CouplingPointOffset = Vector(85,0,0)   
+		
+	timer.Simple(0.1, function()	
         if not IsValid(self) then return end	
 		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон	
 		local opt65 = Vector(65,0,0)	
 		self.RearCouple.CouplingPointOffset = opt65
-		self.FrontCouple.CouplingPointOffset = opt65		
+		self.FrontCouple.CouplingPointOffset = opt65
 	end)
-		
+
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)	
 	
@@ -125,7 +124,7 @@ end
     self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
     self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)	
 	self.RearBogey.DisableSound = 1 	
-			
+	
     -- Initialize key mapping
     self.KeyMap = {
         [KEY_W] = "PanelKVUp",
@@ -149,7 +148,7 @@ end
             def="PBSet",
             [KEY_LSHIFT] = "AttentionBrakeSet",
         },
-	    [KEY_N] = "TPTToggle",		
+	    [KEY_N] = "TPTToggle",
 
         [KEY_PAD_ENTER] = "KVWrenchKV",
         [KEY_EQUAL] = "R_Program1Set",
@@ -289,7 +288,7 @@ end
         ABSD = true,
         UAVA = true,
         Init = true,
-		R_ASNPOn = true,		
+		R_ASNPOn = true,
     }
 	self.Lamps = {
         broken = {},
@@ -320,8 +319,8 @@ function ENT:TrainSpawnerUpdate()
 	for i = 1,4 do
 		self:SetNW2Int("DoorsAnim"..i,math.random(5,15))
 	end
-		local sp = math.random (-6,-15)		
-		local sp1 = math.random (10,17)			
+		local sp = math.random (-6,-15)
+		local sp1 = math.random (10,17)	
 		--скорость дверей
 		for k,v in pairs(self.Pneumatic.LeftDoorSpeed) do
 			self.Pneumatic.LeftDoorSpeed[k] = -15.1 + math.random(-sp,sp1) / 4
@@ -335,20 +334,20 @@ function ENT:TrainSpawnerUpdate()
 	self.HeadLightBroken = {}
 	for i = 1, 4 do
 		if math.random(1, 20) == 1 then 
-			self.HeadLightBroken[i] = true				
+			self.HeadLightBroken[i] = true
 			self:SetNW2Bool("HeadLightBroken"..i, true)
 		else
-			self.HeadLightBroken[i] = false		
+			self.HeadLightBroken[i] = false
 			self:SetNW2Bool("HeadLightBroken"..i, false)
 		end
 	end
 	self.RedLightBroken = {}
 	for i = 1, 4 do
 		if math.random(1, 90) == 1 then 
-			self.RedLightBroken[i] = true				
+			self.RedLightBroken[i] = true
 			self:SetNW2Bool("RedLightBroken"..i, true)
 		else
-			self.RedLightBroken[i] = false		
+			self.RedLightBroken[i] = false
 			self:SetNW2Bool("RedLightBroken"..i, false)
 		end
 	end
@@ -357,10 +356,10 @@ function ENT:TrainSpawnerUpdate()
 	self.SalonLightBroken = {}
 	for i = 1, 9 do
 		if math.random(1, 15) == 1 then 
-			self.SalonLightBroken[i] = true				
+			self.SalonLightBroken[i] = true
 			self:SetNW2Bool("SalonLightBroken"..i, true)
 		else
-			self.SalonLightBroken[i] = false		
+			self.SalonLightBroken[i] = false
 			self:SetNW2Bool("SalonLightBroken"..i, false)
 		end	
 	end	
@@ -378,13 +377,13 @@ function ENT:TrainSpawnerUpdate()
        if RingSound == 1 then
             RingSound = math.ceil(math.random()*3+0.5)
           else RingSound = RingSound-1 end	
-	self:SetNW2Int("RingSound",RingSound)		
+	self:SetNW2Int("RingSound",RingSound)
 
 	local ZavodTable = self:GetNW2Int("ZavodTable")	
        if ZavodTable == 1 then
             ZavodTable = math.ceil(math.random()*1+0.5)
           else ZavodTable = ZavodTable-1 end	
-	self:SetNW2Int("ZavodTable",ZavodTable)		
+	self:SetNW2Int("ZavodTable",ZavodTable)
 
 	local VentSound = self:GetNW2Int("VentSound")	
        if VentSound == 1 then
@@ -509,12 +508,13 @@ function ENT:CreatePricep(pos,ang)
 	PB.m_tblToolsAllowed = {"none"}	
 	PB.DisableContacts = true
 	constraint.RemoveConstraints(self.RearBogey, "Axis")
+	constraint.RemoveConstraints(ent, "AdvBallsocket")	
     constraint.AdvBallsocket(
         self,
         RB,
         0, --bone
         0, --bone    
-        RB.SpawnPos,
+        Vector(-60,0,60),
 		pos,
         0, --forcelimit
         0, --torquelimit
@@ -527,7 +527,7 @@ function ENT:CreatePricep(pos,ang)
         0, --xfric
         0, --yfric
         0, --zfric
-        0, --rotonly
+        1, --rotonly
         1 --nocollide
     ) 	
     constraint.AdvBallsocket(
@@ -535,7 +535,7 @@ function ENT:CreatePricep(pos,ang)
         RB,
         0, --bone
         0, --bone    
-        RB.SpawnPos+Vector(320,0,60),
+        Vector(310,0,-60),
 		pos,
         0, --forcelimit
         0, --torquelimit
@@ -552,9 +552,9 @@ function ENT:CreatePricep(pos,ang)
         1 --nocollide
     )
 	
-    --if IsValid(PB:GetPhysicsObject()) then
-        --self.NormalMass = PB:GetPhysicsObject():GetMass()
-    --end		
+   if IsValid(PB:GetPhysicsObject()) then
+        self.NormalMass = PB:GetPhysicsObject():GetMass()
+    end		
 	
 	Metrostroi.RerailBogey(self.FrontBogey)                
     Metrostroi.RerailBogey(self.RearBogey)

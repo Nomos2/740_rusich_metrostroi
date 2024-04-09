@@ -39,7 +39,7 @@ local yventpos = {
 function ENT:PassengerCapacity()
     return 172
 end
-local function GetDoorPosition(n,G)			--	x						--	y        --	z
+local function GetDoorPosition(n,G)	--	x--	y        --	z
 	return Vector(-195.5 - -35.0*G - 232.1*n, 66*(1-2*G), 4.3)
 end
 function ENT:GetStandingArea()    --смещение пассажиров
@@ -48,7 +48,7 @@ end
 function ENT:BoardPassengers(delta)	
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain 
-	if not IsValid(train) then return end		
+	if not IsValid(train) then return end
 	self:SetNW2Float("PassengerCount", math.max(0,math.min(self:PassengerCapacity(),train:GetNW2Float("PassengerCount") + delta)))
 end
 
@@ -74,20 +74,20 @@ function ENT:InitializeSounds()
         self.SoundPositions["vent"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
         self.SoundNames["vent1"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop_1.wav"}
         self.SoundPositions["vent1"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
-    end		
+    end
 	
     self.SoundNames["disconnect_valve"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
     self.SoundNames["RearBrakeLineIsolation"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"
     self.SoundNames["RearTrainLineIsolation"] = "subway_trains/common/switches/pneumo_disconnect_switch.mp3"	
 	
     self.SoundNames["bbe"]   = {"subway_trains/740_4/bbe.wav",loop = true}
-    self.SoundPositions["bbe"] = {800,1e9,Vector(50,0,-40),0.5}			
+    self.SoundPositions["bbe"] = {800,1e9,Vector(50,0,-40),0.5}	
 
 	self.SoundNames["cab_door_open"] = "subway_trains/740_4/doors/torec/door_torec_open.mp3"
     self.SoundNames["cab_door_close"] = "subway_trains/740_4/doors/torec/door_torec_close.mp3"	
 	local j = math.random (1,3)	
     self.SoundNames["release_rear"] = {loop=true,"subway_trains/740_4/new/pneumo_release_"..j..".wav"}
-    self.SoundPositions["release_rear"] = {1200,1e9,Vector(600-144,0,-70),0.4}		
+    self.SoundPositions["release_rear"] = {1200,1e9,Vector(600-144,0,-70),0.4}
 
 	local snd = math.random (1,2)	
 	local closed = math.random (1,3)	

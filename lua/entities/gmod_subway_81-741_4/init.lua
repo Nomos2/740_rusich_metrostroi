@@ -48,33 +48,33 @@ function ENT:Initialize()
 	self.DriverSeat.m_tblToolsAllowed = {"none"}		
 
  -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 505,0,-80),Angle(0,180,0),true,"740PER")		
+        self.FrontBogey = self:CreateBogey(Vector( 505,0,-80),Angle(0,180,0),true,"740PER")
         self.RearBogey  = self:CreateBogey(Vector(-18,0,-80),Angle(0,0,0),false,"740G")
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
-		self.RearBogey:SetNWInt("MotorSoundType",2)			
-        self.FrontCouple = self:CreateCouple(Vector(608-17,0,-60),Angle(0,0,0),true,"740")		
+		self.RearBogey:SetNWInt("MotorSoundType",2)
+        self.FrontCouple = self:CreateCouple(Vector(608-17,0,-60),Angle(0,0,0),true,"740")
         self.RearCouple = self:CreateCouple(Vector(-612-17,0,-60),Angle(0,-180,0),false,"740")
-		
+
 		self.FrontCouple.m_tblToolsAllowed = {"none"}	
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
 		self.FrontBogey.m_tblToolsAllowed = {"none"}	
 		self.RearBogey.m_tblToolsAllowed = {"none"}	
-		self.RearBogey:SetSolid(SOLID_VPHYSICS)		
+		self.RearBogey:SetSolid(SOLID_VPHYSICS)
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)
-		self:SetNW2Entity("RearCouple",self.RearCouple)		
+		self:SetNW2Entity("RearCouple",self.RearCouple)
 		local opt = Vector(75,0,0)
-		self.FrontCouple.CouplingPointOffset = opt		
-		self.RearCouple.CouplingPointOffset = opt + Vector(1,0,0) 		
+		self.FrontCouple.CouplingPointOffset = opt
+		self.RearCouple.CouplingPointOffset = opt + Vector(1,0,0) 
 	
 	timer.Simple(0.1, function()	
         if not IsValid(self) then return end
 		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон
 		local opt65 = Vector(65,0,0)	
 		self.RearCouple.CouplingPointOffset = opt65
-		self.FrontCouple.CouplingPointOffset = opt65					
+		self.FrontCouple.CouplingPointOffset = opt65
 	end)
 	
 	self.FrontBogey:SetNWBool("Async",true)
@@ -133,20 +133,20 @@ function ENT:Initialize()
     }
     self.FrontDoor = false
 	
-    self.PVZ_otsek_close = false		
+    self.PVZ_otsek_close = false
     self.PVZ_otsek = false
-    self.PVZ_otsek_open = false		
+    self.PVZ_otsek_open = false
 	
 	self.Lamps = {
         broken = {},
-    }		
+    }
 	
     local rand = math.random() > 0.9 and 1 or math.random(0.95,0.99)
     for i = 1,20 do
         if math.random() > rand then self.Lamps.broken[i] = math.random() > 0.7 end
-    end		
+    end
 	
-    self:UpdateLampsColors()		
+    self:UpdateLampsColors()
 	
 end
 
@@ -176,13 +176,13 @@ local ahahaha =  math.random (1,5)
 		self:SetNW2Int("DoorsAnim"..i,math.random(ahahaha,15))
 	end
 	
-		local sp = math.random (-6,-15)		
-		local sp1 = math.random (10,17)			
+		local sp = math.random (-6,-15)
+		local sp1 = math.random (10,17)
 		--скорость дверей
 		for k,v in pairs(self.Pneumatic.LeftDoorSpeed) do
 			self.Pneumatic.LeftDoorSpeed[k] = -5.5 + math.random(-sp,sp1) / 6
 		end
-		
+
 		for k,v in pairs(self.Pneumatic.RightDoorSpeed) do
 			self.Pneumatic.RightDoorSpeed[k] = -15.5 + math.random(-sp,sp1) / 6
 		end	
@@ -257,61 +257,61 @@ function ENT:CreatePricep(pos,ang)
 	PB.m_tblToolsAllowed = {"none"}	
 	PB.DisableContacts = true
 	constraint.RemoveConstraints(self.RearBogey, "Axis")
-	constraint.RemoveConstraints(self.RearBogey, "AdvBallsocket")	
+	constraint.RemoveConstraints(ent, "AdvBallsocket")	
     constraint.AdvBallsocket(
         self,
-        self.RearBogey,
+        RB,
         0, --bone
         0, --bone    
-        self.RearBogey.SpawnPos,
+        Vector(-60,0,60),
 		pos,
         0, --forcelimit
         0, --torquelimit
         -0, --xmin
         -0, --ymin
-        -55, --zmin
+        -90, --zmin
         0, --xmax
         0, --ymax
-        55, --zmax
+        90, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
-        0, --rotonly
+        1, --rotonly
         1 --nocollide
     ) 	
     constraint.AdvBallsocket(
         ent,
-        self.RearBogey,
+        RB,
         0, --bone
         0, --bone    
-        self.RearBogey.SpawnPos+Vector(350,0,60),
+        Vector(310,0,-60),
 		pos,
         0, --forcelimit
         0, --torquelimit
         -0, --xmin
         -0, --ymin
-        -55, --zmin
+        -90, --zmin
         0, --xmax
         0, --ymax
-        55, --zmax
+        90, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
-        0, --rotonly
+        1, --rotonly
         1 --nocollide
-    )   	
+    )
 	
-    if IsValid(RB:GetPhysicsObject()) then
-        self.NormalMass = RB:GetPhysicsObject():GetMass()
-    end		
+   if IsValid(PB:GetPhysicsObject()) then
+        self.NormalMass = PB:GetPhysicsObject():GetMass()
+    end	
 	
-	--Метод mirror 				
+	--Метод mirror 
     ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)
 	
 	ent.ButtonBuffer = {}
 	ent.KeyBuffer = {}
-	ent.KeyMap = {}			
+	ent.KeyMap = {}
 	
 	return ent
 end
@@ -319,13 +319,13 @@ end
 function ENT:Think()	
     local retVal = self.BaseClass.Think(self)
     local power = self.Electric.Battery80V > 62 --Батарея
-	local Panel = self.Panel		
+	local Panel = self.Panel
 	
     local state = math.abs(self.AsyncInverter.InverterFrequency/(11+self.AsyncInverter.State*5))--(10+8*math.Clamp((self.AsyncInverter.State-0.4)/0.4,0,1)))
     self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+self.AsyncInverter.State/1),0,1)*math.Clamp(self.Speed/6,0,1))
     self:SetPackedRatio("asyncstate", math.Clamp(self.AsyncInverter.State/0.2*math.abs(self.AsyncInverter.Current)/100,0,1))
     self:SetPackedRatio("chopper", math.Clamp(self.Electric.Chopper>0 and self.Electric.IChopped/100 or 0,0,1))
-		
+
 	local lightsActive1 = power and self.SFV20.Value > 0 
     local lightsActive2 = power and self.BUV.MainLights 
 	local mul = 0
@@ -343,9 +343,9 @@ function ENT:Think()
         else
             self:SetPackedBool("lightsActive"..i,false)
         end
-    end		
+    end
 	
-    local passlight = power and (self.BUV.MainLights and 1 or self.SFV20.Value > 0.5 and 0.4) or 0		
+    local passlight = power and (self.BUV.MainLights and 1 or self.SFV20.Value > 0.5 and 0.4) or 0
 	
 	self:SetLightPower(15,passlight > 0, passlight and mul/40)
 	self:SetLightPower(16,passlight > 0.5, passlight and mul/40)
@@ -359,7 +359,7 @@ function ENT:Think()
 	
     self:SetPackedRatio("TrainLine", self.Pneumatic.BrakeLinePressure/16.0)
     self:SetPackedRatio("BrakeLine", self.Pneumatic.TrainLinePressure/16.0)
-	self:SetPackedRatio("BrakeCylinder", math.min(3.3,self.Pneumatic.BrakeCylinderPressure)/6.0)		
+	self:SetPackedRatio("BrakeCylinder", math.min(3.3,self.Pneumatic.BrakeCylinderPressure)/6.0)
 	
     --self:SetNW2Int("PassSchemesLED",self.PassSchemes.PassSchemeCurr)
     --self:SetNW2Int("PassSchemesLEDN",self.PassSchemes.PassSchemeNext) 
@@ -399,12 +399,12 @@ function ENT:Think()
         fB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
         fB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
         fB.DisableContacts = self.BUV.Pant or fB.DisableContactsManual	
-		
+
 		rB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
         rB.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
         rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
-        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
-        rB.DisableContacts = self.BUV.Pant or rB.DisableContactsManual		
+        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         
+        rB.DisableContacts = self.BUV.Pant or rB.DisableContactsManual
 		
 		pB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
         pB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure

@@ -130,7 +130,7 @@ ENT.ClientProps["RearTrain"] = {
 	model = "models/metrostroi_train/bogey/disconnect_valve_blue.mdl",
 	pos = Vector(-336, -25, -53.9),
 	ang = Angle(0,90,0),
-	hide = 1,			
+	hide = 1,	
 }
 ENT.ClientProps["RearBrake"] = {
     model = "models/metrostroi_train/bogey/disconnect_valve_red.mdl",
@@ -149,7 +149,7 @@ ENT.ButtonMap["Tickers_rear"] = {
 	height = 64,
 	scale = 0.054,
 	hide=true,
-	hideseat=1,		
+	hideseat=1,
 }	
 	
 ENT.ClientProps["lamps_salon_on_rear_avar1"] = {
@@ -255,7 +255,7 @@ function ENT:Initialize()
         "models/metrostroi/passengers/m4.mdl",
         "models/metrostroi/passengers/m5.mdl",
     }
-    train.PreviousCompressorState = false			
+    train.PreviousCompressorState = false	
 	
     self.VentRand = {}
     self.VentState = {}
@@ -381,16 +381,16 @@ end
 	end
 	
 	local ZavodTable = train:GetNW2Int("ZavodTable",1)	
-    if not IsValid(train) then return end		
+    if not IsValid(train) then return end
     self:ShowHide("Zavod_table_soch",ZavodTable==2)	
     self:ShowHide("Zavod_table_sochl_torec",ZavodTable==2)
 	
-	local dT = train.DeltaTime		
+	local dT = train.DeltaTime
 	--Анимация дверей.
 	if not self.DoorStates then self.DoorStates = {} end
     if not self.DoorLoopStates then self.DoorLoopStates = {} end
     if not IsValid(train) then return end
-	local dT = train.DeltaTime		
+	local dT = train.DeltaTime
     for b=0,3 do
         for k=0,2 do
             local st = k==1 and "DoorR" or "DoorL"
@@ -400,12 +400,12 @@ end
             --print(state,self.DoorStates[state])
             if (state ~= 1 and state ~= 0) ~= self.DoorStates[id] then
                 if doorstate and state < 1 or not doorstate and state > 0 then
-					if doorstate then self:PlayOnce(sid.."s","",1,math.Rand(0.9,1.3)) end--math.Rand(0.9,1.3))						
+					if doorstate then self:PlayOnce(sid.."s","",1,math.Rand(0.9,1.3)) end
                 else
 					if state > 0 then
-                        self:PlayOnce(sid.."o","",1,math.Rand(0.9,1.3))					
+                        self:PlayOnce(sid.."o","",1,math.Rand(0.9,1.3))	
                     else
-                        self:PlayOnce(sid.."c","",1,math.Rand(0.9,1.3))						
+                        self:PlayOnce(sid.."c","",1,math.Rand(0.9,1.3))
                     end
                 end
                 self.DoorStates[id] = (state ~= 1 and state ~= 0)
@@ -415,24 +415,24 @@ end
             else
                 self.DoorLoopStates[id] = math.Clamp((self.DoorLoopStates[id] or 0) - 6*train.DeltaTime,0,1)
             end
-	        self:SetSoundState(sid.."r",self.DoorLoopStates[id],0.9+self.DoorLoopStates[id]*0.1)					
+	        self:SetSoundState(sid.."r",self.DoorLoopStates[id],0.9+self.DoorLoopStates[id]*0.1)
             local n_l = "door"..b.."x"..k--.."a"
-			local n_r = "door"..b.."x"..k.."b"								
-            self:Animate(n_r,state,0,1,15,1)		
+			local n_r = "door"..b.."x"..k.."b"
+            self:Animate(n_r,state,0,1,15,1)
 			self:Animate(n_l,state,0,1,15,1)
         end
 	end	
 	
-    if not IsValid(train) then return end		
+    if not IsValid(train) then return end
     train.RearLeak = math.Clamp(train.RearLeak + 10*(-train:GetPackedRatio("RearLeak")-train.RearLeak)*dT,0,1)	
     self:SetSoundState("rear_isolation",train.RearLeak,0.9+0.2*train.RearLeak)	
 
-    if not IsValid(train) then return end		
+    if not IsValid(train) then return end
     self:Animate("RearBrake", train:GetNW2Bool("RbI") and 0 or 1,0,1, 3, false)
     self:Animate("RearTrain", train:GetNW2Bool("RtI") and 1 or 0,0,1, 3, false)
 	
     local dPdT = train:GetPackedRatio("BrakeCylinderPressure_dPdT")
-    if not IsValid(train) then return end		
+    if not IsValid(train) then return end
     train.ReleasedPdT = math.Clamp(train.ReleasedPdT + 4*(-train:GetPackedRatio("BrakeCylinderPressure_dPdT",0)-train.ReleasedPdT)*dT,0,1)
     self:SetSoundState("release_rear",math.Clamp(train.ReleasedPdT,0,1)^1.65,1.0)
 	
@@ -441,7 +441,7 @@ end
     local ventSpeedAdd = math.Clamp(speed/30,0,1)
 
     local vstate = self:GetPackedBool("Vent2Work")
-    if not IsValid(train) then return end		
+    if not IsValid(train) then return end
     for i=1,4 do
         local rand = self.VentRand[i]
         local vol = self.VentVol[i]
@@ -460,7 +460,7 @@ end
 		local VentSound = train:GetNW2Int("VentSound",1)	
 		if VentSound==1 then
         self:SetSoundState("vent"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
-		elseif		
+		elseif
 		VentSound==2 then
         self:SetSoundState("vent1"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
 		end 	
@@ -480,7 +480,7 @@ end
 	if self.Sounds["announcer"..k] and IsValid(self.Sounds["announcer"..k]) then
             self.Sounds["announcer"..k]:SetVolume(work and (v[4] or 1)  or 0.5)
 		end 
-	end		
+	end
 	
 end
 
@@ -504,8 +504,8 @@ end
 function ENT:DrawPost(special)
     self.HeadTrain = self:GetNW2Entity("HeadTrain")	
     local train = self.HeadTrain	
-    if not IsValid(train) then return end		
-	self.RTMaterial:SetTexture("$basetexture", train.Tickers)		
+    if not IsValid(train) then return end
+	self.RTMaterial:SetTexture("$basetexture", train.Tickers)
     self:DrawOnPanel("Tickers_rear",function(...)
         surface.SetMaterial(self.RTMaterial)
         surface.SetDrawColor(255,255,255)

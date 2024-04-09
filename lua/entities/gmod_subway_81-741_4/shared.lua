@@ -37,7 +37,7 @@ end
 function ENT:GetStandingArea()
     return Vector(530-17,-25,-47), Vector(50,25,-41)
 end
-local function GetDoorPosition(b,k)	--Правые двери			--Левые двери
+local function GetDoorPosition(b,k)	--Правые двери	--Левые двери
 	return Vector(652.5-17  - 35.0*k     -  338.8*b, 67.5*(1-2*k), 4.3)
 end
 
@@ -60,40 +60,40 @@ function ENT:InitializeSounds()
 	for i = 1,10 do
 		local id1 = Format("b1tunnel_%d",i)
 		local id2 = Format("b2tunnel_%d",i)
-		local id3 = Format("b3tunnel_%d",i)		
+		local id3 = Format("b3tunnel_%d",i)
 		self.SoundNames[id1.."a"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."a.wav"
 		self.SoundNames[id1.."b"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."b.wav"
 		self.SoundPositions[id1.."a"] = {700,1e9,Vector( 505,0,-80),1}
 		self.SoundPositions[id1.."b"] = self.SoundPositions[id1.."a"]
-		
+
 		self.SoundNames[id2.."a"] = "subway_trains/740_4/bogey/wheels/tunnel/yakobs/st"..i.."a.wav"
 		self.SoundNames[id2.."b"] = "subway_trains/740_4/bogey/wheels/tunnel/yakobs/st"..i.."b.wav"
 		self.SoundPositions[id2.."a"] = {700,1e9,Vector(-18,0,-80),1}
 		self.SoundPositions[id2.."b"] = self.SoundPositions[id2.."a"]
-		
+
 		self.SoundNames[id3.."a"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."a.wav"
 		self.SoundNames[id3.."b"] = "subway_trains/740_4/bogey/wheels/tunnel/st"..i.."b.wav"
 		self.SoundPositions[id3.."a"] = {700,1e9,Vector(-540,0,-80),1}
-		self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]		
+		self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]
 	end
 	for i = 1,14 do
 		local id1 = Format("b1street_%d",i)
 		local id2 = Format("b2street_%d",i)
-		local id3 = Format("b3street_%d",i)		
+		local id3 = Format("b3street_%d",i)
 		self.SoundNames[id1.."a"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."a.mp3"
 		self.SoundNames[id1.."b"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."b.mp3"
 		self.SoundPositions[id1.."a"] = {700,1e9,Vector( 520,0,-75),1.5}
 		self.SoundPositions[id1.."b"] = self.SoundPositions[id1.."a"]
-		
+
 		self.SoundNames[id2.."a"] = "subway_trains/740_4/bogey/wheels/street/yakobs/street_"..i.."a.mp3"
 		self.SoundNames[id2.."b"] = "subway_trains/740_4/bogey/wheels/street/yakobs/street_"..i.."b.mp3"
 		self.SoundPositions[id2.."a"] = {700,1e9,Vector(-18,0,-80),1.5}
 		self.SoundPositions[id2.."b"] = self.SoundPositions[id2.."a"] 
-		
+
 		self.SoundNames[id3.."a"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."a.mp3"
 		self.SoundNames[id3.."b"] = "subway_trains/740_4/bogey/wheels/street/street_"..i.."b.mp3"
 		self.SoundPositions[id3.."a"] = {700,1e9,Vector(-540,0,-80),1.5}
-		self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]		
+		self.SoundPositions[id3.."b"] = self.SoundPositions[id3.."a"]
 	end	
 	
 	--Код id3 не работает в задней секции как надо, стуков нет. 	
