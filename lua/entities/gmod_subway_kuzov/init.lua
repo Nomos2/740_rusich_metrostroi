@@ -136,13 +136,12 @@ function ENT:Initialize()
 		0, --rotonly
 		1 --collide		
 	) 	
-	
-    if IsValid(RB:GetPhysicsObject()) then
-        PB.NormalMass = RB:GetPhysicsObject():GetMass()
-    end
-    if IsValid(self:GetPhysicsObject()) then
-        train.NormalMass = self:GetPhysicsObject():GetMass()
-    end		
+	timer.Simple(0.4, function()
+    train.NormalMass = RB:GetPhysicsObject():GetMass(5000)
+    train.NormalMass = FB:GetPhysicsObject():GetMass(5000)
+    train.NormalMass = PB:GetPhysicsObject():GetMass(5000)		
+	end)
+    train.NormalMass = self:GetPhysicsObject():GetMass()
 	
 	FC:GetPhysicsObject():SetMass(3000)		
 

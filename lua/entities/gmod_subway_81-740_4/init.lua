@@ -508,13 +508,34 @@ function ENT:CreatePricep(pos,ang)
 	PB.m_tblToolsAllowed = {"none"}	
 	PB.DisableContacts = true
 	constraint.RemoveConstraints(self.RearBogey, "Axis")
-	constraint.RemoveConstraints(ent, "AdvBallsocket")	
+	constraint.RemoveConstraints(ent, "AdvBallsocket")
     constraint.AdvBallsocket(
         self,
         RB,
         0, --bone
         0, --bone    
-        Vector(-60,0,60),
+        Vector(-55,0,60),
+		pos,
+        0, --forcelimit
+        0, --torquelimit
+        -0, --xmin
+        -0, --ymin
+        -90, --zmin
+        0, --xmax
+        0, --ymax
+        90, --zmax
+        0, --xfric
+        0, --yfric
+        0, --zfric
+        1, --rotonly
+        1 --nocollide
+    ) 		
+    constraint.AdvBallsocket(
+        self,
+        RB,
+        0, --bone
+        0, --bone    
+        Vector(-55,0,120),
 		pos,
         0, --forcelimit
         0, --torquelimit
@@ -551,10 +572,6 @@ function ENT:CreatePricep(pos,ang)
         1, --rotonly
         1 --nocollide
     )
-	
-   if IsValid(PB:GetPhysicsObject()) then
-        self.NormalMass = PB:GetPhysicsObject():GetMass()
-    end		
 	
 	Metrostroi.RerailBogey(self.FrontBogey)                
     Metrostroi.RerailBogey(self.RearBogey)
