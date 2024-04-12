@@ -79,8 +79,6 @@ function ENT:Initialize()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
     if not IsValid(train) then return end
-	train:SetNW2Entity("FrontBogey.Wheels",train.FrontBogey.Wheels)	
-	train:SetNW2Entity("RearBogey.Wheels",train.RearBogey.Wheels)
 	local FB = train.FrontBogey	
 	local PB = train.PricepBogey	
 	local RB = train.RearBogey		
@@ -106,13 +104,27 @@ function ENT:Initialize()
 		0.1, --yfric
 		1, --zfric
 		0 --rotonly
-	)    	
+	)
 	RC:GetPhysicsObject():SetMass(3000)
     constraint.NoCollide(self,train,0,0)
     constraint.NoCollide(self,RB.Wheels,0,0)
     constraint.NoCollide(train,RB.Wheels,0,0)		
     constraint.NoCollide(train,RB,0,0)	
     constraint.NoCollide(self,RB,0,0)		
+	   
+    constraint.Axis(
+        PB,        
+        self,
+        0,
+        0,
+        Vector(0,0,0),
+        Vector(0,0,0),
+        0,
+        0,
+        0,
+        0,
+        Vector(0,0,1)
+    )	
 
 	FC:PhysicsInit(SOLID_VPHYSICS)	
 	constraint.AdvBallsocket(
@@ -136,12 +148,12 @@ function ENT:Initialize()
 		0, --rotonly
 		1 --collide		
 	) 	
-	timer.Simple(0.4, function()
-    train.NormalMass = RB:GetPhysicsObject():GetMass(5000)
-    train.NormalMass = FB:GetPhysicsObject():GetMass(5000)
-    train.NormalMass = PB:GetPhysicsObject():GetMass(5000)		
-	end)
+	timer.Simple(0.4, function()	
+    train.NormalMass = train:GetPhysicsObject():GetMass()
+    train.NormalMass = FB:GetPhysicsObject():GetMass()
+    train.NormalMass = PB:GetPhysicsObject():GetMass()
     train.NormalMass = self:GetPhysicsObject():GetMass()
+	end)
 	
 	FC:GetPhysicsObject():SetMass(3000)		
 

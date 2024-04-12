@@ -85,8 +85,8 @@ end
 	self.ASSensor = self:AddLightSensor(Vector(515-9,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
 	
     -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 495,0,-80),Angle(0,180,0),true,"740ALS")	
-        self.RearBogey  = self:CreateBogey(Vector(-40.5,0,-80),Angle(0,0,0),false,"740G")
+        self.FrontBogey = self:CreateBogey(Vector( 495,0,-75),Angle(0,180,0),true,"740ALS")	
+        self.RearBogey  = self:CreateBogey(Vector(-40.5,0,-75),Angle(0,0,0),false,"740G")
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)	
         self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
@@ -145,8 +145,8 @@ end
         [KEY_V] = "DoorClose",
         [KEY_G] = "EnableBVSet",
         [KEY_SPACE] = {
-            def="PBSet",
-            [KEY_LSHIFT] = "AttentionBrakeSet",
+		def="PBSet",
+		[KEY_LSHIFT] = "AttentionBrakeSet",
         },
 	    [KEY_N] = "TPTToggle",
 
@@ -155,38 +155,38 @@ end
         [KEY_RBRACKET] = "R_Program1Set",
         [KEY_MINUS] = "R_Program2Set",
         [KEY_LSHIFT] = {
-            def="PanelControllerUnlock",
-            [KEY_SPACE] = "AttentionBrakeSet",
-            [KEY_V] = "EmergencyDoorsToggle",
-            --[KEY_7] = "WrenchNone",
-            --[KEY_8] = "WrenchKRR",
-            [KEY_9] = "KRR-",
-            [KEY_0] = "KRR+",
-            [KEY_G] = "EnableBVEmerSet",
-            [KEY_2] = "RingSet",
-            [KEY_L] = "HornEngage",
+		def="PanelControllerUnlock",
+		[KEY_SPACE] = "AttentionBrakeSet",
+		[KEY_V] = "EmergencyDoorsToggle",
+		--[KEY_7] = "WrenchNone",
+		--[KEY_8] = "WrenchKRR",
+		[KEY_9] = "KRR-",
+		[KEY_0] = "KRR+",
+		[KEY_G] = "EnableBVEmerSet",
+		[KEY_2] = "RingSet",
+		[KEY_L] = "HornEngage",
 
-            [KEY_PAD_ENTER] = "KVWrenchNone",
+		[KEY_PAD_ENTER] = "KVWrenchNone",
         },
         [KEY_LALT] = {
-            [KEY_V] = "DoorCloseToggle",
-            [KEY_PAD_1] = "Vityaz1Set",
-            [KEY_PAD_2] = "Vityaz2Set",
-            [KEY_PAD_3] = "Vityaz3Set",
-            [KEY_PAD_4] = "Vityaz4Set",
-            [KEY_PAD_5] = "Vityaz5Set",
-            [KEY_PAD_6] = "Vityaz6Set",
-            [KEY_PAD_7] = "Vityaz7Set",
-            [KEY_PAD_8] = "Vityaz8Set",
-            [KEY_PAD_9] = "Vityaz9Set",
-            [KEY_PAD_0] = "Vityaz0Set",
-            [KEY_PAD_DECIMAL] = "VityazF5Set",
-            [KEY_PAD_ENTER] = "VityazF8Set",
-            [KEY_UP] = "VityazF6Set",
-            [KEY_LEFT] = "VityazF5Set",
-            [KEY_DOWN] = "VityazF7Set",
-            [KEY_RIGHT] = "VityazF9Set",
-            [KEY_PAD_MINUS] = "VityazF2Set",
+		[KEY_V] = "DoorCloseToggle",
+		[KEY_PAD_1] = "Vityaz1Set",
+		[KEY_PAD_2] = "Vityaz2Set",
+		[KEY_PAD_3] = "Vityaz3Set",
+		[KEY_PAD_4] = "Vityaz4Set",
+		[KEY_PAD_5] = "Vityaz5Set",
+		[KEY_PAD_6] = "Vityaz6Set",
+		[KEY_PAD_7] = "Vityaz7Set",
+		[KEY_PAD_8] = "Vityaz8Set",
+		[KEY_PAD_9] = "Vityaz9Set",
+		[KEY_PAD_0] = "Vityaz0Set",
+		[KEY_PAD_DECIMAL] = "VityazF5Set",
+		[KEY_PAD_ENTER] = "VityazF8Set",
+		[KEY_UP] = "VityazF6Set",
+		[KEY_LEFT] = "VityazF5Set",
+		[KEY_DOWN] = "VityazF7Set",
+		[KEY_RIGHT] = "VityazF9Set",
+		[KEY_PAD_MINUS] = "VityazF2Set",
             [KEY_PAD_PLUS] = "VityazF3Set",
             [KEY_PAD_MULTIPLY] = "VityazF4Set",
             [KEY_PAD_DIVIDE] = "VityazF1Set",
@@ -487,34 +487,87 @@ end]] --Попытка замены звуков тележек от Димас�
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")	
     if not IsValid(ent) then return end
+    ent.Joints = {}
+    ent.JointPositions = {}	
 	ent:SetPos(self:LocalToWorld(Vector(-356-9,0,0)))
-	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
+    ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())
 	ent:DrawShadow(false)	
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
+    ent.SpawnPos = pos
+    ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
-	self.RearBogey = self:GetNW2Entity("RearBogey")	
+    ent:SetNW2Entity("TrainEntity", self)
 	local RB = self.RearBogey
+    local index=1
+    local x = ent:LocalToWorld(ent:LocalToWorld(Vector(0,0,0))).x
+    for i,v in ipairs(ent.JointPositions) do
+        if v>pos.x then index=i+1 else break end
+    end
+    table.insert(ent.JointPositions,index,x)
 	
-	self.PricepBogey = ent:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
+	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")	
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
 	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
 	local PB = self.PricepBogey	
+	PB:SetSolid(SOLID_VPHYSICS)
+	PB:PhysicsInit(SOLID_VPHYSICS)
     local rand = math.random()*0.05
 	PB:SetNWFloat("SqualPitch",1.45+rand)
 	PB:SetNWInt("MotorSoundType",2)
 	PB:SetNWInt("Async",true)
 	PB.m_tblToolsAllowed = {"none"}	
 	PB.DisableContacts = true
-	constraint.RemoveConstraints(self.RearBogey, "Axis")
-	constraint.RemoveConstraints(ent, "AdvBallsocket")
     constraint.AdvBallsocket(
+		ent,
+		RB,
+		0, --bone
+		0, --bone
+		pos-Vector(-330,0,-40),
+		Vector(-330,0,-70),
+		0.5, --forcelimit
+		0.5, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-90, --zmin
+		2, --xmax
+		2, --ymax
+		90, --zmax
+		0, --xfric
+		0, --yfric
+		1, --zfric
+		0, --rotonly
+		1 --nocollide
+	)
+	    constraint.AdvBallsocket(
+		ent,
+		RB,
+		0, --bone
+		0, --bone
+		pos-Vector(-330,0,20),
+		Vector(-330,0,70),
+		0.5, --forcelimit
+		0.5, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-90, --zmin
+		2, --xmax
+		2, --ymax
+		90, --zmax
+		0, --xfric
+		0, --yfric
+		1, --zfric
+		0, --rotonly
+		1 --nocollide
+    )	
+	
+    constraint.AdvBallsocket(
+        RB,
         self,
-        RB,
         0, --bone
         0, --bone    
-        Vector(-55,0,60),
+        Vector(-40,0,120),
 		pos,
         0, --forcelimit
         0, --torquelimit
@@ -527,53 +580,15 @@ function ENT:CreatePricep(pos,ang)
         0, --xfric
         0, --yfric
         0, --zfric
-        1, --rotonly
-        1 --nocollide
-    ) 		
-    constraint.AdvBallsocket(
-        self,
-        RB,
-        0, --bone
-        0, --bone    
-        Vector(-55,0,120),
-		pos,
-        0, --forcelimit
-        0, --torquelimit
-        -0, --xmin
-        -0, --ymin
-        -90, --zmin
-        0, --xmax
-        0, --ymax
-        90, --zmax
-        0, --xfric
-        0, --yfric
-        0, --zfric
-        1, --rotonly
-        1 --nocollide
-    ) 	
-    constraint.AdvBallsocket(
-        ent,
-        RB,
-        0, --bone
-        0, --bone    
-        Vector(310,0,-60),
-		pos,
-        0, --forcelimit
-        0, --torquelimit
-        -0, --xmin
-        -0, --ymin
-        -90, --zmin
-        0, --xmax
-        0, --ymax
-        90, --zmax
-        0, --xfric
-        0, --yfric
-        0, --zfric
-        1, --rotonly
+        0, --rotonly
         1 --nocollide
     )
 	
-	Metrostroi.RerailBogey(self.FrontBogey)                
+   if IsValid(PB:GetPhysicsObject()) then
+        self.NormalMass = PB:GetPhysicsObject():GetMass()
+    end	
+	
+	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)
     Metrostroi.RerailBogey(self.PricepBogey)
 
@@ -734,7 +749,7 @@ function ENT:Think()
 		--print(A)
         local add = 1
         if math.abs(self:GetAngles().pitch) > 4 then
-            add = math.min((math.abs(self:GetAngles().pitch)-4)/2,1)
+		add = math.min((math.abs(self:GetAngles().pitch)-4)/2,1)
         end
         fB.MotorForce = (40000+5000*(A < 0 and 1 or 0))*add --35300
         fB.Reversed = (self:ReadTrainWire(13) > 0.5)--<
@@ -812,7 +827,7 @@ function ENT:OnButtonPress(button,ply)
         self.DoorSelectL:TriggerInput("Set",1)
         self.DoorSelectR:TriggerInput("Set",0)
         if self.EmergencyDoors.Value == 1 or self.DoorClose.Value == 0 then
-            self.DoorLeft:TriggerInput("Set",1)
+		self.DoorLeft:TriggerInput("Set",1)
         end
     end
     if button == "DoorRight" then
@@ -824,10 +839,10 @@ function ENT:OnButtonPress(button,ply)
     end
     if button == "DoorClose" then
         if self.EmergencyDoors.Value == 1 then
-            self.EmerCloseDoors:TriggerInput("Set",1)
+		self.EmerCloseDoors:TriggerInput("Set",1)
         else
-                 self.DoorClose:TriggerInput("Set",1-self.DoorClose.Value)
-            self.EmerCloseDoors:TriggerInput("Set",0)
+     		self.DoorClose:TriggerInput("Set",1-self.DoorClose.Value)
+		self.EmerCloseDoors:TriggerInput("Set",0)
         end
     end
         if button == "KRO+" then
@@ -852,17 +867,17 @@ function ENT:OnButtonPress(button,ply)
 	end
     if button == "WrenchKRO" then
         if self.KV.KRRPosition == 0 then
-            --self:PlayOnce("kro_in","cabin",1)
-            self.WrenchMode = 1
+		--self:PlayOnce("kro_in","cabin",1)
+		self.WrenchMode = 1
 			self.KVWrenchMode = self.WrenchMode
         end
     end
     if button == "WrenchKRR" then
         if self.KV.KROPosition == 0 and self.WrenchMode ~= 2 then
-            --self:PlayOnce("krr_in","cabin",1)
-            self.WrenchMode = 2
+		--self:PlayOnce("krr_in","cabin",1)
+		self.WrenchMode = 2
 			self.KVWrenchMode = self.WrenchMode
-            RunConsoleCommand("say",ply:GetName().." want drive with KRU!")
+		RunConsoleCommand("say",ply:GetName().." want drive with KRU!")
         end
     end
 	if button:find("KRO") or button:find("KRR") then
@@ -873,7 +888,7 @@ end
 function ENT:OnButtonRelease(button,ply)
     if string.find(button,"PneumaticBrakeSet") then
         if button == "PneumaticBrakeSet1" and (self.Pneumatic.DriverValvePosition == 1) then
-            self.Pneumatic:TriggerInput("BrakeSet",2)
+		self.Pneumatic:TriggerInput("BrakeSet",2)
         end
         return
     end

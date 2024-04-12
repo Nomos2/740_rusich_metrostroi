@@ -48,8 +48,8 @@ function ENT:Initialize()
 	self.DriverSeat.m_tblToolsAllowed = {"none"}		
 
  -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 505,0,-80),Angle(0,180,0),true,"740PER")
-        self.RearBogey  = self:CreateBogey(Vector(-18,0,-80),Angle(0,0,0),false,"740G")
+        self.FrontBogey = self:CreateBogey(Vector( 505,0,-75),Angle(0,180,0),true,"740PER")
+        self.RearBogey  = self:CreateBogey(Vector(-18,0,-75),Angle(0,0,0),false,"740G")
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)
         self.FrontCouple = self:CreateCouple(Vector(608-17,0,-60),Angle(0,0,0),true,"740")
@@ -189,6 +189,15 @@ local ahahaha =  math.random (1,5)
 	
 end	
 
+function Metrostroi:RerailChange(ent, bool)
+    if not IsValid(ent) then return end
+    if bool then
+        timer.Remove("metrostroi_rerailer_solid_reset_"..ent:EntIndex())    
+    else
+        timer.Create("metrostroi_rerailer_solid_reset_"..ent:EntIndex(),1e9,1,function() end)    
+    end
+end
+
 function ENT:UpdateLampsColors()
     local lCol,lCount = Vector(),20
 	local mr = math.random
@@ -235,77 +244,86 @@ end
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")
     if not IsValid(ent) then return end
+    ent.Joints = {}
+    ent.JointPositions = {}	
 	ent:SetPos(self:LocalToWorld(Vector(-343,0,0)))
 	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())
 	ent:DrawShadow(false)
-	ent:SetUseType( SIMPLE_USE )	
 	if CPPI and IsValid(self:CPPIGetOwner()) then ent:CPPISetOwner(self:CPPIGetOwner()) end
+    ent.SpawnPos = pos
+    ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
-	self.RearBogey = self:GetNW2Entity("RearBogey")	
+    ent:SetNW2Entity("TrainEntity", self)	
 	local RB = self.RearBogey
+    local index=1
+    local x = ent:LocalToWorld(ent:LocalToWorld(Vector(0,0,0))).x
+    for i,v in ipairs(ent.JointPositions) do
+        if v>pos.x then index=i+1 else break end
+    end
+    table.insert(ent.JointPositions,index,x)
 	
-	self.PricepBogey = ent:CreateBogey(Vector(-200,0,-80),Angle(0,0,0),true,"740NOTR")	
+	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")	
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
 	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
 	local PB = self.PricepBogey	
+	PB:SetSolid(SOLID_VPHYSICS)
+	PB:PhysicsInit(SOLID_VPHYSICS)
     local rand = math.random()*0.05
 	PB:SetNWFloat("SqualPitch",1.45+rand)
 	PB:SetNWInt("MotorSoundType",2)
 	PB:SetNWInt("Async",true)
 	PB.m_tblToolsAllowed = {"none"}	
-	PB.DisableContacts = true
-	constraint.RemoveConstraints(self.RearBogey, "Axis")
-	constraint.RemoveConstraints(ent, "AdvBallsocket")
-    constraint.AdvBallsocket(
-        self,
-        RB,
-        0, --bone
-        0, --bone    
-        Vector(-55,0,60),
-		pos,
-        0, --forcelimit
-        0, --torquelimit
-        -0, --xmin
-        -0, --ymin
-        -90, --zmin
-        0, --xmax
-        0, --ymax
-        90, --zmax
-        0, --xfric
-        0, --yfric
-        0, --zfric
-        1, --rotonly
-        1 --nocollide
-    ) 		
+	PB.DisableContacts = true	
+	constraint.AdvBallsocket(
+		ent,
+		RB,
+		0, --bone
+		0, --bone
+		pos-Vector(-330,0,-40),
+		Vector(-330,0,-70),
+		0.5, --forcelimit
+		0.5, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-90, --zmin
+		2, --xmax
+		2, --ymax
+		90, --zmax
+		0, --xfric
+		0, --yfric
+		1, --zfric
+		0, --rotonly
+		1 --nocollide
+	)
+	    constraint.AdvBallsocket(
+		ent,
+		RB,
+		0, --bone
+		0, --bone
+		pos-Vector(-330,0,20),
+		Vector(-330,0,70),
+		0.5, --forcelimit
+		0.5, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-90, --zmin
+		2, --xmax
+		2, --ymax
+		90, --zmax
+		0, --xfric
+		0, --yfric
+		1, --zfric
+		0, --rotonly
+		1 --nocollide
+    )		
     constraint.AdvBallsocket(
         self,
         RB,
         0, --bone
         0, --bone    
         Vector(-55,0,120),
-		pos,
-        0, --forcelimit
-        0, --torquelimit
-        -0, --xmin
-        -0, --ymin
-        -90, --zmin
-        0, --xmax
-        0, --ymax
-        90, --zmax
-        0, --xfric
-        0, --yfric
-        0, --zfric
-        1, --rotonly
-        1 --nocollide
-    ) 	
-    constraint.AdvBallsocket(
-        ent,
-        RB,
-        0, --bone
-        0, --bone    
-        Vector(310,0,-60),
 		pos,
         0, --forcelimit
         0, --torquelimit
