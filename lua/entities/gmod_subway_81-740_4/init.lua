@@ -104,8 +104,8 @@ end
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)
 		self:SetNW2Entity("RearCouple",self.RearCouple)
 		
-		self.FrontCouple.CouplingPointOffset = Vector(70,0,0) 
-		self.RearCouple.CouplingPointOffset = Vector(85,0,0)   
+		self.FrontCouple.CouplingPointOffset = Vector(75,0,0) 
+		self.RearCouple.CouplingPointOffset = Vector(90,0,0)   
 		
 	timer.Simple(0.1, function()	
         if not IsValid(self) then return end	
@@ -536,7 +536,7 @@ function ENT:CreatePricep(pos,ang)
 		90, --zmax
 		0, --xfric
 		0, --yfric
-		1, --zfric
+		0, --zfric
 		0, --rotonly
 		1 --nocollide
 	)
@@ -557,7 +557,7 @@ function ENT:CreatePricep(pos,ang)
 		90, --zmax
 		0, --xfric
 		0, --yfric
-		1, --zfric
+		0, --zfric
 		0, --rotonly
 		1 --nocollide
     )	
@@ -588,8 +588,8 @@ function ENT:CreatePricep(pos,ang)
 		RB,
         0, --bone
         0, --bone    
-		pos-Vector(70,0,20),
-		Vector(70,0,20),
+		pos-Vector(70,0,10),
+		Vector(70,0,10),
 		0.5, --forcelimit
 		0.5, --torquelimit
 		-4, --xmin
@@ -603,7 +603,19 @@ function ENT:CreatePricep(pos,ang)
         0, --zfric
         0, --rotonly
         1 --nocollide
-    )	
+    )
+	if IsValid(ent:GetPhysicsObject()) then
+        self.NormalMass = ent:GetPhysicsObject():GetMass()
+    end		
+	if IsValid(self.FrontBogey:GetPhysicsObject()) then
+        self.NormalMass = self.FrontBogey:GetPhysicsObject():GetMass()
+    end	
+	if IsValid(self.RearBogey:GetPhysicsObject()) then
+        self.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
+    end
+	if IsValid(self.PricepBogey:GetPhysicsObject()) then
+        ent.NormalMass = self.PricepBogey:GetPhysicsObject():GetMass()
+    end	
 	
 	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)

@@ -105,7 +105,7 @@ function ENT:Initialize()
 		1, --zfric
 		0 --rotonly
 	)
-	RC:GetPhysicsObject():SetMass(3000)
+	RC:GetPhysicsObject():SetMass(5000)
     constraint.NoCollide(self,train,0,0)	
     constraint.NoCollide(train,RB,0,0)	
     constraint.NoCollide(self,RB,0,0)		
@@ -123,7 +123,6 @@ function ENT:Initialize()
         0,
         Vector(0,0,1)
     )
-
 	FC:PhysicsInit(SOLID_VPHYSICS)	
 	constraint.AdvBallsocket(
 	    train,
@@ -145,17 +144,8 @@ function ENT:Initialize()
 		1, --zfric
 		0, --rotonly
 		1 --collide		
-	) 	
-	timer.Simple(0.4, function()
-    if not IsValid(train) then return end
-    train.NormalMass = FB:GetPhysicsObject():GetMass()
-    train.NormalMass = PB:GetPhysicsObject():GetMass()
-	if IsValid(self:GetPhysicsObject()) then
-        train.NormalMass = self:GetPhysicsObject():GetMass()
-    end	
-	end)
-	
-	FC:GetPhysicsObject():SetMass(3000)		
+	)
+	FC:GetPhysicsObject():SetMass(5000)		
 
 	table.insert(train.TrainEntities,self)      
     table.insert(self.TrainEntities,train)
