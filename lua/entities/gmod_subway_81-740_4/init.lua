@@ -507,24 +507,25 @@ function ENT:CreatePricep(pos,ang)
     end
     table.insert(ent.JointPositions,index,x)
 	
-	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")	
-	self:SetNW2Entity("PricepBogey",self.PricepBogey)
-	local PB = self.PricepBogey	
-	PB:SetSolid(SOLID_VPHYSICS)
-	PB:PhysicsInit(SOLID_VPHYSICS)
+	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")		
+	local PB = self.PricepBogey
+    if not IsValid(PB) then return end	
+	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
+	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
     local rand = math.random()*0.05
-	PB:SetNWFloat("SqualPitch",1.45+rand)
-	PB:SetNWInt("MotorSoundType",2)
-	PB:SetNWInt("Async",true)
-	PB.m_tblToolsAllowed = {"none"}	
-	PB.DisableContacts = true
+	self.PricepBogey:SetNWFloat("SqualPitch",1.45+rand)
+	self.PricepBogey:SetNWInt("MotorSoundType",2)
+	self.PricepBogey:SetNWInt("Async",true)
+	self.PricepBogey.m_tblToolsAllowed = {"none"}	
+	self.PricepBogey.DisableContacts = true
+	self:SetNW2Entity("PricepBogey",self.PricepBogey)
     constraint.AdvBallsocket(
 		ent,
 		RB,
 		0, --bone
 		0, --bone
-		pos-Vector(-330,0,-30),
-		Vector(-330,0,-70),
+		pos-Vector(-330,0,60),
+		Vector(-330,0,60),
 		0.5, --forcelimit
 		0.5, --torquelimit
 		-4, --xmin
@@ -539,13 +540,13 @@ function ENT:CreatePricep(pos,ang)
 		0, --rotonly
 		1 --nocollide
 	)
-	    constraint.AdvBallsocket(
+	constraint.AdvBallsocket(
 		ent,
 		RB,
 		0, --bone
 		0, --bone
 		pos-Vector(-330,0,20),
-		Vector(-330,0,70),
+		Vector(-330,0,20),
 		0.5, --forcelimit
 		0.5, --torquelimit
 		-4, --xmin
@@ -562,30 +563,47 @@ function ENT:CreatePricep(pos,ang)
     )	
 	
     constraint.AdvBallsocket(
-        RB,
-        self,
+		self,
+		RB,
         0, --bone
         0, --bone    
-        Vector(-40,0,120),
-		pos,
-        0, --forcelimit
-        0, --torquelimit
-        0, --xmin
-        0, --ymin
-        -90, --zmin
-        0, --xmax
-        0, --ymax
-        90, --zmax
+		pos-Vector(70,0,60),
+		Vector(70,0,60),
+		0.5, --forcelimit
+		0.5, --torquelimit
+		-4, --xmin
+		-4, --ymin
+		-90, --zmin
+		4, --xmax
+		4, --ymax
+		90, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
         0, --rotonly
         1 --nocollide
     )
-	
-   if IsValid(PB:GetPhysicsObject()) then
-        self.NormalMass = PB:GetPhysicsObject():GetMass()
-    end	
+    constraint.AdvBallsocket(
+ 		self,
+		RB,
+        0, --bone
+        0, --bone    
+		pos-Vector(70,0,20),
+		Vector(70,0,20),
+		0.5, --forcelimit
+		0.5, --torquelimit
+		-4, --xmin
+		-4, --ymin
+		-90, --zmin
+		4, --xmax
+		4, --ymax
+		90, --zmax
+        0, --xfric
+        0, --yfric
+        0, --zfric
+        0, --rotonly
+        1 --nocollide
+    )	
 	
 	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)
