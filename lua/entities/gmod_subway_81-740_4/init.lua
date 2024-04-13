@@ -509,7 +509,6 @@ function ENT:CreatePricep(pos,ang)
 	
 	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")	
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
-	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
 	local PB = self.PricepBogey	
 	PB:SetSolid(SOLID_VPHYSICS)
 	PB:PhysicsInit(SOLID_VPHYSICS)
@@ -524,15 +523,15 @@ function ENT:CreatePricep(pos,ang)
 		RB,
 		0, --bone
 		0, --bone
-		pos-Vector(-330,0,-40),
+		pos-Vector(-330,0,-30),
 		Vector(-330,0,-70),
 		0.5, --forcelimit
 		0.5, --torquelimit
-		-2, --xmin
-		-2, --ymin
+		-4, --xmin
+		-4, --ymin
 		-90, --zmin
-		2, --xmax
-		2, --ymax
+		4, --xmax
+		4, --ymax
 		90, --zmax
 		0, --xfric
 		0, --yfric
@@ -549,11 +548,11 @@ function ENT:CreatePricep(pos,ang)
 		Vector(-330,0,70),
 		0.5, --forcelimit
 		0.5, --torquelimit
-		-2, --xmin
-		-2, --ymin
+		-4, --xmin
+		-4, --ymin
 		-90, --zmin
-		2, --xmax
-		2, --ymax
+		4, --xmax
+		4, --ymax
 		90, --zmax
 		0, --xfric
 		0, --yfric
@@ -571,8 +570,8 @@ function ENT:CreatePricep(pos,ang)
 		pos,
         0, --forcelimit
         0, --torquelimit
-        -0, --xmin
-        -0, --ymin
+        0, --xmin
+        0, --ymin
         -90, --zmin
         0, --xmax
         0, --ymax

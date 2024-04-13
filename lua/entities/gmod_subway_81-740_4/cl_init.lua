@@ -1746,8 +1746,7 @@ function ENT:Initialize()
         self.VentVol[i] = 0
     end
 	
-	self.FrontBogey = self:GetNW2Entity("FrontBogey")	
-	PricepBogey = self:GetNW2Entity("PricepBogey")	
+	self.FrontBogey = self:GetNW2Entity("FrontBogey")
 	self.RearBogey = self:GetNW2Entity("RearBogey")	
 	self.FrontCouple = self:GetNW2Entity("FrontCouple")
 	self.RearCouple = self:GetNW2Entity("RearCouple")
@@ -1762,7 +1761,7 @@ if Metrostroi.Version >= 1537278077 then
 function ENT:ReInitBogeySounds(bogey)
 	if not IsValid(bogey) then return end
 	
-	local MotorType = self:GetNW2Int("MotorType")	
+local MotorType = self:GetNW2Int("MotorType")	
 
     -- Bogey-related sounds
     bogey.SoundNames = {}
