@@ -52,8 +52,8 @@ function ENT:Initialize()
         self.RearBogey  = self:CreateBogey(Vector(-18,0,-75),Angle(0,0,0),false,"740G")
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)
-        self.FrontCouple = self:CreateCouple(Vector(608-17,0,-60),Angle(0,0,0),true,"740")
-        self.RearCouple = self:CreateCouple(Vector(-612-17,0,-60),Angle(0,-180,0),false,"740")
+        self.FrontCouple = self:CreateCouple(Vector(608-18,0,-60),Angle(0,0,0),true,"740")
+        self.RearCouple = self:CreateCouple(Vector(-612-16,0,-60),Angle(0,-180,0),false,"740")
 
 		self.FrontCouple.m_tblToolsAllowed = {"none"}	
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
@@ -65,16 +65,10 @@ function ENT:Initialize()
 		self:SetNW2Entity("RearBogey",self.RearBogey)
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)
 		self:SetNW2Entity("RearCouple",self.RearCouple)
-		local opt = Vector(70,0,0)
-		self.FrontCouple.CouplingPointOffset = opt
-		self.RearCouple.CouplingPointOffset = opt - Vector(5,0,0) 
 	
 	timer.Simple(0.1, function()	
         if not IsValid(self) then return end
 		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон
-		local opt65 = Vector(65,0,0)	
-		self.RearCouple.CouplingPointOffset = opt65
-		self.FrontCouple.CouplingPointOffset = opt65
 	end)
 	
 	self.FrontBogey:SetNWBool("Async",true)
@@ -243,7 +237,6 @@ end
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")
     if not IsValid(ent) then return end
-    ent.Joints = {}
     ent.JointPositions = {}	
 	ent:SetPos(self:LocalToWorld(Vector(-343,0,0)))
 	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
@@ -254,7 +247,7 @@ function ENT:CreatePricep(pos,ang)
     ent.SpawnPos = pos
     ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
-    ent:SetNW2Entity("TrainEntity", self)	
+    ent:SetNW2Entity("TrainEntity", self)
 	local RB = self.RearBogey
     local index=1
     local x = ent:LocalToWorld(ent:LocalToWorld(Vector(0,0,0))).x
@@ -263,9 +256,7 @@ function ENT:CreatePricep(pos,ang)
     end
     table.insert(ent.JointPositions,index,x)
 	
-	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")		
-	local PB = self.PricepBogey
-    if not IsValid(PB) then return end	
+	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
     local rand = math.random()*0.05
@@ -318,13 +309,13 @@ function ENT:CreatePricep(pos,ang)
 		1 --nocollide
     )	
 	
-	constraint.AdvBallsocket(
-		RB,
+    constraint.AdvBallsocket(
 		self,
+		RB,
         0, --bone
         0, --bone    
-		pos-Vector(10,0,60),
-		Vector(5,0,60),
+		pos-Vector(50,0,60),
+		Vector(50,0,60),
 		1, --forcelimit
 		1, --torquelimit
 		-2, --xmin
@@ -340,12 +331,12 @@ function ENT:CreatePricep(pos,ang)
         1 --nocollide
     )
     constraint.AdvBallsocket(
-		RB,
 		self,
+		RB,
         0, --bone
         0, --bone    
-		pos-Vector(10,0,20),
-		Vector(10,0,20),
+		pos-Vector(50,0,33),
+		Vector(50,0,33),
 		1, --forcelimit
 		1, --torquelimit
 		-2, --xmin
@@ -366,9 +357,9 @@ function ENT:CreatePricep(pos,ang)
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
         ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass(15000)
     end
-	if IsValid(self.FrontBogey:GetPhysicsObject()) then
-        self.NormalMass = self.FrontBogey:GetPhysicsObject():GetMass()
-    end		
+	if IsValid(self.PricepBogey:GetPhysicsObject()) then
+        self.NormalMass = self.PricepBogey:GetPhysicsObject():GetMass()
+    end	
 
 	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)

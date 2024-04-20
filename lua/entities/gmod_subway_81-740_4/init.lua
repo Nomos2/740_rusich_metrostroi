@@ -105,7 +105,7 @@ end
 		self:SetNW2Entity("RearCouple",self.RearCouple)
 		
 		self.FrontCouple.CouplingPointOffset = Vector(75,0,0) 
-		self.RearCouple.CouplingPointOffset = Vector(90,0,0)   
+		self.RearCouple.CouplingPointOffset = Vector(80,0,0)   
 		
 	timer.Simple(0.1, function()	
         if not IsValid(self) then return end	
@@ -487,7 +487,6 @@ end]] --Попытка замены звуков тележек от Димас�
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")	
     if not IsValid(ent) then return end
-    ent.Joints = {}
     ent.JointPositions = {}	
 	ent:SetPos(self:LocalToWorld(Vector(-356-9,0,0)))
     ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
@@ -507,9 +506,7 @@ function ENT:CreatePricep(pos,ang)
     end
     table.insert(ent.JointPositions,index,x)
 	
-	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")		
-	local PB = self.PricepBogey
-    if not IsValid(PB) then return end	
+	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
     local rand = math.random()*0.05
@@ -563,12 +560,12 @@ function ENT:CreatePricep(pos,ang)
     )	
 	
     constraint.AdvBallsocket(
-		RB,
 		self,
+		RB,
         0, --bone
         0, --bone    
-		pos-Vector(10,0,60),
-		Vector(5,0,60),
+		pos-Vector(45,0,60),
+		Vector(45,0,60),
 		1, --forcelimit
 		1, --torquelimit
 		-2, --xmin
@@ -584,12 +581,12 @@ function ENT:CreatePricep(pos,ang)
         1 --nocollide
     )
     constraint.AdvBallsocket(
-		RB,
 		self,
+		RB,
         0, --bone
         0, --bone    
-		pos-Vector(10,0,20),
-		Vector(10,0,20),
+		pos-Vector(45,0,33),
+		Vector(45,0,33),
 		1, --forcelimit
 		1, --torquelimit
 		-2, --xmin
@@ -604,14 +601,15 @@ function ENT:CreatePricep(pos,ang)
         0, --rotonly
         1 --nocollide
     )
+	
 	if IsValid(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end		
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
         ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass(15000)
     end
-	if IsValid(self.FrontBogey:GetPhysicsObject()) then
-        self.NormalMass = self.FrontBogey:GetPhysicsObject():GetMass()
+	if IsValid(self.PricepBogey:GetPhysicsObject()) then
+        self.NormalMass = self.PricepBogey:GetPhysicsObject():GetMass()
     end	
 	
 	Metrostroi.RerailBogey(self.FrontBogey)    		

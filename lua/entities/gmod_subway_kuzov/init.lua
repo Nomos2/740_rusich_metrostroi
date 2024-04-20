@@ -108,7 +108,8 @@ function ENT:Initialize()
 	RC:GetPhysicsObject():SetMass(5000)
     constraint.NoCollide(self,train,0,0)	
     constraint.NoCollide(train,RB,0,0)	
-    constraint.NoCollide(self,RB,0,0)		
+    constraint.NoCollide(self,RB,0,0)
+    constraint.NoCollide(PB,RC,0,0)
 	   
     constraint.Axis(
         PB,        
@@ -223,7 +224,6 @@ function ENT:Think()
 	local train = self.HeadTrain    
 	if not IsValid(train) then return end
 	local retVal = self.BaseClass.Think(self)
-
 	if not train.RearBrakeLineIsolation then
 		train.RearBrakeLineIsolation = self.RearBrakeLineIsolation
 	end
