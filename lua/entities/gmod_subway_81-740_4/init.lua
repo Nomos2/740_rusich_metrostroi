@@ -524,16 +524,16 @@ function ENT:CreatePricep(pos,ang)
 		RB,
 		0, --bone
 		0, --bone
-		pos-Vector(-330,0,60),
-		Vector(-330,0,60),
-		0.5, --forcelimit
-		0.5, --torquelimit
-		-4, --xmin
-		-4, --ymin
-		-90, --zmin
-		4, --xmax
-		4, --ymax
-		90, --zmax
+		pos-Vector(-310,0,60),
+		Vector(-310,0,60),
+		1, --forcelimit
+		1, --torquelimit
+		-1.8, --xmin
+		-1.8, --ymin
+		-45, --zmin
+		1.8, --xmax
+		1.8, --ymax
+		45, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -545,16 +545,16 @@ function ENT:CreatePricep(pos,ang)
 		RB,
 		0, --bone
 		0, --bone
-		pos-Vector(-330,0,20),
-		Vector(-330,0,20),
-		0.5, --forcelimit
-		0.5, --torquelimit
-		-4, --xmin
-		-4, --ymin
-		-90, --zmin
-		4, --xmax
-		4, --ymax
-		90, --zmax
+		pos-Vector(-310,0,20),
+		Vector(-310,0,20),
+		1, --forcelimit
+		1, --torquelimit
+		-1.8, --xmin
+		-1.8, --ymin
+		-45, --zmin
+		1.8, --xmax
+		1.8, --ymax
+		45, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -563,20 +563,20 @@ function ENT:CreatePricep(pos,ang)
     )	
 	
     constraint.AdvBallsocket(
-		self,
 		RB,
+		self,
         0, --bone
         0, --bone    
-		pos-Vector(70,0,60),
-		Vector(70,0,60),
-		0.5, --forcelimit
-		0.5, --torquelimit
-		-4, --xmin
-		-4, --ymin
-		-90, --zmin
-		4, --xmax
-		4, --ymax
-		90, --zmax
+		pos-Vector(10,0,60),
+		Vector(5,0,60),
+		1, --forcelimit
+		1, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-45, --zmin
+		2, --xmax
+		2, --ymax
+		45, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -584,20 +584,20 @@ function ENT:CreatePricep(pos,ang)
         1 --nocollide
     )
     constraint.AdvBallsocket(
- 		self,
 		RB,
+		self,
         0, --bone
         0, --bone    
-		pos-Vector(70,0,10),
-		Vector(70,0,10),
-		0.5, --forcelimit
-		0.5, --torquelimit
-		-4, --xmin
-		-4, --ymin
-		-90, --zmin
-		4, --xmax
-		4, --ymax
-		90, --zmax
+		pos-Vector(10,0,20),
+		Vector(10,0,20),
+		1, --forcelimit
+		1, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-45, --zmin
+		2, --xmax
+		2, --ymax
+		45, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -607,14 +607,11 @@ function ENT:CreatePricep(pos,ang)
 	if IsValid(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end		
+	if IsValid(self.RearBogey:GetPhysicsObject()) then
+        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass(15000)
+    end
 	if IsValid(self.FrontBogey:GetPhysicsObject()) then
         self.NormalMass = self.FrontBogey:GetPhysicsObject():GetMass()
-    end	
-	if IsValid(self.RearBogey:GetPhysicsObject()) then
-        self.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
-    end
-	if IsValid(self.PricepBogey:GetPhysicsObject()) then
-        ent.NormalMass = self.PricepBogey:GetPhysicsObject():GetMass()
     end	
 	
 	Metrostroi.RerailBogey(self.FrontBogey)    		
