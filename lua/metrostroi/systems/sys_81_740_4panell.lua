@@ -221,7 +221,7 @@ function TRAIN_SYSTEM:Think()
         else
             self.Controller = self.Controller - 1
         end
-        self.Train:PlayOnce("KV_"..previousPosition.."_"..self.Controller, "cabin",0.5)
+        self.Train:PlayOnce("KV_"..previousPosition.."_"..self.Controller, "cabin",0.5,self.TargetController == self.Controller and 1.3 or 1.4)
     end
     if self.Controller == self.TargetController then
         self.ControllerTimer = nil
