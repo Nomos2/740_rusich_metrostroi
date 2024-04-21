@@ -27,7 +27,7 @@ function ENT:Initialize()
 	self.NoTrain = false 
     self.BaseClass.Initialize(self)
 	
-    self.NormalMass = 17000	
+    self.NormalMass = 24000	
 	
     self.PassengerSeat = self:CreateSeat("passenger",Vector(-135,-40,-25),Angle(0,90,0),"models/nova/airboat_seat.mdl")
     self.PassengerSeat2 = self:CreateSeat("passenger",Vector(-135,40,-25),Angle(0,270,0),"models/nova/airboat_seat.mdl")  
@@ -79,7 +79,8 @@ function ENT:Initialize()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
     if not IsValid(train) then return end
-	local FB = train.FrontBogey	
+    self.SpawnPos = pos
+    self.SpawnAng = ang	
 	local PB = train.PricepBogey	
 	local RB = train.RearBogey		
 	local RC = train.RearCouple
@@ -105,11 +106,54 @@ function ENT:Initialize()
 		1, --zfric
 		0 --rotonly
 	)
-	RC:GetPhysicsObject():SetMass(5000)
+	RC:GetPhysicsObject():SetMass(4500)
     constraint.NoCollide(self,train,0,0)	
     constraint.NoCollide(train,RB,0,0)	
     constraint.NoCollide(self,RB,0,0)
     constraint.NoCollide(PB,RC,0,0)
+	
+    constraint.AdvBallsocket(
+		self,
+		RB,
+		0, --bone
+		0, --bone
+		Vector(310,0,60),
+		Vector(310,0,60),
+		1, --forcelimit
+		1, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-25, --zmin
+		2, --xmax
+		2, --ymax
+		25, --zmax
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1 --nocollide
+	)
+	constraint.AdvBallsocket(
+		self,
+		RB,
+		0, --bone
+		0, --bone
+		Vector(310,0,0),
+		Vector(310,0,0),
+		1, --forcelimit
+		1, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-25, --zmin
+		2, --xmax
+		2, --ymax
+		25, --zmax
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1 --nocollide
+    )		
 	   
     constraint.Axis(
         PB,        
@@ -146,7 +190,12 @@ function ENT:Initialize()
 		0, --rotonly
 		1 --collide		
 	)
-	FC:GetPhysicsObject():SetMass(5000)		
+	FC:GetPhysicsObject():SetMass(4500)
+	
+	if IsValid(train.RearBogey:GetPhysicsObject()) then
+        self.NormalMass = train.RearBogey:GetPhysicsObject():GetMass()
+    end	
+	
 
 	table.insert(train.TrainEntities,self)      
     table.insert(self.TrainEntities,train)

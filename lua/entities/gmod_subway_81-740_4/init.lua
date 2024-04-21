@@ -54,7 +54,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
     self:SetPos(self:GetPos() + Vector(0,0,140))
 	
-    self.NormalMass = 17000
+    self.NormalMass = 24000
 
     -- Create seat entities
     self.DriverSeat = self:CreateSeat("driver",Vector(775-159-9,19,-27))
@@ -91,7 +91,8 @@ end
 		self.RearBogey:SetNWInt("MotorSoundType",2)	
         self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
         self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")
-
+		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
+		
 		self.FrontCouple.m_tblToolsAllowed = {"none"}
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
 		self.FrontBogey.m_tblToolsAllowed = {"none"}	
@@ -102,10 +103,11 @@ end
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
 		self:SetNW2Entity("FrontCouple",self.FrontCouple)
-		self:SetNW2Entity("RearCouple",self.RearCouple)
+		self:SetNW2Entity("RearCouple",self.RearCouple)	
 		
-		self.FrontCouple.CouplingPointOffset = Vector(75,0,0) 
-		self.RearCouple.CouplingPointOffset = Vector(80,0,0)   
+		local opt75 = Vector(75,0,0)		
+		self.FrontCouple.CouplingPointOffset = opt75
+		self.RearCouple.CouplingPointOffset = opt75+Vector(10,0,0)    
 		
 	timer.Simple(0.1, function()	
         if not IsValid(self) then return end	
@@ -487,7 +489,7 @@ end]] --Попытка замены звуков тележек от Димас�
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")	
     if not IsValid(ent) then return end
-    ent.JointPositions = {}	
+    ent.JointPositions = {-356-9,0,0}	
 	ent:SetPos(self:LocalToWorld(Vector(-356-9,0,0)))
     ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent:Spawn()
@@ -505,6 +507,7 @@ function ENT:CreatePricep(pos,ang)
         if v>pos.x then index=i+1 else break end
     end
     table.insert(ent.JointPositions,index,x)
+    ent.NormalMass = self.NormalMass		
 	
 	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
@@ -516,67 +519,25 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey.m_tblToolsAllowed = {"none"}	
 	self.PricepBogey.DisableContacts = true
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
-    constraint.AdvBallsocket(
-		ent,
-		RB,
-		0, --bone
-		0, --bone
-		pos-Vector(-310,0,60),
-		Vector(-310,0,60),
-		1, --forcelimit
-		1, --torquelimit
-		-1.8, --xmin
-		-1.8, --ymin
-		-45, --zmin
-		1.8, --xmax
-		1.8, --ymax
-		45, --zmax
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1 --nocollide
-	)
-	constraint.AdvBallsocket(
-		ent,
-		RB,
-		0, --bone
-		0, --bone
-		pos-Vector(-310,0,20),
-		Vector(-310,0,20),
-		1, --forcelimit
-		1, --torquelimit
-		-1.8, --xmin
-		-1.8, --ymin
-		-45, --zmin
-		1.8, --xmax
-		1.8, --ymax
-		45, --zmax
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1 --nocollide
-    )	
 	
     constraint.AdvBallsocket(
 		self,
 		RB,
         0, --bone
         0, --bone    
-		pos-Vector(45,0,60),
-		Vector(45,0,60),
-		1, --forcelimit
-		1, --torquelimit
+		pos-Vector(55,0,60),
+		Vector(55,0,60),
+		0, --forcelimit
+		0, --torquelimit
 		-2, --xmin
 		-2, --ymin
-		-45, --zmin
+		-25, --zmin
 		2, --xmax
 		2, --ymax
-		45, --zmax
+		25, --zmax
         0, --xfric
         0, --yfric
-        0, --zfric
+        0.5, --zfric
         0, --rotonly
         1 --nocollide
     )
@@ -585,33 +546,28 @@ function ENT:CreatePricep(pos,ang)
 		RB,
         0, --bone
         0, --bone    
-		pos-Vector(45,0,33),
-		Vector(45,0,33),
-		1, --forcelimit
-		1, --torquelimit
+		pos-Vector(55,0,15),
+		Vector(55,0,15),
+		0, --forcelimit
+		0, --torquelimit
 		-2, --xmin
 		-2, --ymin
-		-45, --zmin
+		-25, --zmin
 		2, --xmax
 		2, --ymax
-		45, --zmax
+		25, --zmax
         0, --xfric
         0, --yfric
-        0, --zfric
+        0.5, --zfric
         0, --rotonly
         1 --nocollide
     )
-	
 	if IsValid(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
-    end		
-	if IsValid(self.RearBogey:GetPhysicsObject()) then
-        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass(15000)
     end
 	if IsValid(self.PricepBogey:GetPhysicsObject()) then
         self.NormalMass = self.PricepBogey:GetPhysicsObject():GetMass()
-    end	
-	
+    end
 	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)
     Metrostroi.RerailBogey(self.PricepBogey)
