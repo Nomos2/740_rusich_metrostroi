@@ -191,11 +191,6 @@ function ENT:Initialize()
 		1 --collide		
 	)
 	FC:GetPhysicsObject():SetMass(4500)
-	
-	if IsValid(train.RearBogey:GetPhysicsObject()) then
-        self.NormalMass = train.RearBogey:GetPhysicsObject():GetMass()
-    end	
-	
 
 	table.insert(train.TrainEntities,self)      
     table.insert(self.TrainEntities,train)

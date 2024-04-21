@@ -316,7 +316,7 @@ function ENT:CreatePricep(pos,ang)
     end
 	if IsValid(self.PricepBogey:GetPhysicsObject()) then
         self.NormalMass = self.PricepBogey:GetPhysicsObject():GetMass()
-    end
+    end	
 	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)
     Metrostroi.RerailBogey(self.PricepBogey)	
