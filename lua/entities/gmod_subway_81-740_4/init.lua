@@ -489,7 +489,6 @@ end]] --Попытка замены звуков тележек от Димас�
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")	
     if not IsValid(ent) then return end
-    ent.JointPositions = {-356-9,0,0}	
 	ent:SetPos(self:LocalToWorld(Vector(-356-9,0,0)))
     ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent:Spawn()
@@ -500,14 +499,7 @@ function ENT:CreatePricep(pos,ang)
     ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
     ent:SetNW2Entity("TrainEntity", self)
-	local RB = self.RearBogey
-    local index=1
-    local x = ent:LocalToWorld(ent:LocalToWorld(Vector(0,0,0))).x
-    for i,v in ipairs(ent.JointPositions) do
-        if v>pos.x then index=i+1 else break end
-    end
-    table.insert(ent.JointPositions,index,x)
-    ent.NormalMass = self.NormalMass		
+	local RB = self.RearBogey		
 	
 	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
@@ -525,8 +517,8 @@ function ENT:CreatePricep(pos,ang)
 		RB,
         0, --bone
         0, --bone    
-		pos-Vector(55,0,60),
-		Vector(55,0,60),
+		pos-Vector(65,0,60),
+		Vector(65,0,60),
 		0, --forcelimit
 		0, --torquelimit
 		-2, --xmin
@@ -537,7 +529,7 @@ function ENT:CreatePricep(pos,ang)
 		25, --zmax
         0, --xfric
         0, --yfric
-        0.5, --zfric
+        0, --zfric
         0, --rotonly
         1 --nocollide
     )
@@ -546,8 +538,8 @@ function ENT:CreatePricep(pos,ang)
 		RB,
         0, --bone
         0, --bone    
-		pos-Vector(55,0,15),
-		Vector(55,0,15),
+		pos-Vector(65,0,0),
+		Vector(65,0,0),
 		0, --forcelimit
 		0, --torquelimit
 		-2, --xmin
@@ -558,16 +550,16 @@ function ENT:CreatePricep(pos,ang)
 		25, --zmax
         0, --xfric
         0, --yfric
-        0.5, --zfric
+        0, --zfric
         0, --rotonly
         1 --nocollide
     )
 	if IsValid(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
-    end
-	if IsValid(self.PricepBogey:GetPhysicsObject()) then
-        self.NormalMass = self.PricepBogey:GetPhysicsObject():GetMass()
     end	
+	if IsValid(self.RearBogey:GetPhysicsObject()) then
+        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
+    end
 	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)
     Metrostroi.RerailBogey(self.PricepBogey)

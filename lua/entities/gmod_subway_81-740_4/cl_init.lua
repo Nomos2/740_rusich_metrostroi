@@ -1508,14 +1508,14 @@ ENT.ClientProps["bucik_old"] = {
 }
 ENT.ClientProps["door_cab_r"] = {
 	model = "models/metrostroi_train/81-740/cabine/cabin_right.mdl",
-	pos = Vector(765-159.75-9, -61.9,13.1),
+	pos = Vector(765-159.75-8.8, -61.9,13.2),
 	ang = Angle(0,-90,0.25),
 	scale = 1.001,
 	hide = 1,
 }
 ENT.ClientProps["door_cab_l"] = {
 	model = "models/metrostroi_train/81-740/cabine/cabin_left.mdl",
-	pos = Vector(765-159.45-9, 63.5, 13.1),
+	pos = Vector(765-159.45-8.8, 63.3, 13.2),
 	ang = Angle(0,-90,0.25),
 	scale = 1.01,
 	hide = 1,
