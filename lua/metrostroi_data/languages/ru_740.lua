@@ -92,7 +92,6 @@ Common.741.RearDoor 						= Задняя торцевая дверь
 Common.740.FrontDoor 						= Передняя торцевая дверь
 
 Common.740.Password 						= Установить/снять подсказку пароля
-Common.740.Antenna  						= Установить/снять антенну
 
 Common.740.Vityaz.F1             = Витязь: F1
 Common.740.Vityaz.F2             = Витязь: СКОР
@@ -495,7 +494,6 @@ Entities.gmod_subway_81-740_4.Buttons.PneumoHelper2.!BrakeTrainLine   = @[Common
 Entities.gmod_subway_81-740_4.Buttons.PneumoHelper1.!BrakeCylinder    = @[Common.740.BCPressure]
 Entities.gmod_subway_81-740_4.Buttons.GV.GVToggle                     = @[Common.740.BRU]
 
-Entities.gmod_subway_81-740_4.Buttons.Antenna.Antenna      	  = @[Common.740.Antenna]
 Entities.gmod_subway_81-740_4.Buttons.Password.Password       = @[Common.740.Password]
 
 Entities.gmod_subway_81-740_4.Buttons.ALSPANELLAMPS.!LN       = @[Common.740.LN]

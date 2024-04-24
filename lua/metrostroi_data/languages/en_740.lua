@@ -90,7 +90,6 @@ Common.741.RearDoor 						= Rear end door
 Common.740.FrontDoor 						= Front end door
 
 Common.740.Password 						= Set/remove password hint
-Common.740.Antenna  						= Install/remove the antenna
 
 Common.740.Vityaz.F1             = Vityaz: F1
 Common.740.Vityaz.F2             = Vityaz: Speed
@@ -496,7 +495,6 @@ Entities.gmod_subway_81-740_4.Buttons.PneumoHelper2.!BrakeTrainLine   = @[Common
 Entities.gmod_subway_81-740_4.Buttons.PneumoHelper1.!BrakeCylinder    = @[Common.740.BCPressure]
 Entities.gmod_subway_81-740_4.Buttons.GV.GVToggle                     = @[Common.740.BRU]
 
-Entities.gmod_subway_81-740_4.Buttons.Antenna.Antenna         = @[Common.740.Antenna]
 Entities.gmod_subway_81-740_4.Buttons.Password.Password       = @[Common.740.Password]
 
 Entities.gmod_subway_81-740_4.Buttons.ALSPANELLAMPS.!LN       = @[Common.740.LN]

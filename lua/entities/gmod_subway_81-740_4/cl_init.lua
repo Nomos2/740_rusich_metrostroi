@@ -1236,7 +1236,7 @@ ENT.ClientProps["april_bucket"] = {
 }
 print("happy bucket day!")
 end
-ENT.ClientProps["AntennaProp"] = {
+ENT.ClientProps["Antenna"] = {
     model = "models/metrostroi_train/81-740/body/antenna/antenna.mdl",
     pos = Vector(234.25-15-9,21.3,-124.5),
     ang = Angle(-6,0,0),
@@ -1615,18 +1615,6 @@ ENT.ClientProps["Naddver_off"] = {
 	ang = Angle(0,0,0),
 	scale = 1,	
 	nohide = true,
-}
-ENT.ButtonMap["Antenna"] = {
-    pos = Vector(835-161-9,-7.5,-19.5),
-    ang = Angle(0,90,84),
-    width = 240,
-    height = 150,
-    scale = 0.0625,
-    hideseat=0.2,
-	
-	buttons = {
-        {ID = "Antenna",x=0,y=0,w=240,h=150,tooltip="",},
-    }
 }
 ENT.ButtonMap["Password"] = {
     pos = Vector(672.25-15-9,-6,4.2),
@@ -2308,7 +2296,6 @@ for k=0,3 do
     self:Animate("km013", Cpos[self:GetPackedRatio("Cran")] or 0, 0, 0.7,  2,false)
     self:Animate("PB",  self:GetPackedBool("PB") and 1 or 0,0,0.2,  8,false)
 	
-	self:ShowHide("AntennaProp",not self:GetNW2Bool("Antenna"))
 	self:ShowHide("PasswordProp",not self:GetNW2Bool("Password"))	
 	
 	local ZavodTable = self:GetNW2Int("ZavodTable",1)	
