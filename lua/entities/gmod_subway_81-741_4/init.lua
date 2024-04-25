@@ -267,8 +267,8 @@ function ENT:CreatePricep(pos,ang)
 		RB,
         0, --bone
         0, --bone    
-		pos-Vector(65,0,60),
-		Vector(65,0,60),
+		pos-Vector(60,0,60),
+		Vector(60,0,60),
 		0, --forcelimit
 		0, --torquelimit
 		-2, --xmin
@@ -288,8 +288,8 @@ function ENT:CreatePricep(pos,ang)
 		RB,
         0, --bone
         0, --bone    
-		pos-Vector(65,0,0),
-		Vector(65,0,0),
+		pos-Vector(60,0,0),
+		Vector(60,0,0),
 		0, --forcelimit
 		0, --torquelimit
 		-2, --xmin
