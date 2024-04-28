@@ -82,8 +82,21 @@ function ENT:Initialize()
 	local PB = train.PricepBogey	
 	local RB = train.RearBogey		
 	local RC = train.RearCouple
-	local FC = train.FrontCouple
-	RC:PhysicsInit(SOLID_VPHYSICS)	
+	train:SetNW2Entity("FrontBogeyWheels",train.FrontBogey.Wheels)
+	train:SetNW2Entity("RearBogeyWheels",train.RearBogey.Wheels)		
+	train:SetNW2Entity("PricepBogeyWheels",train.PricepBogey.Wheels)
+	train.FrontBogey.Wheels.m_tblToolsAllowed = {"none"}
+	train.RearBogey.Wheels.m_tblToolsAllowed = {"none"}	
+	train.PricepBogey.Wheels.m_tblToolsAllowed = {"none"}
+	
+    RC:SetParameters()
+    if not RC.NoPhysics then
+        RC:PhysicsInit(SOLID_VPHYSICS)
+        RC:SetMoveType(MOVETYPE_VPHYSICS)
+        RC:SetSolid(SOLID_VPHYSICS)
+    end
+    RC:SetUseType(SIMPLE_USE)
+	
 	constraint.AdvBallsocket(
 	    self,
         RC,
@@ -119,12 +132,12 @@ function ENT:Initialize()
 		Vector(310,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		-4, --xmin
+		-4, --ymin
+		-45, --zmin
+		4, --xmax
+		4, --ymax
+		45, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -140,12 +153,12 @@ function ENT:Initialize()
 		Vector(310,0,0),
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		-4, --xmin
+		-4, --ymin
+		-45, --zmin
+		4, --xmax
+		4, --ymax
+		45, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -166,29 +179,6 @@ function ENT:Initialize()
         0,
         Vector(0,0,1)
     )
-	FC:PhysicsInit(SOLID_VPHYSICS)	
-	constraint.AdvBallsocket(
-	    train,
-        FC,
-        0, --bone
-        0, --bone
-        Vector(611,0,-50),
-        Vector(0,0,0),
-		1, --forcelimit
-		1, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-15, --zmin
-		2, --xmax
-		2, --ymax
-		15, --zmax
-		0.1, --xfric
-		0.1, --yfric
-		1, --zfric
-		0, --rotonly
-		1 --collide		
-	)
-	FC:GetPhysicsObject():SetMass(4000)
 
 	table.insert(train.TrainEntities,self)      
     table.insert(self.TrainEntities,train)

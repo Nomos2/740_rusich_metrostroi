@@ -91,7 +91,6 @@ end
 		self.RearBogey:SetNWInt("MotorSoundType",2)	
         self.FrontCouple = self:CreateCouple(Vector(627-14,0,-60),Angle(0,0,0),true,"740")
         self.RearCouple = self:CreateCouple(Vector(-641-9,0,-60),Angle(0,-180,0),false,"740")
-		self.RearCouple:PhysicsInit(SOLID_VPHYSICS)
 		
 		self.FrontCouple.m_tblToolsAllowed = {"none"}
 		self.RearCouple.m_tblToolsAllowed = {"none"}	
@@ -107,7 +106,7 @@ end
 		
 		local opt75 = Vector(75,0,0)		
 		self.FrontCouple.CouplingPointOffset = opt75
-		self.RearCouple.CouplingPointOffset = opt75+Vector(10,0,0)    
+		self.RearCouple.CouplingPointOffset = opt75+Vector(9,0,0)    
 		
 	timer.Simple(0.1, function()	
         if not IsValid(self) then return end	
@@ -509,23 +508,23 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey:SetNWInt("Async",true)
 	self.PricepBogey.m_tblToolsAllowed = {"none"}	
 	self.PricepBogey.DisableContacts = true
-	self:SetNW2Entity("PricepBogey",self.PricepBogey)
+	self:SetNW2Entity("PricepBogey",self.PricepBogey)	
 	
     constraint.AdvBallsocket(
 		self,
 		RB,
         0, --bone
         0, --bone    
-		pos-Vector(60,0,60),
-		Vector(60,0,60),
+		pos-Vector(60,0,55),
+		Vector(60,0,55),
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
+		-3.5, --xmin
+		-3.5, --ymin
 		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		3.5, --xmax
+		3.5, --ymax
+		45, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -541,12 +540,12 @@ function ENT:CreatePricep(pos,ang)
 		Vector(60,0,0),
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		-3.5, --xmin
+		-3.5, --ymin
+		-45, --zmin
+		3.5, --xmax
+		3.5, --ymax
+		45, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
