@@ -499,6 +499,9 @@ function ENT:CreatePricep(pos,ang)
     ent:SetNW2Entity("TrainEntity", self)
 	local RB = self.RearBogey		
 	
+	table.insert(ent.TrainEntities,self)      
+    table.insert(self.TrainEntities,ent)	
+	
 	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)

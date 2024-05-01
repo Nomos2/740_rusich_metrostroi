@@ -82,12 +82,14 @@ function ENT:Initialize()
 	local PB = train.PricepBogey	
 	local RB = train.RearBogey		
 	local RC = train.RearCouple
+	timer.Simple(2, function()	
 	train:SetNW2Entity("FrontBogeyWheels",train.FrontBogey.Wheels)
 	train:SetNW2Entity("RearBogeyWheels",train.RearBogey.Wheels)		
 	train:SetNW2Entity("PricepBogeyWheels",train.PricepBogey.Wheels)
 	train.FrontBogey.Wheels.m_tblToolsAllowed = {"none"}
 	train.RearBogey.Wheels.m_tblToolsAllowed = {"none"}	
 	train.PricepBogey.Wheels.m_tblToolsAllowed = {"none"}
+	end)
 	
     RC:SetParameters()
     if not RC.NoPhysics then
@@ -180,8 +182,6 @@ function ENT:Initialize()
         Vector(0,0,1)
     )
 
-	table.insert(train.TrainEntities,self)      
-    table.insert(self.TrainEntities,train)
     end)
 end
 
