@@ -82,14 +82,6 @@ function ENT:Initialize()
 	local PB = train.PricepBogey	
 	local RB = train.RearBogey		
 	local RC = train.RearCouple
-	timer.Simple(2, function()	
-	train:SetNW2Entity("FrontBogeyWheels",train.FrontBogey.Wheels)
-	train:SetNW2Entity("RearBogeyWheels",train.RearBogey.Wheels)		
-	train:SetNW2Entity("PricepBogeyWheels",train.PricepBogey.Wheels)
-	train.FrontBogey.Wheels.m_tblToolsAllowed = {"none"}
-	train.RearBogey.Wheels.m_tblToolsAllowed = {"none"}	
-	train.PricepBogey.Wheels.m_tblToolsAllowed = {"none"}
-	end)
 	
     RC:SetParameters()
     if not RC.NoPhysics then
@@ -119,7 +111,7 @@ function ENT:Initialize()
 		1, --zfric
 		0 --rotonly
 	)
-	RC:GetPhysicsObject():SetMass(4000)
+	RC:GetPhysicsObject():SetMass(5000)
     constraint.NoCollide(self,train,0,0)	
     constraint.NoCollide(train,RB,0,0)	
     constraint.NoCollide(self,RB,0,0)
@@ -136,10 +128,10 @@ function ENT:Initialize()
 		0, --torquelimit
 		-4, --xmin
 		-4, --ymin
-		-45, --zmin
+		-25, --zmin
 		4, --xmax
 		4, --ymax
-		45, --zmax
+		25, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -157,10 +149,10 @@ function ENT:Initialize()
 		0, --torquelimit
 		-4, --xmin
 		-4, --ymin
-		-45, --zmin
+		-25, --zmin
 		4, --xmax
 		4, --ymax
-		45, --zmax
+		25, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric

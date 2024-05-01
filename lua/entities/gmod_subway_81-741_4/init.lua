@@ -34,7 +34,7 @@ function ENT:Initialize()
     -- Set model and initialize
     self:SetModel("models/metrostroi_train/81-741/body/81-741_4_front.mdl")
     self.BaseClass.Initialize(self)
-    self:SetPos(self:GetPos() + Vector(0,0,140))	
+    self:SetPos(self:GetPos() + Vector(0,0,160))	
 
     self.NormalMass = 24000
 
@@ -269,16 +269,16 @@ function ENT:CreatePricep(pos,ang)
 		RB,
         0, --bone
         0, --bone    
-		pos-Vector(10,0,55),
-		Vector(10,0,55),
+		pos-Vector(5,0,60),
+		Vector(5,0,60),
 		0, --forcelimit
 		0, --torquelimit
 		-3.5, --xmin
 		-3.5, --ymin
-		-45, --zmin
+		-25, --zmin
 		3.5, --xmax
 		3.5, --ymax
-		45, --zmax
+		25, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -296,17 +296,17 @@ function ENT:CreatePricep(pos,ang)
 		0, --torquelimit
 		-3.5, --xmin
 		-3.5, --ymin
-		-45, --zmin
+		-25, --zmin
 		3.5, --xmax
 		3.5, --ymax
-		45, --zmax
+		25, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
         0, --rotonly
         1 --nocollide
-    )
-	if IsValid(ent:GetPhysicsObject()) then
+    )	
+	--if IsValid(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end	
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
