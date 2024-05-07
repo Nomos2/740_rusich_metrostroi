@@ -1746,7 +1746,6 @@ local Cpos = {
     0,0.24,0.5,0.55,0.6,1
 }
 
-if Metrostroi.Version >= 1537278077 then
 function ENT:ReInitBogeySounds(bogey)
 if not IsValid(bogey) then return end
 	
@@ -1819,7 +1818,7 @@ if MotorType==1 then
     bogey.SoundNames["flange1"]      = "subway_trains/740_4/bogey/flange_9.wav"
     bogey.SoundNames["flange2"]      = "subway_trains/740_4/bogey/Flange_10.wav"
     bogey.SoundNames["brakea_loop1"]       = "subway_trains/740_4/bogey/braking_async3.wav"
-    bogey.SoundNames["brakea_loop2"]       = "subway_trains/740_4/bogey/braking_async4.wav"
+    bogey.SoundNames["brakea_loop2"]       = "subway_trains/740_4/bogey/braking_async3.wav"
     bogey.SoundNames["brake_loop1"]       = "subway_trains/bogey/brake_rattle3.wav"
     bogey.SoundNames["brake_loop2"]       = "subway_trains/bogey/brake_rattle4.wav"
     bogey.SoundNames["brake_loop3"]       = "subway_trains/bogey/brake_rattle5.wav"
@@ -1829,8 +1828,8 @@ if MotorType==1 then
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
-end
-if MotorType==2 then
+elseif
+MotorType==2 then
     for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     table.insert(bogey.EngineSNDConfig,{"ted1_740" ,08,00,16,  1})--40
     table.insert(bogey.EngineSNDConfig,{"ted2_740" ,16,08-4,24,1})--35
@@ -1899,8 +1898,8 @@ if MotorType==2 then
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
-end	
-if MotorType==3 then
+elseif	
+MotorType==3 then
  for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end	
 	table.insert(bogey.EngineSNDConfig,{"ted1_720" ,08,00,16,1*0.4})
 	table.insert(bogey.EngineSNDConfig,{"ted2_720" ,16,08-4,24,1*0.43})
@@ -1965,8 +1964,8 @@ if MotorType==3 then
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
-end
-if MotorType==4 then
+elseif
+MotorType==4 then
 for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
 	table.insert(bogey.EngineSNDConfig,{"ted1_740" ,08,00,16,1*1})
 	table.insert(bogey.EngineSNDConfig,{"ted2_740" ,16,08-4,24,1*1})
@@ -2032,9 +2031,8 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
-	
-end
-if MotorType==5 then
+elseif
+MotorType==5 then
 for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
 	table.insert(bogey.EngineSNDConfig,{"ted1_740" ,08,00,16,1*1})
 	table.insert(bogey.EngineSNDConfig,{"ted2_740" ,16,08-4,24,1*1})
@@ -2092,7 +2090,7 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     bogey.SoundNames["flangeb"]      = "subway_trains/740_4/bogey/skrip2_"..skripit..".wav"
     bogey.SoundNames["flange1"]      = "subway_trains/740_4/bogey/flange_9.wav"
     bogey.SoundNames["flange2"]      = "subway_trains/740_4/bogey/Flange_10.wav"
-    bogey.SoundNames["brakea_loop1"]       = "subway_trains/740_4/bogey/braking_async3.wav"
+    bogey.SoundNames["brakea_loop1"]       = "subway_trains/740_4/bogey/braking_async4.wav"
     bogey.SoundNames["brakea_loop2"]       = "subway_trains/740_4/bogey/braking_async4.wav"
     bogey.SoundNames["brake_loop1"]       = "subway_trains/bogey/brake_rattle3.wav"
     bogey.SoundNames["brake_loop2"]       = "subway_trains/bogey/brake_rattle4.wav"
@@ -2130,7 +2128,6 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     --bogey.MotorSoundType = nil
 end
 end
-else return end
 	
 function ENT:Think()
     self.BaseClass.Think(self)	
@@ -2153,9 +2150,8 @@ function ENT:Think()
 	self.PricepBogey.EngineSNDConfig[1] and self.PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
 		self:ReInitBogeySounds(self.PricepBogey)
 	end	
-	end
-
-	if MotorType==2 then
+	elseif
+	MotorType==2 then
 	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V4/engine_8.wav" or self.FrontBogey.EngineSNDConfig and 
 	self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
@@ -2168,9 +2164,8 @@ function ENT:Think()
 	self.PricepBogey.EngineSNDConfig[1] and self.PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
 		self:ReInitBogeySounds(self.PricepBogey)
 	end	
-	end
-
-	if MotorType==3 then
+	elseif
+	MotorType==3 then
 	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_720"] ~= "subway_trains/bogey/engines/720/speed_8.wav"  or self.FrontBogey.EngineSNDConfig and 
 	self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 0.4) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
@@ -2183,9 +2178,8 @@ function ENT:Think()
 	self.PricepBogey.EngineSNDConfig[1] and self.PricepBogey.EngineSNDConfig[1][5] ~= 0.4 or refresh then
 		self:ReInitBogeySounds(self.PricepBogey)
 	end	
-	end
-
-	if MotorType==4 then
+	elseif
+	MotorType==4 then
 	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V3/engine_8.wav" or self.FrontBogey.EngineSNDConfig and 
 	self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)
@@ -2198,9 +2192,8 @@ function ENT:Think()
 	self.PricepBogey.EngineSNDConfig[1] and self.PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
 		self:ReInitBogeySounds(self.PricepBogey)
 	end	
-	end
-
-	if MotorType==5 then		
+	elseif
+	MotorType==5 then		
 	if IsValid(self.FrontBogey) and self.FrontBogey.SoundNames and (self.FrontBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V2/engine_8.wav" or self.FrontBogey.EngineSNDConfig and 
 	self.FrontBogey.EngineSNDConfig[1] and self.FrontBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.FrontBogey)

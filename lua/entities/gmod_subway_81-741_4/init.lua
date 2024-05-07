@@ -48,15 +48,11 @@ function ENT:Initialize()
 	self.DriverSeat.m_tblToolsAllowed = {"none"}		
 
  -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 505,0,-75),Angle(0,180,0),true,"740PER")
-        self.RearBogey  = self:CreateBogey(Vector(-18,0,-75),Angle(0,0,0),false,"740G")
+        self.FrontBogey = self:CreateBogey(Vector( 505,0,-75.5),Angle(0,180,0),true,"740PER")
+        self.RearBogey  = self:CreateBogey(Vector(-530,0,-74),Angle(0,0,0),true,"740NOTR")
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)
-        self.FrontCouple = self:CreateCouple(Vector(608-18,0,-59.9),Angle(0,0,0),true,"740")
-        self.RearCouple = self:CreateCouple(Vector(-612-16,0,-60),Angle(0,-180,0),false,"740")	
 
-		self.FrontCouple.m_tblToolsAllowed = {"none"}	
-		self.RearCouple.m_tblToolsAllowed = {"none"}	
 		self.FrontBogey.m_tblToolsAllowed = {"none"}	
 		self.RearBogey.m_tblToolsAllowed = {"none"}	
 		self.RearBogey:SetSolid(SOLID_VPHYSICS)
@@ -64,8 +60,6 @@ function ENT:Initialize()
 		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
-		self:SetNW2Entity("FrontCouple",self.FrontCouple)
-		self:SetNW2Entity("RearCouple",self.RearCouple)
 	
 	timer.Simple(0.1, function()	
         if not IsValid(self) then return end
@@ -253,7 +247,7 @@ function ENT:CreatePricep(pos,ang)
 	table.insert(ent.TrainEntities,self)      
     table.insert(self.TrainEntities,ent)	
 	
-	self.PricepBogey = self:CreateBogey(Vector(-532-25,0,-75),Angle(0,0,0),true,"740NOTR")
+	self.PricepBogey = self:CreateBogey(Vector(-18,0,-74.5),Angle(0,0,0),false,"740G")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
     local rand = math.random()*0.05
@@ -264,9 +258,26 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey.DisableContacts = true
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
 	
+	timer.Simple(1, function()
+	ent.CoupleRear = ent:CreateCouple(Vector( -287,0,-60),Angle(0,180,0),false,"740")
+    if IsValid(ent.HeadTrain) then
+        ent.CoupleRear:SetNW2Entity("TrainEntity", ent.HeadTrain)
+        ent.HeadTrain.CoupleRear = ent.CoupleRear
+        ent:SetNW2Entity("HeadTrain", ent.HeadTrain)
+		self.CoupleFront = self:CreateCouple(Vector( 595,0,-60),Angle(0,0,0),true,"740")
+		self.CoupleFront.m_tblToolsAllowed = {"none"}
+		self.CoupleRear.m_tblToolsAllowed = {"none"}
+		self:SetNW2Entity("CoupleFront",self.RearCouple)
+		self:SetNW2Entity("CoupleRear",self.FrontCouple)		
+    end
+	Metrostroi.RerailBogey(self.FrontBogey)    		
+    Metrostroi.RerailBogey(self.RearBogey)
+    Metrostroi.RerailBogey(self.PricepBogey)	
+	end)
+	
     constraint.AdvBallsocket(
 		self,
-		RB,
+		self.PricepBogey,
         0, --bone
         0, --bone    
 		pos-Vector(5,0,60),
@@ -287,7 +298,7 @@ function ENT:CreatePricep(pos,ang)
     )
     constraint.AdvBallsocket(
 		self,
-		RB,
+		self.PricepBogey,
         0, --bone
         0, --bone    
 		pos-Vector(10,0,0),

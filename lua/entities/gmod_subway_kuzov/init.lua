@@ -81,45 +81,14 @@ function ENT:Initialize()
     if not IsValid(train) then return end
 	local PB = train.PricepBogey	
 	local RB = train.RearBogey		
-	local RC = train.RearCouple
 	
-    RC:SetParameters()
-    if not RC.NoPhysics then
-        RC:PhysicsInit(SOLID_VPHYSICS)
-        RC:SetMoveType(MOVETYPE_VPHYSICS)
-        RC:SetSolid(SOLID_VPHYSICS)
-    end
-    RC:SetUseType(SIMPLE_USE)
-	
-	constraint.AdvBallsocket(
-	    self,
-        RC,
-        0, --bone
-        0, --bone
-        Vector(-281,0,-50),
-        Vector(0,0,0),
-		1, --forcelimit
-		1, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-15, --zmin
-		2, --xmax
-		2, --ymax
-		15, --zmax
-		0.1, --xfric
-		0.1, --yfric
-		1, --zfric
-		0 --rotonly
-	)
-	RC:GetPhysicsObject():SetMass(5000)
     constraint.NoCollide(self,train,0,0)	
     constraint.NoCollide(train,RB,0,0)	
     constraint.NoCollide(self,RB,0,0)
-    constraint.NoCollide(PB,RC,0,0)
 	
     constraint.AdvBallsocket(
 		self,
-		RB,
+		PB,
 		0, --bone
 		0, --bone
 		Vector(310,0,60),
@@ -140,7 +109,7 @@ function ENT:Initialize()
 	)
 	constraint.AdvBallsocket(
 		self,
-		RB,
+		PB,
 		0, --bone
 		0, --bone
 		Vector(310,0,0),
@@ -161,7 +130,7 @@ function ENT:Initialize()
     )		
 	   
     constraint.Axis(
-        PB,        
+        RB,        
         self,
         0,
         0,

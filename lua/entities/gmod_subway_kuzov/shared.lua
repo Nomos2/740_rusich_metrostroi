@@ -19,13 +19,13 @@ end
 ENT.Type            = "anim"
 ENT.Base            = "gmod_subway_base"
 
-ENT.Category		= ""
 ENT.Spawnable		= false
 ENT.AdminSpawnable	= false
 ENT.Author          = ""
 ENT.Contact         = ""
 ENT.Purpose         = ""
 ENT.Instructions    = ""
+ENT.Category		= "Metrostroi (trains)"
 ENT.Model 			= "models/metrostroi_train/81-740/body/81-740_4_rear_reference.mdl"
 
 ENT.NoTrain = true
