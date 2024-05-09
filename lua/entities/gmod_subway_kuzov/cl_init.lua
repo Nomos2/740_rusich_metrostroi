@@ -275,8 +275,8 @@ function ENT:Think()
     if not IsValid(train) then return end
 	
 --Регистрация тележки
-train.PricepBogey = train:GetNW2Entity("PricepBogey")	
-local RB = train.PricepBogey
+train.RearBogey = train:GetNW2Entity("RearBogey")	
+local RB = train.RearBogey
 
 --Взято из cl_init тележки.
 local c_gui
