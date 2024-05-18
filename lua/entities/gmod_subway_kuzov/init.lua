@@ -75,15 +75,14 @@ function ENT:Initialize()
 	
     self:UpdateLampsColors()	
 	
-	timer.Simple(0.1, function()
+	timer.Simple(0.5, function()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
     if not IsValid(train) then return end
 	local PB = train.PricepBogey	
 	local RB = train.RearBogey		
 	
-    constraint.NoCollide(self,train,0,0)	
-    constraint.NoCollide(train,RB,0,0)	
+    constraint.NoCollide(self,train,0,0)
     constraint.NoCollide(self,RB,0,0)
 	
     constraint.AdvBallsocket(
@@ -140,7 +139,7 @@ function ENT:Initialize()
         0,
         0,
         0,
-        Vector(0,0,1)
+        Vector(0,0,-1)
     )
 
     end)

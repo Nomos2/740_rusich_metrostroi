@@ -22,7 +22,6 @@ return
 [bg]
 Entities.gmod_subway_81-740_4.Name = 81-740.4 (Русич глава beta)
 Entities.gmod_subway_81-741_4.Name = 81-741.4 (Русич празнина beta)
-self.Train.SubwayTrain.Name        = 81-740.4 (Русич глава beta)
 
 #Cameras
 Train.740.CameraCond    = Управление на климатике, ИГЛА

@@ -220,7 +220,7 @@ if SERVER then
 
 			local rebootTime = Train:GetNW2Float("CAMSRebootTime", 0)
 			if Train:GetNW2Int("CAMSButton", 0) ~= 0 then --rebooting
-				if rebootTime > 3.5 then --Антон захотел 3.5
+				if rebootTime > 3.5 then
 					Train:SetNW2Float("CAMSRebootTime", 0)
 					self.State = -4
 				else
@@ -550,7 +550,7 @@ else
     end
     local CamRT = surface.GetTextureID( "pp/rt" )
     local CamRTM = Material( "pp/rt" )
-    local CamsPos = Vector(777-144,34,-14)
+    local CamsPos = Vector(777-144-131,34,-14)
     function TRAIN_SYSTEM:ClientThink()
 		if not self.Train:ShouldDrawPanel("CAMS") then return end
 		self.scalex,self.scaley = ScrW()/1024,ScrH()/661 --ScrW()/1768*1.725,ScrH()/992*1.5 
@@ -565,13 +565,13 @@ else
 			local Cam2,Cam2E,Cam2Pos = train:GetNW2Bool("CAMSCam2C"),train:GetNW2Entity("CAMSCam2E"),train:GetNW2Bool("CAMSCam2Pos",false)		
 			
             if Cam1 and not Cam2 and lastenter then
-				Metrostroi.RenderCamOnRT(train,CamsPos,"Cam1",1/train:GetNW2Int("CAMSFPS",05),self.Cam1,Cam1E,Vector(760-144,-75,60)+(Cam1Pos and Vector(0,144,0) or Vector(0,0,0)),Angle(10,180,0),1024,768,1,1,1)
+				Metrostroi.RenderCamOnRT(train,CamsPos,"Cam1",1/train:GetNW2Int("CAMSFPS",05),self.Cam1,Cam1E,Vector(760-144-131,-75,60)+(Cam1Pos and Vector(0,144,0) or Vector(0,0,0)),Angle(10,180,0),1024,768,1,1,1)
 			end
             if Cam1 then
-				Metrostroi.RenderCamOnRT(train,CamsPos,"Cam3",1/train:GetNW2Int("CAMSFPS",05),self.Cam2,Cam1E,Vector(760-144,-70,60)+(Cam1Pos and Vector(0,144,0) or Vector(0,0,-1)),Angle(5,180,0),1024,768,1,1,1)
+				Metrostroi.RenderCamOnRT(train,CamsPos,"Cam3",1/train:GetNW2Int("CAMSFPS",05),self.Cam2,Cam1E,Vector(760-144-131,-70,60)+(Cam1Pos and Vector(0,144,0) or Vector(0,0,-1)),Angle(5,180,0),1024,768,1,1,1)
 			end
 			if Cam2 then
-				Metrostroi.RenderCamOnRT(train,CamsPos,"Cam2",1/train:GetNW2Int("CAMSFPS",05),self.Cam3,Cam2E,Vector(760-144,-75,60)+(Cam2Pos and Vector(0,144,0) or Vector(0,0,0)),Angle(5,180,0),1024,768,1,1,1)
+				Metrostroi.RenderCamOnRT(train,CamsPos,"Cam2",1/train:GetNW2Int("CAMSFPS",05),self.Cam3,Cam2E,Vector(760-144-131,-75,60)+(Cam2Pos and Vector(0,144,0) or Vector(0,0,0)),Angle(5,180,0),1024,768,1,1,1)
 			end		
         end
 		

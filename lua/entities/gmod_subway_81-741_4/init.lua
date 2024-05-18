@@ -39,7 +39,7 @@ function ENT:Initialize()
     self.NormalMass = 24000
 
     -- Create seat entities
-	self.DriverSeat = self:CreateSeat("instructor",Vector(610,11,-35),Angle(0,90,0),"models/vehicles/prisoner_pod_inner.mdl")
+	self.DriverSeat = self:CreateSeat("instructor",Vector(610-340,11,-35),Angle(0,90,0),"models/vehicles/prisoner_pod_inner.mdl")
 
     -- Hide seats
     self.DriverSeat:SetRenderMode(RENDERMODE_TRANSALPHA)
@@ -48,9 +48,9 @@ function ENT:Initialize()
 	self.DriverSeat.m_tblToolsAllowed = {"none"}		
 
  -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 505,0,-75.5),Angle(0,180,0),true,"740PER")
-        self.RearBogey  = self:CreateBogey(Vector(-530,0,-74),Angle(0,0,0),true,"740NOTR")
-		self.FrontBogey:SetNWInt("MotorSoundType",2)
+        self.FrontBogey = self:CreateBogey(Vector( 170,0,-75),Angle(0,180,0),true,"740PER")
+        self.RearBogey  = self:CreateBogey(Vector(-885,0,-75),Angle(0,0,0),true,"740NOTR")
+		self.FrontBogey:SetNWInt("MotorSoundType",2) 
 		self.RearBogey:SetNWInt("MotorSoundType",2)
 
 		self.FrontBogey.m_tblToolsAllowed = {"none"}	
@@ -95,30 +95,30 @@ function ENT:Initialize()
     self.InteractionZones = {
         {
             ID = "FrontBrakeLineIsolationToggle",
-            Pos = Vector(660,-22.0,-45), Radius = 16,
+            Pos = Vector(660-340,-22.0,-45), Radius = 16,
         },
         {
             ID = "FrontTrainLineIsolationToggle",
-            Pos = Vector(660,22.0,-45), Radius = 16,
+            Pos = Vector(660-340,22.0,-45), Radius = 16,
         },
         {
             ID = "FrontDoor",
-            Pos = Vector(654,0,25), Radius = 20,
+            Pos = Vector(654-340,0,25), Radius = 20,
         },
         {
             ID = "GVToggle",
-            Pos = Vector(128,60,-75), Radius = 20,
+            Pos = Vector(128-340,60,-75), Radius = 20,
         },
         {
             ID = "AirDistributorDisconnectToggle",
-            Pos = Vector(-177, -66, -50), Radius = 20,
+            Pos = Vector(-177-340, -66, -50), Radius = 20,
         },
     }
     self.Lights = {
         -- Interior
-		[15] = { "dynamiclight",    Vector(280-144, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500 , fov=180,farz = 128 }, 
-		[16] = { "dynamiclight",    Vector(420-144, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500 , fov=180,farz = 128 },
-        [17] = { "dynamiclight",    Vector(705-144, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500, fov=180,farz = 128 },	
+		[15] = { "dynamiclight",    Vector(280-144-340, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500 , fov=180,farz = 128 }, 
+		[16] = { "dynamiclight",    Vector(420-144-340, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500 , fov=180,farz = 128 },
+        [17] = { "dynamiclight",    Vector(705-144-340, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500, fov=180,farz = 128 },	
     }
     self.FrontDoor = false
 	
@@ -193,7 +193,7 @@ function ENT:UpdateLampsColors()
 	local rnd1,rnd2,col = 0.7+mr()*0.3,mr()
 	local typ = math.Round(mr())
 	local r,g = 15,15
-	for i = 1,40 do
+	for i = 1,20 do
 		local chtp = mr() > rnd1
 		if typ == 0 and chtp then
 			if mr() > rnd2 then
@@ -232,8 +232,8 @@ end
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")
     if not IsValid(ent) then return end
-	ent:SetPos(self:LocalToWorld(Vector(-343,0,0)))
-	ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
+	ent:SetPos(self:LocalToWorld(Vector(-684,0,0)))
+    ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
 	ent:Spawn()
 	ent:SetOwner(self:GetOwner())
 	ent:DrawShadow(false)
@@ -243,11 +243,11 @@ function ENT:CreatePricep(pos,ang)
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
     ent:SetNW2Entity("TrainEntity", self)
 	local RB = self.RearBogey
-	
-	table.insert(ent.TrainEntities,self)      
+
+	table.insert(ent.TrainEntities,self)
     table.insert(self.TrainEntities,ent)	
-	
-	self.PricepBogey = self:CreateBogey(Vector(-18,0,-74.5),Angle(0,0,0),false,"740G")
+
+	self.PricepBogey = self:CreateBogey(Vector(-358.5,0,-74.5),Angle(0,0,0),false,"740G")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
     local rand = math.random()*0.05
@@ -258,30 +258,27 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey.DisableContacts = true
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
 	
-	timer.Simple(1, function()
+    timer.Simple(0, function()
+    if not IsValid(ent) or not IsValid(self) then return end
 	ent.CoupleRear = ent:CreateCouple(Vector( -287,0,-60),Angle(0,180,0),false,"740")
     if IsValid(ent.HeadTrain) then
         ent.CoupleRear:SetNW2Entity("TrainEntity", ent.HeadTrain)
         ent.HeadTrain.CoupleRear = ent.CoupleRear
         ent:SetNW2Entity("HeadTrain", ent.HeadTrain)
-		self.CoupleFront = self:CreateCouple(Vector( 595,0,-60),Angle(0,0,0),true,"740")
+		self.CoupleFront = self:CreateCouple(Vector( 251,0,-60),Angle(0,0,0),true,"740")
 		self.CoupleFront.m_tblToolsAllowed = {"none"}
 		self.CoupleRear.m_tblToolsAllowed = {"none"}
 		self:SetNW2Entity("CoupleFront",self.RearCouple)
 		self:SetNW2Entity("CoupleRear",self.FrontCouple)		
     end
-	Metrostroi.RerailBogey(self.FrontBogey)    		
-    Metrostroi.RerailBogey(self.RearBogey)
-    Metrostroi.RerailBogey(self.PricepBogey)	
-	end)
 	
     constraint.AdvBallsocket(
 		self,
 		self.PricepBogey,
         0, --bone
         0, --bone    
-		pos-Vector(5,0,60),
-		Vector(5,0,60),
+		pos-Vector(350,0,60),
+		Vector(350,0,60),
 		0, --forcelimit
 		0, --torquelimit
 		-3.5, --xmin
@@ -301,8 +298,8 @@ function ENT:CreatePricep(pos,ang)
 		self.PricepBogey,
         0, --bone
         0, --bone    
-		pos-Vector(10,0,0),
-		Vector(10,0,0),
+		pos-Vector(350,0,3),
+		Vector(350,0,3),
 		0, --forcelimit
 		0, --torquelimit
 		-3.5, --xmin
@@ -325,7 +322,8 @@ function ENT:CreatePricep(pos,ang)
     end
 	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)
-    Metrostroi.RerailBogey(self.PricepBogey)	
+    Metrostroi.RerailBogey(self.PricepBogey)
+	end)
 
 	--Метод mirror 				
     ent.HeadTrain = self 

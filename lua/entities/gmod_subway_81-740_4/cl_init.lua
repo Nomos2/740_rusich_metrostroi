@@ -25,7 +25,7 @@ ENT.ClientSounds = {}
 
 --Головная часть 
 ENT.ButtonMap["PUU"] = {
-    pos = Vector(814.8-159-9, 43, 2.2), --446 -- 14 -- -0,5
+    pos = Vector(814.8-168-131, 43, 2.2), --446 -- 14 -- -0,5
     ang = Angle(0,-90,40),
     width = 685,
     height = 110,
@@ -194,28 +194,28 @@ ENT.ButtonMap["PUU"] = {
 
 ENT.ClientProps["Head0-_--"] = {
     model = "models/metrostroi_train/81-740/body/headlight.mdl", --_-- обозначает положение фары на маске.
-    pos = Vector(324.5-159.4-9, 4.8, -55.8),
+    pos = Vector(324.5-159.4-9-131, 4.8, -55.8),
     ang = Angle(-7,0,0),
     scale = 1.1, 
     nohide=true,
 }
 ENT.ClientProps["Head--_-0"] = {
     model = "models/metrostroi_train/81-740/body/headlight.mdl",
-    pos = Vector(324.5-159.4-9, 86.3, -55.8),
+    pos = Vector(324.5-159.4-9-131, 86.3, -55.8),
     ang = Angle(-7,0,0),
     scale = 1.1, 
     nohide=true,
 }
 ENT.ClientProps["Head-0_--"] = {
     model = "models/metrostroi_train/81-740/body/headlight.mdl",
-    pos = Vector(324.8-159.4-9, 18.3, -58.2),
+    pos = Vector(324.8-159.4-9-131, 18.3, -58.2),
     ang = Angle(-7,0,0),
     scale = 1.1, 
     nohide=true,
 }
 ENT.ClientProps["Head--_0-"] = {
     model = "models/metrostroi_train/81-740/body/headlight.mdl",
-    pos = Vector(324.8-159.4-9, 73.4, -58.2),
+    pos = Vector(324.8-159.4-9-131, 73.4, -58.2),
     ang = Angle(-7,0,0),
     scale = 1.1, 
     nohide=true,
@@ -223,26 +223,26 @@ ENT.ClientProps["Head--_0-"] = {
 	
 ENT.ClientProps["krepezh"] = {
     model = "models/metrostroi_train/81-740/body/krepezh.mdl",
-    pos = Vector(286-8-9,0,-71),
+    pos = Vector(286-8-9-137,0,-71),
     ang = Angle(0,0,0),
     nohide = true,
 }
 
 ENT.ClientProps["salon"] = {
 	model = "models/metrostroi_train/81-740/salon/salon.mdl",
-	pos = Vector(0-15-9.3,0.2,0),
+	pos = Vector(0-15-9.3-131, 0.2, 0),
 	ang = Angle(0,0,0),
 	hide = 1.5,
 }
 ENT.ClientProps["handrails"] = {
 	model = "models/metrostroi_train/81-740/salon/handrails/handrails.mdl",
-	pos = Vector(368-161-9.3,-5,-2),
+	pos = Vector(368-161-9.3-130.5,-5,-2),
 	ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["lamps_salon_off"] = {
     model = "models/metrostroi_train/81-740/salon/lamps/lamps_off.mdl",
-    pos = Vector(-15-9.3,0,0),
+    pos = Vector(-15-9.3-130.5,0,0),
     ang = Angle(0,0,0),
     hide=2,
 }
@@ -250,14 +250,14 @@ ENT.ClientProps["lamps_salon_off"] = {
 --Аварийка
 ENT.ClientProps["lamps_salon_on_avar1"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(689-159-9.3,-58,-74.15),
+    pos = Vector(689-168.3-131,-58,-74.15),
     ang = Angle(0,-180,0),
 	hide=2,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on_avar2"] = { 
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(309-159-9.3,0.6,-74.15),
+    pos = Vector(309-168.3-131,0.5,-74.15),
     ang = Angle(0,-180,0),
 	hide=2,
     color = Color(245,238,223),
@@ -266,63 +266,63 @@ ENT.ClientProps["lamps_salon_on_avar2"] = {
 
 ENT.ClientProps["lamps_salon_on1"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(689-159-9.3,0.55,-74.15),
+    pos = Vector(689-168.3-131,0.55,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on2"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(636-159-9.3,0.55,-74.15),
+    pos = Vector(636-168.3-131,0.55,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on3"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(581-159-9.3,0.55,-74.15),
+    pos = Vector(581-168.3-131,0.55,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on4"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(527-159-9.3,0.55,-74.15),
+    pos = Vector(527-168.3-131,0.55,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on5"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(473-159-9.3,0.55,-74.15),
+    pos = Vector(473-168.3-131,0.55,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on6"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(419-159-9.3,0.45,-74.2),
+    pos = Vector(419-168.3-131,0.45,-74.2),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on7"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(364-159-9.3,0.55,-74.15),
+    pos = Vector(364-168.3-131,0.55,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on8"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(309-159-9.3,0.55,-74.15),
+    pos = Vector(309-168.3-131,0.55,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on9"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(255-159-9.3,0.55,-74.15),
+    pos = Vector(255-168.3-131,0.55,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
@@ -330,63 +330,63 @@ ENT.ClientProps["lamps_salon_on9"] = {
 
 ENT.ClientProps["lamps_salon_on_fr1"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(689-159-9.3,-58.08,-74.15),
+    pos = Vector(689-168.3-131,-58.08,-74.15),
     ang = Angle(0,180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on_fr2"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(635-159-9.3,-58.08,-74.15),
+    pos = Vector(635-168.3-131,-58.08,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on_fr3"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(581-159-9.3,-58.08,-74.15),
+    pos = Vector(581-168.3-131,-58.08,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on_fr4"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(527-159-9.3,-58.08,-74.15),
+    pos = Vector(527-168.3-131,-58.08,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on_fr5"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(473-159-9.3,-58.08,-74.15),
+    pos = Vector(473-168.3-131,-58.08,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on_fr6"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(418.7-159-9.3,-58.08,-74.15),
+    pos = Vector(418.7-168.3-131,-58.08,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on_fr7"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(364-159-9.3,-58.08,-74.15),
+    pos = Vector(364-168.3-131,-58.08,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on_fr8"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(310-159-9.3,-58.08,-74.15),
+    pos = Vector(310-168.3-131,-58.08,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
 }
 ENT.ClientProps["lamps_salon_on_fr9"] = {
     model = "models/metrostroi_train/81-741/salon/lamps/lamps_on_rear_new.mdl",
-    pos = Vector(255.9-159-9.3,-58.08,-74.15),
+    pos = Vector(255.9-168.3-131,-58.08,-74.15),
     ang = Angle(0,-180,0),
     hide = 1,
     color = Color(245,238,223),
@@ -394,13 +394,13 @@ ENT.ClientProps["lamps_salon_on_fr9"] = {
 local rnd = math.random (0,-10)
 ENT.ClientProps["wiper"] = { --дворник от 760
     model = "models/metrostroi_train/81-740/body/81-740_wiper.mdl",
-    pos = Vector(176.8-15-9,-10,0),
+    pos = Vector(176.8-15-9-131,-10,0),
     ang = Angle(0,0,rnd),
 	nohide = true,
 }
 
 ENT.ButtonMap["ALSPANELLAMPS"] = { -- дополнительные лампы АЛС 
-	pos = Vector(812-159-9,17.2,-0.01),
+	pos = Vector(812-168-131,17.2,-0.01),
 	ang = Angle(0,-90,40),
 	width = 75,
 	height = 50,
@@ -431,7 +431,7 @@ ENT.ButtonMap["ALSPANELLAMPS"] = { -- дополнительные лампы А
     }
 }
 ENT.ButtonMap["PUL"] = {
-    pos = Vector(807-159-9, 34.5, -3.1),
+    pos = Vector(807-168-131, 34.5, -3.1),
     ang = Angle(0,-90,21.5),
     width = 100,
     height = 220,
@@ -468,7 +468,7 @@ ENT.ButtonMap["PUL"] = {
     }
 }
 ENT.ButtonMap["PUR"] = {
-    pos = Vector(806.5-159-9,13.5,-3.3), --446 -- 14 -- -0,5
+    pos = Vector(806.5-168-131,13.5,-3.3), --446 -- 14 -- -0,5
     ang = Angle(0,-90,22),
     width = 210,
     height = 210,
@@ -549,7 +549,7 @@ ENT.ButtonMap["PUR"] = {
     }
 }
 ENT.ButtonMap["RV"] = {
-    pos = Vector(806.4-159-9,52,-4),
+    pos = Vector(806.4-168-131,52,-4),
     ang = Angle(-1,-90,30),
     width = 60,
     height = 200,
@@ -580,7 +580,7 @@ ENT.ButtonMap["RV"] = {
     }
 }
 ENT.ButtonMap["CAMSButtons"] = {
-    pos = Vector(807.3-159-9,46.9,-3.72),
+    pos = Vector(807.3-168-131,46.9,-3.72),
     ang = Angle(-1,-90,30),
     width = 100,
     height = 120,
@@ -621,7 +621,7 @@ ENT.ButtonMap["CAMSButtons"] = {
     }
 }
 ENT.ButtonMap["PneumoHelper1"] = {
-    pos = Vector(788-159-9,58.5,15.2),
+    pos = Vector(788-168-131,58.5,15.2),
     ang = Angle(0,0,92),
     width = 70,
     height = 76,
@@ -631,7 +631,7 @@ ENT.ButtonMap["PneumoHelper1"] = {
     }
 }
 ENT.ButtonMap["PneumoHelper2"] = {
-    pos = Vector(788-159-9,58.2,22.3),
+    pos = Vector(788-168-131,58.2,22.3),
     ang = Angle(0,0,92),
     width = 70,
     height = 76,
@@ -643,7 +643,7 @@ ENT.ButtonMap["PneumoHelper2"] = {
 
 --Вольтаж
 ENT.ButtonMap["VoltHelper2"] = {
-    pos = Vector(817-159-9,50.7,22),
+    pos = Vector(817-168-131,50.7,22),
     ang = Angle(0,-90,108),
     width = 60,
     height = 118,
@@ -657,7 +657,7 @@ ENT.ButtonMap["VoltHelper2"] = {
 
 --ИГЛА
 ENT.ButtonMap["IGLA_C"] = {
-    pos = Vector(735.85-159-9,34.1,44.6),
+    pos = Vector(735.85-168-131,34.1,44.6),
     ang = Angle(0,90,90),
     width = 512,
     height = 107,
@@ -666,7 +666,7 @@ ENT.ButtonMap["IGLA_C"] = {
     hide=true,
 }
 ENT.ButtonMap["IGLAButtons_C"] = {
-    pos = Vector(735.85-159-9,34,45.71),
+    pos = Vector(735.85-168-131,34,45.71),
     ang = Angle(0,90,90),
     width = 147,
     height = 75,
@@ -695,7 +695,7 @@ ENT.ButtonMap["IGLAButtons_C"] = {
     }
 }
 ENT.ButtonMap["Tickers"] = {
-    pos = Vector(162.8-159-9,-27.2,66.45), --446 -- 14 -- -0,5
+    pos = Vector(162.8-168-131,-27.2,66.45), --446 -- 14 -- -0,5
     ang = Angle(0,90,90),
     width = 1024,
     height = 64,
@@ -704,7 +704,7 @@ ENT.ButtonMap["Tickers"] = {
     hideseat=1,
 }
 ENT.ButtonMap["BackVent"] = {
-    pos = Vector(735.25-158.7-9,27,47), --446 -- 14 -- -0,5
+    pos = Vector(735.25-158.7-9-131,27,47), --446 -- 14 -- -0,5
     ang = Angle(0,90,90),
     width = 80,
     height = 110,
@@ -732,7 +732,7 @@ ENT.ButtonMap["BackVent"] = {
 }
 
 ENT.ButtonMap["BackPPZ"] = {
-    pos = Vector(735.52-159-9,22,35), --446 -- 14 -- -0,5
+    pos = Vector(735.52-168-131,22,35), --446 -- 14 -- -0,5
     ang = Angle(0,90,90),
     width = 400,
     height = 310,
@@ -775,7 +775,7 @@ for k,buttbl in ipairs(ENT.ButtonMap["BackPPZ"].buttons) do
     }
 end
 ENT.ButtonMap["PVZ"] = {
-    pos = Vector(700.52-159-9,60,32.2), --446 -- 14 -- -0,5
+    pos = Vector(700.52-168-131,60,32.2), --446 -- 14 -- -0,5
     ang = Angle(0,0,94),
     width = 330,
     height = 160,
@@ -829,7 +829,7 @@ for k,buttbl in ipairs(ENT.ButtonMap["PVZ"].buttons) do
 end
 
 ENT.ButtonMap["BackDown"] = {
-    pos = Vector(735.52-159-9,23,12), --446 -- 14 -- -0,5
+    pos = Vector(735.52-168-131,23,12), --446 -- 14 -- -0,5
     ang = Angle(0,90,90),
     width = 400,
     height = 350,
@@ -941,7 +941,7 @@ ENT.ButtonMap["BackDown"] = {
     }
 }
 ENT.ButtonMap["CraneCap2"] = {
-    pos = Vector(788.12-159.3-9,-4.5,-20.2),
+    pos = Vector(788.12-159.3-9-131,-4.5,-20.2),
     ang = Angle(0,-90,31),
     width = 120,
     height = 25,
@@ -965,7 +965,7 @@ ENT.ButtonMap["CraneCap2"] = {
     }
 }
 ENT.ButtonMap["VityazButtons"] = {
-    pos = Vector(806.12-159.3-9,-4.5,-4.2),
+    pos = Vector(806.12-159.3-9-131,-4.5,-4.2),
     ang = Angle(0,-90,31),
     width = 120,
     height = 90,
@@ -1093,7 +1093,7 @@ ENT.ButtonMap["VityazButtons"] = {
     }
 }
 ENT.ButtonMap["BTO"] = {
-    pos = Vector(775.12-144-9,-21,-44), --446 -- 14 -- -0,5
+    pos = Vector(775.12-144-9-131,-21,-44), --446 -- 14 -- -0,5
     ang = Angle(0,0,0),
     width = 224,
     height = 50,
@@ -1114,7 +1114,7 @@ ENT.ButtonMap["BTO"] = {
 }
 
 ENT.ButtonMap["FrontPneumatic"] = {
-    pos = Vector(835-160-8-9,-35.0,-44),
+    pos = Vector(835-160-8-9-131,-35.0,-44),
     ang = Angle(0,90,90),
     width = 700,
     height = 100,
@@ -1130,14 +1130,14 @@ ENT.ButtonMap["FrontPneumatic"] = {
 }
 ENT.ClientProps["FrontBrake"] = {--
     model = "models/metrostroi_train/bogey/disconnect_valve_red.mdl",
-    pos = Vector(835-159-9, -17, -53.9),
+    pos = Vector(835-168-131, -17, -53.9),
     ang = Angle(30,-90,0),
 	scale = 0.8,
     hide = 2,
 }
 ENT.ClientProps["FrontTrain"] = {--
     model = "models/metrostroi_train/bogey/disconnect_valve_blue.mdl",
-    pos = Vector(835-159-9, 17, -53.9),
+    pos = Vector(835-168-131, 17, -53.9),
     ang = Angle( -30,-90,0),
 	scale = 0.8,
     hide = 2,
@@ -1147,7 +1147,7 @@ ENT.ClientSounds["FrontTrainLineIsolation"] = {{"FrontTrain",function() return "
 
 --Головная часть
 ENT.ButtonMap["CabinDoorL"] = {
-    pos = Vector(750-168-9,59.6,55),
+    pos = Vector(750-168-9-131,59.6,55),
     ang = Angle(0,00,94),
     width = 900,
     height = 2000,
@@ -1161,7 +1161,7 @@ ENT.ButtonMap["CabinDoorL"] = {
     }
 }
 ENT.ButtonMap["CabinDoorL2"] = {
-    pos = Vector(790-163-9,60,55),
+    pos = Vector(790-163-9-131,60,55),
     ang = Angle(0,180,86),
     width = 900,
     height = 2000,
@@ -1175,7 +1175,7 @@ ENT.ButtonMap["CabinDoorL2"] = {
     }
 }
 ENT.ButtonMap["CabinDoorR"] = {
-    pos = Vector(790-163-9,-59.5,52),
+    pos = Vector(790-163-9-131,-59.5,52),
     ang = Angle(0,180,94),
     width = 900,
     height = 2000,
@@ -1189,7 +1189,7 @@ ENT.ButtonMap["CabinDoorR"] = {
     }
 }
 ENT.ButtonMap["CabinDoorR2"] = {
-    pos = Vector(750-168-9,-60,52),
+    pos = Vector(750-168-9-131,-60,52),
     ang = Angle(0,0,86),
     width = 900,
     height = 2000,
@@ -1204,25 +1204,25 @@ ENT.ButtonMap["CabinDoorR2"] = {
 }
 ENT.ClientProps["lamp_f"] = {
     model = "models/metrostroi_train/81-720/lamp_revers_up.mdl",
-    pos = Vector(333.75-159-9,5.68,21.15),
+    pos = Vector(333.75-168-131,5.68,21.15),
     ang = Angle(0,0,0),
     hideseat=0.8,
 }
 ENT.ClientProps["lamp_b"] = {
     model = "models/metrostroi_train/81-720/lamp_revers_down.mdl",
-    pos = Vector(333.6-159-9,5.68,21.15),
+    pos = Vector(333.6-168-131,5.68,21.15),
     ang = Angle(0,0,0),
     hideseat=0.8,
 }
 ENT.ClientProps["fireextinguisher"] = {
     model = "models/metrostroi_train/81-502/fireextinguisher.mdl", scale=0.9,
-    pos = Vector(446-159-9,30.1, -0.6),
+    pos = Vector(446-168-131,30.1, -0.6),
     ang = Angle(0,0,0),
     hideseat = 0.8,
 }
 ENT.ClientProps["fireextinguisher2"] = {
     model = "models/metrostroi_train/81-502/fireextinguisher.mdl", scale=0.9,
-    pos = Vector(1050.8-159-9,-220.5, -0.6),
+    pos = Vector(1050.8-168-131,-220.5, -0.6),
     ang = Angle(0,140,0),
     hideseat = 0.8,
 }
@@ -1230,7 +1230,7 @@ ENT.ClientProps["fireextinguisher2"] = {
 if os.date( "%m-%d" ) == "04-01" then
 ENT.ClientProps["april_bucket"] = {
     model = "models/props_junk/metalbucket01a.mdl",
-    pos = Vector(810.8-159-9,-45.5, -39.6),
+    pos = Vector(810.8-168-131,-45.5, -39.6),
     ang = Angle(0,140,0),
     hide = 1,
 }
@@ -1238,14 +1238,14 @@ print("happy bucket day!")
 end
 ENT.ClientProps["Antenna"] = {
     model = "models/metrostroi_train/81-740/body/antenna/antenna.mdl",
-    pos = Vector(234.25-15-9,21.3,-124.5),
+    pos = Vector(234.25-15-9-131,21.3,-124.5),
     ang = Angle(-6,0,0),
     --color = Color(239,215,177),	
     nohide = true,
 }
 ENT.ClientProps["PasswordProp"] = {
     model = "models/metrostroi_train/81-740/cabine/password.mdl",
-    pos = Vector(672.3-15-9,-6,3.4),
+    pos = Vector(672.3-15-9-131,-6,3.4),
     ang = Angle(90,180,33),
 	scale = 1,	
     hide = 1,
@@ -1253,14 +1253,14 @@ ENT.ClientProps["PasswordProp"] = {
 ---Segments
 ENT.ClientProps["speed1"] = {
     model = "models/metrostroi_train/81-720/digits/digit.mdl",
-    pos = Vector(810.9-159-9, 17.1+1.495, -0.98),
+    pos = Vector(810.9-168-131, 17.1+1.495, -0.98),
     ang = Angle(140,0,0),
     color = Color(20,255,50),
     hideseat = 0.2,
 }
 ENT.ClientProps["speed2"] = {
     model = "models/metrostroi_train/81-720/digits/digit.mdl",
-    pos = Vector(810.9-159-9, 18, -0.98),
+    pos = Vector(810.9-168-131, 18, -0.98),
     ang = Angle(140,0,0),
     color = Color(20,255,50),
     hideseat = 0.2,
@@ -1269,7 +1269,7 @@ ENT.ClientProps["speed2"] = {
 for i=1,5 do
     ENT.ClientProps["speeddop"..i] = {
         model = "models/metrostroi_train/81-720/segments/speed_red.mdl",
-        pos = Vector(205.3-15-9, 1.305*(i-1)+3, 102.58),
+        pos = Vector(205.3-15-9-131, 1.305*(i-1)+3, 102.58),
         ang = Angle(10,0,0.2),
         skin = 0,
         color = Color(255,55,55),
@@ -1278,7 +1278,7 @@ for i=1,5 do
     }
     ENT.ClientProps["speedfact"..i] = {
         model = "models/metrostroi_train/81-720/segments/speed_green.mdl",
-        pos = Vector(344.58-159-9, -1.305*(i-1)+2.95, 103.72),
+        pos = Vector(344.58-168-131, -1.305*(i-1)+2.95, 103.72),
         ang = Angle(10,0,-0.2),
         skin = 0,
         color = Color(90,255,80),
@@ -1286,7 +1286,7 @@ for i=1,5 do
     }
     ENT.ClientProps["speedrek"..i] = {
         model = "models/metrostroi_train/81-720/segments/speed_yellow.mdl",
-        pos = Vector(344.420-159-9, 1.32*(i-1)+2.75, 103.47),
+        pos = Vector(344.420-168-131, 1.32*(i-1)+2.75, 103.47),
         ang = Angle(10,0,0.3),
         skin = 0,
         color = Color(255,255,60),
@@ -1295,115 +1295,115 @@ for i=1,5 do
 end
 ENT.ClientProps["brake_cylinder"] = {
     model = "models/metrostroi_train/equipment/arrow_nm.mdl",
-    pos = Vector(790.33-159-9, 58.98, 12.90),
+    pos = Vector(790.33-168-131, 58.98, 12.90),
     ang = Angle(-45.000000,0.000000,-270.000000),
     hideseat = 0.2,
 }
 ENT.ClientProps["train_line"] = {
     model = "models/metrostroi_train/equipment/arrow_nm.mdl",
-    pos = Vector(790.33-159-9,58.57,20.10),
+    pos = Vector(790.33-168-131,58.57,20.10),
     ang = Angle(-40.000000,0.000000,-270.000000),
     hideseat = 0.2,
 }
 ENT.ClientProps["brake_line"] = {
     model = "models/metrostroi_train/equipment/arrow_tm.mdl",
-    pos = Vector(790.33-159-9, 58.54, 20.10),
+    pos = Vector(790.33-168-131, 58.54, 20.10),
     ang = Angle(-40.000000,0.000000,-270.000000),
     hideseat = 0.2,
 }
 --Вольтаж
 ENT.ClientProps["volt_hv"] = {
     model = "models/metrostroi_train/81-710/ezh3_voltages.mdl",
-    pos = Vector(817.57-159-9,48.90,19.8),
+    pos = Vector(817.57-168-131,48.90,19.8),
     ang = Angle(37.156513,-80,108),
     hideseat = 0.2,
 	scale = 1,
 }
 ENT.ClientProps["volt_rail_case"] = {
     model = "models/metrostroi_train/81-740/cabine/electric/voltm.mdl",
-    pos = Vector(817.4-159-9,47.9,21),
+    pos = Vector(817.4-168-131,47.9,21),
     ang = Angle(-16.8,0,0),
     hideseat = 0.2,
 }
 
 ENT.ClientProps["amp_i13"] = {
     model = "models/metrostroi_train/81-710/ezh3_voltages.mdl",
-    pos = Vector(818.7-159-9,48.90,15.8),
+    pos = Vector(818.7-168-131,48.90,15.8),
     ang = Angle(40.156513,-71.4,108.8),
     hideseat = 0.2,
 	scale = 1,	
 }
 ENT.ClientProps["amp_engine_case"] = {
     model = "models/metrostroi_train/81-740/cabine/electric/amperm.mdl",
-    pos = Vector(818.6-159-9,47.9,17),
+    pos = Vector(818.6-168-131,47.9,17),
     ang = Angle(-16.3,-0.5,0),
     hideseat = 0.2,
 }
 ENT.ClientProps["PPZpanel"] = {
     model = "models/metrostroi_train/81-740/cabine/electric/paneltex.mdl",
-    pos = Vector(735.5-159-9,50,50),
+    pos = Vector(735.5-168-131,50,50),
     ang = Angle(180,270,0),
     scale = 1,
 	hide = 2,
 }
 ENT.ClientProps["PPZpanel_IGLA"] = {
     model = "models/metrostroi_train/81-740/cabine/electric/IGLA.mdl",
-    pos = Vector(735.4-159-9,38,40.5),
+    pos = Vector(735.4-168-131,38,40.5),
     ang = Angle(0,180,0),
     scale = 1,
     hide = 2,
 }
 ENT.ClientProps["manometresp"] = {
     model = "models/metrostroi_train/81-740/cabine/monometres.mdl",
-    pos = Vector(792-159-9,58.3,15),
+    pos = Vector(792-168-131,58.3,15),
     ang = Angle(0,0,2),
     scale = 1,
     hide = 1,
 }
 ENT.ClientProps["vityazpanel"] = {
     model = "models/metrostroi_train/81-740/cabine/cralix/vityazpanel.mdl",
-    pos = Vector(465-159-9,1.5,0),
+    pos = Vector(465-168-131,1.5,0),
     ang = Angle(0,0,0),
     scale = 1,
     hide = 1,
 }
 ENT.ClientProps["redlights740up1"] = {
     model = "models/metrostroi_train/81-740/body/cralix/headlights81-740up.mdl",
-    pos = Vector(464.2-159-9,0.6,-0.7),
+    pos = Vector(464.2-168-131,0.6,-0.7),
     ang = Angle(0,0,0),
     scale = 1.01,
     nohide=true,
 }
 ENT.ClientProps["redlights740up2"] = {
     model = "models/metrostroi_train/81-740/body/cralix/headlights81-740up.mdl",
-    pos = Vector(464.2-159-9,-79.4,-0.7),
+    pos = Vector(464.2-168-131,-79.4,-0.7),
     ang = Angle(0,0,0),
     scale = 1.01,
     nohide=true,
 }
 ENT.ClientProps["redlights740down1"] = {
     model = "models/metrostroi_train/81-740/body/cralix/headlights81-740down.mdl",
-    pos = Vector(468-159.8-9,0.6,0,0),
+    pos = Vector(468-159.8-9-131,0.6,0,0),
     ang = Angle(0,0,0),
     scale = 1,
     nohide=true,
 }
 ENT.ClientProps["redlights740down2"] = {
     model = "models/metrostroi_train/81-740/body/cralix/headlights81-740down.mdl",
-    pos = Vector(468-159.99-9,-82.4,-1.5),
+    pos = Vector(468-159.99-9-131,-82.4,-1.5),
     ang = Angle(-0.2,0,0),
     scale = 1,
     nohide=true,
 }
 ENT.ClientProps["EmergencyBrakeValve"] = {
 	model = "models/metrostroi_train/81-740/cabine/StopKran.mdl",
-	pos = Vector(1197-159-9,-58.8,2),
+	pos = Vector(1197-168-131,-58.8,2),
 	ang = Angle(0,180,2),
 	hide = 2,
 }
 
 ENT.ButtonMap["EmergencyBrake1"] = {
-    pos = Vector(635-9,-59.7,14),
+    pos = Vector(635-9-131,-59.7,14),
     ang = Angle(0,180,90),
     width = 70,
     height = 600,
@@ -1420,7 +1420,7 @@ ENT.ButtonMap["EmergencyBrake1"] = {
 }
 
 ENT.ButtonMap["GV"] = {
-    pos = Vector(222-16-9,51.5,-80),
+    pos = Vector(222-16-9-131,51.5,-80),
     ang = Angle(0,90,-90),
     width = 70,
     height = 70,
@@ -1435,7 +1435,7 @@ ENT.ButtonMap["GV"] = {
 }
 ENT.ClientProps["gv"] = {
     model = "models/metrostroi/81-717/gv.mdl",
-    pos = Vector(366-160-9,55,-76),
+    pos = Vector(366-160-9-131,55,-76),
     ang = Angle(-90,90,-90),
     color = Color(150,255,255),
     hideseat = 0.2,
@@ -1448,29 +1448,29 @@ ENT.ClientProps["gv_wrench"] = {
 }
 ENT.ClientProps["door_cab_m"] = {
     model = "", --models/metrostroi_train/81-720/720_door_cab.mdl
-    pos = Vector(374.9-159-9,-45.5+25.5,-12.3),
+    pos = Vector(374.9-168-131,-45.5+25.5,-12.3),
     ang = Angle(0,-90-1,0)
 }
 ENT.ClientProps["door_cab_o"] = {
     model = "", --models/metrostroi_train/81-720/720_cab_otsek.mdl
-    pos = Vector(374.9-159-9,26,-15),
+    pos = Vector(374.9-168-131,26,-15),
     ang = Angle(0,-90+0.45,-0.15)
 }
 ENT.ClientProps["KRO"] = {
     model = "models/metrostroi_train/81-740/cabine/pult/tum_r.mdl",
-    pos = Vector(805.2-159-9,48.2,-4.8),
+    pos = Vector(805.2-168-131,48.2,-4.8),
     ang = Angle(150,0,180),
     hideseat = 0.2,
 }
 ENT.ClientProps["KRR"] = {
     model = "models/metrostroi_train/81-740/cabine/pult/tum_r_rad.mdl",
-    pos = Vector(802-159-9,48.2,-6.7),
+    pos = Vector(802-168-131,48.2,-6.7),
     ang = Angle(150,0,180),
     hideseat = 0.2,
 }
 ENT.ClientProps["controller"] = {
     model = "models/metrostroi_train/81-720/720_kv.mdl",
-    pos = Vector(796.4-159-9,24.2,-6.4),
+    pos = Vector(796.4-168-131,24.2,-6.4),
     ang = Angle(0.000000,-90.000000,23.699429),
     hideseat = 0.2,
 	scale = 0.8,
@@ -1478,7 +1478,7 @@ ENT.ClientProps["controller"] = {
 ENT.ClientPropsInitialized = false
 ENT.ClientProps["km013"] = {
     model = "models/metrostroi_train/81-720/720_km013.mdl",
-    pos = Vector(780-159-9,-8,-25.3),
+    pos = Vector(780-168-131,-8,-25.3),
     ang = Angle(180,90,-110),
     hideseat = 0.2,
 }
@@ -1487,7 +1487,7 @@ table.insert(ENT.ClientSounds["br_013"],{"km013",function(ent,_,var) return "br_
 
 ENT.ClientProps["PB"] = {
     model = "models/metrostroi_train/81-720/720_pb.mdl",
-    pos = Vector(810.138672-159-9,35.572510,-30),
+    pos = Vector(810.138672-168-131,35.572510,-30),
     ang = Angle(0,-90,0),
     hideseat = 0.2,
 }
@@ -1496,26 +1496,26 @@ table.insert(ENT.ClientSounds["PB"],{"PB",function(ent,var) return var > 0 and "
 
 ENT.ClientProps["Pult"] = {
 	model = "models/metrostroi_train/81-740/cabine/Pult/pult.mdl",
-	pos = Vector(465.4-159-9, 6, 0),
+	pos = Vector(465.4-168-131, 6, 0),
 	ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["bucik_old"] = {
 	model = "models/metrostroi_train/81-740/cabine/Pult/bucik.mdl",
-	pos = Vector(465.4-159-9, 6, 0),
+	pos = Vector(465.4-168-131, 6, 0),
 	ang = Angle(0,0,0),
 	hide = 2,
 }
 ENT.ClientProps["door_cab_r"] = {
 	model = "models/metrostroi_train/81-740/cabine/cabin_right.mdl",
-	pos = Vector(765-159.75-8.8, -61.9,13.2),
+	pos = Vector(765-159.75-8.8-131, -61.9,13.2),
 	ang = Angle(0,-90,0.25),
 	scale = 1.001,
 	hide = 1,
 }
 ENT.ClientProps["door_cab_l"] = {
 	model = "models/metrostroi_train/81-740/cabine/cabin_left.mdl",
-	pos = Vector(765-159.45-8.8, 63.3, 13.2),
+	pos = Vector(765-159.45-8.8-131, 63.3, 13.2),
 	ang = Angle(0,-90,0.25),
 	scale = 1.01,
 	hide = 1,
@@ -1524,19 +1524,19 @@ ENT.ClientProps["door_cab_l"] = {
 --Модели 2023.
 ENT.ClientProps["Zavod_table_front"] = { --Заводская табличка
     model = "models/metrostroi_train/81-740/salon/zavod.mdl",
-	pos = Vector(543.2-15-9,15,60),
+	pos = Vector(543.2-15-9-131,15,60),
     ang = Angle(90,-180,0),
 	hide = 1,
 	scale = 3,	
 }
 ENT.ClientProps["ASNP_test"] = {
 	model = "models/740_vrb/vrb_asnp.mdl",
-	pos = Vector(682.5-15-9,-52.8,-11), --684.5-15,-56,-11
+	pos = Vector(682.5-15-9-131,-52.8,-11), --684.5-15,-56,-11
 	ang = Angle(0,-90,0), --0,-105,0 
 	hideseat=0.8,
 }
 ENT.ButtonMap["ASNPScreen"] = {
-    pos = Vector(658.63-9,-52.1,-6.1), --446 -- 14 -- -0,5 
+    pos = Vector(658.63-9-131,-52.1,-6.1), --446 -- 14 -- -0,5 
     ang = Angle(0,-152.3,90),
     width = 520,
     height = 125,
@@ -1544,7 +1544,7 @@ ENT.ButtonMap["ASNPScreen"] = {
     hide=0.8,
 }
 ENT.ButtonMap["ASNP"] = {
-    pos = Vector(660.8-9,-51,-6.1), --446 -- 14 -- -0,5
+    pos = Vector(660.8-9-131,-51,-6.1), --446 -- 14 -- -0,5
     ang = Angle(0,-152.3,90),
     width = 120,
     height = 50,
@@ -1581,14 +1581,14 @@ ENT.ButtonMap["ASNP"] = {
 }
 ENT.ClientProps["Gerb_msk"] = {
 	model = "models/metrostroi_train/81-740/body/gerb.mdl",
-	pos = Vector(565-15-9,63.9,35),
+	pos = Vector(565-15-9-131,63.9,35),
 	ang = Angle(0,0,-86.8),
 	nohide = true,
 	scale = 3,
 }
 ENT.ClientProps["Gerb_msk_right"] = {
 	model = "models/metrostroi_train/81-740/body/gerb.mdl",
-	pos = Vector(565-15-9,-62.9,36),
+	pos = Vector(565-15-9-131,-62.9,36),
 	ang = Angle(0,180,-86.8),
 	nohide = true,
 	scale = 3,
@@ -1596,14 +1596,14 @@ ENT.ClientProps["Gerb_msk_right"] = {
 
 ENT.ClientProps["Gerb_msk1"] = {
 	model = "models/metrostroi_train/81-740/body/gerb.mdl",
-	pos = Vector(565-15-9,63.9,35),
+	pos = Vector(565-15-9-131,63.9,35),
 	ang = Angle(0,0,-86.8),
 	nohide = true,
 	scale = 3,
 }
 ENT.ClientProps["Gerb_msk_right1"] = {
 	model = "models/metrostroi_train/81-740/body/gerb.mdl",
-	pos = Vector(565-15-9,-62.9,36),
+	pos = Vector(565-15-9-131,-62.9,36),
 	ang = Angle(0,180,-86.8),
 	nohide = true,
 	scale = 3,
@@ -1611,13 +1611,13 @@ ENT.ClientProps["Gerb_msk_right1"] = {
 
 ENT.ClientProps["Naddver_off"] = {
 	model = "models/metrostroi_train/81-740/salon/naddverka_off.mdl",
-	pos = Vector(314.55-15-9,37.58,58.1),
+	pos = Vector(314.55-15-9-131,37.58,58.1),
 	ang = Angle(0,0,0),
 	scale = 1,	
 	nohide = true,
 }
 ENT.ButtonMap["Password"] = {
-    pos = Vector(672.25-15-9,-6,4.2),
+    pos = Vector(672.25-15-9-131,-6,4.2),
     ang = Angle(0,-123,90),
     width = 50,
     height = 25,
@@ -1630,38 +1630,38 @@ ENT.ButtonMap["Password"] = {
 }
 ENT.ClientProps["door0x0"] = {
 	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
-	pos = Vector(127.1,61.5,4),
+	pos = Vector(127.1-131,61.5,4),
 	ang = Angle(0,-90,0),
 	hide = 2
 }
 ENT.ClientProps["door1x0"] = {
 	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
-	pos = Vector(466.1,61.5,4),
+	pos = Vector(466.1-131,61.5,4),
 	ang = Angle(0,-90,0),
 	hide = 2
 }
 
 ENT.ClientProps["door0x1"] = {
 	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
-	pos = Vector(127,-60.5,4),
+	pos = Vector(127-131,-60.5,4),
 	ang = Angle(0,90,0),
 	hide = 2
 }
 ENT.ClientProps["door1x1"] = {
 	model = "models/metrostroi_train/81-740/body/door_pass.mdl",
-	pos = Vector(466,-60.5,4),
+	pos = Vector(466-131,-60.5,4),
 	ang = Angle(0,90,0),
 	hide = 2
 }
 
 local yventpos = {
-    414.5+0*117-159-28,
-	414.5+2*117+5-159,
-	214.5+4*117+0.5-15-144,
+    414.5+0*117-159-28-131,
+	414.5+2*117+5-159-131,
+	214.5+4*117+0.5-15-144-131,
 }
 
 ENT.ButtonMap["CAMS"] = {
-    pos = Vector(809.1-159-9.11,52.37,10.58),
+    pos = Vector(809.1-168.11-131,52.37,10.58),
     ang = Angle(0,-57.7,90),
     width = 0,
     height = 0,
@@ -1670,7 +1670,7 @@ ENT.ButtonMap["CAMS"] = {
 	hide=0.5,
 }
 ENT.ButtonMap["Vityaz"] = {
-	pos = Vector(658-9, -4.7, 12.1),
+	pos = Vector(658-9-131, -4.7, 12.1),
     ang = Angle(0,-122.4,90),
     width = 0,
     height = 0,
@@ -1680,9 +1680,9 @@ ENT.ButtonMap["Vityaz"] = {
 
 
 ENT.Lights = {
-    [1] = { "headlight",Vector(690-15-9,0,-35),Angle(0,0,0),Color(216,161,92),farz=5144,brightness = 4,hfov=105,vfov=105,texture = "models/metrostroi_train/equipment/headlight",shadows = 1,headlight=true}, --Фары 
-    [2] = { "headlight",Vector(968-159-9,0,50),Angle(-1,0,0),Color(255,0,0),fov=170,brightness = 0.3,farz=450,texture = "models/metrostroi_train/equipment/headlight2",shadows = 0,backlight=true}, --Красные фары 
-    [3] = { "headlight",Vector(358-159-9,40,43.9),Angle(50,40,-0),Color(206,135,80), fov=100,farz=200,brightness = 0,shadows=1}, --отсеки
+    [1] = { "headlight",Vector(690-15-9-131,0,-35),Angle(0,0,0),Color(216,161,92),farz=5144,brightness = 4,hfov=105,vfov=105,texture = "models/metrostroi_train/equipment/headlight",shadows = 1,headlight=true}, --Фары 
+    [2] = { "headlight",Vector(968-168-131,0,50),Angle(-1,0,0),Color(255,0,0),fov=170,brightness = 0.3,farz=450,texture = "models/metrostroi_train/equipment/headlight2",shadows = 0,backlight=true}, --Красные фары 
+    [3] = { "headlight",Vector(358-168-131,40,43.9),Angle(50,40,-0),Color(206,135,80), fov=100,farz=200,brightness = 0,shadows=1}, --отсеки
 }
 function ENT:Initialize()
     self.BaseClass.Initialize(self)
@@ -2211,7 +2211,7 @@ end
 for k=0,3 do
     self.ClientProps["TrainNumberR"..k] = {
         model = "models/metrostroi_train/common/bort_numbers.mdl",
-        pos = Vector(705-k*6.6+4*6.6/2-159-9, -63.9, 14),
+        pos = Vector(705-k*6.6+4*6.6/2-168-131, -63.9, 14),
         ang = Angle(0,0,-3.29),
 		hide = 1,
         callback = function(ent)
@@ -2227,7 +2227,7 @@ for k=0,3 do
             local rightNum = self.ClientEnts["TrainNumberR"..k]
 	        local num = math.floor(self.WagonNumber%(10^(k+1))/10^k)
             if IsValid(rightNum) then
-				rightNum:SetPos(self:LocalToWorld(Vector(705-k*6.6+4*6.6/2-159-9, -63.9, 14)))
+				rightNum:SetPos(self:LocalToWorld(Vector(705-k*6.6+4*6.6/2-168-131, -63.9, 14)))
                 rightNum:SetSkin(num)
             end
 			self.HeadTrain1 = self:GetNW2Entity("gmod_subway_kuzov")	

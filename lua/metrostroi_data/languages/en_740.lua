@@ -22,7 +22,6 @@ return
 [en]
 Entities.gmod_subway_81-740_4.Name = 81-740.4 (Rusich head beta)
 Entities.gmod_subway_81-741_4.Name = 81-741.4 (Middle Rusich beta)
-self.Train.SubwayTrain.Name        = 81-740.4 (Rusich head beta)
 
 #Cameras
 Train.740.CameraCond    = Air conditioner, IGLA #
