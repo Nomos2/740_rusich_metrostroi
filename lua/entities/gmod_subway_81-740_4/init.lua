@@ -85,8 +85,8 @@ end
 	self.ASSensor = self:AddLightSensor(Vector(515-9,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
 	
     -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 360,0,-74),Angle(0,180,0),true,"740ALS")	
-        self.RearBogey  = self:CreateBogey(Vector(-532-160,0,-75),Angle(0,0,0),false,"740NOTR") -- -532-25,0,-75
+        self.FrontBogey = self:CreateBogey(Vector( 360,0,-75),Angle(0,180,0),true,"740ALS")	
+        self.RearBogey  = self:CreateBogey(Vector(-532-160,0,-75),Angle(0,0,0),false,"740NOTR")
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)
 	
@@ -511,10 +511,7 @@ function ENT:CreatePricep(pos,ang)
 		self.CoupleRear.m_tblToolsAllowed = {"none"}
 		self:SetNW2Entity("CoupleFront",self.RearCouple)
 		self:SetNW2Entity("CoupleRear",self.FrontCouple)		
-    end	
-	Metrostroi.RerailBogey(self.FrontBogey)    		
-    Metrostroi.RerailBogey(self.RearBogey)
-    Metrostroi.RerailBogey(self.PricepBogey)
+    end
 
     constraint.AdvBallsocket(
 		self,
@@ -565,6 +562,9 @@ function ENT:CreatePricep(pos,ang)
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
         ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
     end
+	Metrostroi.RerailBogey(self.FrontBogey)    		
+    Metrostroi.RerailBogey(self.RearBogey)
+    Metrostroi.RerailBogey(self.PricepBogey)	
     end)	
 
 	--Метод mirror 				
