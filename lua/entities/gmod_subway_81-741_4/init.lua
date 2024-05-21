@@ -48,8 +48,8 @@ function ENT:Initialize()
 	self.DriverSeat.m_tblToolsAllowed = {"none"}		
 
  -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 170,0,-75),Angle(0,180,0),true,"740PER")
-        self.RearBogey  = self:CreateBogey(Vector(-885,0,-75),Angle(0,0,0),true,"740NOTR")
+        self.FrontBogey = self:CreateBogey(Vector( 170,0,-76),Angle(0,180,0),true,"740PER")
+        self.RearBogey  = self:CreateBogey(Vector(-885,0,-76),Angle(0,0,0),true,"740NOTR")
 		self.FrontBogey:SetNWInt("MotorSoundType",2) 
 		self.RearBogey:SetNWInt("MotorSoundType",2)
 
@@ -247,7 +247,7 @@ function ENT:CreatePricep(pos,ang)
 	table.insert(ent.TrainEntities,self)
     table.insert(self.TrainEntities,ent)	
 
-	self.PricepBogey = self:CreateBogey(Vector(-358.5,0,-74.5),Angle(0,0,0),false,"740G")
+	self.PricepBogey = self:CreateBogey(Vector(-358.5,0,-75.5),Angle(0,0,0),false,"740G")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
     local rand = math.random()*0.05
@@ -317,8 +317,8 @@ function ENT:CreatePricep(pos,ang)
 	if IsValid(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end	
-	if IsValid(self.RearBogey:GetPhysicsObject()) then
-        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
+	if IsValid(ent:GetPhysicsObject()) then
+        self.RearBogey.NormalMass = ent:GetPhysicsObject():GetMass()
     end
 	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)

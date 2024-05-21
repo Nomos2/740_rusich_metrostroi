@@ -227,7 +227,6 @@ ENT.ClientProps["krepezh"] = {
     ang = Angle(0,0,0),
     nohide = true,
 }
-
 ENT.ClientProps["salon"] = {
 	model = "models/metrostroi_train/81-740/salon/salon.mdl",
 	pos = Vector(0-15-9.3-131, 0.2, 0),

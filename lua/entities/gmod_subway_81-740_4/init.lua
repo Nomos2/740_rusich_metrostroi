@@ -80,13 +80,13 @@ function ENT:Initialize()
 	self.InstructorsSeat4.m_tblToolsAllowed = {"none"}
 	 
 if not (Map:find("gm_mus_loopline"))	then
-	self.LightSensor = self:AddLightSensor(Vector(627-9,0,-125),Angle(0,90,0))
+	self.LightSensor = self:AddLightSensor(Vector(627-9-131,0,-125),Angle(0,90,0))
 end	
-	self.ASSensor = self:AddLightSensor(Vector(515-9,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
+	self.ASSensor = self:AddLightSensor(Vector(515-9-131,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
 	
     -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 360,0,-75),Angle(0,180,0),true,"740ALS")	
-        self.RearBogey  = self:CreateBogey(Vector(-532-160,0,-75),Angle(0,0,0),false,"740NOTR")
+        self.FrontBogey = self:CreateBogey(Vector( 360,0,-76),Angle(0,180,0),true,"740ALS")	
+        self.RearBogey  = self:CreateBogey(Vector(-532-160,0,-76),Angle(0,0,0),false,"740NOTR")
 		self.FrontBogey:SetNWInt("MotorSoundType",2)
 		self.RearBogey:SetNWInt("MotorSoundType",2)
 	
@@ -99,8 +99,9 @@ end
 		self:SetNW2Entity("RearBogey",self.RearBogey)	  
 		
 	timer.Simple(0.1, function()	
-        if not IsValid(self) then return end	
-		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон	
+        if not IsValid(self) then return end		
+		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон		
+		--self.PassStvor = self:CreateStvor(Vector(0,0,0))--код не работает, хз из-за чего, срабатывет только после изменения переменной.				
 	end)
 
 	self.FrontBogey:SetNWBool("Async",true)
@@ -489,7 +490,7 @@ function ENT:CreatePricep(pos,ang)
 	table.insert(ent.TrainEntities,self)      
     table.insert(self.TrainEntities,ent)	
 	
-		self.PricepBogey = self:CreateBogey(Vector(-171,0,-74.5),Angle(0,0,0),true,"740G")
+		self.PricepBogey = self:CreateBogey(Vector(-171,0,-75.5),Angle(0,0,0),true,"740G")
 		local rand = math.random()*0.05
 		self.PricepBogey:SetNWFloat("SqualPitch",1.45+rand)
 		self.PricepBogey:SetNWInt("MotorSoundType",2)
@@ -559,8 +560,8 @@ function ENT:CreatePricep(pos,ang)
 	if IsValid(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end	
-	if IsValid(self.RearBogey:GetPhysicsObject()) then
-        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
+	if IsValid(ent:GetPhysicsObject()) then
+        self.RearBogey.NormalMass = ent:GetPhysicsObject():GetMass()
     end
 	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)
@@ -577,6 +578,38 @@ function ENT:CreatePricep(pos,ang)
 	
 	return ent
 end	
+
+--[[function self:CreateStvor(pos,ang)   
+	local ent1 = ents.Create("gmod_subway_base")	
+	if not IsValid(ent1) then return end	
+	ent1:SetModel("models/hunter/blocks/cube025x025x025.mdl")		
+	ent1:SetPos(self:LocalToWorld(Vector(330,0,-40)))
+    ent1:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
+	ent1:Spawn()
+	ent1:SetOwner(self:GetOwner())
+	ent1:DrawShadow(false)	
+	if CPPI and IsValid(self:CPPIGetOwner()) then ent1:CPPISetOwner(self:CPPIGetOwner()) end
+    ent1.SpawnPos = pos
+    ent1.SpawnAng = ang	
+	ent1:SetParent(self)
+	self:SetNW2Entity("gmod_subway_base",ent1)
+		
+	table.insert(ent1.TrainEntities,self)      
+    table.insert(self.TrainEntities,ent1)
+	
+	self.HeadTrain2 = self:GetNW2Entity("ent1")
+	local train2 = self.HeadTrain2    
+	if not IsValid(train2) then return end	
+	
+    self:SetPackedBool("DoorL",train2.DoorLeft)
+    self:SetPackedBool("DoorR",train2.DoorRight)    
+    self.LeftDoorsOpening = train2.DoorLeft
+    self.RightDoorsOpening = train2.DoorRight
+    self.LeftDoorsOpen = train2.LeftDoorsOpen
+    self.RightDoorsOpen = train2.RightDoorsOpen	
+	
+	return ent1
+end]]	
 ---------------------------------------------------------------------------
 function ENT:Think()
     local retVal = self.BaseClass.Think(self)

@@ -36,7 +36,7 @@ function ENT:PassengerCapacity()
 end
 
 function ENT:GetStandingArea()
-	return Vector(520-15-9-131,-25,-47),Vector(15,25,-46)
+	return Vector(520-15-9-111,-25,-47),Vector(-115,35,-46)
 end 
 
 local function GetDoorPosition(n,G)	--Правые двери	--Левые двери
