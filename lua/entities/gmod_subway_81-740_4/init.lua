@@ -96,13 +96,18 @@ end
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
 		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
-		self:SetNW2Entity("RearBogey",self.RearBogey)	  
+		self:SetNW2Entity("RearBogey",self.RearBogey)
+		self.RearBogey.DisableContacts = true		
 		
 	timer.Simple(0.1, function()	
         if not IsValid(self) then return end		
-		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон		
-		--self.PassStvor = self:CreateStvor(Vector(0,0,0))--код не работает, хз из-за чего, срабатывет только после изменения переменной.				
+		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон			
 	end)
+	
+	timer.Simple(1, function()	
+        if not IsValid(self) then return end			
+		self.PassStvor = self:CreateStvor(Vector(0,0,0))--код не работает, хз из-за чего, срабатывет только после изменения переменной.				
+	end)	
 
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)	
@@ -496,7 +501,6 @@ function ENT:CreatePricep(pos,ang)
 		self.PricepBogey:SetNWInt("MotorSoundType",2)
 		self.PricepBogey:SetNWInt("Async",true)
 		self.PricepBogey.m_tblToolsAllowed = {"none"}	
-		self.PricepBogey.DisableContacts = true
 		self:SetNW2Entity("PricepBogey",self.PricepBogey)
 		self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 		self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)	
@@ -579,7 +583,7 @@ function ENT:CreatePricep(pos,ang)
 	return ent
 end	
 
---[[function self:CreateStvor(pos,ang)   
+--[[function ENT:CreateStvor(pos,ang)   
 	local ent1 = ents.Create("gmod_subway_base")	
 	if not IsValid(ent1) then return end	
 	ent1:SetModel("models/hunter/blocks/cube025x025x025.mdl")		
@@ -597,7 +601,7 @@ end
 	table.insert(ent1.TrainEntities,self)      
     table.insert(self.TrainEntities,ent1)
 	
-	self.HeadTrain2 = self:GetNW2Entity("ent1")
+	self.HeadTrain2 = self:GetNW2Entity("gmod_subway_base")
 	local train2 = self.HeadTrain2    
 	if not IsValid(train2) then return end	
 	
@@ -609,7 +613,7 @@ end
     self.RightDoorsOpen = train2.RightDoorsOpen	
 	
 	return ent1
-end]]	
+end]]
 ---------------------------------------------------------------------------
 function ENT:Think()
     local retVal = self.BaseClass.Think(self)

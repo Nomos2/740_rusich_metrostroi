@@ -57,6 +57,7 @@ function ENT:Initialize()
 		self.RearBogey.m_tblToolsAllowed = {"none"}	
 		self.RearBogey:SetSolid(SOLID_VPHYSICS)
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
+		self.RearBogey.DisableContacts = true		
 		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
@@ -254,8 +255,7 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey:SetNWFloat("SqualPitch",1.45+rand)
 	self.PricepBogey:SetNWInt("MotorSoundType",2)
 	self.PricepBogey:SetNWInt("Async",true)
-	self.PricepBogey.m_tblToolsAllowed = {"none"}	
-	self.PricepBogey.DisableContacts = true
+	self.PricepBogey.m_tblToolsAllowed = {"none"}
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
 	
     timer.Simple(0, function()

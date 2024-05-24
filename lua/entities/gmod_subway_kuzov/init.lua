@@ -90,15 +90,15 @@ function ENT:Initialize()
 		PB,
 		0, --bone
 		0, --bone
-		Vector(310,0,60),
-		Vector(310,0,60),
+		Vector(314,0,60),
+		Vector(314,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-4, --xmin
-		-4, --ymin
+		-3, --xmin
+		-3, --ymin
 		-25, --zmin
-		4, --xmax
-		4, --ymax
+		3, --xmax
+		3, --ymax
 		25, --zmax
 		0, --xfric
 		0, --yfric
@@ -111,22 +111,22 @@ function ENT:Initialize()
 		PB,
 		0, --bone
 		0, --bone
-		Vector(310,0,0),
-		Vector(310,0,0),
+		Vector(314,0,0),
+		Vector(314,0,0),
 		0, --forcelimit
 		0, --torquelimit
-		-4, --xmin
-		-4, --ymin
+		-3, --xmin
+		-3, --ymin
 		-25, --zmin
-		4, --xmax
-		4, --ymax
+		3, --xmax
+		3, --ymax
 		25, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
 		0, --rotonly
 		1 --nocollide
-    )		
+    )	
 	   
     constraint.Axis(
         RB,        
