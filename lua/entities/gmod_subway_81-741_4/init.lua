@@ -243,10 +243,11 @@ function ENT:CreatePricep(pos,ang)
     ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
     ent:SetNW2Entity("TrainEntity", self)
-	local RB = self.RearBogey
 
-	table.insert(ent.TrainEntities,self)
-    table.insert(self.TrainEntities,ent)	
+    timer.Simple(0, function()
+        if not IsValid(ent) or not IsValid(self) then return end
+	table.insert(ent.TrainEntities,self)      
+    table.insert(self.TrainEntities,ent)		
 
 	self.PricepBogey = self:CreateBogey(Vector(-358.5,0,-75.5),Angle(0,0,0),false,"740G")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
@@ -258,23 +259,21 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey.m_tblToolsAllowed = {"none"}
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
 	
-    timer.Simple(0, function()
-    if not IsValid(ent) or not IsValid(self) then return end
 	ent.CoupleRear = ent:CreateCouple(Vector( -287,0,-60),Angle(0,180,0),false,"740")
-    if IsValid(ent.HeadTrain) then
-        ent.CoupleRear:SetNW2Entity("TrainEntity", ent.HeadTrain)
-        ent.HeadTrain.CoupleRear = ent.CoupleRear
-        ent:SetNW2Entity("HeadTrain", ent.HeadTrain)
-		self.CoupleFront = self:CreateCouple(Vector( 251,0,-60),Angle(0,0,0),true,"740")
-		self.CoupleFront.m_tblToolsAllowed = {"none"}
-		self.CoupleRear.m_tblToolsAllowed = {"none"}
-		self:SetNW2Entity("CoupleFront",self.RearCouple)
-		self:SetNW2Entity("CoupleRear",self.FrontCouple)		
-    end
+    ent.CoupleRear:SetNW2Entity("TrainEntity", ent.HeadTrain)
+	ent:SetNW2Entity("HeadTrain", ent.HeadTrain)	
+    ent.HeadTrain.CoupleRear = ent.CoupleRear
+	ent.CoupleRear.m_tblToolsAllowed = {"none"}	
+	ent:SetNW2Entity("CoupleRear",ent.RearCouple)
+	
+	self.CoupleFront = self:CreateCouple(Vector( 251,0,-60),Angle(0,0,0),true,"740")
+	self.CoupleFront.m_tblToolsAllowed = {"none"}
+	self:SetNW2Entity("CoupleFront",self.FrontCouple)
+	local PB = self.PricepBogey	
 	
     constraint.AdvBallsocket(
 		self,
-		self.PricepBogey,
+		PB,
         0, --bone
         0, --bone    
 		pos-Vector(350,0,60),
@@ -295,7 +294,7 @@ function ENT:CreatePricep(pos,ang)
     )
     constraint.AdvBallsocket(
 		self,
-		self.PricepBogey,
+		PB,
         0, --bone
         0, --bone    
 		pos-Vector(350,0,3),

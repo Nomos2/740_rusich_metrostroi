@@ -43,6 +43,7 @@ if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Me
 				}
 				scripted_ents.Register(tbl,"gmod_train_couple")	-- регистрируем
 			end
+			
 		end)	
 	end
     
@@ -76,7 +77,23 @@ if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Me
             BogeyTbl.EngineSNDConfig[5] = ClBogeyConf
             print("[Metrostroi 81-740] Inject sounds")
         end)
-    end
+		
+    for k,v in pairs(Metrostroi.TrainClasses) do
+        if v == "gmod_subway_kuzov" then
+            Metrostroi.TrainClasses[k] = nil
+            Metrostroi.IsTrainClass[v] = nil
+            break
+		end	
+	if not Metrostroi.Advanced then return end	
+	for k,v in pairs(Metrostroi.Advanced.TrainClasses) do
+        if v == "gmod_subway_kuzov" then
+            Metrostroi.Advanced.TrainClasses[k] = nil
+            Metrostroi.Advanced.IsTrainClass[v] = nil
+		end	
+	end		
+	end		
+		
+    end	
 	
 	if CLIENT then return end
 	
@@ -120,6 +137,21 @@ timer.Simple(0,function()
 				}
 				scripted_ents.Register(tbl,"gmod_train_bogey") -- регистрируем
 			end
+			
+    for k,v in pairs(Metrostroi.TrainClasses) do
+        if v == "gmod_subway_kuzov" then
+            Metrostroi.TrainClasses[k] = nil
+            Metrostroi.IsTrainClass[v] = nil
+            break
+		end	
+	if not Metrostroi.Advanced then return end	
+	for k,v in pairs(Metrostroi.Advanced.TrainClasses) do
+        if v == "gmod_subway_kuzov" then
+            Metrostroi.Advanced.TrainClasses[k] = nil
+            Metrostroi.Advanced.IsTrainClass[v] = nil
+		end	
+	end		
+	end			
 
 	-- регистрируем сцепку
 			local tbl = scripted_ents.Get("gmod_train_couple")
@@ -131,8 +163,8 @@ timer.Simple(0,function()
 				print("[Metrostroi 81-740] Inject sounds")
 				end
 			end)	
-		end 	
-	end) 
+		end 
+	end)
 end
 
 --[[mezhvag --межвагонки будут переделаны

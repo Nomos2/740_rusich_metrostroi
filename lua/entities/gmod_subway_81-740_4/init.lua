@@ -104,10 +104,10 @@ end
 		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон			
 	end)
 	
-	timer.Simple(1, function()	
+	--[[timer.Simple(1, function()	
         if not IsValid(self) then return end			
 		self.PassStvor = self:CreateStvor(Vector(0,0,0))--код не работает, хз из-за чего, срабатывет только после изменения переменной.				
-	end)	
+	end)]]	
 
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)	
@@ -488,39 +488,38 @@ function ENT:CreatePricep(pos,ang)
     ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
     ent:SetNW2Entity("TrainEntity", self)
-	local PB = self.PricepBogey		
 	
     timer.Simple(0, function()
         if not IsValid(ent) or not IsValid(self) then return end
 	table.insert(ent.TrainEntities,self)      
     table.insert(self.TrainEntities,ent)	
 	
-		self.PricepBogey = self:CreateBogey(Vector(-171,0,-75.5),Angle(0,0,0),true,"740G")
-		local rand = math.random()*0.05
-		self.PricepBogey:SetNWFloat("SqualPitch",1.45+rand)
-		self.PricepBogey:SetNWInt("MotorSoundType",2)
-		self.PricepBogey:SetNWInt("Async",true)
-		self.PricepBogey.m_tblToolsAllowed = {"none"}	
-		self:SetNW2Entity("PricepBogey",self.PricepBogey)
-		self.PricepBogey:SetSolid(SOLID_VPHYSICS)
-		self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)	
-	
-	ent.CoupleRear = ent:CreateCouple(Vector( -287,0,-60),Angle(0,180,0),false,"740")
-    if IsValid(ent.HeadTrain) then
-        ent.CoupleRear:SetNW2Entity("TrainEntity", ent.HeadTrain)
-        ent.HeadTrain.CoupleRear = ent.CoupleRear
-        ent:SetNW2Entity("HeadTrain", ent.HeadTrain)
-		self.CoupleFront = self:CreateCouple(Vector( 483,0,-60),Angle(0,0,0),true,"740")	
-		self.CoupleFront.EKKDisconnected = true
-		self.CoupleFront.m_tblToolsAllowed = {"none"}
-		self.CoupleRear.m_tblToolsAllowed = {"none"}
-		self:SetNW2Entity("CoupleFront",self.RearCouple)
-		self:SetNW2Entity("CoupleRear",self.FrontCouple)		
-    end
+	self.PricepBogey = self:CreateBogey(Vector(-171,0,-75.5),Angle(0,0,0),true,"740G")
+	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
+	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
+    local rand = math.random()*0.05
+	self.PricepBogey:SetNWFloat("SqualPitch",1.45+rand)
+	self.PricepBogey:SetNWInt("MotorSoundType",2)
+	self.PricepBogey:SetNWInt("Async",true)
+	self.PricepBogey.m_tblToolsAllowed = {"none"}	
+	self:SetNW2Entity("PricepBogey",self.PricepBogey)	
 
+	ent.CoupleRear = ent:CreateCouple(Vector( -287,0,-60),Angle(0,180,0),false,"740")
+    ent.CoupleRear:SetNW2Entity("TrainEntity", ent.HeadTrain)   
+	ent:SetNW2Entity("HeadTrain", ent.HeadTrain)
+    ent.HeadTrain.CoupleRear = ent.CoupleRear
+	ent.CoupleRear.m_tblToolsAllowed = {"none"}	
+	ent:SetNW2Entity("CoupleRear",ent.RearCouple)	
+	
+	self.CoupleFront = self:CreateCouple(Vector( 483,0,-60),Angle(0,0,0),true,"740")	
+	self.CoupleFront.EKKDisconnected = true
+	self.CoupleFront.m_tblToolsAllowed = {"none"}
+	self:SetNW2Entity("CoupleFront",self.FrontCouple)
+	local PB = self.PricepBogey	
+	
     constraint.AdvBallsocket(
 		self,
-		self.PricepBogey,
+		PB,
         0, --bone
         0, --bone    
 		Vector(-70-131,0,60),
@@ -541,7 +540,7 @@ function ENT:CreatePricep(pos,ang)
     )
     constraint.AdvBallsocket(
 		self,
-		self.PricepBogey,
+		PB,
         0, --bone
         0, --bone    
 		Vector(-70-131,0,3),
