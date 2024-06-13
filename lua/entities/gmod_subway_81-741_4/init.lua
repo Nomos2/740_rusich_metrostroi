@@ -57,7 +57,6 @@ function ENT:Initialize()
 		self.RearBogey.m_tblToolsAllowed = {"none"}	
 		self.RearBogey:SetSolid(SOLID_VPHYSICS)
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
-		self.RearBogey.DisableContacts = true	
 		self.RearBogey.NormalMass = 20000		
 		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
@@ -258,6 +257,7 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey:SetNWInt("Async",true)
 	self.PricepBogey.m_tblToolsAllowed = {"none"}
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
+	self.PricepBogey.DisableSound = 1	
 	
 	self.CoupleFront = self:CreateCouple(Vector( 251,0,-60),Angle(0,0,0),true,"740")
 	self.CoupleFront.m_tblToolsAllowed = {"none"}

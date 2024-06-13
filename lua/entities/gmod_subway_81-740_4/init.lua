@@ -95,7 +95,6 @@ end
 		self.RearBogey.m_tblToolsAllowed = {"none"}	
 		self.RearBogey:SetSolid(SOLID_VPHYSICS)
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
-		self.RearBogey.DisableContacts = true	
 		self.RearBogey.NormalMass = 20000		
 		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
