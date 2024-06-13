@@ -86,18 +86,20 @@ end
 	
     -- Create bogeys
         self.FrontBogey = self:CreateBogey(Vector( 360,0,-76),Angle(0,180,0),true,"740ALS")	
+		self.FrontBogey.m_tblToolsAllowed = {"none"}
         self.RearBogey  = self:CreateBogey(Vector(-532-160,0,-76),Angle(0,0,0),false,"740NOTR")
-		self.FrontBogey:SetNWInt("MotorSoundType",2)
+		self.FrontBogey:SetNWInt("MotorSoundType",2) 
 		self.RearBogey:SetNWInt("MotorSoundType",2)
-	
+
 		self.FrontBogey.m_tblToolsAllowed = {"none"}	
-		self.RearBogey.m_tblToolsAllowed = {"none"}
+		self.RearBogey.m_tblToolsAllowed = {"none"}	
 		self.RearBogey:SetSolid(SOLID_VPHYSICS)
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
+		self.RearBogey.DisableContacts = true	
+		self.RearBogey.NormalMass = 20000		
 		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
-		self.RearBogey.DisableContacts = true		
 		
 	timer.Simple(0.1, function()	
         if not IsValid(self) then return end		
@@ -115,7 +117,6 @@ end
     local rand = math.random()*0.05
     self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
     self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)	
-	self.RearBogey.DisableSound = 1 	
 	
     -- Initialize key mapping
     self.KeyMap = {
@@ -487,7 +488,7 @@ function ENT:CreatePricep(pos,ang)
     ent.SpawnPos = pos
     ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
-    ent:SetNW2Entity("TrainEntity", self)
+    ent:SetNW2Entity("TrainEntity", self) 
 	
     timer.Simple(0, function()
         if not IsValid(ent) or not IsValid(self) then return end
@@ -502,14 +503,8 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey:SetNWInt("MotorSoundType",2)
 	self.PricepBogey:SetNWInt("Async",true)
 	self.PricepBogey.m_tblToolsAllowed = {"none"}	
-	self:SetNW2Entity("PricepBogey",self.PricepBogey)	
-
-	ent.CoupleRear = ent:CreateCouple(Vector( -287,0,-60),Angle(0,180,0),false,"740")
-    ent.CoupleRear:SetNW2Entity("TrainEntity", ent.HeadTrain)   
-	ent:SetNW2Entity("HeadTrain", ent.HeadTrain)
-    ent.HeadTrain.CoupleRear = ent.CoupleRear
-	ent.CoupleRear.m_tblToolsAllowed = {"none"}	
-	ent:SetNW2Entity("CoupleRear",ent.RearCouple)	
+	self:SetNW2Entity("PricepBogey",self.PricepBogey)
+	self.PricepBogey.DisableSound = 1	
 	
 	self.CoupleFront = self:CreateCouple(Vector( 483,0,-60),Angle(0,0,0),true,"740")	
 	self.CoupleFront.EKKDisconnected = true
@@ -522,15 +517,15 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		Vector(-70-131,0,60),
-		Vector(-70-131,0,60),
+		Vector(-185,0,60),
+		Vector(-185,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-3.5, --xmin
-		-3.5, --ymin
+		-3, --xmin
+		-3, --ymin
 		-25, --zmin
-		3.5, --xmax
-		3.5, --ymax
+		3, --xmax
+		3, --ymax
 		25, --zmax
         0, --xfric
         0, --yfric
@@ -543,15 +538,15 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		Vector(-70-131,0,3),
-		Vector(-70-131,0,3),
+		Vector(-185,0,3),
+		Vector(-185,0,3),
 		0, --forcelimit
 		0, --torquelimit
-		-3.5, --xmin
-		-3.5, --ymin
+		-3, --xmin
+		-3, --ymin
 		-25, --zmin
-		3.5, --xmax
-		3.5, --ymax
+		3, --xmax
+		3, --ymax
 		25, --zmax
         0, --xfric
         0, --yfric
@@ -560,16 +555,17 @@ function ENT:CreatePricep(pos,ang)
         1 --nocollide
     )		
 
-	if IsValid(ent:GetPhysicsObject()) then
-        self.NormalMass = ent:GetPhysicsObject():GetMass()
-    end	
-	if IsValid(self.RearBogey:GetPhysicsObject()) then
-        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
-    end
 	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)
     Metrostroi.RerailBogey(self.PricepBogey)	
     end)	
+	
+	if IsValid(ent:GetPhysicsObject()) then
+        self.NormalMass = ent:GetPhysicsObject():GetMass(20000)
+    end	
+	if IsValid(self.RearBogey:GetPhysicsObject()) then
+        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass(20000)
+    end	
 
 	--Метод mirror 				
     ent.HeadTrain = self 
@@ -763,15 +759,15 @@ function ENT:Think()
         end
         fB.MotorForce = (40000+5000*(A < 0 and 1 or 0))*add --35300
         fB.Reversed = (self:ReadTrainWire(13) > 0.5)--<
-        pB.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
-        pB.Reversed = (self:ReadTrainWire(12) > 0.5)-->
+        rB.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
+        rB.Reversed = (self:ReadTrainWire(12) > 0.5)-->
 
         -- These corrections are required to beat source engine friction at very low values of motor power
         local P = math.max(0,0.04449 + 1.06879*math.abs(A) - 0.465729*A^2)
         if math.abs(A) > 0.4 then P = math.abs(A) end
         if math.abs(A) < 0.05 then P = 0 end
         if self.Speed < 10 then P = P*(1.0 + 0.6*(10.0-self.Speed)/10.0) end
-        pB.MotorPower  = P*0.5*((A > 0) and 1 or -1)
+        rB.MotorPower  = P*0.5*((A > 0) and 1 or -1)
         fB.MotorPower = P*0.5*((A > 0) and 1 or -1)
 
         -- Apply brakes
@@ -785,12 +781,13 @@ function ENT:Think()
         rB.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
         rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
         rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
-        rB.DisableContacts = self.BUV.Pant or rB.DisableContactsManual		
+        rB.DisableContacts = true		
 		
 		pB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
         pB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
         pB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
-	    pB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)	
+	    pB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
+        pB.DisableContacts = self.BUV.Pant or rB.DisableContactsManual		
 
     end
     return retVal

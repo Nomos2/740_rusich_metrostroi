@@ -57,7 +57,8 @@ function ENT:Initialize()
 		self.RearBogey.m_tblToolsAllowed = {"none"}	
 		self.RearBogey:SetSolid(SOLID_VPHYSICS)
 		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
-		self.RearBogey.DisableContacts = true		
+		self.RearBogey.DisableContacts = true	
+		self.RearBogey.NormalMass = 20000		
 		
 		self:SetNW2Entity("FrontBogey",self.FrontBogey)
 		self:SetNW2Entity("RearBogey",self.RearBogey)
@@ -73,7 +74,6 @@ function ENT:Initialize()
     local rand = math.random()*0.05
     self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
     self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)
-	self.RearBogey.DisableSound = 1	
 	
     -- Initialize key mapping
     self.KeyMap = {
@@ -249,7 +249,7 @@ function ENT:CreatePricep(pos,ang)
 	table.insert(ent.TrainEntities,self)      
     table.insert(self.TrainEntities,ent)		
 
-	self.PricepBogey = self:CreateBogey(Vector(-358.5,0,-75.5),Angle(0,0,0),false,"740G")
+	self.PricepBogey = self:CreateBogey(Vector(-358.5,0,-75),Angle(0,0,0),false,"740G")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
     local rand = math.random()*0.05
@@ -258,13 +258,6 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey:SetNWInt("Async",true)
 	self.PricepBogey.m_tblToolsAllowed = {"none"}
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
-	
-	ent.CoupleRear = ent:CreateCouple(Vector( -287,0,-60),Angle(0,180,0),false,"740")
-    ent.CoupleRear:SetNW2Entity("TrainEntity", ent.HeadTrain)
-	ent:SetNW2Entity("HeadTrain", ent.HeadTrain)	
-    ent.HeadTrain.CoupleRear = ent.CoupleRear
-	ent.CoupleRear.m_tblToolsAllowed = {"none"}	
-	ent:SetNW2Entity("CoupleRear",ent.RearCouple)
 	
 	self.CoupleFront = self:CreateCouple(Vector( 251,0,-60),Angle(0,0,0),true,"740")
 	self.CoupleFront.m_tblToolsAllowed = {"none"}
@@ -276,16 +269,16 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		pos-Vector(350,0,60),
-		Vector(350,0,60),
+		Vector(-310,0,60),
+		Vector(-310,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-3.5, --xmin
-		-3.5, --ymin
-		-25, --zmin
-		3.5, --xmax
-		3.5, --ymax
-		25, --zmax
+		-1, --xmin
+		-1, --ymin
+		-15, --zmin
+		1, --xmax
+		1, --ymax
+		15, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -297,33 +290,33 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		pos-Vector(350,0,3),
-		Vector(350,0,3),
+		Vector(-310,0,3),
+		Vector(-310,0,3),
 		0, --forcelimit
 		0, --torquelimit
-		-3.5, --xmin
-		-3.5, --ymin
-		-25, --zmin
-		3.5, --xmax
-		3.5, --ymax
-		25, --zmax
+		-1, --xmin
+		-1, --ymin
+		-15, --zmin
+		1, --xmax
+		1, --ymax
+		15, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
         0, --rotonly
         1 --nocollide
     )
-	if IsValid(ent:GetPhysicsObject()) then
-        self.NormalMass = ent:GetPhysicsObject():GetMass()
-    end	
-	if IsValid(self.RearBogey:GetPhysicsObject()) then
-        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
-    end
 	Metrostroi.RerailBogey(self.FrontBogey)    		
     Metrostroi.RerailBogey(self.RearBogey)
-    Metrostroi.RerailBogey(self.PricepBogey)
-	end)
-
+    Metrostroi.RerailBogey(self.PricepBogey)	
+    end)	
+	
+	if IsValid(ent:GetPhysicsObject()) then
+        self.NormalMass = ent:GetPhysicsObject():GetMass(20000)
+    end	
+	if IsValid(self.RearBogey:GetPhysicsObject()) then
+        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass(20000)
+    end
 	--Метод mirror 				
     ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)
@@ -390,26 +383,26 @@ function ENT:Think()
     self.AsyncInverter:TriggerInput("Speed",self.Speed)
 	
 	local fB,rB,pB = self.FrontBogey,self.RearBogey,self.PricepBogey	
-       
+	
    if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
 
         local A = self.AsyncInverter.Torque
 		--print(A)
         local add = 1
         if math.abs(self:GetAngles().pitch) > 4 then
-            add = math.min((math.abs(self:GetAngles().pitch)-4)/2,1)
+		add = math.min((math.abs(self:GetAngles().pitch)-4)/2,1)
         end
         fB.MotorForce = (40000+5000*(A < 0 and 1 or 0))*add --35300
         fB.Reversed = (self:ReadTrainWire(13) > 0.5)--<
-        pB.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
-        pB.Reversed = (self:ReadTrainWire(12) > 0.5)-->
+        rB.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
+        rB.Reversed = (self:ReadTrainWire(12) > 0.5)-->
 
         -- These corrections are required to beat source engine friction at very low values of motor power
         local P = math.max(0,0.04449 + 1.06879*math.abs(A) - 0.465729*A^2)
         if math.abs(A) > 0.4 then P = math.abs(A) end
         if math.abs(A) < 0.05 then P = 0 end
         if self.Speed < 10 then P = P*(1.0 + 0.6*(10.0-self.Speed)/10.0) end
-        pB.MotorPower  = P*0.5*((A > 0) and 1 or -1)
+        rB.MotorPower  = P*0.5*((A > 0) and 1 or -1)
         fB.MotorPower = P*0.5*((A > 0) and 1 or -1)
 
         -- Apply brakes
@@ -418,23 +411,23 @@ function ENT:Think()
         fB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
         fB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
         fB.DisableContacts = self.BUV.Pant or fB.DisableContactsManual	
-
+		
 		rB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
         rB.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
         rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
-        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         
-        rB.DisableContacts = self.BUV.Pant or rB.DisableContactsManual
+        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
+        rB.DisableContacts = true		
 		
 		pB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
         pB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
         pB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
-	    pB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)	
+	    pB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
+        pB.DisableContacts = self.BUV.Pant or rB.DisableContactsManual		
 
     end
     return retVal
 end
---	 
---При сцепке открывать краны
+--
 function ENT:OnCouple(train,isfront)
     if isfront and self.FrontAutoCouple then
         self.FrontBrakeLineIsolation:TriggerInput("Open",1.0)

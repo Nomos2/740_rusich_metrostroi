@@ -82,6 +82,13 @@ function ENT:Initialize()
 	local PB = train.PricepBogey	
 	local RB = train.RearBogey		
 	
+	self.CoupleRear = self:CreateCouple(Vector( -287,0,-60),Angle(0,180,0),false,"740")
+    self.CoupleRear:SetNW2Entity("TrainEntity", self.HeadTrain)
+	self:SetNW2Entity("HeadTrain", self.HeadTrain)	
+    self.HeadTrain.CoupleRear = self.CoupleRear
+	self.CoupleRear.m_tblToolsAllowed = {"none"}	
+	self:SetNW2Entity("CoupleRear",self.RearCouple)	
+	
     constraint.NoCollide(self,train,0,0)
     constraint.NoCollide(self,RB,0,0)
 	
@@ -94,12 +101,12 @@ function ENT:Initialize()
 		Vector(314,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-3, --xmin
-		-3, --ymin
-		-25, --zmin
-		3, --xmax
-		3, --ymax
-		25, --zmax
+		-1, --xmin
+		-1, --ymin
+		-15, --zmin
+		1, --xmax
+		1, --ymax
+		15, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -115,12 +122,12 @@ function ENT:Initialize()
 		Vector(314,0,0),
 		0, --forcelimit
 		0, --torquelimit
-		-3, --xmin
-		-3, --ymin
-		-25, --zmin
-		3, --xmax
-		3, --ymax
-		25, --zmax
+		-1, --xmin
+		-1, --ymin
+		-15, --zmin
+		1, --xmax
+		1, --ymax
+		15, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric

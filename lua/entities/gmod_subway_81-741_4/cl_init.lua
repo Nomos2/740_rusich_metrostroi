@@ -507,8 +507,6 @@ function ENT:Initialize()
 	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")
 	self.RearBogey = self:GetNW2Entity("RearBogey")
-	self.FrontCouple = self:GetNW2Entity("FrontCouple")
-	self.RearCouple = self:GetNW2Entity("RearCouple")	
 	self.PricepBogey = self:GetNW2Entity("PricepBogey")		
 end
 
