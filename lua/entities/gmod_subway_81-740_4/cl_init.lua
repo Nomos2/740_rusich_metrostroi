@@ -194,28 +194,28 @@ ENT.ButtonMap["PUU"] = {
 
 ENT.ClientProps["Head0-_--"] = {
     model = "models/metrostroi_train/81-740/body/headlight.mdl", --_-- обозначает положение фары на маске.
-    pos = Vector(324.5-159.4-9-131, 4.8, -55.8),
+    pos = Vector(324.1-159.4-9-131, 4.8, -55.8),
     ang = Angle(-7,0,0),
     scale = 1.1, 
     nohide=true,
 }
 ENT.ClientProps["Head--_-0"] = {
     model = "models/metrostroi_train/81-740/body/headlight.mdl",
-    pos = Vector(324.5-159.4-9-131, 86.3, -55.8),
+    pos = Vector(324.1-159.4-9-131, 86.3, -55.8),
     ang = Angle(-7,0,0),
     scale = 1.1, 
     nohide=true,
 }
 ENT.ClientProps["Head-0_--"] = {
     model = "models/metrostroi_train/81-740/body/headlight.mdl",
-    pos = Vector(324.8-159.4-9-131, 18.3, -58.2),
+    pos = Vector(324.3-159.4-9-131, 18.3, -58.2),
     ang = Angle(-7,0,0),
     scale = 1.1, 
     nohide=true,
 }
 ENT.ClientProps["Head--_0-"] = {
     model = "models/metrostroi_train/81-740/body/headlight.mdl",
-    pos = Vector(324.8-159.4-9-131, 73.4, -58.2),
+    pos = Vector(324.3-159.4-9-131, 73.4, -58.2),
     ang = Angle(-7,0,0),
     scale = 1.1, 
     nohide=true,
@@ -229,7 +229,7 @@ ENT.ClientProps["krepezh"] = {
 }
 ENT.ClientProps["salon"] = {
 	model = "models/metrostroi_train/81-740/salon/salon.mdl",
-	pos = Vector(0-15-9.3-131, 0.2, 0),
+	pos = Vector(0-24.3-131, 0.2, 0),
 	ang = Angle(0,0,0),
 	hide = 1.5,
 }
@@ -241,7 +241,7 @@ ENT.ClientProps["handrails"] = {
 }
 ENT.ClientProps["lamps_salon_off"] = {
     model = "models/metrostroi_train/81-740/salon/lamps/lamps_off.mdl",
-    pos = Vector(-15-9.3-130.5,0,0),
+    pos = Vector(-24.3-130.5,0,0),
     ang = Angle(0,0,0),
     hide=2,
 }
@@ -393,7 +393,7 @@ ENT.ClientProps["lamps_salon_on_fr9"] = {
 local rnd = math.random (0,-10)
 ENT.ClientProps["wiper"] = { --дворник от 760
     model = "models/metrostroi_train/81-740/body/81-740_wiper.mdl",
-    pos = Vector(176.8-15-9-131,-10,0),
+    pos = Vector(176.3-24-131,-10,0),
     ang = Angle(0,0,rnd),
 	nohide = true,
 }
@@ -1237,14 +1237,14 @@ print("happy bucket day!")
 end
 ENT.ClientProps["Antenna"] = {
     model = "models/metrostroi_train/81-740/body/antenna/antenna.mdl",
-    pos = Vector(234.25-15-9-131,21.3,-124.5),
+    pos = Vector(234.15-24-131.2,21.3,-124.5),
     ang = Angle(-6,0,0),
     --color = Color(239,215,177),	
     nohide = true,
 }
 ENT.ClientProps["PasswordProp"] = {
     model = "models/metrostroi_train/81-740/cabine/password.mdl",
-    pos = Vector(672.3-15-9-131,-6,3.4),
+    pos = Vector(672.3-24-131,-6,3.4),
     ang = Angle(90,180,33),
 	scale = 1,	
     hide = 1,
@@ -1268,7 +1268,7 @@ ENT.ClientProps["speed2"] = {
 for i=1,5 do
     ENT.ClientProps["speeddop"..i] = {
         model = "models/metrostroi_train/81-720/segments/speed_red.mdl",
-        pos = Vector(205.3-15-9-131, 1.305*(i-1)+3, 102.58),
+        pos = Vector(205.3-24-131, 1.305*(i-1)+3, 102.58),
         ang = Angle(10,0,0.2),
         skin = 0,
         color = Color(255,55,55),
@@ -1523,14 +1523,14 @@ ENT.ClientProps["door_cab_l"] = {
 --Модели 2023.
 ENT.ClientProps["Zavod_table_front"] = { --Заводская табличка
     model = "models/metrostroi_train/81-740/salon/zavod.mdl",
-	pos = Vector(543.2-15-9-131,15,60),
+	pos = Vector(543.2-24-131,15,60),
     ang = Angle(90,-180,0),
 	hide = 1,
 	scale = 3,	
 }
 ENT.ClientProps["ASNP_test"] = {
 	model = "models/740_vrb/vrb_asnp.mdl",
-	pos = Vector(682.5-15-9-131,-52.8,-11), --684.5-15,-56,-11
+	pos = Vector(682.5-24-131,-52.8,-11), --684.5-15,-56,-11
 	ang = Angle(0,-90,0), --0,-105,0 
 	hideseat=0.8,
 }
@@ -1580,14 +1580,14 @@ ENT.ButtonMap["ASNP"] = {
 }
 ENT.ClientProps["Gerb_msk"] = {
 	model = "models/metrostroi_train/81-740/body/gerb.mdl",
-	pos = Vector(565-15-9-131,63.9,35),
+	pos = Vector(565-24-131,63.9,35),
 	ang = Angle(0,0,-86.8),
 	nohide = true,
 	scale = 3,
 }
 ENT.ClientProps["Gerb_msk_right"] = {
 	model = "models/metrostroi_train/81-740/body/gerb.mdl",
-	pos = Vector(565-15-9-131,-62.9,36),
+	pos = Vector(565-24-131,-62.9,36),
 	ang = Angle(0,180,-86.8),
 	nohide = true,
 	scale = 3,
@@ -1595,14 +1595,14 @@ ENT.ClientProps["Gerb_msk_right"] = {
 
 ENT.ClientProps["Gerb_msk1"] = {
 	model = "models/metrostroi_train/81-740/body/gerb.mdl",
-	pos = Vector(565-15-9-131,63.9,35),
+	pos = Vector(565-24-131,63.9,35),
 	ang = Angle(0,0,-86.8),
 	nohide = true,
 	scale = 3,
 }
 ENT.ClientProps["Gerb_msk_right1"] = {
 	model = "models/metrostroi_train/81-740/body/gerb.mdl",
-	pos = Vector(565-15-9-131,-62.9,36),
+	pos = Vector(565-24-131,-62.9,36),
 	ang = Angle(0,180,-86.8),
 	nohide = true,
 	scale = 3,
@@ -1610,13 +1610,13 @@ ENT.ClientProps["Gerb_msk_right1"] = {
 
 ENT.ClientProps["Naddver_off"] = {
 	model = "models/metrostroi_train/81-740/salon/naddverka_off.mdl",
-	pos = Vector(314.55-15-9-131,37.58,58.1),
+	pos = Vector(314.55-24-131,37.58,58.1),
 	ang = Angle(0,0,0),
 	scale = 1,	
 	nohide = true,
 }
 ENT.ButtonMap["Password"] = {
-    pos = Vector(672.25-15-9-131,-6,4.2),
+    pos = Vector(672.25-24-131,-6,4.2),
     ang = Angle(0,-123,90),
     width = 50,
     height = 25,
@@ -1679,7 +1679,7 @@ ENT.ButtonMap["Vityaz"] = {
 
 
 ENT.Lights = {
-    [1] = { "headlight",Vector(690-15-9-131,0,-35),Angle(0,0,0),Color(216,161,92),farz=5144,brightness = 4,hfov=105,vfov=105,texture = "models/metrostroi_train/equipment/headlight",shadows = 1,headlight=true}, --Фары 
+    [1] = { "headlight",Vector(690-24-131,0,-35),Angle(0,0,0),Color(216,161,92),farz=5144,brightness = 4,hfov=105,vfov=105,texture = "models/metrostroi_train/equipment/headlight",shadows = 1,headlight=true}, --Фары 
     [2] = { "headlight",Vector(968-168-131,0,50),Angle(-1,0,0),Color(255,0,0),fov=170,brightness = 0.3,farz=450,texture = "models/metrostroi_train/equipment/headlight2",shadows = 0,backlight=true}, --Красные фары 
     [3] = { "headlight",Vector(358-168-131,40,43.9),Angle(50,40,-0),Color(206,135,80), fov=100,farz=200,brightness = 0,shadows=1}, --отсеки
 }
@@ -1825,6 +1825,24 @@ if MotorType==1 then
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
+    -- Remove old sounds
+    if bogey.Sounds then
+        for k,v in pairs(bogey.Sounds) do
+            v:Stop()
+        end
+    end
+    -- Create sounds
+    bogey.Sounds = {}
+    bogey.Playing = {}
+    for k,v in pairs(bogey.SoundNames) do
+        util.PrecacheSound(v)
+        local e = bogey
+        if (k == "brake3a") and IsValid(bogey:GetNW2Entity("TrainWheels")) then
+            e = bogey:GetNW2Entity("TrainWheels")
+        end
+        bogey.Sounds[k] = CreateSound(e, Sound(v))
+    end
+    bogey.Async = nil	
 elseif
 MotorType==2 then
     for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
@@ -1895,6 +1913,24 @@ MotorType==2 then
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
+    -- Remove old sounds
+    if bogey.Sounds then
+        for k,v in pairs(bogey.Sounds) do
+            v:Stop()
+        end
+    end
+    -- Create sounds
+    bogey.Sounds = {}
+    bogey.Playing = {}
+    for k,v in pairs(bogey.SoundNames) do
+        util.PrecacheSound(v)
+        local e = bogey
+        if (k == "brake3a") and IsValid(bogey:GetNW2Entity("TrainWheels")) then
+            e = bogey:GetNW2Entity("TrainWheels")
+        end
+        bogey.Sounds[k] = CreateSound(e, Sound(v))
+    end
+    bogey.Async = nil	
 elseif	
 MotorType==3 then
  for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end	
@@ -1961,6 +1997,24 @@ MotorType==3 then
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
+    -- Remove old sounds
+    if bogey.Sounds then
+        for k,v in pairs(bogey.Sounds) do
+            v:Stop()
+        end
+    end
+    -- Create sounds
+    bogey.Sounds = {}
+    bogey.Playing = {}
+    for k,v in pairs(bogey.SoundNames) do
+        util.PrecacheSound(v)
+        local e = bogey
+        if (k == "brake3a") and IsValid(bogey:GetNW2Entity("TrainWheels")) then
+            e = bogey:GetNW2Entity("TrainWheels")
+        end
+        bogey.Sounds[k] = CreateSound(e, Sound(v))
+    end
+    bogey.Async = nil	
 elseif
 MotorType==4 then
 for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
@@ -2028,6 +2082,24 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
+    -- Remove old sounds
+    if bogey.Sounds then
+        for k,v in pairs(bogey.Sounds) do
+            v:Stop()
+        end
+    end
+    -- Create sounds
+    bogey.Sounds = {}
+    bogey.Playing = {}
+    for k,v in pairs(bogey.SoundNames) do
+        util.PrecacheSound(v)
+        local e = bogey
+        if (k == "brake3a") and IsValid(bogey:GetNW2Entity("TrainWheels")) then
+            e = bogey:GetNW2Entity("TrainWheels")
+        end
+        bogey.Sounds[k] = CreateSound(e, Sound(v))
+    end
+    bogey.Async = nil	
 elseif
 MotorType==5 then
 for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end

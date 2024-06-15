@@ -513,7 +513,7 @@ end
 function ENT:ReInitBogeySounds(bogey)
 	if not IsValid(bogey) then return end
 	
-	local MotorType = self:GetNW2Int("MotorType")	
+local MotorType = self:GetNW2Int("MotorType")	
 
     -- Bogey-related sounds
     bogey.SoundNames = {}
@@ -592,6 +592,24 @@ if MotorType==1 then
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
+    -- Remove old sounds
+    if bogey.Sounds then
+        for k,v in pairs(bogey.Sounds) do
+            v:Stop()
+        end
+    end
+    -- Create sounds
+    bogey.Sounds = {}
+    bogey.Playing = {}
+    for k,v in pairs(bogey.SoundNames) do
+        util.PrecacheSound(v)
+        local e = bogey
+        if (k == "brake3a") and IsValid(bogey:GetNW2Entity("TrainWheels")) then
+            e = bogey:GetNW2Entity("TrainWheels")
+        end
+        bogey.Sounds[k] = CreateSound(e, Sound(v))
+    end
+    bogey.Async = nil	
 elseif
 MotorType==2 then
     for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
@@ -662,6 +680,24 @@ MotorType==2 then
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
+    -- Remove old sounds
+    if bogey.Sounds then
+        for k,v in pairs(bogey.Sounds) do
+            v:Stop()
+        end
+    end
+    -- Create sounds
+    bogey.Sounds = {}
+    bogey.Playing = {}
+    for k,v in pairs(bogey.SoundNames) do
+        util.PrecacheSound(v)
+        local e = bogey
+        if (k == "brake3a") and IsValid(bogey:GetNW2Entity("TrainWheels")) then
+            e = bogey:GetNW2Entity("TrainWheels")
+        end
+        bogey.Sounds[k] = CreateSound(e, Sound(v))
+    end
+    bogey.Async = nil	
 elseif	
 MotorType==3 then
  for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end	
@@ -728,6 +764,24 @@ MotorType==3 then
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
+    -- Remove old sounds
+    if bogey.Sounds then
+        for k,v in pairs(bogey.Sounds) do
+            v:Stop()
+        end
+    end
+    -- Create sounds
+    bogey.Sounds = {}
+    bogey.Playing = {}
+    for k,v in pairs(bogey.SoundNames) do
+        util.PrecacheSound(v)
+        local e = bogey
+        if (k == "brake3a") and IsValid(bogey:GetNW2Entity("TrainWheels")) then
+            e = bogey:GetNW2Entity("TrainWheels")
+        end
+        bogey.Sounds[k] = CreateSound(e, Sound(v))
+    end
+    bogey.Async = nil	
 elseif
 MotorType==4 then
 for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
@@ -795,6 +849,24 @@ for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
     bogey.SoundNames["brake2_loop2"]       = "subway_trains/bogey/brake_rattle_h.wav"
     bogey.SoundNames["brake_squeal1"]       = "subway_trains/bogey/brake_squeal1.wav"
     bogey.SoundNames["brake_squeal2"]       = "subway_trains/bogey/brake_squeal2.wav"
+    -- Remove old sounds
+    if bogey.Sounds then
+        for k,v in pairs(bogey.Sounds) do
+            v:Stop()
+        end
+    end
+    -- Create sounds
+    bogey.Sounds = {}
+    bogey.Playing = {}
+    for k,v in pairs(bogey.SoundNames) do
+        util.PrecacheSound(v)
+        local e = bogey
+        if (k == "brake3a") and IsValid(bogey:GetNW2Entity("TrainWheels")) then
+            e = bogey:GetNW2Entity("TrainWheels")
+        end
+        bogey.Sounds[k] = CreateSound(e, Sound(v))
+    end
+    bogey.Async = nil	
 elseif
 MotorType==5 then
 for k,v in pairs(bogey.EngineSNDConfig) do bogey:SetSoundState(v[1],0,0) end
