@@ -52,7 +52,7 @@ function ENT:Initialize()
     -- Set model and initialize
 	self:SetModel("models/metrostroi_train/81-740/body/81-740_4_front.mdl")	
     self.BaseClass.Initialize(self)
-    self:SetPos(self:GetPos() + Vector(0,0,140))
+    self:SetPos(self:GetPos() + Vector(0,0,140))	
 	
     self.NormalMass = 24000
 
@@ -78,44 +78,45 @@ function ENT:Initialize()
     self.InstructorsSeat4:SetRenderMode(RENDERMODE_TRANSALPHA)
     self.InstructorsSeat4:SetColor(Color(0,0,0,0))
 	self.InstructorsSeat4.m_tblToolsAllowed = {"none"}
-	 
+	
+    -- Create bogeys
+    self.FrontBogey = self:CreateBogey(Vector( 360,0,-76),Angle(0,180,0),true,"740ALS")	
+    self.RearBogey = self:CreateBogey(Vector(-532-160,0,-76),Angle(0,0,0),false,"740NOTR")
+	
+	self.FrontBogey:SetNWBool("Async",true)
+    self.RearBogey:SetNWBool("Async",true)	
+	self.FrontBogey:SetNWInt("MotorSoundType",2)
+	self.RearBogey:SetNWInt("MotorSoundType",2)  
+	self.FrontBogey.m_tblToolsAllowed = {"none"}		
+    local rand = math.random()*0.05
+    self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
+    self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)
+	self.RearBogey:SetSolid(SOLID_VPHYSICS)
+	self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
+	self.RearBogey.NormalMass = 20000	
+	self.RearBogey.m_tblToolsAllowed = {"none"}	
+	
+	timer.Simple(0.1, function()
+	self.CoupleFront = self:CreateCouple(Vector( 483,0,-60),Angle(0,0,0),true,"740")	
+	self.CoupleFront.EKKDisconnected = true
+	self.CoupleFront.m_tblToolsAllowed = {"none"}
+	self:SetNW2Entity("CoupleFront",self.FrontCouple)	
+    if not IsValid(self) then return end		
+		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон			
+	end)
+	
+	self:SetNW2Entity("FrontBogey",self.FrontBogey)
+	self:SetNW2Entity("RearBogey",self.RearBogey)	
+	
 if not (Map:find("gm_mus_loopline"))	then
 	self.LightSensor = self:AddLightSensor(Vector(627-9-131,0,-125),Angle(0,90,0))
 end	
-	self.ASSensor = self:AddLightSensor(Vector(515-9-131,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП
-	
-    -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 360,0,-76),Angle(0,180,0),true,"740ALS")	
-		self.FrontBogey.m_tblToolsAllowed = {"none"}
-        self.RearBogey  = self:CreateBogey(Vector(-532-160,0,-76),Angle(0,0,0),false,"740NOTR")
-		self.FrontBogey:SetNWInt("MotorSoundType",2) 
-		self.RearBogey:SetNWInt("MotorSoundType",2)
-
-		self.FrontBogey.m_tblToolsAllowed = {"none"}	
-		self.RearBogey.m_tblToolsAllowed = {"none"}	
-		self.RearBogey:SetSolid(SOLID_VPHYSICS)
-		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
-		self.RearBogey.NormalMass = 20000		
-		
-		self:SetNW2Entity("FrontBogey",self.FrontBogey)
-		self:SetNW2Entity("RearBogey",self.RearBogey)
-		
-	timer.Simple(0.1, function()	
-        if not IsValid(self) then return end		
-		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон			
-	end)
+	self.ASSensor = self:AddLightSensor(Vector(515-9-131,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП	
 	
 	--[[timer.Simple(1, function()	
         if not IsValid(self) then return end			
 		self.PassStvor = self:CreateStvor(Vector(0,0,0))--код не работает, хз из-за чего, срабатывет только после изменения переменной.				
 	end)]]	
-
-	self.FrontBogey:SetNWBool("Async",true)
-    self.RearBogey:SetNWBool("Async",true)	
-
-    local rand = math.random()*0.05
-    self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
-    self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)	
 	
     -- Initialize key mapping
     self.KeyMap = {
@@ -384,15 +385,6 @@ function ENT:TrainSpawnerUpdate()
     self:UpdateLampsColors()
 end
 
-function Metrostroi:RerailChange(ent, bool)
-    if not IsValid(ent) then return end
-    if bool then
-        timer.Remove("metrostroi_rerailer_solid_reset_"..ent:EntIndex())    
-    else
-        timer.Create("metrostroi_rerailer_solid_reset_"..ent:EntIndex(),1e9,1,function() end)    
-    end
-end
-
 function ENT:UpdateLampsColors()
     local lCol,lCount = Vector(),0
 	local mr = math.random
@@ -474,7 +466,14 @@ end
 		end
 	end
 end]] --Попытка замены звуков тележек от Димастерса.
-	
+function ENT:RerailChange(ent, bool)
+    if not IsValid(ent) then return end
+    if bool then
+        timer.Remove("metrostroi_rerailer_solid_reset_"..ent:EntIndex())    
+    else
+        timer.Create("metrostroi_rerailer_solid_reset_"..ent:EntIndex(),1e9,1,function() end)    
+    end
+end	
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")	
     if not IsValid(ent) then return end
@@ -489,26 +488,20 @@ function ENT:CreatePricep(pos,ang)
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
     ent:SetNW2Entity("TrainEntity", self) 
 	
-    timer.Simple(0, function()
         if not IsValid(ent) or not IsValid(self) then return end
 	table.insert(ent.TrainEntities,self)      
-    table.insert(self.TrainEntities,ent)	
+    table.insert(self.TrainEntities,ent)
 	
 	self.PricepBogey = self:CreateBogey(Vector(-171,0,-75.5),Angle(0,0,0),true,"740G")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
-    local rand = math.random()*0.05
+	local rand = math.random()*0.05
 	self.PricepBogey:SetNWFloat("SqualPitch",1.45+rand)
 	self.PricepBogey:SetNWInt("MotorSoundType",2)
 	self.PricepBogey:SetNWInt("Async",true)
 	self.PricepBogey.m_tblToolsAllowed = {"none"}	
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
 	self.PricepBogey.DisableSound = 1	
-	
-	self.CoupleFront = self:CreateCouple(Vector( 483,0,-60),Angle(0,0,0),true,"740")	
-	self.CoupleFront.EKKDisconnected = true
-	self.CoupleFront.m_tblToolsAllowed = {"none"}
-	self:SetNW2Entity("CoupleFront",self.FrontCouple)
 	local PB = self.PricepBogey	
 	
     constraint.AdvBallsocket(
@@ -552,20 +545,14 @@ function ENT:CreatePricep(pos,ang)
         0, --zfric
         0, --rotonly
         1 --nocollide
-    )		
-
-	Metrostroi.RerailBogey(self.FrontBogey)    		
-    Metrostroi.RerailBogey(self.RearBogey)
-    Metrostroi.RerailBogey(self.PricepBogey)	
-    end)	
+    )
 	
 	if IsValid(ent:GetPhysicsObject()) then
-        self.NormalMass = ent:GetPhysicsObject():GetMass(20000)
+        self.NormalMass = ent:GetPhysicsObject():GetMass()
     end	
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
         ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass(20000)
-    end	
-
+    end
 	--Метод mirror 				
     ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)
@@ -637,7 +624,9 @@ function ENT:Think()
             self:SetPackedBool("lightsActive"..i,false)
         end
     end
-
+	local fB = self.FrontBogey
+	local rB = self.RearBogey
+	local pB = self.PricepBogey	
     self:SetPackedRatio("Speed", self.Speed) 
     self:SetNW2Int("Wrench",self.WrenchMode) 
     self:SetPackedRatio("Controller",Panel.Controller) 
@@ -743,12 +732,9 @@ function ENT:Think()
     self:SetPackedRatio("BL", self.Pneumatic.BrakeLinePressure/16.0) 
     self:SetPackedRatio("TL", self.Pneumatic.TrainLinePressure/16.0) 
     self:SetPackedRatio("BC", math.max(math.min(3.2,self.Pneumatic.BrakeCylinderPressure),math.min(3.2,self.Pneumatic.MiddleBogeyBrakeCylinderPressure))/6.0) 
-
     self.AsyncInverter:TriggerInput("Speed", self.Speed)
-	
-	local fB,rB,pB = self.FrontBogey,self.RearBogey,self.PricepBogey	
-	
-   if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
+
+	if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
 
         local A = self.AsyncInverter.Torque
 		--print(A)
@@ -770,23 +756,26 @@ function ENT:Think()
         fB.MotorPower = P*0.5*((A > 0) and 1 or -1)
 
         -- Apply brakes
+		--передняя тележка
         fB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
         fB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
         fB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
         fB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
-        fB.DisableContacts = self.BUV.Pant or fB.DisableContactsManual	
+        fB.DisableContacts = self.BUV.Pant or fB.DisableContactsManual		
 		
-		rB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
-        rB.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
-        rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
-        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
-        rB.DisableContacts = true		
-		
+		--средняя тележка		
 		pB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
         pB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
-        pB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
+        pB.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
 	    pB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
-        pB.DisableContacts = self.BUV.Pant or rB.DisableContactsManual		
+        pB.DisableContacts = self.BUV.Pant or pB.DisableContactsManual	
+		
+		--задняя тележка		
+		rB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
+        rB.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
+        rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
+        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
+        rB.DisableContacts = true			
 
     end
     return retVal

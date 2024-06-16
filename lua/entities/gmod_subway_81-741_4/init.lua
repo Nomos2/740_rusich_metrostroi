@@ -48,31 +48,31 @@ function ENT:Initialize()
 	self.DriverSeat.m_tblToolsAllowed = {"none"}		
 
  -- Create bogeys
-        self.FrontBogey = self:CreateBogey(Vector( 170,0,-76),Angle(0,180,0),true,"740PER")
-        self.RearBogey  = self:CreateBogey(Vector(-885,0,-76),Angle(0,0,0),true,"740NOTR")
-		self.FrontBogey:SetNWInt("MotorSoundType",2) 
-		self.RearBogey:SetNWInt("MotorSoundType",2)
-
-		self.FrontBogey.m_tblToolsAllowed = {"none"}	
-		self.RearBogey.m_tblToolsAllowed = {"none"}	
-		self.RearBogey:SetSolid(SOLID_VPHYSICS)
-		self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
-		self.RearBogey.NormalMass = 20000		
-		
-		self:SetNW2Entity("FrontBogey",self.FrontBogey)
-		self:SetNW2Entity("RearBogey",self.RearBogey)
-	
-	timer.Simple(0.1, function()	
-        if not IsValid(self) then return end
-		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон
-	end)
-	
+    self.FrontBogey = self:CreateBogey(Vector( 170,0,-76),Angle(0,180,0),true,"740PER")
+    self.RearBogey  = self:CreateBogey(Vector(-885,0,-76),Angle(0,0,0),true,"740NOTR")
 	self.FrontBogey:SetNWBool("Async",true)
-    self.RearBogey:SetNWBool("Async",true)
-
+    self.RearBogey:SetNWBool("Async",true)	
+	self.FrontBogey:SetNWInt("MotorSoundType",2)
+	self.RearBogey:SetNWInt("MotorSoundType",2)  
+	self.FrontBogey.m_tblToolsAllowed = {"none"}		
     local rand = math.random()*0.05
     self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
     self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)
+	self.RearBogey:SetSolid(SOLID_VPHYSICS)
+	self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
+	self.RearBogey.NormalMass = 20000	
+	self.RearBogey.m_tblToolsAllowed = {"none"}	
+	
+	timer.Simple(0.1, function()
+	self.CoupleFront = self:CreateCouple(Vector( 251,0,-60),Angle(0,0,0),true,"740")
+	self.CoupleFront.m_tblToolsAllowed = {"none"}
+	self:SetNW2Entity("CoupleFront",self.FrontCouple)	
+    if not IsValid(self) then return end
+		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон		
+	end)
+	
+	self:SetNW2Entity("FrontBogey",self.FrontBogey)
+	self:SetNW2Entity("RearBogey",self.RearBogey)
 	
     -- Initialize key mapping
     self.KeyMap = {
@@ -175,15 +175,6 @@ local ahahaha =  math.random (1,5)
 			self.Pneumatic.RightDoorSpeed[k] = -15.5 + math.random(-sp,sp1) / 6
 		end	
 	
-end	
-
-function Metrostroi:RerailChange(ent, bool)
-    if not IsValid(ent) then return end
-    if bool then
-        timer.Remove("metrostroi_rerailer_solid_reset_"..ent:EntIndex())    
-    else
-        timer.Create("metrostroi_rerailer_solid_reset_"..ent:EntIndex(),1e9,1,function() end)    
-    end
 end
 
 function ENT:UpdateLampsColors()
@@ -228,7 +219,14 @@ function ENT:UpdateLampsColors()
 		--PrintTable(self.Lamps.broken)	
 	end
 end
-
+function ENT:RerailChange(ent, bool)
+    if not IsValid(ent) then return end
+    if bool then
+        timer.Remove("metrostroi_rerailer_solid_reset_"..ent:EntIndex())    
+    else
+        timer.Create("metrostroi_rerailer_solid_reset_"..ent:EntIndex(),1e9,1,function() end)    
+    end
+end
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")
     if not IsValid(ent) then return end
@@ -242,9 +240,7 @@ function ENT:CreatePricep(pos,ang)
     ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
     ent:SetNW2Entity("TrainEntity", self)
-
-    timer.Simple(0, function()
-        if not IsValid(ent) or not IsValid(self) then return end
+	
 	table.insert(ent.TrainEntities,self)      
     table.insert(self.TrainEntities,ent)		
 
@@ -257,11 +253,7 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey:SetNWInt("Async",true)
 	self.PricepBogey.m_tblToolsAllowed = {"none"}
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
-	self.PricepBogey.DisableSound = 1	
-	
-	self.CoupleFront = self:CreateCouple(Vector( 251,0,-60),Angle(0,0,0),true,"740")
-	self.CoupleFront.m_tblToolsAllowed = {"none"}
-	self:SetNW2Entity("CoupleFront",self.FrontCouple)
+	self.PricepBogey.DisableSound = 1
 	local PB = self.PricepBogey	
 	
     constraint.AdvBallsocket(
@@ -273,12 +265,12 @@ function ENT:CreatePricep(pos,ang)
 		Vector(-310,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-1, --xmin
-		-1, --ymin
-		-15, --zmin
-		1, --xmax
-		1, --ymax
-		15, --zmax
+		-3, --xmin
+		-3, --ymin
+		-25, --zmin
+		3, --xmax
+		3, --ymax
+		25, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -294,25 +286,21 @@ function ENT:CreatePricep(pos,ang)
 		Vector(-310,0,3),
 		0, --forcelimit
 		0, --torquelimit
-		-1, --xmin
-		-1, --ymin
-		-15, --zmin
-		1, --xmax
-		1, --ymax
-		15, --zmax
+		-3, --xmin
+		-3, --ymin
+		-25, --zmin
+		3, --xmax
+		3, --ymax
+		25, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
         0, --rotonly
         1 --nocollide
     )
-	Metrostroi.RerailBogey(self.FrontBogey)    		
-    Metrostroi.RerailBogey(self.RearBogey)
-    Metrostroi.RerailBogey(self.PricepBogey)	
-    end)	
 	
 	if IsValid(ent:GetPhysicsObject()) then
-        self.NormalMass = ent:GetPhysicsObject():GetMass(20000)
+        self.NormalMass = ent:GetPhysicsObject():GetMass()
     end	
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
         ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass(20000)
@@ -362,7 +350,9 @@ function ENT:Think()
 	self:SetLightPower(15,passlight > 0, passlight and mul/40)
 	self:SetLightPower(16,passlight > 0.5, passlight and mul/40)
 	self:SetLightPower(17,passlight > 0, passlight and mul/40)
-	
+	local fB = self.FrontBogey
+	local rB = self.RearBogey
+	local pB = self.PricepBogey	
     self:SetPackedRatio("Speed", self.Speed)
     self:SetPackedBool("Vent2Work",self.Electric.Vent2>0)
     self:SetPackedBool("BBEWork",power and self.BUV.BBE > 0)
@@ -380,11 +370,9 @@ function ENT:Think()
     self:SetPackedBool("AnnPlay",Panel.AnnouncerPlaying > 0)
     self:SetPackedBool("FrontDoor",self.FrontDoor)
 	self:SetPackedRatio("SalonLighting",passlight)
-    self.AsyncInverter:TriggerInput("Speed",self.Speed)
+    self.AsyncInverter:TriggerInput("Speed",self.Speed)	
 	
-	local fB,rB,pB = self.FrontBogey,self.RearBogey,self.PricepBogey	
-	
-   if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
+    if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
 
         local A = self.AsyncInverter.Torque
 		--print(A)
@@ -406,23 +394,26 @@ function ENT:Think()
         fB.MotorPower = P*0.5*((A > 0) and 1 or -1)
 
         -- Apply brakes
+		--передняя тележка
         fB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
         fB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
         fB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
         fB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
-        fB.DisableContacts = self.BUV.Pant or fB.DisableContactsManual	
+        fB.DisableContacts = self.BUV.Pant or fB.DisableContactsManual		
 		
-		rB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
-        rB.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
-        rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
-        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
-        rB.DisableContacts = true		
-		
+		--средняя тележка		
 		pB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
         pB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
-        pB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
+        pB.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
 	    pB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
-        pB.DisableContacts = self.BUV.Pant or rB.DisableContactsManual		
+        pB.DisableContacts = self.BUV.Pant or pB.DisableContactsManual	
+		
+		--задняя тележка		
+		rB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
+        rB.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
+        rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
+        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
+        rB.DisableContacts = true			
 
     end
     return retVal

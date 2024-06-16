@@ -1,6 +1,21 @@
 if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Metrostroi Project') then --пояснение, на МСМП есть свой скрипт на замену звуков телеги, потому, в случае обнаружения этого сервера звуки не включаются.
 	if SERVER then
 		timer.Simple(1,function()
+	if not Metrostroi then return end		
+    for k,v in pairs(Metrostroi.TrainClasses) do
+        if v == "gmod_subway_kuzov" then
+            Metrostroi.TrainClasses[k] = nil
+            Metrostroi.IsTrainClass[v] = nil
+            break
+		end	
+	if not Metrostroi.Advanced then return end	
+	for k,v in pairs(Metrostroi.Advanced.TrainClasses) do
+        if v == "gmod_subway_kuzov" then
+            Metrostroi.Advanced.TrainClasses[k] = nil
+            Metrostroi.Advanced.IsTrainClass[v] = nil
+		end	
+	end		
+	end
 			-- регистрируем тележки
 			local tbl = scripted_ents.Get("gmod_train_bogey")
 			if tbl then	
@@ -30,7 +45,7 @@ if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Me
 					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
-					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
+					nil,
 				}
 				scripted_ents.Register(tbl,"gmod_train_bogey") -- регистрируем
 			end
@@ -76,8 +91,15 @@ if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Me
             BogeyTbl.SoundNames["ted10_740"] = "subway_trains/740_4/engines/engine_80.wav"
             BogeyTbl.EngineSNDConfig[5] = ClBogeyConf
             print("[Metrostroi 81-740] Inject sounds")
-        end)
+        end) 	
 		
+    end
+	
+	else
+
+--custom bogey and couple
+timer.Simple(0,function()
+	if not Metrostroi then return end
     for k,v in pairs(Metrostroi.TrainClasses) do
         if v == "gmod_subway_kuzov" then
             Metrostroi.TrainClasses[k] = nil
@@ -92,16 +114,6 @@ if Metrostroi.Version >= 1623941696 and not GetHostName():find('Moscow Subway Me
 		end	
 	end		
 	end		
-		
-    end	
-	
-	if CLIENT then return end
-	
-	else
-
---custom bogey and couple
-timer.Simple(0,function()
-	if not Metrostroi then return end
 	if SERVER then
 		timer.Simple(1,function()
 			-- регистрируем тележки
@@ -133,7 +145,7 @@ timer.Simple(0,function()
 					Vector(0,0,-10),Angle(0,90,0),"models/metrostroi_train/bogey/metro_wheels_collector.mdl",
 					Vector(0,-61,-14),Vector(0,61,-14),
 					nil,
-					Vector(4.3,-63,-3.3),Vector(4.3,63,-3.3),
+					nil,
 				}
 				scripted_ents.Register(tbl,"gmod_train_bogey") -- регистрируем
 			end
@@ -151,6 +163,8 @@ timer.Simple(0,function()
 		end 
 	end)
 end
+
+	if CLIENT then return end
 
 --[[mezhvag --межвагонки будут переделаны
 hook.Add("Metrostroi.AddMezhvagToSpawner","81_740_stock",function(tab)

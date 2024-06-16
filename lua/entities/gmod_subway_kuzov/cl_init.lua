@@ -238,7 +238,7 @@ function ENT:Initialize()
     local train = self.HeadTrain 
     if not IsValid(train) then return end
 	
-	train.CompressorVol = 0	
+	self.CompressorVol = 0	
     self.PassengerEnts = {}
     self.PassengerEntsStucked = {}	
     self.PassengerPositions = {}	
@@ -255,7 +255,7 @@ function ENT:Initialize()
         "models/metrostroi/passengers/m4.mdl",
         "models/metrostroi/passengers/m5.mdl",
     }
-    train.PreviousCompressorState = false	
+    self.PreviousCompressorState = false	
 	
     self.VentRand = {}
     self.VentState = {}
@@ -275,7 +275,6 @@ function ENT:Think()
     if not IsValid(train) then return end
 	
 --Регистрация тележки
-train.RearBogey = train:GetNW2Entity("RearBogey")	
 local RB = train.RearBogey
 
 --Взято из cl_init тележки.
@@ -354,9 +353,6 @@ self.ClientProps["TrainNumberL"..k] = {
 		end,
     } 
 end
-    self.HeadTrain = self:GetNW2Entity("HeadTrain")	
-    local train = self.HeadTrain 
-    if not IsValid(train) then return end
 	
 	local animation = math.random (5,12)	
 	local animation1 = math.random (0.5,1)

@@ -91,49 +91,29 @@ function ENT:Initialize()
 	
     constraint.NoCollide(self,train,0,0)
     constraint.NoCollide(self,RB,0,0)
+    constraint.NoCollide(RB,self.CoupleRear,0,0)	
 	
     constraint.AdvBallsocket(
 		self,
 		PB,
 		0, --bone
 		0, --bone
-		Vector(314,0,60),
+		Vector(314,0,3),
 		Vector(314,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-1, --xmin
-		-1, --ymin
+		0, --xmin
+		0, --ymin
 		-15, --zmin
-		1, --xmax
-		1, --ymax
+		0, --xmax
+		0, --ymax
 		15, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
 		0, --rotonly
 		1 --nocollide
-	)
-	constraint.AdvBallsocket(
-		self,
-		PB,
-		0, --bone
-		0, --bone
-		Vector(314,0,0),
-		Vector(314,0,0),
-		0, --forcelimit
-		0, --torquelimit
-		-1, --xmin
-		-1, --ymin
-		-15, --zmin
-		1, --xmax
-		1, --ymax
-		15, --zmax
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1 --nocollide
-    )	
+	)	
 	   
     constraint.Axis(
         RB,        
@@ -146,7 +126,7 @@ function ENT:Initialize()
         0,
         0,
         0,
-        Vector(0,0,-1)
+        Vector(0,0,1)
     )
 
     end)
@@ -171,7 +151,7 @@ function ENT:TrainSpawnerUpdate()
 			train.Pneumatic.RightDoorSpeed[k] = -3.5 + math.random(sp,sp1) / 6	
 		end	
 
-    train:UpdateLampsColors()
+    self:UpdateLampsColors()
 	
 end
 
@@ -235,12 +215,7 @@ function ENT:Think()
     self:SetPackedBool("Vent2Work",train.Electric.Vent2>0)	
     self:SetPackedBool("BBEWork",power and train.BUV.BBE > 0)
     self:SetPackedBool("CompressorWork",train.Pneumatic.Compressor) 
-    self:SetPackedBool("AnnPlay",Panel.AnnouncerPlaying > 0)
-	
-    --local state = math.abs(train.AsyncInverter.InverterFrequency/(11+train.AsyncInverter.State*5))--(10+8*math.Clamp((self.AsyncInverter.State-0.4)/0.4,0,1)))
-    --self:SetPackedRatio("asynccurrent", math.Clamp(state*(state+train.AsyncInverter.State/1),0,1)*math.Clamp(train.Speed/6,0,1))
-    --self:SetPackedRatio("asyncstate", math.Clamp(train.AsyncInverter.State/0.2*math.abs(train.AsyncInverter.Current)/100,0,1))
-    --self:SetPackedRatio("chopper", math.Clamp(train.Electric.Chopper>0 and train.Electric.IChopped/100 or 0,0,1))		
+    self:SetPackedBool("AnnPlay",Panel.AnnouncerPlaying > 0)	
 	 
       self:SetPackedBool("DoorL",train.DoorLeft)
       self:SetPackedBool("DoorR",train.DoorRight)    

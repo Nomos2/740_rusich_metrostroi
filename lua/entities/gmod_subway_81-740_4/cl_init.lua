@@ -1734,8 +1734,8 @@ function ENT:Initialize()
     end
 	
 	self.FrontBogey = self:GetNW2Entity("FrontBogey")
-	self.RearBogey = self:GetNW2Entity("RearBogey")
 	self.PricepBogey = self:GetNW2Entity("PricepBogey")	
+	self.RearBogey = self:GetNW2Entity("RearBogey")
 	
 end	
 	
@@ -2203,7 +2203,7 @@ function ENT:Think()
     if not self.RenderClientEnts or self.CreatingCSEnts then return end	
 
 	local MotorType = self:GetNW2Int("MotorType")
-	local PricepBogey = self:GetNW2Entity("PricepBogey")	
+	local PricepBogey = self:GetNW2Entity("PricepBogey")
 	local refresh = false--true
 
 	if MotorType==1 then
