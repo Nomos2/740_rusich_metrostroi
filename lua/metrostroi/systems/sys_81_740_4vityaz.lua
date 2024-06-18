@@ -85,6 +85,7 @@ function TRAIN_SYSTEM:Initialize()
 	self.Errors = {}
 	self.Error = 0
 	self.Counter = 0
+	self.Brightness = 4
 	self.OldVersion = true
 	
 	self.ProstExchTimer = math.random(1024,3072)
@@ -308,7 +309,13 @@ if SERVER then
 				self.Prost = true
 				self.Kos = 	true
 			end]]
-			
+			-- Яркость
+			if not self.OldVersion and self.Brightness < 4 and name == "VityazF6" and value then
+				self.Brightness = self.Brightness + 1
+			end
+			if not self.OldVersion and self.Brightness > 1 and name == "VityazF7" and value then
+				self.Brightness = self.Brightness - 1
+			end
 			if self.ProstCanEnDis and char then
 				if char == 3 then
 					self.Prost = not self.Prost
@@ -436,9 +443,9 @@ if SERVER then
 	end
 	function TRAIN_SYSTEM:Think(dT)
 		--print(self.ProstCanEnDis)
-		
         if self.State > 0 and self.Reset and self.Reset ~= 1 then self.Reset = false end
         local Train = self.Train
+		Train:SetNW2Int("Monitor:Brightness", self.Brightness)
 		Train:SetNW2Bool("OldVersion", self.OldVersion)
         local Panel = Train.Panel
         local Power = Train.Electric.Battery80V*Train.SF1.Value > 0 or Train.Electric.ReservePower > 0
@@ -1119,13 +1126,14 @@ else
 	
     function TRAIN_SYSTEM:VityazMonitor(Train)
 		local isOld = Train:GetNW2Bool("OldVersion")
-		local red = isOld and Color(150,47,49) or Color(226,47,44)
-		local green = isOld and Color(60,95,70) or Color(93,196,81)
-		local speedColor = isOld and Color(52,122,85) or Color(139,206,109)
-		local yellow = isOld and Color(216,222,176) or Color(230,230,105)
-		local purple = isOld and Color(233,160,255) or Color(214,180,252)
-		local aqua = isOld and Color(137,213,236) or Color(150,193,225)
-		local darkpurple = isOld and Color(144,92,164) or Color(214,180,252)
+		local br = Train:GetNW2Int("Monitor:Brightness")
+		local red = isOld and Color(150,47,49) or Color(226,47,44,115+br*35)
+		local green = isOld and Color(60,95,70) or Color(93,196,81,115+br*35)
+		local speedColor = isOld and Color(52,122,85) or Color(139,206,109,115+br*35)
+		local yellow = isOld and Color(216,222,176) or Color(230,230,105,115+br*35)
+		local purple = isOld and Color(233,160,255) or Color(214,180,252,115+br*35)
+		local aqua = isOld and Color(137,213,236) or Color(150,193,225,115+br*35)
+		local darkpurple = isOld and Color(144,92,164) or Color(214,180,252,115+br*35)
 		local blue = Color(36,119,219)		
 		local white = Color(232,236,239)
 		
