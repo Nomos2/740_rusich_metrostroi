@@ -5,9 +5,6 @@ Metrostroi.DefineSystem("81_740_4VITYAZ")
 TRAIN_SYSTEM.DontAccelerateSimulation = true
 
 function TRAIN_SYSTEM:Initialize()
-	self.PowerCommand = 0
-	self.PowerTarget = 0
-
 	self.Train:LoadSystem("VityazNoth","Relay","Switch",{bass=true})
     self.Train:LoadSystem("VityazF1","Relay","Switch",{bass=true})
     self.Train:LoadSystem("VityazF2","Relay","Switch",{bass=true})
@@ -85,7 +82,7 @@ function TRAIN_SYSTEM:Initialize()
 	self.Errors = {}
 	self.Error = 0
 	self.Counter = 0
-	self.Brightness = 4
+	self.Brightness = 5
 	self.OldVersion = true
 	
 	self.ProstExchTimer = math.random(1024,3072)
@@ -94,8 +91,8 @@ function TRAIN_SYSTEM:Initialize()
 
 	self.Password = ""
 	
-	self.Klimat1Mode = true -- os.date("%b") == "Nov" or os.date("%b") == "Dec" or os.date("%b") == "Jan" or os.date("%b") == "Feb" or os.date("%b") == "Mar" -- true/false  зима/лето
-	self.Klimat2Mode = true -- os.date("%b") == "Nov" or os.date("%b") == "Dec" or os.date("%b") == "Jan" or os.date("%b") == "Feb" or os.date("%b") == "Mar"
+	self.Klimat1Mode = false -- os.date("%b") == "Nov" or os.date("%b") == "Dec" or os.date("%b") == "Jan" or os.date("%b") == "Feb" or os.date("%b") == "Mar" -- true/false  зима/лето
+	self.Klimat2Mode = false -- os.date("%b") == "Nov" or os.date("%b") == "Dec" or os.date("%b") == "Jan" or os.date("%b") == "Feb" or os.date("%b") == "Mar"
 	-- Переключается по комиссионному смотру по указу начальства
 	-- с зимним режимом можно кататься хоть до марта, хоть до мая
 	-- ПОЭТОМУ ВЫСТАВЛЯЙТЕ САМИ, ЧТОБЫ ЖИЗНЬ МЁДОМ НЕ КАЗАЛАСЬ МУХАХАХАХАХАХАХ
@@ -114,7 +111,6 @@ function TRAIN_SYSTEM:Initialize()
 	self.Dir = "0"
 	self.Deadlock = "0"
 	self.BTB = false
-	self.Loop = true
 
 	--self.TestPUType = math.random() > 0.3 and 1 or 2
 
@@ -309,8 +305,8 @@ if SERVER then
 				self.Prost = true
 				self.Kos = 	true
 			end]]
-			-- Яркость
-			if not self.OldVersion and self.Brightness < 4 and name == "VityazF6" and value then
+			-- Контрастность
+			if not self.OldVersion and self.Brightness < 5 and name == "VityazF6" and value then
 				self.Brightness = self.Brightness + 1
 			end
 			if not self.OldVersion and self.Brightness > 1 and name == "VityazF7" and value then
@@ -1127,15 +1123,20 @@ else
     function TRAIN_SYSTEM:VityazMonitor(Train)
 		local isOld = Train:GetNW2Bool("OldVersion")
 		local br = Train:GetNW2Int("Monitor:Brightness")
-		local red = isOld and Color(150,47,49) or Color(226,47,44,115+br*35)
-		local green = isOld and Color(60,95,70) or Color(93,196,81,115+br*35)
-		local speedColor = isOld and Color(52,122,85) or Color(139,206,109,115+br*35)
-		local yellow = isOld and Color(216,222,176) or Color(230,230,105,115+br*35)
-		local purple = isOld and Color(233,160,255) or Color(214,180,252,115+br*35)
-		local aqua = isOld and Color(137,213,236) or Color(150,193,225,115+br*35)
-		local darkpurple = isOld and Color(144,92,164) or Color(214,180,252,115+br*35)
-		local blue = Color(36,119,219)		
-		local white = Color(232,236,239)
+		local brMod = 35
+		local baseBr = 255-brMod*5
+		local brTotal = baseBr+br*brMod
+		local red = isOld and Color(150,47,49) or Color(250,55,55,brTotal)
+		local green = isOld and Color(60,95,70) or Color(103,236,91,brTotal)
+		local gray = isOld and Color(170,170,170) or Color(170,170,170,brTotal)
+		local speedColor = isOld and Color(52,122,85) or Color(169,236,139,brTotal)
+		local yellow = isOld and Color(216,222,176) or Color(250,250,105,brTotal)
+		local purple = isOld and Color(233,160,255) or Color(224,190,252,brTotal)
+		local aqua = isOld and Color(137,213,236) or Color(150,193,255,brTotal)
+		local aqua2 = isOld and Color(66,187,183) or Color(66,187,183,brTotal) 
+		local darkpurple = isOld and Color(144,92,164) or Color(214,180,252,brTotal)
+		local blue = isOld and Color(36,119,219) or Color(36,119,219,brTotal) 
+		local white = isOld and Color(232,236,239) or Color(232,236,239,brTotal)
 		
 		local state2 = Train:GetNW2Int("VityazState2",0)
 		local wagnum = Train:GetNW2Int("VityazWagNum",0)
@@ -1144,7 +1145,13 @@ else
 		local err = Train:GetNW2Int("VityazError")
 		if self.State ~= 0 then
 			--surface.SetDrawColor(25,13,13,180)
-			surface.SetDrawColor(10,10,19,190)
+			local brMod = 8
+			local baseBr = 255-brMod*5
+			local brTotal = baseBr+br*brMod
+			local сolMod = 1
+			local baseСol = 10 + сolMod * 5
+			local сolTotal = isOld and 10 or baseСol + br * сolMod
+			surface.SetDrawColor(сolTotal,сolTotal,сolTotal,isOld and brTotal or 190)
 			surface.DrawRect(0,0,800,600)
 		end
 		if self.State == -3 then
@@ -1208,10 +1215,10 @@ else
 					printedText = text[1] or "sample text"
 					textPosX = text[2] or 0
 					textPosY = text[3] or 0
-					col = col or Color(230,92,152)
+					col = col or Color(230,92,152,brTotal)
 					surface.SetDrawColor(col)
 					surface.DrawRect(posX,posY,sizeX,sizeY)
-					self:PrintText(textPosX,textPosY,printedText,Color(20,20,20))
+					self:PrintText(textPosX,textPosY,printedText,Color(20,20,20,brTotal))
 				end
 				--local colorLightGreen = Color()
 				local textBoxPosY = 20+25*5
@@ -1219,12 +1226,12 @@ else
 				local textBoxSizeX = 122
 				local textBoxSizeY = 122
 				local textBoxXoffset = 12
-				drawDefBox({"Красный",1.7,8},textBoxPosX,textBoxPosY,textBoxSizeX,textBoxSizeY,Color(255,55,53))
-				drawDefBox({"Зеленый",9.5,8},textBoxPosX+textBoxSizeX+textBoxXoffset,textBoxPosY,textBoxSizeX,textBoxSizeY,Color(169,255,59))
-				drawDefBox({"Синий",18.5,8},textBoxPosX+textBoxSizeX*2+textBoxXoffset*2,textBoxPosY,textBoxSizeX,textBoxSizeY,Color(50,145,255))
+				drawDefBox({"Красный",1.7,8},textBoxPosX,textBoxPosY,textBoxSizeX,textBoxSizeY,Color(255,55,53,brTotal))
+				drawDefBox({"Зеленый",9.5,8},textBoxPosX+textBoxSizeX+textBoxXoffset,textBoxPosY,textBoxSizeX,textBoxSizeY,Color(169,255,59,brTotal))
+				drawDefBox({"Синий",18.5,8},textBoxPosX+textBoxSizeX*2+textBoxXoffset*2,textBoxPosY,textBoxSizeX,textBoxSizeY,Color(50,145,255,brTotal))
 				drawDefBox({"Белый",26.5,8},textBoxPosX+textBoxSizeX*3+textBoxXoffset*3,textBoxPosY,textBoxSizeX,textBoxSizeY,white)
-				local colorWhite = Color(230,230,230)
-				local colorGray = Color(120,120,120)
+				local colorWhite = Color(230,230,230,brTotal)
+				local colorGray = Color(120,120,120,brTotal)
 				surface.SetDrawColor(colorWhite)
 				surface.DrawOutlinedRect(20,20,800-40,600-40,2)
 
@@ -1342,29 +1349,29 @@ else
             local yPOS = 20
 			--
             for i=0,1 do
-                self:PrintText(0,yPOS+i/1.5,"█",Color(6,37,89),3)--23
-                self:PrintText(1,yPOS+i/1.5,"█",Color(6,37,89),3)--23
+                self:PrintText(0,yPOS+i/1.5,"█",Color(6,37,89,brTotal),3)--23
+                self:PrintText(1,yPOS+i/1.5,"█",Color(6,37,89,brTotal),3)--23
 
-                self:PrintText(2,yPOS+i/1.5,"█",Color(30,75,28),3)--23
-                self:PrintText(3,yPOS+i/1.5,"█",Color(30,75,28),3)--23
+                self:PrintText(2,yPOS+i/1.5,"█",Color(30,75,28,brTotal),3)--23
+                self:PrintText(3,yPOS+i/1.5,"█",Color(30,75,28,brTotal),3)--23
 
-                self:PrintText(4,yPOS+i/1.5,"█",Color(28,105,109),3)--23
-                self:PrintText(5,yPOS+i/1.5,"█",Color(28,105,109),3)--23
+                self:PrintText(4,yPOS+i/1.5,"█",Color(28,105,109,brTotal),3)--23
+                self:PrintText(5,yPOS+i/1.5,"█",Color(28,105,109,brTotal),3)--23
 
-                self:PrintText(6,yPOS+i/1.5,"█",Color(77,14,14),3)--23
-                self:PrintText(7,yPOS+i/1.5,"█",Color(77,14,14),3)--23
+                self:PrintText(6,yPOS+i/1.5,"█",Color(77,14,14,brTotal),3)--23
+                self:PrintText(7,yPOS+i/1.5,"█",Color(77,14,14,brTotal),3)--23
 
                 self:PrintText(8,yPOS+i/1.5,"█",darkpurple,3)--ахахах пле
                 self:PrintText(9,yPOS+i/1.5,"█",darkpurple,3)--пле сука оррр
 
-                self:PrintText(10,yPOS+i/1.5,"█",Color(100,90,27),3)
-                self:PrintText(11,yPOS+i/1.5,"█",Color(100,90,27),3)
+                self:PrintText(10,yPOS+i/1.5,"█",Color(100,90,27,brTotal),3)
+                self:PrintText(11,yPOS+i/1.5,"█",Color(100,90,27,brTotal),3)
 
-                self:PrintText(12,yPOS+i/1.5,"█",Color(108,113,117),3)
-                self:PrintText(13,yPOS+i/1.5,"█",Color(108,113,117),3)
+                self:PrintText(12,yPOS+i/1.5,"█",Color(108,113,117,brTotal),3)
+                self:PrintText(13,yPOS+i/1.5,"█",Color(108,113,117,brTotal),3)
 
-                self:PrintText(14,yPOS+i/1.5,"█",Color(0,0,0),3)
-                self:PrintText(15,yPOS+i/1.5,"█",Color(0,0,0),3)
+                self:PrintText(14,yPOS+i/1.5,"█",Color(0,0,0,brTotal),3)
+                self:PrintText(15,yPOS+i/1.5,"█",Color(0,0,0,brTotal),3)
 
                 self:PrintText(16,yPOS+i/1.5,"█",blue,3)
                 self:PrintText(17,yPOS+i/1.5,"█",blue,3)
@@ -1387,17 +1394,17 @@ else
                 self:PrintText(28,yPOS+i/1.5,"█",white,3)
                 self:PrintText(29,yPOS+i/1.5,"█",white,3)
 				
-                self:PrintText(30,yPOS+i/1.5,"█",Color(6,37,89),3)--23
-                self:PrintText(31,yPOS+i/1.5,"█",Color(6,37,89),3)--23
+                self:PrintText(30,yPOS+i/1.5,"█",Color(6,37,89,brTotal),3)--23
+                self:PrintText(31,yPOS+i/1.5,"█",Color(6,37,89,brTotal),3)--23
 				
-                self:PrintText(32,yPOS+i/1.5,"█",Color(30,75,28),3)--23
-                self:PrintText(33,yPOS+i/1.5,"█",Color(30,75,28),3)--23
+                self:PrintText(32,yPOS+i/1.5,"█",Color(30,75,28,brTotal),3)--23
+                self:PrintText(33,yPOS+i/1.5,"█",Color(30,75,28,brTotal),3)--23
 
-                self:PrintText(34,yPOS+i/1.5,"█",Color(28,105,109),3)--23
-                self:PrintText(35,yPOS+i/1.5,"█",Color(28,105,109),3)--23
+                self:PrintText(34,yPOS+i/1.5,"█",Color(28,105,109,brTotal),3)--23
+                self:PrintText(35,yPOS+i/1.5,"█",Color(28,105,109,brTotal),3)--23
 				
-                self:PrintText(36,yPOS+i/1.5,"█",Color(77,14,14),3)--23
-                self:PrintText(37,yPOS+i/1.5,"█",Color(77,14,14),3)--23
+                self:PrintText(36,yPOS+i/1.5,"█",Color(77,14,14,brTotal),3)--23
+                self:PrintText(37,yPOS+i/1.5,"█",Color(77,14,14,brTotal),3)--23
 				
                 self:PrintText(38,yPOS+i/1.5,"█",darkpurple,3)
                 self:PrintText(39,yPOS+i/1.5,"█",darkpurple,3)
@@ -1625,13 +1632,13 @@ else
 					self:PrintText(31+w,22,"█",Train:GetNW2Bool("VityazMejWag"..w,false) and green or purple)
 				elseif sel == 2 then
 					if Train:GetNW2Bool("VityazMKK1Mode",false) then
-						self:PrintText(29+w,15,"З",Color(66,187,183))
+						self:PrintText(29+w,15,"З",aqua2)
 					else
 						self:PrintText(29+w,15,"Л",red)
 					end
 				elseif sel == 3 then
 					if Train:GetNW2Bool("VityazMKK2Mode",false) then
-						self:PrintText(29+w,15,"З",Color(66,187,183))
+						self:PrintText(29+w,15,"З",aqua2)
 					else
 						self:PrintText(29+w,15,"Л",red)
 					end
@@ -1715,7 +1722,7 @@ else
 				local cb = 10+xAddOffset -- cubebegin
 
 				--
-				if err > 0 then self:PrintText(2+xAddOffset,1,"█",Color(80,10,10)) end
+				if err > 0 then self:PrintText(2+xAddOffset,1,"█",Color(80,10,10,brTotal)) end
 				if err > 0 and self.Counter%70 > 35  then	self:PrintText(3,1,"?", yellow) end -- Пока что пусть будет так # ПРОВЕРЬТЕ НА ЛАГИ
 				self:PrintText(4+xAddOffset,1,"РЕЖИМ:",yellow)
 					local typ = Train:GetNW2Int("VityazType",0)
@@ -1781,12 +1788,12 @@ else
 				self:PrintText(3+xAddOffset,16,"климат1:",yellow)
 				self:PrintText(3+xAddOffset,17,"климат2:",yellow)
 				if Train:GetNW2Bool("VityazMKK1Mode",false) then
-					self:PrintText(1+xAddOffset,16,"з", Color(66,187,183))
+					self:PrintText(1+xAddOffset,16,"з", aqua2)
 				else
 					self:PrintText(1+xAddOffset,16,"л", red)
 				end
 				if Train:GetNW2Bool("VityazMKK2Mode",false) then
-					self:PrintText(1+xAddOffset,17,"з", Color(66,187,183))
+					self:PrintText(1+xAddOffset,17,"з", aqua2)
 				else
 					self:PrintText(1+xAddOffset,17,"л", red)
 				end
@@ -1854,17 +1861,17 @@ else
 					CurrentMode = alsfreq == 1 and "ДНЕПР2/6" or "ДАУ"
 					if ProstActive and speed > 0 then
 						if Prost then
-							self:PrintText(22+xRightAddOffet,1,"прост",Metka and green or Color(170,170,170))
-							self:PrintText(22+xRightAddOffet,11,"норма", Color(170,170,170))
+							self:PrintText(22+xRightAddOffet,1,"прост",Metka and green or gray)
+							self:PrintText(22+xRightAddOffet,11,"норма", gray)
 						end
 					else
 						if Prost then
-							self:PrintText(22+xRightAddOffet,1,"прост",prostact and speed > 0 and green or Color(170,170,170))
-							self:PrintText(22+xRightAddOffet,11,"норма", Color(170,170,170))
+							self:PrintText(22+xRightAddOffet,1,"прост",prostact and speed > 0 and green or gray)
+							self:PrintText(22+xRightAddOffet,11,"норма", gray)
 						end
 					end
 					if Kos then
-						self:PrintText(29+xRightAddOffet,1,"кос",(Metka and Kos2) and green or Color(170,170,170))
+						self:PrintText(29+xRightAddOffet,1,"кос",(Metka and Kos2) and green or gray)
 					end
 				end
 				self:PrintText(28+xRightAddOffet,10,CurrentMode,yellow)
