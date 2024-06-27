@@ -223,9 +223,8 @@ ENT.ClientProps["door2x1"] = {
 }
 
 local yventpos = {
-    414.5+0*117-159,
-	414.5+2*117+5-159,
-	214.5+4*117+0.5-15,
+	11,9,78,
+	-40,-1,78,
 }
 
 function ENT:Initialize()

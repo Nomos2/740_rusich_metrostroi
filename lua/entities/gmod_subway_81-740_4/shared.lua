@@ -52,10 +52,11 @@ for i=0,1 do
 end
 
 local yventpos = {
-    414.5+0*117-144-28-131,
-	414.5+2*117+5-144-131,
-	214.5+4*117+0.5-144-131,
+    139.5,0,78,
+	190.5,10,78,
+	--214.5+4*117+0.5-144-131,
 }
+
 function ENT:InitializeSounds()
     self.BaseClass.InitializeSounds(self)	
 
@@ -111,6 +112,9 @@ function ENT:InitializeSounds()
         self.SoundNames["vent1"..i] = {loop=true,"subway_trains/740_4/vent/vent_loop_1.wav"}
         self.SoundPositions["vent1"..i] = {130,1e9,Vector(yventpos[i],0,30),0.2}
     end	
+	
+    self.SoundNames["VentCab"]   = {"subway_trains/740_4/cab_fan4.mp3", loop = true}	
+    self.SoundPositions["VentCab"] = {400,1e9,Vector(458.5,-1.5,78),1}		
 
 	self.SoundNames["kr_open"] = {
         "subway_trains/717/cover/cover_open1.mp3",

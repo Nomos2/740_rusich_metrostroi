@@ -49,7 +49,7 @@ function ENT:Initialize()
 
  -- Create bogeys
     self.FrontBogey = self:CreateBogey(Vector( 170,0,-76),Angle(0,180,0),true,"740PER")
-    self.RearBogey  = self:CreateBogey(Vector(-885,0,-76),Angle(0,0,0),true,"740NOTR")
+    self.RearBogey  = self:CreateBogey(Vector(-885,0,-75),Angle(0,0,0),true,"740NOTR")
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)	
 	self.FrontBogey:SetNWInt("MotorSoundType",2)
@@ -303,8 +303,11 @@ function ENT:CreatePricep(pos,ang)
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end	
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
-        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass(20000)
+        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
     end
+	if IsValid(self:GetPhysicsObject()) then
+        self.PricepBogey.NormalMass = self:GetPhysicsObject():GetMass()
+    end	
 	--Метод mirror 				
     ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)

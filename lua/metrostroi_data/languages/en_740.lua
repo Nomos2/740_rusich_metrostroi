@@ -280,7 +280,7 @@ Common.740.Forw				= Forward movement
 Common.740.Back				= Backward movement
 
 Common.740.EmergencyBrakeValve				= Emergency brake
-Common.740.teplovent				        = Fan heater (Not working)
+Common.740.FanHeater				        = Fan heater
 
 #gmod_subway_81-740_4
 #Buttons:
@@ -388,7 +388,8 @@ Entities.gmod_subway_81-740_4.Buttons.PUU.R_LineToggle                = @[Common
 Entities.gmod_subway_81-740_4.Buttons.PUU.R_EmerSet                   = @[Common.740.R_Emer]
 Entities.gmod_subway_81-740_4.Buttons.PUU.EmergencyControlsToggle     = @[Common.740.EmergencyControls]
 Entities.gmod_subway_81-740_4.Buttons.PUU.WiperToggle                 = @[Common.740.Wiper]
-Entities.gmod_subway_81-740_4.Buttons.PUU.teplovent                   = @[Common.740.teplovent]
+Entities.gmod_subway_81-740_4.Buttons.PUU.FanHeater-                  = @[Common.740.FanHeater]
+Entities.gmod_subway_81-740_4.Buttons.PUU.FanHeater+                  = @[Common.740.FanHeater]
 
 Entities.gmod_subway_81-740_4.Buttons.PUU.!VDop                       = @[Common.740.SpeedAccept1]
 Entities.gmod_subway_81-740_4.Buttons.PUU.!VDop2                      = @[Common.740.SpeedAccept]

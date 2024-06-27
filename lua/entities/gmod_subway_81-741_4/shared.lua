@@ -42,9 +42,8 @@ local function GetDoorPosition(b,k)	--Правые двери	--Левые дв�
 end
 
 local yventpos = {
-    414.5+0*117-144-340,
-	414.5+2*117+5-144-340,
-	414.5+4*117+0.5-144-340,
+    4,1,78,
+	-46.5,-9,78,
 }
 -- Setup door positions
 ENT.LeftDoorPositions = {}

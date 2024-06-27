@@ -31,9 +31,8 @@ ENT.Model 			= "models/metrostroi_train/81-740/body/81-740_4_rear_reference.mdl"
 ENT.NoTrain = true
 
 local yventpos = {
-    -14.5+0*117-144,
-	-14.5+2*117+5-144,
-	-44.5+4*117+0.5-144,
+	11,9,78,
+	-40,-1,78,
 }
 
 function ENT:PassengerCapacity()

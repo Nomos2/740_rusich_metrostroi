@@ -49,6 +49,8 @@ function TRAIN_SYSTEM:Initialize()
     self.Train:LoadSystem("VentCondMode","Relay","Switch",{maxvalue=3,defaultvalue=2,bass=true})
     self.Train:LoadSystem("VentStrengthMode","Relay","Switch",{maxvalue=3,defaultvalue=2,bass=true})
     self.Train:LoadSystem("VentHeatMode","Relay","Switch",{maxvalue=1,defaultvalue=0,bass=true})
+	
+    self.Train:LoadSystem("FanHeater","Relay","Switch",{maxvalue=5,defaultvalue=0,bass=true})
 
     self.Train:LoadSystem("EmerX1","Relay","Switch",{bass=true})
     self.Train:LoadSystem("EmerX2","Relay","Switch",{bass=true})

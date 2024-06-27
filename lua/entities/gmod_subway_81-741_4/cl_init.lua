@@ -470,11 +470,9 @@ ENT.ClientProps["door2x1"] = {
 	hide = 2
 }
 
-
 local yventpos = {
-    414.5+0*117-144-340,
-	414.5+2*117+5-144-340,
-	414.5+4*117+0.5-144-340,
+    4,1,78,
+	-46.5,-9,78,
 }
 
 function ENT:Initialize()
@@ -499,7 +497,7 @@ function ENT:Initialize()
     self.VentRand = {}
     self.VentState = {}
     self.VentVol = {}
-    for i=1,8 do
+    for i=1,4 do
     self.VentRand[i] = math.Rand(0.5,2)
     self.VentState[i] = 0
     self.VentVol[i] = 0

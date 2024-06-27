@@ -45,7 +45,7 @@ ENT.SyncTable = {
 	
 	--"CAMS1","CAMS2","CAMS3","CAMS4",
 	"CAMS5","CAMS6","CAMS7","CAMS8","CAMS9","CAMS10",
-    "PB",   "GV",	"EmergencyBrakeValve","stopkran",
+    "PB",   "GV",	"EmergencyBrakeValve","stopkran","FanHeater",
 }
 
 function ENT:Initialize()
@@ -56,7 +56,7 @@ function ENT:Initialize()
 	
     self.NormalMass = 24000
 
-    -- Create seat entities
+    -- Create seat entities 
     self.DriverSeat = self:CreateSeat("driver",Vector(775-168-131,19,-27))
     self.InstructorsSeat = self:CreateSeat("instructor",Vector(586-15-9-131,-40,-30),Angle(0,90,0),"models/nova/jeep_seat.mdl")
     self.InstructorsSeat2 = self:CreateSeat("instructor",Vector(767-168-131,45,-35),Angle(0,75,0),"models/vehicles/prisoner_pod_inner.mdl") 
@@ -492,7 +492,7 @@ function ENT:CreatePricep(pos,ang)
 	table.insert(ent.TrainEntities,self)      
     table.insert(self.TrainEntities,ent)
 	
-	self.PricepBogey = self:CreateBogey(Vector(-171,0,-75.5),Angle(0,0,0),true,"740G")
+	self.PricepBogey = self:CreateBogey(Vector(-171,0,-75),Angle(0,0,0),true,"740G")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
 	local rand = math.random()*0.05
@@ -551,8 +551,11 @@ function ENT:CreatePricep(pos,ang)
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end	
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
-        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass(20000)
+        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
     end
+	if IsValid(self:GetPhysicsObject()) then
+        self.PricepBogey.NormalMass = self:GetPhysicsObject():GetMass()
+    end	
 	--Метод mirror 				
     ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)
@@ -632,6 +635,7 @@ function ENT:Think()
     self:SetPackedRatio("Controller",Panel.Controller) 
     self:SetPackedRatio("KRO",(self.KV.KROPosition+1)/2) 
     self:SetPackedRatio("KRR",(self.KV.KRRPosition+1)/2) 
+	self:SetPackedRatio("FanHeater",self.FanHeater.Value/5)
 	
     self:SetPackedRatio("VentCondMode",self.VentCondMode.Value/3)
     self:SetPackedRatio("VentStrengthMode",self.VentStrengthMode.Value/3)

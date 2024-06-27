@@ -179,19 +179,23 @@ ENT.ButtonMap["PUU"] = {
             var="Wiper",speed=8, vmin=0, vmax=0.7,
             sndvol = 0.5, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
         }},
-		{ID = "teplovent",x=531, y=95, radius=15, tooltip = "",model = {
-            model = "models/metrostroi_train/81-720/rc_rotator1.mdl",z=3.85,ang = Angle (0,0,0),
-			scale = 0.4,
-            var="teplovent",speed=8, vmin=0, vmax=0.7,
-            sndvol = 0.5, snd = function(val) return val and "button_square_on" or "button_square_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},
+		
+		{ID = "!FanHeater",x=530, y=97,w=0,h=0, radius=0, model = {
+            model = "models/metrostroi_train/81-720/rc_rotator1.mdl",ang = Angle(0,0,-180),z=4, scale = 0.4,
+            getfunc = function(ent) return ent:GetPackedRatio("FanHeater") end,var="FanHeater",
+            speed=6, min=0.5,max=0.08,
+            sndvol = 0.5, snd = function(val) return val and "switch_batt_on" or "switch_batt_off" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
+            sndmin = 90, sndmax = 1e3, sndang = Angle(-90,0,0),
+        }}, 
+        {ID = "FanHeater-",x=515, y=88, w=20,h=20,tooltip=""},
+        {ID = "FanHeater+",x=530, y=88,w=20,h=20,tooltip=""}, 		
+
         {ID = "!VDop",x=269, y=69, w=107, h=6, tooltip = ""},
         {ID = "!VFact",x=269, y=76+9, w=107, h=6, tooltip = ""},
         {ID = "!VPred",x=269, y=76+17, w=107, h=6, tooltip = ""},
 		{ID = "!VDop2",x=381, y=65, w=26, h=28, tooltip = ""},
     }
 }
-
 ENT.ClientProps["Head0-_--"] = {
     model = "models/metrostroi_train/81-740/body/headlight.mdl", --_-- обозначает положение фары на маске.
     pos = Vector(324.1-159.4-9-131, 4.8, -55.8),
@@ -480,7 +484,7 @@ ENT.ButtonMap["PUR"] = {
             var="AccelRate",speed=12, vmin=0, vmax=1,
             lamp = {model = "models/metrostroi_train/81-720/buttons/l1.mdl",var="AccelRateLamp",anim=true},
             sndvol = 0.3, snd = function(val) return val and "button_square_press" or "button_square_release" end,sndmin = 80, sndmax = 1e3/3, sndang = Angle(-90,0,0),
-        }},*/		
+        }},*/
 		{ID = "TPTToggle",x=24, y=55, radius=15, tooltip = "",model = {
             model = "models/metrostroi_train/81-722/button_red.mdl",z=-6,
             var="TPT",speed=12, vmin=0, vmax=0.5,
@@ -1624,7 +1628,7 @@ ENT.ButtonMap["Password"] = {
     hideseat=0.2,
 	
 	buttons = {
-        {ID = "Password",x=0,y=0,w=50,h=25	,tooltip="",},
+        {ID = "Password",x=0,y=0,w=50,h=25,tooltip="",},
     }
 }
 ENT.ClientProps["door0x0"] = {
@@ -1654,9 +1658,8 @@ ENT.ClientProps["door1x1"] = {
 }
 
 local yventpos = {
-    414.5+0*117-159-28-131,
-	414.5+2*117+5-159-131,
-	214.5+4*117+0.5-15-144-131,
+    139.5,0,78,
+	190.5,10,78,
 }
 
 ENT.ButtonMap["CAMS"] = {
@@ -1676,7 +1679,6 @@ ENT.ButtonMap["Vityaz"] = {
     scale = 0.0125,    
 	hide=0.5,
 }
-
 
 ENT.Lights = {
     [1] = { "headlight",Vector(690-24-131,0,-35),Angle(0,0,0),Color(216,161,92),farz=5144,brightness = 4,hfov=105,vfov=105,texture = "models/metrostroi_train/equipment/headlight",shadows = 1,headlight=true}, --Фары 
@@ -2585,6 +2587,7 @@ end
 	local RingSound = self:GetNW2Int("RingSound",1)
 
     local state = self:GetPackedBool("RingEnabled")
+	
 	if RingSound==1 then
     self:SetSoundState("ring",state and 0.40 or 0,1)
 	elseif
@@ -2598,11 +2601,12 @@ end
     self:SetSoundState("ring_1",state and 0.40 or 0,1)
 	end
 
+    local VentCab = self:GetPackedBool("FanHeater")	
+    self:SetSoundState("VentCab",VentCab and 0.40 or 0,1)	
+
     local speed = self:GetPackedRatio("Speed", 0)
-
     local ventSpeedAdd = math.Clamp(speed/30,0,1)
-
-    local vstate = self:GetPackedBool("Vent2Work")
+    local vstate = self:GetPackedBool("Vent2Work")	
     for i=1,4 do
         local rand = self.VentRand[i]
         local vol = self.VentVol[i]
@@ -2626,6 +2630,7 @@ end
         self:SetSoundState("vent1"..i,vol1*(0.7+vol2*0.3),0.5+0.5*vol1+math.Rand(-0.01,0.01))
 		end
     end
+	
     --local rol10 = math.Clamp(speed/5,0,1)*(1-math.Clamp((speed-50)/8,0,1))
     --local rol70 = math.Clamp((speed-50)/8,0,1)
     local rollingi = math.min(1,self.TunnelCoeff+math.Clamp((self.StreetCoeff-0.82)/0.5,0,1))
