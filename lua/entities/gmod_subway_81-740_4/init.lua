@@ -553,8 +553,8 @@ function ENT:CreatePricep(pos,ang)
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
         ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
     end
-	if IsValid(self:GetPhysicsObject()) then
-        self.PricepBogey.NormalMass = self:GetPhysicsObject():GetMass()
+	if IsValid(ent:GetPhysicsObject()) then
+        self.PricepBogey.NormalMass = ent:GetPhysicsObject():GetMass()
     end	
 	--Метод mirror 				
     ent.HeadTrain = self 
@@ -636,6 +636,7 @@ function ENT:Think()
     self:SetPackedRatio("KRO",(self.KV.KROPosition+1)/2) 
     self:SetPackedRatio("KRR",(self.KV.KRRPosition+1)/2) 
 	self:SetPackedRatio("FanHeater",self.FanHeater.Value/5)
+	self:SetPackedBool("FanHeatWork",self.FanHeater.Value*self.Battery.Value*self.SF16.Value > 0)	
 	
     self:SetPackedRatio("VentCondMode",self.VentCondMode.Value/3)
     self:SetPackedRatio("VentStrengthMode",self.VentStrengthMode.Value/3)

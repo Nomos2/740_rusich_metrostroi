@@ -2601,7 +2601,7 @@ end
     self:SetSoundState("ring_1",state and 0.40 or 0,1)
 	end
 
-    local VentCab = self:GetPackedBool("FanHeater")	
+    local VentCab = self:GetPackedBool("FanHeatWork")	
     self:SetSoundState("VentCab",VentCab and 0.40 or 0,1)	
 
     local speed = self:GetPackedRatio("Speed", 0)

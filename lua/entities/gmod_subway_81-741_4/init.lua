@@ -305,8 +305,8 @@ function ENT:CreatePricep(pos,ang)
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
         ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
     end
-	if IsValid(self:GetPhysicsObject()) then
-        self.PricepBogey.NormalMass = self:GetPhysicsObject():GetMass()
+	if IsValid(ent:GetPhysicsObject()) then
+        self.PricepBogey.NormalMass = ent:GetPhysicsObject():GetMass()
     end	
 	--Метод mirror 				
     ent.HeadTrain = self 
