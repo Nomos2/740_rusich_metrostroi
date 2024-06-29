@@ -82,7 +82,7 @@ function ENT:Initialize()
 	local PB = train.PricepBogey	
 	local RB = train.RearBogey		
 	
-	self.CoupleRear = self:CreateCouple(Vector( -287,0,-60),Angle(0,180,0),false,"740")
+	self.CoupleRear = self:CreateCouple(Vector( -283,0,-60),Angle(0,180,0),false,"740")
     self.CoupleRear:SetNW2Entity("TrainEntity", self.HeadTrain)
 	self:SetNW2Entity("HeadTrain", self.HeadTrain)	
     self.HeadTrain.CoupleRear = self.CoupleRear

@@ -54,7 +54,7 @@ ENT.ClientProps["Zavod_table_sochl_torec"] = {
 
 ENT.ClientProps["krepezh"] = {
     model = "models/metrostroi_train/81-740/body/krepezh.mdl",
-    pos = Vector(61, 0, -75.2),
+    pos = Vector(65, 0, -75.2),
     ang = Angle(0,180,0), 
 	nohide = true,   	  
 }
@@ -266,12 +266,23 @@ function ENT:Initialize()
     end	
 end	
 
+function ENT:GetTrainAccelerationAtPos(pos)
+    self.HeadTrain = self:GetNW2Entity("HeadTrain")	
+    local train = self.HeadTrain 
+    if not IsValid(train) then return end
+    local localAcceleration = train:GetTrainAcceleration()
+    local angularVelocity = train:GetTrainAngularVelocity()
+
+    return localAcceleration - angularVelocity:Cross(angularVelocity:Cross(pos*0.01905))
+end
+
 function ENT:Think()
     self.BaseClass.Think(self)
     if not self.RenderClientEnts or self.CreatingCSEnts then return end 	
     self.HeadTrain = self:GetNW2Entity("HeadTrain")	
     local train = self.HeadTrain 
     if not IsValid(train) then return end
+	
 	
 --Регистрация тележки
 local RB = train.RearBogey
@@ -366,13 +377,15 @@ end
 
     local state = self:GetPackedBool("CompressorWork")
     self:SetSoundState("compressor",state and 1.0 or 0,1)
+	
+	local lamp = train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false)	
 
 	for i = 1,11 do	
 		if not IsValid(train) then return end	
 		local colV = kr:GetNW2Vector("Lamp7404"..i)
 		local col = Color(colV.x,colV.y,colV.z)	   
-		self:ShowHideSmooth("lamps_salon_on_rear"..i-1,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
-		self:ShowHideSmooth("lamps_salon_on_rear1"..i,train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
+		self:ShowHideSmooth("lamps_salon_on_rear"..i-1,lamp,col)	
+		self:ShowHideSmooth("lamps_salon_on_rear1"..i,lamp,col)	
 	end
 	
 	local ZavodTable = train:GetNW2Int("ZavodTable",1)	

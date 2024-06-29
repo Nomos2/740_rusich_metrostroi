@@ -110,9 +110,8 @@ function ENT:Initialize()
 	
 if not (Map:find("gm_mus_loopline"))	then
 	self.LightSensor = self:AddLightSensor(Vector(627-9-131,0,-125),Angle(0,90,0))
-end	
 	self.ASSensor = self:AddLightSensor(Vector(515-9-131,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП	
-	
+end	
 	--[[timer.Simple(1, function()	
         if not IsValid(self) then return end			
 		self.PassStvor = self:CreateStvor(Vector(0,0,0))--код не работает, хз из-за чего, срабатывет только после изменения переменной.				
@@ -530,11 +529,11 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		Vector(-185,0,3),
-		Vector(-185,0,3),
+		Vector(-185,0,5),
+		Vector(-185,0,5),
 		0, --forcelimit
 		0, --torquelimit
-		-3, --xmin
+		-2, --xmin
 		-3, --ymin
 		-25, --zmin
 		3, --xmax
@@ -553,8 +552,8 @@ function ENT:CreatePricep(pos,ang)
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
         ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
     end
-	if IsValid(ent:GetPhysicsObject()) then
-        self.PricepBogey.NormalMass = ent:GetPhysicsObject():GetMass()
+	if IsValid(self:GetPhysicsObject()) then
+        self.PricepBogey.NormalMass = self:GetPhysicsObject():GetMass()
     end	
 	--Метод mirror 				
     ent.HeadTrain = self 
@@ -673,8 +672,7 @@ function ENT:Think()
 	self:SetLightPower(12,passlight > 0.5, passlight and mul/20)
 	self:SetLightPower(13,passlight > 0, passlight and mul/20)
 	
-    self:SetPackedRatio("SalonLighting",passlight) 
-	--print(passlight)
+    self:SetPackedRatio("SalonLighting",passlight)
     self:SetPackedRatio("TrainLine", self.Pneumatic.BrakeLinePressure/16.0) 
     self:SetPackedRatio("BrakeLine", self.Pneumatic.TrainLinePressure/16.0) 
 	self:SetPackedRatio("BrakeCylinder", math.min(3.3,self.Pneumatic.BrakeCylinderPressure)/6.0) 

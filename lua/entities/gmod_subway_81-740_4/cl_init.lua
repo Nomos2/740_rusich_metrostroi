@@ -227,7 +227,7 @@ ENT.ClientProps["Head--_0-"] = {
 	
 ENT.ClientProps["krepezh"] = {
     model = "models/metrostroi_train/81-740/body/krepezh.mdl",
-    pos = Vector(286-8-9-137,0,-71),
+    pos = Vector(286-8-9-135,0,-71),
     ang = Angle(0,0,0),
     nohide = true,
 }
@@ -2367,12 +2367,10 @@ for k=0,3 do
 	or Map:find("gm_metro_ruralline")
 	or Map:find("gm_metro_nsk_line")
 	or Map:find("gm_line_2")	
-	or Map:find("gm_dnipro")	
-	
+	or Map:find("gm_dnipro")
 	
     self:ShowHide("Gerb_msk",kek1)
     self:ShowHide("Gerb_msk_right",kek1)
-	
     self:ShowHide("Gerb_msk1",not kek1)
     self:ShowHide("Gerb_msk_right1",not kek1)	
 	
@@ -2385,11 +2383,13 @@ for avar = 1,2 do
 	self:ShowHideSmooth("lamps_salon_on_avar"..avar,self:Animate("LampsEmer",self:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,animation1,animation,false),col)  
 end
 
+local lamp = self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false)
+
 for i = 1,10 do	
     local colV = kr:GetNW2Vector("Lamp7404"..i)
     local col = Color(colV.x,colV.y,colV.z)
-    self:ShowHideSmooth("lamps_salon_on"..i,self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)
-    self:ShowHideSmooth("lamps_salon_on_fr"..i,self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false),col)	
+    self:ShowHideSmooth("lamps_salon_on"..i,lamp,col)
+    self:ShowHideSmooth("lamps_salon_on_fr"..i,lamp,col)	
 end
 	
 	local cab_lamp = self:Animate("cab_lamp",self:GetPackedBool("CabinEnabledFull") and 1 or self:GetPackedBool("CabinEnabledEmer") and 0.5 or 0,0,1,5,false)

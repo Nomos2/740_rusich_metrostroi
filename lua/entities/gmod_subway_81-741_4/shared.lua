@@ -133,7 +133,6 @@ function ENT:InitializeSounds()
     self.SoundNames["rolling_medium2"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_medium"..rol..".wav"}
     self.SoundNames["rolling_high2"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_high"..rol..".wav"}
     self.SoundPositions["rolling_low"] = {480,1e12,Vector(520-17-340,0,0),0.6*0.4}
-    self.SoundPositions["rolling_medium1"] = {480,1e12,Vector(520-17-340,0,0),0.90*0.4}
     self.SoundPositions["rolling_medium2"] = {480,1e12,Vector(520-17-340,0,0),0.90*0.4}
     self.SoundPositions["rolling_high2"] = {480,1e12,Vector(520-17-340,0,0),1.00*0.4}
 
@@ -154,7 +153,6 @@ function ENT:InitializeSounds()
     self.SoundNames["rolling_medium2_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_medium"..rol..".wav"}
     self.SoundNames["rolling_high2_middle"] = {loop=true,"subway_trains/740_4/bogey/rolling_outside_high"..rol..".wav"}
     self.SoundPositions["rolling_low_middle"] = {480,1e12,Vector(-1-17-340,0,0),0.6*0.4}
-    self.SoundPositions["rolling_medium1_middle"] = {480,1e12,Vector(-1-17-340,0,0),0.90*0.4}
     self.SoundPositions["rolling_medium2_middle"] = {480,1e12,Vector(-1-17-340,0,0),0.90*0.4}
     self.SoundPositions["rolling_high2_middle"] = {480,1e12,Vector(-1-17,0-340,0),1.00*0.4}	
 
@@ -221,4 +219,4 @@ ENT.SubwayTrain = {
     Manufacturer = "MVM",
     EKKType = 740
 }
-ENT.NumberRanges = {{0681,0683},{0735,0762},{0767,0784},{0786,0800},{0802,0804},{0808,0815},{0817,0823},{0825,0844},{0847,0852},{0854,0854},{0856,0870},{0872,0879},{0881,0884},{0886,0890},{0892,0905},{0909,0911},{0913,0917}}
+ENT.NumberRanges = {{0681,0683},{0735,0762},{0767,0784},{0786,0800},{0808,0815},{0817,0823},{0825,0844},{0847,0852},{0854,0854},{0856,0870},{0872,0879},{0881,0884},{0886,0890},{0894,0905},{0909,0911},{0913,0917}}

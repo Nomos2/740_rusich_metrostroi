@@ -64,7 +64,7 @@ function ENT:Initialize()
 	self.RearBogey.m_tblToolsAllowed = {"none"}	
 	
 	timer.Simple(0.1, function()
-	self.CoupleFront = self:CreateCouple(Vector( 251,0,-60),Angle(0,0,0),true,"740")
+	self.CoupleFront = self:CreateCouple(Vector( 247,0,-60),Angle(0,0,0),true,"740")
 	self.CoupleFront.m_tblToolsAllowed = {"none"}
 	self:SetNW2Entity("CoupleFront",self.FrontCouple)	
     if not IsValid(self) then return end
@@ -282,8 +282,8 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		Vector(-310,0,3),
-		Vector(-310,0,3),
+		Vector(-310,0,5),
+		Vector(-310,0,5),
 		0, --forcelimit
 		0, --torquelimit
 		-3, --xmin
@@ -305,8 +305,8 @@ function ENT:CreatePricep(pos,ang)
 	if IsValid(self.RearBogey:GetPhysicsObject()) then
         ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
     end
-	if IsValid(ent:GetPhysicsObject()) then
-        self.PricepBogey.NormalMass = ent:GetPhysicsObject():GetMass()
+	if IsValid(self:GetPhysicsObject()) then
+        self.PricepBogey.NormalMass = self:GetPhysicsObject():GetMass()
     end	
 	--Метод mirror 				
     ent.HeadTrain = self 

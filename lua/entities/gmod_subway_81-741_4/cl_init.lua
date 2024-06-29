@@ -175,7 +175,7 @@ ENT.ClientProps["door_cab_f"] = {
 }
 ENT.ClientProps["krepezh"] = {
     model = "models/metrostroi_train/81-740/body/krepezh.mdl",
-    pos = Vector(259-357.9,0,-74.6),
+    pos = Vector(259-354.9,0,-74.6),
     ang = Angle(0,0,0),
     nohide = true,
 }
@@ -1106,11 +1106,13 @@ for avar = 1,2 do
     self:ShowHideSmooth("lamps_salon_on_avar_front"..avar,self:Animate("LampsEmer",self:GetPackedRatio("SalonLighting") == 0.4 and 1 or 0,0,1,5,false),col)	
 end	
 
+local lamp = self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,1,5,false)
+
 for i = 0,11 do	
     local colV = kr:GetNW2Vector("Lamp7404"..i)
     local col = Color(colV.x,colV.y,colV.z)	
-	self:ShowHideSmooth("lamps_salon_on_front"..i,self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,1,5,false),col)
-	self:ShowHideSmooth("lamps_salon_on_front_left"..i,self:Animate("LampsFull",self:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,1,5,false),col)
+	self:ShowHideSmooth("lamps_salon_on_front"..i,lamp,col)
+	self:ShowHideSmooth("lamps_salon_on_front_left"..i,lamp,col)
 end
 
     self:Animate("FrontBrake", self:GetNW2Bool("FbI") and 0 or 1,0,1, 3, false)
