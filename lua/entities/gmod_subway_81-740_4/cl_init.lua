@@ -1720,7 +1720,6 @@ function ENT:Initialize()
 	self.EmergencyValveEPKRamp = 0
 	self.EmergencyBrakeValveRamp = 0
     self.FrontLeak = 0
-    self.RearLeak = 0
 
     self.ParkingBrake = 0
 

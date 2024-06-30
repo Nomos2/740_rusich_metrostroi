@@ -255,6 +255,7 @@ function ENT:Initialize()
         "models/metrostroi/passengers/m5.mdl",
     }
     self.PreviousCompressorState = false	
+    self.RearLeak = 0	
 	
     self.VentRand = {}
     self.VentState = {}
@@ -378,7 +379,7 @@ end
     local state = self:GetPackedBool("CompressorWork")
     self:SetSoundState("compressor",state and 1.0 or 0,1)
 	
-	local lamp = train:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false)	
+	local lamp = self:Animate("LampsFull",train:GetPackedRatio("SalonLighting") == 1 and 1 or 0,0,animation1,animation,false)	
 
 	for i = 1,11 do	
 		if not IsValid(train) then return end	
@@ -432,8 +433,8 @@ end
 	end	
 	
     if not IsValid(train) then return end
-    train.RearLeak = math.Clamp(train.RearLeak + 10*(-train:GetPackedRatio("RearLeak")-train.RearLeak)*dT,0,1)	
-    self:SetSoundState("rear_isolation",train.RearLeak,0.9+0.2*train.RearLeak)	
+    self.RearLeak = math.Clamp(self.RearLeak + 10*(-train:GetPackedRatio("RearLeak")-self.RearLeak)*dT,0,1)	
+    self:SetSoundState("rear_isolation",self.RearLeak,0.9+0.2*self.RearLeak)	
 
     if not IsValid(train) then return end
     self:Animate("RearBrake", train:GetNW2Bool("RbI") and 0 or 1,0,1, 3, false)

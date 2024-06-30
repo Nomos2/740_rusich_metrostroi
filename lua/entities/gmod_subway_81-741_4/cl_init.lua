@@ -490,7 +490,6 @@ function ENT:Initialize()
     self.ReleasedPdT = 0
 
     self.FrontLeak = 0
-    self.RearLeak = 0
 
     self.ParkingBrake = 0
 
