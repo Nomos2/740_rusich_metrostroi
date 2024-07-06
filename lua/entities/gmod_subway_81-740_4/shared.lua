@@ -54,7 +54,6 @@ end
 local yventpos = {
     139.5,0,78,
 	190.5,10,78,
-	--214.5+4*117+0.5-144-131,
 }
 
 function ENT:InitializeSounds()

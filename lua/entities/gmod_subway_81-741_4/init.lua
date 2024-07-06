@@ -299,15 +299,20 @@ function ENT:CreatePricep(pos,ang)
         1 --nocollide
     )
 	
-	if IsValid(ent:GetPhysicsObject()) then
+    local VLD = IsValid
+	
+	if VLD(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
-    end	
-	if IsValid(self.RearBogey:GetPhysicsObject()) then
+    end
+	if VLD(ent:GetPhysicsObject()) then
         ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
     end
-	if IsValid(self:GetPhysicsObject()) then
+	if VLD(self:GetPhysicsObject()) then
         self.PricepBogey.NormalMass = self:GetPhysicsObject():GetMass()
     end	
+	if VLD(ent:GetPhysicsObject()) then
+        self.PricepBogey.NormalMass = ent:GetPhysicsObject():GetMass()
+    end		
 	--Метод mirror 				
     ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)
@@ -317,7 +322,7 @@ function ENT:CreatePricep(pos,ang)
 	ent.KeyMap = {}
 	
 	return ent
-end	
+end
 --
 function ENT:Think()	
     local retVal = self.BaseClass.Think(self)

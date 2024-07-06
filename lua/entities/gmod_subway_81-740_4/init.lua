@@ -295,7 +295,7 @@ end
 	
     self:UpdateLampsColors()	
 end
---если на карте нету сигналки включить ВП
+
 function ENT:NonSupportTrigger()
     self.ALS:TriggerInput("Set",1)
     self.ALSk:TriggerInput("Set",0)
@@ -545,16 +545,21 @@ function ENT:CreatePricep(pos,ang)
         0, --rotonly
         1 --nocollide
     )
+
+    local VLD = IsValid
 	
-	if IsValid(ent:GetPhysicsObject()) then
+	if VLD(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
-    end	
-	if IsValid(self.RearBogey:GetPhysicsObject()) then
+    end
+	if VLD(ent:GetPhysicsObject()) then
         ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
     end
-	if IsValid(self:GetPhysicsObject()) then
+	if VLD(self:GetPhysicsObject()) then
         self.PricepBogey.NormalMass = self:GetPhysicsObject():GetMass()
     end	
+	if VLD(ent:GetPhysicsObject()) then
+        self.PricepBogey.NormalMass = ent:GetPhysicsObject():GetMass()
+    end		
 	--Метод mirror 				
     ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)
