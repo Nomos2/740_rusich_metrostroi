@@ -31,6 +31,8 @@ Train.740.CameraVityaz  = SAU "Vityaz"
 Train.740.CameraKRMH    = KRMSH and UAVA valves 
 Train.740.CameraPVZ     = PVZ 
 Train.740.BUCIK    		= BUCIK (Not working)
+Train.740.SalonCam    	= Camera from salon 1
+Train.740.SalonCam1     = Camera from salon 2
 
 #common 
 

@@ -518,7 +518,10 @@ ENT.Cameras = {
     {Vector(777-139-140,-35,-30),Angle(40,90,0),"Train.740.CameraKRMH"},
     {Vector(717-299,36,25),Angle(0,100,0),"Train.740.CameraPVZ"},
     {Vector(840-299,0,-20),Angle(0,0,0),"Train.Common.CouplerCamera"},
-    {Vector(800-157-140,-9),Angle(0,0,0),"Train.740.BUCIK"},
+    {Vector(800-157-140,-7,0),Angle(0,0,0),"Train.740.BUCIK"},
+
+    {Vector(-200,0,45),Angle(0,180,0),"Train.740.SalonCam"}, --Пасхалка :)  
+    {Vector(-100,0,45),Angle(0,0,0),"Train.740.SalonCam1"},
 }
 ---------------------------------------------------
 -- Defined train information

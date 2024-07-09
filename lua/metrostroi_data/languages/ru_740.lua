@@ -33,6 +33,8 @@ Train.740.CameraVityaz  = САУ "Витязь"
 Train.740.CameraKRMH    = Краны КРМШ и УАВА
 Train.740.CameraPVZ     = ПВЗ
 Train.740.BUCIK    		= БУЦИК (Не работает)
+Train.740.SalonCam    	= Камера из салона 1
+Train.740.SalonCam1     = Камера из салона 2
 
 #common 
 

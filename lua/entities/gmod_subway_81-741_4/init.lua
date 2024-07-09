@@ -49,7 +49,7 @@ function ENT:Initialize()
 
  -- Create bogeys
     self.FrontBogey = self:CreateBogey(Vector( 170,0,-76),Angle(0,180,0),true,"740PER")
-    self.RearBogey  = self:CreateBogey(Vector(-885,0,-75),Angle(0,0,0),true,"740NOTR")
+    self.RearBogey  = self:CreateBogey(Vector(-885,0,-76),Angle(0,0,0),true,"740NOTR")
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)	
 	self.FrontBogey:SetNWInt("MotorSoundType",2)

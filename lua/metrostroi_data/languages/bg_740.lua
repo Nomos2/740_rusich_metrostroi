@@ -31,6 +31,8 @@ Train.740.CameraVityaz  = САУ "Витяз"
 Train.740.CameraKRMH    = Крановете на КРМШ и УАВА
 Train.740.CameraPVZ     = ПВЗ
 Train.740.BUCIK     	= БУТСИК (Не работи)
+Train.740.SalonCam    	= Камера от салон 1
+Train.740.SalonCam1     = Камера от салон 2
 
 #common 
 
@@ -43,7 +45,7 @@ Spawner.740.MotorType5    = Тип 4
 Spawner.740.MotorType6    = Тип 5
 
 Spawner.740.ZavodTable     = Местоположение на табелата на производителя
-Spawner.740.ZavodTable2    = Тип 1 близо до кабината на водача / крайната врата на предната секция и близо до прехода между секциите
+Spawner.740.ZavodTable2    = Тип 1 близо до кабината на водача/крайната врата на предната секция и близо до прехода между секциите
 Spawner.740.ZavodTable3    = Тип 2 Близо до крайната врата на задната секция и близо до прехода между секциите
 
 Spawner.740.RingSound     = Тип звук на звънене
@@ -56,7 +58,7 @@ Spawner.740.BUKPVersion   = Версия на фърмуера БУКП
 Spawner.740.BUKPVersion1  = Стар вариант
 Spawner.740.BUKPVersion2  = Нова вариант
 
-Spawner.740.VentSound    = Тип звук на климатика
+Spawner.740.VentSound     = Тип звук на климатика
 Spawner.740.VentSound2    = Тип 1
 Spawner.740.VentSound3    = Тип 2 
 

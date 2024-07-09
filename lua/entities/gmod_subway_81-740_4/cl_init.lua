@@ -2329,7 +2329,7 @@ for k=0,3 do
     self:Animate("volt_hv",self:GetPackedRatio("HV"),1.0,0.722,94,4,false)
     self:Animate("amp_i13",self:GetPackedRatio("I13"),1,0.722,92,2,false) --I13
 
-    self:Animate("controller", (self:GetPackedRatio("Controller")+4)/8, 0, 0.425,  2.5,false)
+    self:Animate("controller", (self:GetPackedRatio("Controller")+4)/8, 0, 0.415,  2,false)
 
     self:Animate("FrontBrake", self:GetNW2Bool("FbI") and 0 or 1,0,1, 3, false)
     self:Animate("FrontTrain",  self:GetNW2Bool("FtI") and 1 or 0,0,1, 3, false)
