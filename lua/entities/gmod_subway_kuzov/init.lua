@@ -27,7 +27,7 @@ function ENT:Initialize()
 	self.NoTrain = false 
     self.BaseClass.Initialize(self)
 	
-    self.NormalMass = 20000	
+    self.NormalMass = 20000
 	
     self.PassengerSeat = self:CreateSeat("passenger",Vector(-135,-40,-25),Angle(0,90,0),"models/nova/airboat_seat.mdl")
     self.PassengerSeat2 = self:CreateSeat("passenger",Vector(-135,40,-25),Angle(0,270,0),"models/nova/airboat_seat.mdl")  
@@ -75,19 +75,20 @@ function ENT:Initialize()
 	
     self:UpdateLampsColors()	
 	
-	timer.Simple(0.5, function()
+	timer.Simple(0, function()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
     if not IsValid(train) then return end
 	local PB = train.PricepBogey	
-	local RB = train.RearBogey		
+	local RB = train.RearBogey	
+	self:GetBaseVelocity()		
 	
 	self.CoupleRear = self:CreateCouple(Vector( -283,0,-60),Angle(0,180,0),false,"740")
     self.CoupleRear:SetNW2Entity("TrainEntity", self.HeadTrain)
 	self:SetNW2Entity("HeadTrain", self.HeadTrain)	
     self.HeadTrain.CoupleRear = self.CoupleRear
-	self.CoupleRear.m_tblToolsAllowed = {"none"}	
-	self:SetNW2Entity("CoupleRear",self.RearCouple)	
+	self.CoupleRear.m_tblToolsAllowed = {"none"}
+	self:SetNW2Entity("CoupleRear",self.CoupleRear)
 	
     constraint.NoCollide(self,train,0,0)
     constraint.NoCollide(self,RB,0,0)
@@ -256,7 +257,8 @@ function ENT:Think()
     train:SetPackedRatio("SalonLighting",passlight) 	
 	self:SetLightPower(14,passlight > 0, passlight and mul/20) 
 	self:SetLightPower(15,passlight > 0.5, passlight and mul/20)
-	self:SetLightPower(16,passlight > 0, passlight and mul/20) 
+	self:SetLightPower(16,passlight > 0, passlight and mul/20)
+end	
 	
     return retVal		 
 end

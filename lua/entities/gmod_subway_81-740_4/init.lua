@@ -54,8 +54,9 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
     self:SetPos(self:GetPos() + Vector(0,0,140))	
 	
-    self.NormalMass = 24000
-
+    self.NormalMass = 20000
+	self:GetBaseVelocity()
+	
     -- Create seat entities 
     self.DriverSeat = self:CreateSeat("driver",Vector(775-168-131,19,-27))
     self.InstructorsSeat = self:CreateSeat("instructor",Vector(586-15-9-131,-40,-30),Angle(0,90,0),"models/nova/jeep_seat.mdl")
@@ -92,17 +93,16 @@ function ENT:Initialize()
     self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
     self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)
 	self.RearBogey:SetSolid(SOLID_VPHYSICS)
-	self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
-	self.RearBogey.NormalMass = 20000	
+	self.RearBogey:PhysicsInit(SOLID_VPHYSICS)	
 	self.RearBogey.m_tblToolsAllowed = {"none"}	
 	
-	timer.Simple(0.1, function()
+	timer.Simple(0.1, function()    
+	if not IsValid(self) then return end
 	self.CoupleFront = self:CreateCouple(Vector( 483,0,-60),Angle(0,0,0),true,"740")	
 	self.CoupleFront.EKKDisconnected = true
-	self.CoupleFront.m_tblToolsAllowed = {"none"}
-	self:SetNW2Entity("CoupleFront",self.FrontCouple)	
-    if not IsValid(self) then return end		
-		self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон			
+	self.CoupleFront.m_tblToolsAllowed = {"none"}	
+    self:SetNW2Entity("CoupleFront",self.CoupleFront)
+	self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон			
 	end)
 	
 	self:SetNW2Entity("FrontBogey",self.FrontBogey)
@@ -487,7 +487,7 @@ function ENT:CreatePricep(pos,ang)
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
     ent:SetNW2Entity("TrainEntity", self) 
 	
-        if not IsValid(ent) or not IsValid(self) then return end
+    if not IsValid(ent) or not IsValid(self) then return end
 	table.insert(ent.TrainEntities,self)      
     table.insert(self.TrainEntities,ent)
 	
@@ -534,7 +534,7 @@ function ENT:CreatePricep(pos,ang)
 		0, --forcelimit
 		0, --torquelimit
 		-2, --xmin
-		-3, --ymin
+		-2, --ymin
 		-25, --zmin
 		3, --xmax
 		3, --ymax
@@ -551,14 +551,14 @@ function ENT:CreatePricep(pos,ang)
 	if VLD(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end
-	if VLD(ent:GetPhysicsObject()) then
-        ent.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
-    end
 	if VLD(self:GetPhysicsObject()) then
         self.PricepBogey.NormalMass = self:GetPhysicsObject():GetMass()
-    end	
+    end
 	if VLD(ent:GetPhysicsObject()) then
         self.PricepBogey.NormalMass = ent:GetPhysicsObject():GetMass()
+    end
+	if VLD(self.RearBogey:GetPhysicsObject()) then
+        self.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
     end		
 	--Метод mirror 				
     ent.HeadTrain = self 
@@ -742,7 +742,7 @@ function ENT:Think()
     self:SetPackedRatio("BC", math.max(math.min(3.2,self.Pneumatic.BrakeCylinderPressure),math.min(3.2,self.Pneumatic.MiddleBogeyBrakeCylinderPressure))/6.0) 
     self.AsyncInverter:TriggerInput("Speed", self.Speed)
 
-	if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
+    if IsValid(fB) and IsValid(rB) and IsValid(pB) and not self.IgnoreEngine then
 
         local A = self.AsyncInverter.Torque
 		--print(A)
@@ -779,10 +779,10 @@ function ENT:Think()
         pB.DisableContacts = self.BUV.Pant or pB.DisableContactsManual	
 		
 		--задняя тележка		
-		rB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
-        rB.BrakeCylinderPressure = self.Pneumatic.MiddleBogeyBrakeCylinderPressure
-        rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT
-        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)         		
+        rB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
+        rB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
+        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
+        rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT        		
         rB.DisableContacts = true			
 
     end
