@@ -61,7 +61,6 @@ function ENT:Initialize()
     self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)
 	self.RearBogey:SetSolid(SOLID_VPHYSICS)
 	self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
-	self.RearBogey.NormalMass = 20000	
 	self.RearBogey.m_tblToolsAllowed = {"none"}	
 	
 	timer.Simple(0.1, function()    
@@ -262,8 +261,8 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		Vector(-310,0,60),
-		Vector(-310,0,60),
+		Vector(-185,0,60),
+		Vector(-185,0,60),
 		0, --forcelimit
 		0, --torquelimit
 		-3, --xmin
@@ -283,12 +282,12 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		Vector(-310,0,5),
-		Vector(-310,0,5),
+		Vector(-185,0,5),
+		Vector(-185,0,5),
 		0, --forcelimit
 		0, --torquelimit
-		-3, --xmin
-		-3, --ymin
+		-2, --xmin
+		-2, --ymin
 		-25, --zmin
 		3, --xmax
 		3, --ymax

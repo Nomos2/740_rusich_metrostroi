@@ -61,7 +61,7 @@ function ENT:Initialize()
             ID = "RearDoor",
             Pos = Vector(-320, 0, 0), Radius = 31
         },
-	}   	
+	}
 	
 	self.RearDoor = false	
 	self.Lamps = {
@@ -75,7 +75,7 @@ function ENT:Initialize()
 	
     self:UpdateLampsColors()	
 	
-	timer.Simple(0, function()
+	timer.Simple(0.5, function()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
     if not IsValid(train) then return end
@@ -257,10 +257,7 @@ function ENT:Think()
     train:SetPackedRatio("SalonLighting",passlight) 	
 	self:SetLightPower(14,passlight > 0, passlight and mul/20) 
 	self:SetLightPower(15,passlight > 0.5, passlight and mul/20)
-	self:SetLightPower(16,passlight > 0, passlight and mul/20)
-end	
-	
-    return retVal		 
+	self:SetLightPower(16,passlight > 0, passlight and mul/20)	 
 end
 
 function ENT:IsolationsOpen()
