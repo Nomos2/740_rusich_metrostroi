@@ -50,7 +50,7 @@ function ENT:Initialize()
 
  -- Create bogeys
     self.FrontBogey = self:CreateBogey(Vector( 170,0,-76),Angle(0,180,0),true,"740PER")
-    self.RearBogey  = self:CreateBogey(Vector(-885,0,-75.5),Angle(0,0,0),true,"740NOTR")
+    self.RearBogey  = self:CreateBogey(Vector(-885,0,-77),Angle(0,0,0),false,"740NOTR")
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)	
 	self.FrontBogey:SetNWInt("MotorSoundType",2)
@@ -254,6 +254,7 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey.m_tblToolsAllowed = {"none"}
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
 	self.PricepBogey.DisableSound = 1
+    local RB = self.RearBogey	
 	local PB = self.PricepBogey	
 	
     constraint.AdvBallsocket(
@@ -261,15 +262,15 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		Vector(-185,0,60),
-		Vector(-185,0,60),
+		Vector(-310,0,60),
+		Vector(-310,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-3, --xmin
-		-3, --ymin
+		-2, --xmin
+		-2, --ymin
 		-25, --zmin
-		3, --xmax
-		3, --ymax
+		2, --xmax
+		2, --ymax
 		25, --zmax
         0, --xfric
         0, --yfric
@@ -282,15 +283,15 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		Vector(-185,0,5),
-		Vector(-185,0,5),
+		Vector(-310,0,5),
+		Vector(-310,0,60),
 		0, --forcelimit
 		0, --torquelimit
 		-2, --xmin
 		-2, --ymin
 		-25, --zmin
-		3, --xmax
-		3, --ymax
+		2, --xmax
+		2, --ymax
 		25, --zmax
         0, --xfric
         0, --yfric
@@ -298,6 +299,63 @@ function ENT:CreatePricep(pos,ang)
         0, --rotonly
         1 --nocollide
     )
+    constraint.AdvBallsocket(
+		ent,
+		PB,
+		0, --bone
+		0, --bone
+		Vector(314,0,60),
+		Vector(314,0,60),
+		0, --forcelimit
+		0, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-25, --zmin
+		2, --xmax
+		2, --ymax
+		25, --zmax
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1 --nocollide
+	)	
+    
+    constraint.AdvBallsocket(
+		ent,
+		PB,
+		0, --bone
+		0, --bone
+		Vector(314,0,5),
+		Vector(314,0,60),
+		0, --forcelimit
+		0, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-25, --zmin
+		2, --xmax
+		2, --ymax
+		25, --zmax
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1 --nocollide
+	)	 
+
+    constraint.Axis(
+        RB,        
+        ent,
+        0,
+        0,
+        Vector(0,0,0),
+        Vector(0,0,0),
+        0,
+        0,
+        0,
+        0,
+        Vector(0,0,1)
+    )     
 	
     local VLD = IsValid
 	

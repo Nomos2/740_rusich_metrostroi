@@ -92,43 +92,7 @@ function ENT:Initialize()
 	
     constraint.NoCollide(self,train,0,0)
     constraint.NoCollide(self,RB,0,0)
-    constraint.NoCollide(RB,self.CoupleRear,0,0)	
-	
-    constraint.AdvBallsocket(
-		self,
-		PB,
-		0, --bone
-		0, --bone
-		Vector(314,0,3),
-		Vector(314,0,60),
-		0, --forcelimit
-		0, --torquelimit
-		0, --xmin
-		0, --ymin
-		-15, --zmin
-		0, --xmax
-		0, --ymax
-		15, --zmax
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1 --nocollide
-	)	
-	   
-    constraint.Axis(
-        RB,        
-        self,
-        0,
-        0,
-        Vector(0,0,0),
-        Vector(0,0,0),
-        0,
-        0,
-        0,
-        0,
-        Vector(0,0,1)
-    )
+    constraint.NoCollide(RB,self.CoupleRear,0,0)
 
     end)
 end

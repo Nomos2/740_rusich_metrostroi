@@ -501,6 +501,7 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey.m_tblToolsAllowed = {"none"}	
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
 	self.PricepBogey.DisableSound = 1	
+    local RB = self.RearBogey	
 	local PB = self.PricepBogey	
 	
     constraint.AdvBallsocket(
@@ -508,15 +509,15 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		Vector(-185,0,60),
-		Vector(-185,0,60),
+		Vector(-180,0,60),
+		Vector(-180,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-3, --xmin
-		-3, --ymin
+		-2, --xmin
+		-2, --ymin
 		-25, --zmin
-		3, --xmax
-		3, --ymax
+		2, --xmax
+		2, --ymax
 		25, --zmax
         0, --xfric
         0, --yfric
@@ -529,21 +530,79 @@ function ENT:CreatePricep(pos,ang)
 		PB,
         0, --bone
         0, --bone    
-		Vector(-185,0,5),
-		Vector(-185,0,5),
+		Vector(-180,0,5),
+		Vector(-180,0,5),
 		0, --forcelimit
 		0, --torquelimit
 		-2, --xmin
 		-2, --ymin
 		-25, --zmin
-		3, --xmax
-		3, --ymax
+		2, --xmax
+		2, --ymax
 		25, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
         0, --rotonly
         1 --nocollide
+    )
+
+    constraint.AdvBallsocket(
+		ent,
+		PB,
+		0, --bone
+		0, --bone
+		Vector(314,0,60),
+		Vector(314,0,60),
+		0, --forcelimit
+		0, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-25, --zmin
+		2, --xmax
+		2, --ymax
+		25, --zmax
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1 --nocollide
+	)	
+    
+    constraint.AdvBallsocket(
+		ent,
+		PB,
+		0, --bone
+		0, --bone
+		Vector(314,0,5),
+		Vector(314,0,60),
+		0, --forcelimit
+		0, --torquelimit
+		-2, --xmin
+		-2, --ymin
+		-25, --zmin
+		2, --xmax
+		2, --ymax
+		25, --zmax
+		0, --xfric
+		0, --yfric
+		0, --zfric
+		0, --rotonly
+		1 --nocollide
+	)	 
+
+    constraint.Axis(
+        RB,        
+        ent,
+        0,
+        0,
+        Vector(0,0,0),
+        Vector(0,0,0),
+        0,
+        0,
+        0,
+        0,
+        Vector(0,0,1)
     )
 
     local VLD = IsValid
