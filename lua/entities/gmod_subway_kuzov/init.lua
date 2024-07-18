@@ -28,6 +28,7 @@ function ENT:Initialize()
     self.BaseClass.Initialize(self)
 	
     self.NormalMass = 20000
+	self:GetBaseVelocity()		
 	
     self.PassengerSeat = self:CreateSeat("passenger",Vector(-135,-40,-25),Angle(0,90,0),"models/nova/airboat_seat.mdl")
     self.PassengerSeat2 = self:CreateSeat("passenger",Vector(-135,40,-25),Angle(0,270,0),"models/nova/airboat_seat.mdl")  
@@ -75,13 +76,11 @@ function ENT:Initialize()
 	
     self:UpdateLampsColors()	
 	
-	timer.Simple(0.5, function()
+	timer.Simple(0.1, function()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
     if not IsValid(train) then return end
-	local PB = train.PricepBogey	
 	local RB = train.RearBogey	
-	self:GetBaseVelocity()		
 	
 	self.CoupleRear = self:CreateCouple(Vector( -283,0,-60),Angle(0,180,0),false,"740")
     self.CoupleRear:SetNW2Entity("TrainEntity", self.HeadTrain)

@@ -49,8 +49,8 @@ function ENT:Initialize()
 	self.DriverSeat.m_tblToolsAllowed = {"none"}		
 
  -- Create bogeys
-    self.FrontBogey = self:CreateBogey(Vector( 170,0,-76),Angle(0,180,0),true,"740PER")
-    self.RearBogey  = self:CreateBogey(Vector(-885,0,-77),Angle(0,0,0),false,"740NOTR")
+    self.FrontBogey = self:CreateBogey(Vector( 170,0,-75.95),Angle(0,180,0),true,"740PER")
+    self.RearBogey  = self:CreateBogey(Vector(-885,0,-76.1),Angle(0,0,0),false,"740NOTR")
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)	
 	self.FrontBogey:SetNWInt("MotorSoundType",2)
@@ -73,6 +73,9 @@ function ENT:Initialize()
 	
 	self:SetNW2Entity("FrontBogey",self.FrontBogey)
 	self:SetNW2Entity("RearBogey",self.RearBogey)
+
+    self.RearBogey.CouplingPointOffset = Vector(-135,0,0) 
+    self.FrontBogey.CouplingPointOffset = Vector(-145,0,0) 
 	
     -- Initialize key mapping
     self.KeyMap = {
@@ -239,12 +242,11 @@ function ENT:CreatePricep(pos,ang)
     ent.SpawnPos = pos
     ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
-    ent:SetNW2Entity("TrainEntity", self)
 	
 	table.insert(ent.TrainEntities,self)      
     table.insert(self.TrainEntities,ent)	
 
-	self.PricepBogey = self:CreateBogey(Vector(-358.5,0,-75),Angle(0,0,0),false,"740G")
+	self.PricepBogey = self:CreateBogey(Vector(-358.5,0,-74.9),Angle(0,0,0),false,"740G")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
     local rand = math.random()*0.05
@@ -256,6 +258,17 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey.DisableSound = 1
     local RB = self.RearBogey	
 	local PB = self.PricepBogey	
+
+    local xmax = 1.75    
+    local ymax = 1.75
+    local zmax = 25
+
+    local xmin = -1.75    
+    local ymin = -1.75
+    local zmin = -25
+
+    local nullpos = Vector(0,0,0)    
+    local VCT1 = Vector(314,0,60) 
 	
     constraint.AdvBallsocket(
 		self,
@@ -266,12 +279,12 @@ function ENT:CreatePricep(pos,ang)
 		Vector(-310,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		xmin, --xmin
+		ymin, --ymin
+		zmin, --zmin
+		xmax, --xmax
+		ymax, --ymax
+		zmax, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -287,55 +300,55 @@ function ENT:CreatePricep(pos,ang)
 		Vector(-310,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		xmin, --xmin
+		ymin, --ymin
+		zmin, --zmin
+		xmax, --xmax
+		ymax, --ymax
+		zmax, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
         0, --rotonly
         1 --nocollide
     )
+
     constraint.AdvBallsocket(
 		ent,
 		PB,
 		0, --bone
 		0, --bone
-		Vector(314,0,60),
-		Vector(314,0,60),
+		VCT1,
+		VCT1,
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		xmin, --xmin
+		ymin, --ymin
+		zmin, --zmin
+		xmax, --xmax
+		ymax, --ymax
+		zmax, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
 		0, --rotonly
 		1 --nocollide
-	)	
-    
+	)
     constraint.AdvBallsocket(
 		ent,
 		PB,
 		0, --bone
 		0, --bone
 		Vector(314,0,5),
-		Vector(314,0,60),
+		VCT1,
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		xmin, --xmin
+		ymin, --ymin
+		zmin, --zmin
+		xmax, --xmax
+		ymax, --ymax
+		zmax, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -348,8 +361,8 @@ function ENT:CreatePricep(pos,ang)
         ent,
         0,
         0,
-        Vector(0,0,0),
-        Vector(0,0,0),
+        nullpos,
+        nullpos,
         0,
         0,
         0,
@@ -363,13 +376,13 @@ function ENT:CreatePricep(pos,ang)
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end
 	if VLD(self:GetPhysicsObject()) then
-        self.PricepBogey.NormalMass = self:GetPhysicsObject():GetMass()
+        PB.NormalMass = self:GetPhysicsObject():GetMass()
     end
 	if VLD(ent:GetPhysicsObject()) then
-        self.PricepBogey.NormalMass = ent:GetPhysicsObject():GetMass()
+        PB.NormalMass = ent:GetPhysicsObject():GetMass()
     end
-	if VLD(self.RearBogey:GetPhysicsObject()) then
-        self.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
+	if VLD(RB:GetPhysicsObject()) then
+        self.NormalMass = RB:GetPhysicsObject():GetMass()
     end		
 	--Метод mirror 				
     ent.HeadTrain = self 

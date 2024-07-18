@@ -284,7 +284,6 @@ function ENT:Think()
     local train = self.HeadTrain 
     if not IsValid(train) then return end
 	
-	
 --Регистрация тележки
 local RB = train.RearBogey
 
@@ -364,6 +363,26 @@ self.ClientProps["TrainNumberL"..k] = {
 		end,
     } 
 end
+
+function self:UpdateWagonNumber()
+    for k=0,3 do	
+
+                if train.WagonNumber then
+                local rightNum = train.ClientEnts["TrainNumberR"..k]
+                local num = math.floor(train.WagonNumber%(10^(k+1))/10^k)
+                if IsValid(rightNum) then
+                    rightNum:SetPos(self:LocalToWorld(Vector(635-k*6.6+4*6.6/2-17.8-340,-63.35,18)))
+                    rightNum:SetSkin(num)
+                end	
+                local leftNum = self.ClientEnts["TrainNumberL"..k]	
+                local num = math.floor(train.WagonNumber%(10^(k+1))/10^k)
+                if IsValid(leftNum) then	
+                    leftNum:SetLocalPos(Vector(-310+k*6.6-4*6.6/2, 63.4, 18))
+                    leftNum:SetSkin(num)
+                end  		
+                end
+            end
+    end
 	
 	local animation = math.random (5,12)	
 	local animation1 = math.random (0.5,1)

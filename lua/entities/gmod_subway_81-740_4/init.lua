@@ -107,6 +107,8 @@ function ENT:Initialize()
 	
 	self:SetNW2Entity("FrontBogey",self.FrontBogey)
 	self:SetNW2Entity("RearBogey",self.RearBogey)	
+
+	self.RearBogey.CouplingPointOffset = Vector(-145,0,0)    
 	
 if not (Map:find("gm_mus_loopline"))	then
 	self.LightSensor = self:AddLightSensor(Vector(627-9-131,0,-125),Angle(0,90,0))
@@ -215,17 +217,17 @@ end
     }
 
  self.Lights = {
-        --белые огни
+
         [1]  = { "light",Vector(832-168-131, 27.5, -23), Angle(0,0,0), Color(255,220,180), brightness = 0.5, scale = 0.5, texture = "sprites/light_glow02.vmt" },
         [2]  = { "light",Vector(832-168-131, 40.5,-20.5), Angle(0,0,0), Color(255,220,180), brightness = 0.5, scale = 0.5, texture = "sprites/light_glow02.vmt" },
         [18]  = { "light",Vector(832-168-131, -27.5, -23), Angle(0,0,0), Color(255,220,180), brightness = 0.5, scale = 0.5, texture = "sprites/light_glow02.vmt" },
         [19]  = { "light",Vector(832-168-131, -40.5, -20.5), Angle(0,0,0), Color(255,220,180), brightness = 0.5, scale = 0.5, texture = "sprites/light_glow02.vmt" },
-        --красные огни 
+
         [3] = { "light",Vector(690-23.9-131, 41.5, -60), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
 		[4] = { "light",Vector(690-23.9-131, -41.5, -60), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
 		[5] = { "light",Vector(656-23.9-131, 40, 57), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
 		[6] = { "light",Vector(656-23.9-131, -40, 57), Angle(0,0,0), Color(139, 0, 0), brightness = 0.6, scale = 0.4, texture = "sprites/light_glow02.vmt" },
-        --освещение в кабине
+
         [10] = { "dynamiclight",    Vector( 755-168-131, 0, 40), Angle(0,0,0), Color(206,135,80), brightness = 1.5, distance = 550 },
         -- Interior
 		[11] = { "dynamiclight",    Vector(260-168-131, 0, 40), Angle(0,0,0), Color(255,220,180), brightness = 3, distance = 500 , fov=180,farz = 128 },
@@ -485,7 +487,6 @@ function ENT:CreatePricep(pos,ang)
     ent.SpawnPos = pos
     ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
-    ent:SetNW2Entity("TrainEntity", self) 
 	
     if not IsValid(ent) or not IsValid(self) then return end
 	table.insert(ent.TrainEntities,self)      
@@ -503,7 +504,17 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey.DisableSound = 1	
     local RB = self.RearBogey	
 	local PB = self.PricepBogey	
-	
+
+    local xmax = 1.75    
+    local ymax = 1.75
+    local zmax = 25
+
+    local xmin = -1.75    
+    local ymin = -1.75
+    local zmin = -25
+    local nullpos = Vector(0,0,0)
+    local VCT1 = Vector(314,0,65) 
+
     constraint.AdvBallsocket(
 		self,
 		PB,
@@ -513,12 +524,12 @@ function ENT:CreatePricep(pos,ang)
 		Vector(-180,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		xmin, --xmin
+		ymin, --ymin
+		zmin, --zmin
+		xmax, --xmax
+		ymax, --ymax
+		zmax, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -534,12 +545,12 @@ function ENT:CreatePricep(pos,ang)
 		Vector(-180,0,5),
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		xmin, --xmin
+		ymin, --ymin
+		zmin, --zmin
+		xmax, --xmax
+		ymax, --ymax
+		zmax, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -552,38 +563,37 @@ function ENT:CreatePricep(pos,ang)
 		PB,
 		0, --bone
 		0, --bone
-		Vector(314,0,60),
-		Vector(314,0,60),
+		VCT1,
+		VCT1,
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		xmin, --xmin
+		ymin, --ymin
+		zmin, --zmin
+		xmax, --xmax
+		ymax, --ymax
+		zmax, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
 		0, --rotonly
 		1 --nocollide
-	)	
-    
+	)
     constraint.AdvBallsocket(
 		ent,
 		PB,
 		0, --bone
 		0, --bone
 		Vector(314,0,5),
-		Vector(314,0,60),
+		VCT1,
 		0, --forcelimit
 		0, --torquelimit
-		-2, --xmin
-		-2, --ymin
-		-25, --zmin
-		2, --xmax
-		2, --ymax
-		25, --zmax
+		xmin, --xmin
+		ymin, --ymin
+		zmin, --zmin
+		xmax, --xmax
+		ymax, --ymax
+		zmax, --zmax
 		0, --xfric
 		0, --yfric
 		0, --zfric
@@ -596,8 +606,8 @@ function ENT:CreatePricep(pos,ang)
         ent,
         0,
         0,
-        Vector(0,0,0),
-        Vector(0,0,0),
+        nullpos,
+        nullpos,
         0,
         0,
         0,
@@ -611,14 +621,17 @@ function ENT:CreatePricep(pos,ang)
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end
 	if VLD(self:GetPhysicsObject()) then
-        self.PricepBogey.NormalMass = self:GetPhysicsObject():GetMass()
+        PB.NormalMass = self:GetPhysicsObject():GetMass()
     end
 	if VLD(ent:GetPhysicsObject()) then
-        self.PricepBogey.NormalMass = ent:GetPhysicsObject():GetMass()
+        PB.NormalMass = ent:GetPhysicsObject():GetMass()
     end
-	if VLD(self.RearBogey:GetPhysicsObject()) then
-        self.NormalMass = self.RearBogey:GetPhysicsObject():GetMass()
-    end		
+	if VLD(RB:GetPhysicsObject()) then
+        self.NormalMass = RB:GetPhysicsObject():GetMass()
+    end	
+    if VLD(self.FrontBogey:GetPhysicsObject()) then
+        self.NormalMass = self.FrontBogey:GetPhysicsObject():GetMass()
+    end	
 	--Метод mirror 				
     ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)
