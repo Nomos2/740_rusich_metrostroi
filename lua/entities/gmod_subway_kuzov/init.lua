@@ -76,7 +76,7 @@ function ENT:Initialize()
 	
     self:UpdateLampsColors()	
 	
-	timer.Simple(0.1, function()
+	timer.Simple(0, function()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
     if not IsValid(train) then return end
