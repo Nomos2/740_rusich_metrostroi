@@ -268,11 +268,7 @@ function ENT:CreatePricep(pos,ang)
     local zmin = -25
 
     local nullpos = Vector(0,0,0)    
-    local VCT1 = Vector(314,0,60) 
-
-    constraint.NoCollide(ent,self,0,0)
-    constraint.NoCollide(ent,RB,0,0)
-    constraint.NoCollide(RB,ent.CoupleRear,0,0)      
+    local VCT1 = Vector(314,0,60)    
 	
     constraint.AdvBallsocket(
 		self,
