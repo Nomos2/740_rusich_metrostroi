@@ -2210,9 +2210,9 @@ function ENT:Think()
 	self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
 	end	
-	if IsValid(self.PricepBogey) and self.PricepBogey.SoundNames and self.PricepBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V1/engine_8.wav" or self.PricepBogey.EngineSNDConfig and 
-	self.PricepBogey.EngineSNDConfig[1] and self.PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
-		self:ReInitBogeySounds(self.PricepBogey)
+	if IsValid(PricepBogey) and PricepBogey.SoundNames and PricepBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V1/engine_8.wav" or PricepBogey.EngineSNDConfig and 
+	PricepBogey.EngineSNDConfig[1] and PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
+		self:ReInitBogeySounds(PricepBogey)
 	end	
 	elseif
 	MotorType==2 then
@@ -2224,9 +2224,9 @@ function ENT:Think()
 	self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
 	end
-	if IsValid(self.PricepBogey) and self.PricepBogey.SoundNames and self.PricepBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V4/engine_8.wav" or self.PricepBogey.EngineSNDConfig and 
-	self.PricepBogey.EngineSNDConfig[1] and self.PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
-		self:ReInitBogeySounds(self.PricepBogey)
+	if IsValid(PricepBogey) and PricepBogey.SoundNames and PricepBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V4/engine_8.wav" or PricepBogey.EngineSNDConfig and 
+	PricepBogey.EngineSNDConfig[1] and PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
+		self:ReInitBogeySounds(PricepBogey)
 	end	
 	elseif
 	MotorType==3 then
@@ -2238,9 +2238,9 @@ function ENT:Think()
 	self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 0.4) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
 	end
-	if IsValid(self.PricepBogey) and self.PricepBogey.SoundNames and self.PricepBogey.SoundNames["ted1_720"] ~= "subway_trains/bogey/engines/720/speed_8.wav" or self.PricepBogey.EngineSNDConfig and 
-	self.PricepBogey.EngineSNDConfig[1] and self.PricepBogey.EngineSNDConfig[1][5] ~= 0.4 or refresh then
-		self:ReInitBogeySounds(self.PricepBogey)
+	if IsValid(PricepBogey) and PricepBogey.SoundNames and PricepBogey.SoundNames["ted1_720"] ~= "subway_trains/bogey/engines/720/speed_8.wav" or PricepBogey.EngineSNDConfig and 
+	PricepBogey.EngineSNDConfig[1] and PricepBogey.EngineSNDConfig[1][5] ~= 0.4 or refresh then
+		self:ReInitBogeySounds(PricepBogey)
 	end	
 	elseif
 	MotorType==4 then
@@ -2252,9 +2252,9 @@ function ENT:Think()
 	self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
 	end
-	if IsValid(self.PricepBogey) and self.PricepBogey.SoundNames and self.PricepBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V3/engine_8.wav" or self.PricepBogey.EngineSNDConfig and 
-	self.PricepBogey.EngineSNDConfig[1] and self.PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
-		self:ReInitBogeySounds(self.PricepBogey)
+	if IsValid(PricepBogey) and PricepBogey.SoundNames and PricepBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V3/engine_8.wav" or PricepBogey.EngineSNDConfig and 
+	PricepBogey.EngineSNDConfig[1] and PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
+		self:ReInitBogeySounds(PricepBogey)
 	end	
 	elseif
 	MotorType==5 then		
@@ -2266,11 +2266,11 @@ function ENT:Think()
 	self.RearBogey.EngineSNDConfig[1] and self.RearBogey.EngineSNDConfig[1][5] ~= 1) or refresh then
 		self:ReInitBogeySounds(self.RearBogey)
 	end	
-	if IsValid(self.PricepBogey) and self.PricepBogey.SoundNames and self.PricepBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V2/engine_8.wav" or self.PricepBogey.EngineSNDConfig and 
-	self.PricepBogey.EngineSNDConfig[1] and self.PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
-		self:ReInitBogeySounds(self.PricepBogey)
+	if IsValid(PricepBogey) and PricepBogey.SoundNames and PricepBogey.SoundNames["ted1_740"] ~= "subway_trains/740_4/engines/V2/engine_8.wav" or PricepBogey.EngineSNDConfig and 
+	PricepBogey.EngineSNDConfig[1] and PricepBogey.EngineSNDConfig[1][5] ~= 1 or refresh then
+		self:ReInitBogeySounds(PricepBogey)
 	end	
-end	
+end
 
 for k=0,3 do
     self.ClientProps["TrainNumberR"..k] = {

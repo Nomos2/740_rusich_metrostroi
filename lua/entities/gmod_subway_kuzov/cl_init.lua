@@ -285,7 +285,7 @@ function ENT:Think()
     if not IsValid(train) then return end
 	
 --Регистрация тележки
-local RB = train.RearBogey
+local PB = train.PricepBogey
 
 --Взято из cl_init тележки.
 local c_gui
@@ -317,7 +317,7 @@ local function addButton(parent,stext,state,scolor,btext,benabled,callback)
     parent:AddItem(panel)
 end
 
-function RB:DrawGUI(tbl)
+function PB:DrawGUI(tbl)
     if IsValid(c_gui) then  c_gui:Close() end
      local c_gui = vgui.Create("DFrame")
         c_gui:SetDeleteOnClose(true)
@@ -336,7 +336,6 @@ function RB:DrawGUI(tbl)
             c_gui:Close()
         end)
     end
-
     scrollPanel:Dock( FILL )
     scrollPanel:InvalidateLayout( true )
     scrollPanel:SizeToChildren(false,true)
@@ -350,8 +349,7 @@ function RB:DrawGUI(tbl)
         c_gui:SetSize(512,math.min(350,y)+35)
         c_gui:Center()
     end
-end	
-	
+end
 for k=0,3 do
 self.ClientProps["TrainNumberL"..k] = {
         model = "models/metrostroi_train/common/bort_numbers.mdl",
@@ -453,19 +451,16 @@ function self:UpdateWagonNumber()
 	
     if not IsValid(train) then return end
     self.RearLeak = math.Clamp(self.RearLeak + 10*(-train:GetPackedRatio("RearLeak")-self.RearLeak)*dT,0,1)	
-    self:SetSoundState("rear_isolation",self.RearLeak,0.9+0.2*self.RearLeak)	
+    self:SetSoundState("rear_isolation",self.RearLeak,0.9+0.2*self.RearLeak)
 
-    if not IsValid(train) then return end
     self:Animate("RearBrake", train:GetNW2Bool("RbI") and 0 or 1,0,1, 3, false)
     self:Animate("RearTrain", train:GetNW2Bool("RtI") and 1 or 0,0,1, 3, false)
 	
     local dPdT = train:GetPackedRatio("BrakeCylinderPressure_dPdT")
-    if not IsValid(train) then return end
     train.ReleasedPdT = math.Clamp(train.ReleasedPdT + 4*(-train:GetPackedRatio("BrakeCylinderPressure_dPdT",0)-train.ReleasedPdT)*dT,0,1)
     self:SetSoundState("release_rear",math.Clamp(train.ReleasedPdT,0,1)^1.65,1.0)
 	
 	local speed = train:GetPackedRatio("Speed", 0)
-
     local ventSpeedAdd = math.Clamp(speed/30,0,1)
 
     local vstate = self:GetPackedBool("Vent2Work")

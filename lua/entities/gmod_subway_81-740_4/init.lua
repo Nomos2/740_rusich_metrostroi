@@ -81,9 +81,10 @@ function ENT:Initialize()
 	self.InstructorsSeat4.m_tblToolsAllowed = {"none"}
 	
     -- Create bogeys
-    self.FrontBogey = self:CreateBogey(Vector( 360,0,-76),Angle(0,180,0),true,"740ALS")	
-    self.RearBogey = self:CreateBogey(Vector(-532-160,0,-76),Angle(0,0,0),false,"740NOTR")
-	
+    self.FrontBogey = self:CreateBogey(Vector( 360,0,-76),Angle(0,180,0),true,"740ALS")
+    self.RearBogey = self:CreateBogey(Vector(-171,0,-75),Angle(0,0,0),true,"740G")    
+	self.RearBogey:SetSolid(SOLID_VPHYSICS)
+	self.RearBogey:PhysicsInit(SOLID_VPHYSICS)
 	self.FrontBogey:SetNWBool("Async",true)
     self.RearBogey:SetNWBool("Async",true)	
 	self.FrontBogey:SetNWInt("MotorSoundType",2)
@@ -92,31 +93,24 @@ function ENT:Initialize()
     local rand = math.random()*0.05
     self.FrontBogey:SetNWFloat("SqualPitch",1.45+rand)
     self.RearBogey:SetNWFloat("SqualPitch",1.45+rand)
-	self.RearBogey:SetSolid(SOLID_VPHYSICS)
-	self.RearBogey:PhysicsInit(SOLID_VPHYSICS)	
-	self.RearBogey.m_tblToolsAllowed = {"none"}	
+	self.RearBogey.m_tblToolsAllowed = {"none"}
+    self.RearBogey.CouplingPointOffset = Vector(-628,0,0)      
 	
 	timer.Simple(0.1, function()    
 	if not IsValid(self) then return end
 	self.CoupleFront = self:CreateCouple(Vector( 483,0,-60),Angle(0,0,0),true,"740")	
 	self.CoupleFront.EKKDisconnected = true
 	self.CoupleFront.m_tblToolsAllowed = {"none"}
-	self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон			
+	self.Pricep = self:CreatePricep(Vector(0,0,0))--вагон
 	end)
 	
 	self:SetNW2Entity("FrontBogey",self.FrontBogey)
-	self:SetNW2Entity("RearBogey",self.RearBogey)	
-
-	self.RearBogey.CouplingPointOffset = Vector(-145,0,0)    
+	self:SetNW2Entity("RearBogey",self.RearBogey)
 	
 if not (Map:find("gm_mus_loopline"))	then
 	self.LightSensor = self:AddLightSensor(Vector(627-9-131,0,-125),Angle(0,90,0))
 	self.ASSensor = self:AddLightSensor(Vector(515-9-131,-45,-95),Angle(90,0,0),"models/hunter/blocks/cube05x2x025.mdl") --для МСМП	
-end	
-	--[[timer.Simple(1, function()	
-        if not IsValid(self) then return end			
-		self.PassStvor = self:CreateStvor(Vector(0,0,0))--код не работает, хз из-за чего, срабатывет только после изменения переменной.				
-	end)]]	
+end
 	
     -- Initialize key mapping
     self.KeyMap = {
@@ -435,6 +429,7 @@ function ENT:RerailChange(ent, bool)
 end	
 function ENT:CreatePricep(pos,ang)
 	local ent = ents.Create("gmod_subway_kuzov")	
+    ent.ParentTrain = self    
     if not IsValid(ent) then return end
 	ent:SetPos(self:LocalToWorld(Vector(-496,0,0)))
     ent:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
@@ -445,12 +440,12 @@ function ENT:CreatePricep(pos,ang)
     ent.SpawnPos = pos
     ent.SpawnAng = ang	
 	self:SetNW2Entity("gmod_subway_kuzov",ent)
+    ent:SetNWEntity( "gmod_subway_kuzov", self )
 	
-    if not IsValid(ent) or not IsValid(self) then return end
 	table.insert(ent.TrainEntities,self)      
     table.insert(self.TrainEntities,ent)
 	
-	self.PricepBogey = self:CreateBogey(Vector(-171,0,-75),Angle(0,0,0),true,"740G")
+    self.PricepBogey = self:CreateBogey(Vector(-532-160,0,-76),Angle(0,0,0),false,"740NOTR")
 	self.PricepBogey:SetSolid(SOLID_VPHYSICS)
 	self.PricepBogey:PhysicsInit(SOLID_VPHYSICS)
 	local rand = math.random()*0.05
@@ -459,9 +454,8 @@ function ENT:CreatePricep(pos,ang)
 	self.PricepBogey:SetNWInt("Async",true)
 	self.PricepBogey.m_tblToolsAllowed = {"none"}	
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
-	self.PricepBogey.DisableSound = 1	
     local RB = self.RearBogey	
-	local PB = self.PricepBogey	
+	local PB = self.PricepBogey
 
     local xmax = 1.75    
     local ymax = 1.75
@@ -470,23 +464,22 @@ function ENT:CreatePricep(pos,ang)
     local xmin = -1.75    
     local ymin = -1.75
     local zmin = -25
-    local nullpos = Vector(0,0,0)
-    local VCT1 = Vector(314,0,65) 
+    --local VCT1 = Vector(314,0,65) 
 
     constraint.AdvBallsocket(
 		self,
-		PB,
+		RB,
         0, --bone
         0, --bone    
-		Vector(-180,0,60),
+		Vector(-180,0,3),
 		Vector(-180,0,60),
 		0, --forcelimit
 		0, --torquelimit
-		xmin, --xmin
-		ymin, --ymin
+		0, --xmin
+		0, --ymin
 		zmin, --zmin
-		xmax, --xmax
-		ymax, --ymax
+		0, --xmax
+		0, --ymax
 		zmax, --zmax
         0, --xfric
         0, --yfric
@@ -494,7 +487,8 @@ function ENT:CreatePricep(pos,ang)
         0, --rotonly
         1 --nocollide
     )
-    constraint.AdvBallsocket(
+
+    --[[constraint.AdvBallsocket(
 		self,
 		PB,
         0, --bone
@@ -514,9 +508,9 @@ function ENT:CreatePricep(pos,ang)
         0, --zfric
         0, --rotonly
         1 --nocollide
-    )
+    )]]
 
-    constraint.AdvBallsocket(
+    --[[constraint.AdvBallsocket(
 		ent,
 		PB,
 		0, --bone
@@ -557,39 +551,22 @@ function ENT:CreatePricep(pos,ang)
 		0, --zfric
 		0, --rotonly
 		1 --nocollide
-	)	 
-
-    constraint.Axis(
-        RB,        
-        ent,
-        0,
-        0,
-        nullpos,
-        nullpos,
-        0,
-        0,
-        0,
-        0,
-        Vector(0,0,1)
-    )
+	)]]
 
     local VLD = IsValid
 	
 	if VLD(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end
-	if VLD(self:GetPhysicsObject()) then
-        PB.NormalMass = self:GetPhysicsObject():GetMass()
-    end
+	--[[if VLD(self:GetPhysicsObject()) then
+        RB.NormalMass = self:GetPhysicsObject():GetMass()
+    end]]
 	if VLD(ent:GetPhysicsObject()) then
-        PB.NormalMass = ent:GetPhysicsObject():GetMass()
+        RB.NormalMass = ent:GetPhysicsObject():GetMass()
     end
-	if VLD(RB:GetPhysicsObject()) then
-        self.NormalMass = RB:GetPhysicsObject():GetMass()
-    end	
-    if VLD(self.FrontBogey:GetPhysicsObject()) then
-        self.NormalMass = self.FrontBogey:GetPhysicsObject():GetMass()
-    end	
+	if VLD(PB:GetPhysicsObject()) then
+        self.NormalMass = PB:GetPhysicsObject():GetMass()
+    end
 	--Метод mirror 				
     ent.HeadTrain = self 
     ent:SetNW2Entity("HeadTrain", self)
@@ -644,39 +621,7 @@ function ENT:CreatePricep(pos,ang)
 end]] --Попытка замены звуков тележек от Димастерса.  
 	
 	return ent
-end	
-
---[[function ENT:CreateStvor(pos,ang)   
-	local ent1 = ents.Create("gmod_subway_base")	
-	if not IsValid(ent1) then return end	
-	ent1:SetModel("models/hunter/blocks/cube025x025x025.mdl")		
-	ent1:SetPos(self:LocalToWorld(Vector(330,0,-40)))
-    ent1:SetAngles(self:LocalToWorldAngles(Angle(0,0,0)))
-	ent1:Spawn()
-	ent1:SetOwner(self:GetOwner())
-	ent1:DrawShadow(false)	
-	if CPPI and IsValid(self:CPPIGetOwner()) then ent1:CPPISetOwner(self:CPPIGetOwner()) end
-    ent1.SpawnPos = pos
-    ent1.SpawnAng = ang	
-	ent1:SetParent(self)
-	self:SetNW2Entity("gmod_subway_base",ent1)
-		
-	table.insert(ent1.TrainEntities,self)      
-    table.insert(self.TrainEntities,ent1)
-	
-	self.HeadTrain2 = self:GetNW2Entity("gmod_subway_base")
-	local train2 = self.HeadTrain2    
-	if not IsValid(train2) then return end	
-	
-    self:SetPackedBool("DoorL",train2.DoorLeft)
-    self:SetPackedBool("DoorR",train2.DoorRight)    
-    self.LeftDoorsOpening = train2.DoorLeft
-    self.RightDoorsOpening = train2.DoorRight
-    self.LeftDoorsOpen = train2.LeftDoorsOpen
-    self.RightDoorsOpen = train2.RightDoorsOpen	
-	
-	return ent1
-end]]
+end
 ---------------------------------------------------------------------------
 function ENT:Think()
     local retVal = self.BaseClass.Think(self)
@@ -827,16 +772,16 @@ function ENT:Think()
         end
         fB.MotorForce = (40000+5000*(A < 0 and 1 or 0))*add --35300
         fB.Reversed = (self:ReadTrainWire(13) > 0.5)--<
-        rB.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
-        rB.Reversed = (self:ReadTrainWire(12) > 0.5)-->
+        pB.MotorForce  = (40000+5000*(A < 0 and 1 or 0))*add --35300
+        pB.Reversed = (self:ReadTrainWire(12) > 0.5)-->
 
         -- These corrections are required to beat source engine friction at very low values of motor power
         local P = math.max(0,0.04449 + 1.06879*math.abs(A) - 0.465729*A^2)
         if math.abs(A) > 0.4 then P = math.abs(A) end
         if math.abs(A) < 0.05 then P = 0 end
         if self.Speed < 10 then P = P*(1.0 + 0.6*(10.0-self.Speed)/10.0) end
-        rB.MotorPower  = P*0.5*((A > 0) and 1 or -1)
-        fB.MotorPower = P*0.5*((A > 0) and 1 or -1)
+        fB.MotorPower  = P*0.5*((A > 0) and 1 or -1)
+        pB.MotorPower = P*0.5*((A > 0) and 1 or -1)
 
         -- Apply brakes
 		--передняя тележка
@@ -847,18 +792,19 @@ function ENT:Think()
         fB.DisableContacts = self.BUV.Pant or fB.DisableContactsManual		
 		
 		--средняя тележка		
-		pB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
-        pB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
-        pB.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
-	    pB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
-        pB.DisableContacts = self.BUV.Pant or pB.DisableContactsManual	
-		
-		--задняя тележка		
-        rB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
+		rB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
         rB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
-        rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
-        rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT        		
-        rB.DisableContacts = true			
+        rB.BrakeCylinderPressure_dPdT = -self.Pneumatic.MiddleBogeyBrakeCylinderPressure_dPdT
+	    rB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
+        rB.DisableContacts = self.BUV.Pant or rB.DisableContactsManual	
+	    rB.DisableSound = 1   	
+		--задняя тележка		
+        pB.PneumaticBrakeForce = (50000.0--[[ +5000+10000--]] ) --20000
+        pB.BrakeCylinderPressure = self.Pneumatic.BrakeCylinderPressure
+        pB.ParkingBrakePressure = math.max(0,(3-self.Pneumatic.ParkingBrakePressure)/3)
+        pB.BrakeCylinderPressure_dPdT = -self.Pneumatic.BrakeCylinderPressure_dPdT        		
+        pB.DisableContacts = true		
+ 	
 
     end
     return retVal

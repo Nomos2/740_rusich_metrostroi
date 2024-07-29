@@ -15,7 +15,7 @@
 	"$envmapsaturation" ".01"
 	"$envmapcontrast" "0.1"
 	"$envmapFresnel" "1"
-	$normalmapalphaenvmapmask 1
+	"$normalmapalphaenvmapmask" "1"
 	
 	"$rimlightexponent" "1"
 	"$rimlightboost" "3"

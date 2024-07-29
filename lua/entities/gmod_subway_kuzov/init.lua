@@ -80,7 +80,8 @@ function ENT:Initialize()
 	self.HeadTrain = self:GetNW2Entity("HeadTrain")	
 	local train = self.HeadTrain	
     if not IsValid(train) then return end
-	local RB = train.RearBogey	
+	local PB = train.PricepBogey	
+	local RB = train.RearBogey
 	
 	self.CoupleRear = self:CreateCouple(Vector( -283,0,-60),Angle(0,180,0),false,"740")
     self.CoupleRear:SetNW2Entity("TrainEntity", self.HeadTrain)
@@ -90,8 +91,54 @@ function ENT:Initialize()
 	self:SetNW2Entity("CoupleRear",self.CoupleRear)
 	
     constraint.NoCollide(self,train,0,0)
-    constraint.NoCollide(self,RB,0,0)
-    constraint.NoCollide(RB,self.CoupleRear,0,0)
+    constraint.NoCollide(self,PB,0,0)
+    constraint.NoCollide(PB,self.CoupleRear,0,0)
+
+    local nullpos = Vector(0,0,0)
+
+	local xmax = 1.75    
+    local ymax = 1.75
+    local zmax = 25
+
+    local xmin = -1.75    
+    local ymin = -1.75
+    local zmin = -25
+
+    constraint.AdvBallsocket(
+		self,
+		RB,
+		0, --bone
+		0, --bone
+		Vector(314,0,60),
+		Vector(314,0,60),
+		0, --forcelimit
+		0, --torquelimit
+    	0, -- xmin
+        0, -- ymin
+        -90, -- zmin
+        0, -- xmax
+        0, -- ymax
+        90, -- zmax
+        0, -- xfric
+        0, -- yfric
+        0, -- zfric
+        0, -- rotonly
+        1 
+	)	
+	
+    constraint.Axis(
+        PB,        
+        self,
+        0,
+        0,
+        nullpos,
+        nullpos,
+        0,
+        0,
+        0,
+        0,
+        Vector(0,0,1)
+    )	
 
     end)
 end

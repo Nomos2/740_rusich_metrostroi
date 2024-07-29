@@ -2,6 +2,7 @@
 {
 	"$basetexture" "models/metrostroi_train/81-740/body/07"
 	"$model" "1"
+	"$surfaceprop" "metalvehicle"	
 	
 	"$phong" "1"
 	"$bumpmap"				"models/metrostroi_train/81-740/body/07_n"
@@ -14,7 +15,7 @@
 	"$envmapsaturation" ".01"
 	"$envmapcontrast" "0.1"
 	"$envmapFresnel" "1"
-	$normalmapalphaenvmapmask 1
+	"$normalmapalphaenvmapmask" "1"
 	
 	"$rimlightexponent" "1"
 	"$rimlightboost" "3"
