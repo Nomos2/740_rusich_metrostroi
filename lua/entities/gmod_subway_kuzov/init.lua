@@ -96,35 +96,48 @@ function ENT:Initialize()
 
     local nullpos = Vector(0,0,0)
 
-	local xmax = 1.75    
-    local ymax = 1.75
-    local zmax = 25
-
-    local xmin = -1.75    
-    local ymin = -1.75
-    local zmin = -25
-
     constraint.AdvBallsocket(
 		self,
 		RB,
 		0, --bone
 		0, --bone
-		Vector(314,0,60),
-		Vector(314,0,60),
+		Vector(304,0,3),
+		Vector(304,0,60),
 		0, --forcelimit
 		0, --torquelimit
-    	0, -- xmin
-        0, -- ymin
-        -90, -- zmin
-        0, -- xmax
-        0, -- ymax
-        90, -- zmax
+    	-1.5, -- xmin
+        -1.5, -- ymin
+        -45, -- zmin
+    	1.5, -- xmin
+        1.5, -- ymin
+        45, -- zmax
         0, -- xfric
         0, -- yfric
         0, -- zfric
         0, -- rotonly
         1 
 	)	
+	constraint.AdvBallsocket(
+		self,
+		RB,
+		0, --bone
+		0, --bone
+		Vector(304,0,60),
+		Vector(304,0,60),
+		0, --forcelimit
+		0, --torquelimit
+    	-1.5, -- xmin
+        -1.5, -- ymin
+        -45, -- zmin
+    	1.5, -- xmin
+        1.5, -- ymin
+        45, -- zmax
+        0, -- xfric
+        0, -- yfric
+        0, -- zfric
+        0, -- rotonly
+        1 
+	)
 	
     constraint.Axis(
         PB,        

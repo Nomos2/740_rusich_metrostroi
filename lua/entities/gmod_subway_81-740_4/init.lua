@@ -456,16 +456,6 @@ function ENT:CreatePricep(pos,ang)
 	self:SetNW2Entity("PricepBogey",self.PricepBogey)
     local RB = self.RearBogey	
 	local PB = self.PricepBogey
-
-    local xmax = 1.75    
-    local ymax = 1.75
-    local zmax = 25
-
-    local xmin = -1.75    
-    local ymin = -1.75
-    local zmin = -25
-    --local VCT1 = Vector(314,0,65) 
-
     constraint.AdvBallsocket(
 		self,
 		RB,
@@ -477,10 +467,10 @@ function ENT:CreatePricep(pos,ang)
 		0, --torquelimit
 		0, --xmin
 		0, --ymin
-		zmin, --zmin
+		-25, --zmin
 		0, --xmax
 		0, --ymax
-		zmax, --zmax
+		25, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
@@ -488,79 +478,11 @@ function ENT:CreatePricep(pos,ang)
         1 --nocollide
     )
 
-    --[[constraint.AdvBallsocket(
-		self,
-		PB,
-        0, --bone
-        0, --bone    
-		Vector(-180,0,5),
-		Vector(-180,0,5),
-		0, --forcelimit
-		0, --torquelimit
-		xmin, --xmin
-		ymin, --ymin
-		zmin, --zmin
-		xmax, --xmax
-		ymax, --ymax
-		zmax, --zmax
-        0, --xfric
-        0, --yfric
-        0, --zfric
-        0, --rotonly
-        1 --nocollide
-    )]]
-
-    --[[constraint.AdvBallsocket(
-		ent,
-		PB,
-		0, --bone
-		0, --bone
-		VCT1,
-		VCT1,
-		0, --forcelimit
-		0, --torquelimit
-		xmin, --xmin
-		ymin, --ymin
-		zmin, --zmin
-		xmax, --xmax
-		ymax, --ymax
-		zmax, --zmax
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1 --nocollide
-	)
-    constraint.AdvBallsocket(
-		ent,
-		PB,
-		0, --bone
-		0, --bone
-		Vector(314,0,5),
-		VCT1,
-		0, --forcelimit
-		0, --torquelimit
-		xmin, --xmin
-		ymin, --ymin
-		zmin, --zmin
-		xmax, --xmax
-		ymax, --ymax
-		zmax, --zmax
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1 --nocollide
-	)]]
-
     local VLD = IsValid
 	
 	if VLD(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end
-	--[[if VLD(self:GetPhysicsObject()) then
-        RB.NormalMass = self:GetPhysicsObject():GetMass()
-    end]]
 	if VLD(ent:GetPhysicsObject()) then
         RB.NormalMass = ent:GetPhysicsObject():GetMass()
     end

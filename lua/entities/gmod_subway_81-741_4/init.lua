@@ -259,58 +259,27 @@ function ENT:CreatePricep(pos,ang)
     local RB = self.RearBogey	
 	local PB = self.PricepBogey 
 
-    local xmax = 1.75    
-    local ymax = 1.75
-    local zmax = 25
-
-    local xmin = -1.75    
-    local ymin = -1.75
-    local zmin = -25
-    --local VCT1 = Vector(314,0,65) 
-
     constraint.AdvBallsocket(
 		self,
 		RB,
         0, --bone
-        0, --bone    
+        0, --bone
 		Vector(-314,0,3),
 		Vector(-314,0,60),
 		0, --forcelimit
 		0, --torquelimit
 		0, --xmin
 		0, --ymin
-		zmin, --zmin
+		-90, --zmin
 		0, --xmax
 		0, --ymax
-		zmax, --zmax
+		90, --zmax
         0, --xfric
         0, --yfric
         0, --zfric
         0, --rotonly
         1 --nocollide
     )
-
-    --[[constraint.AdvBallsocket(
-		ent,
-		PB,
-		0, --bone
-		0, --bone
-		VCT1,
-		VCT1,
-		0, --forcelimit
-		0, --torquelimit
-		xmin, --xmin
-		ymin, --ymin
-		zmin, --zmin
-		xmax, --xmax
-		ymax, --ymax
-		zmax, --zmax
-		0, --xfric
-		0, --yfric
-		0, --zfric
-		0, --rotonly
-		1 --nocollide
-	)]]
 
     --[[constraint.AdvBallsocket(
 		ent,
@@ -339,9 +308,6 @@ function ENT:CreatePricep(pos,ang)
 	if VLD(ent:GetPhysicsObject()) then
         self.NormalMass = ent:GetPhysicsObject():GetMass()
     end
-	--[[if VLD(self:GetPhysicsObject()) then
-        RB.NormalMass = self:GetPhysicsObject():GetMass()
-    end]]
 	if VLD(ent:GetPhysicsObject()) then
         RB.NormalMass = ent:GetPhysicsObject():GetMass()
     end
